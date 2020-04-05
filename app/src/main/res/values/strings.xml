@@ -1,18 +1,63 @@
 <resources>
     <string name="app_name">QazStudy</string>
     <string name="action_settings">Settings</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="title_activity_navigation">Navigation</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="title_activity_navigation" translatable="false">Navigation</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="menu_task">Tasks</string>
     <string name="menu_lesson">Lessons</string>
     <string name="menu_bookmark">Bookmarks</string>
 
-    <string name="home_second">Home Second</string>
-    <string name="title_activity_setting">SettingActivity</string>
+    <string name="home_second" translatable="false">Home Second</string>
+    <string name="title_activity_setting" translatable="false">SettingActivity</string>
     <!-- Strings used for fragments for navigation -->
+
+    <string-array name="lessons_header">
+        <item>Lesson 1</item>
+        <item>Lesson 2</item>
+        <item>Lesson 3</item>
+        <item>Lesson 4</item>
+        <item>Lesson 5</item>
+        <item>Lesson 6</item>
+        <item>Lesson 7</item>
+        <item>Lesson 8</item>
+    </string-array>
+
+    <string-array name="tasks_header">
+        <item>Task 1</item>
+        <item>Task 2</item>
+        <item>Task 3</item>
+        <item>Task 4</item>
+        <item>Task 5</item>
+        <item>Task 6</item>
+        <item>Task 7</item>
+        <item>Task 8</item>
+    </string-array>
+
+    <string-array name="lessons_description">
+        <item>Description 1</item>
+        <item>Description 2</item>
+        <item>Description 3</item>
+        <item>Description 4</item>
+        <item>Description 5</item>
+        <item>Description 6</item>
+        <item>Description 7</item>
+        <item>Description 8</item>
+    </string-array>
+
+    <!-- Profile activity -->
+    <string name="activity_profile__btn_exit">Exit</string>
+    <string name="activity_profile__hint_name">Name</string>
+    <string name="activity_profile__hint_city">City</string>
+    <string name="activity_profile__hint_email">Email</string>
+    <string name="activity_profile__hint_country">Country</string>
+    <string name="activity_profile__hint_password">Password</string>
+    <string name="activity_profile__btn_delete">Delete account</string>
+    <string name="activity_profile__ic_back_description">Description</string>
+    <string name="activity_profile__title">Profile</string>
+
 </resources>

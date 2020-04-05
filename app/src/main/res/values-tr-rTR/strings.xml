@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QazStudy</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="menu_task">HZ</string>
+    <string name="menu_lesson">Dersler</string>
+    <string name="menu_bookmark">HZ</string>
+
+
+    <string-array name="lessons_header">
+        <item>Ders 1</item>
+        <item>Ders 2</item>
+        <item>Ders 3</item>
+        <item>Ders 4</item>
+        <item>Ders 5</item>
+        <item>Ders 6</item>
+        <item>Ders 7</item>
+        <item>Ders 8</item>
+    </string-array>
+    <string name="activity_profile__hint_name">Adınız</string>
+    <string name="activity_profile__hint_email">E-posta</string>
+    <string name="activity_profile__hint_password">Parola</string>
+    <string name="activity_profile__hint_country">Ülke</string>
+    <string name="activity_profile__hint_city">Sehir</string>
+    <string name="activity_profile__btn_exit">Şıkmak</string>
+    <string name="activity_profile__btn_delete">Kullanıcıyı siılmek</string>
+    <string name="activity_profile__ic_back_description">Açıklama</string>
+    <string name="activity_profile__title">HZ</string>
+</resources>

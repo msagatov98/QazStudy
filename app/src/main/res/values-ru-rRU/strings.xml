@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QazStudy</string>
+    <string name="action_settings">Настройки</string>
+    <string name="menu_task">Задачи</string>
+    <string name="menu_lesson">Уроки</string>
+    <string name="menu_bookmark">Заметки</string>
+
+    <string-array name="lessons_header">
+        <item>Урок 1</item>
+        <item>Урок 2</item>
+        <item>Урок 3</item>
+        <item>Урок 4</item>
+        <item>Урок 5</item>
+        <item>Урок 6</item>
+        <item>Урок 7</item>
+        <item>Урок 8</item>
+    </string-array>
+    <string name="activity_profile__hint_name">Имя</string>
+    <string name="activity_profile__hint_email">Электронная почта</string>
+    <string name="activity_profile__hint_password">Пароль</string>
+    <string name="activity_profile__hint_country">Страна</string>
+    <string name="activity_profile__hint_city">Город</string>
+    <string name="activity_profile__btn_exit">Выйти</string>
+    <string name="activity_profile__btn_delete">Удалить аккаунт</string>
+    <string name="activity_profile__ic_back_description">Описание</string>
+    <string name="activity_profile__title">Профиль</string>
+</resources>

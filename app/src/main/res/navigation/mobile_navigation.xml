@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/nav_lesson"
-        android:name="com.qazstudy.ui.home.HomeFragment"
+        android:name="com.qazstudy.ui.home.FragmentLesson"
         android:label="@string/menu_lesson"
         tools:layout="@layout/fragment_lesson">
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_lesson_second"
-        android:name="com.qazstudy.ui.home.HomeFragment"
+        android:name="com.qazstudy.ui.home.FragmentLesson"
         android:label="@string/home_second"
         tools:layout="@layout/fragment_lesson">
         <action
@@ -48,5 +48,6 @@
         android:label="Settings"
         android:name="com.qazstudy.ui.setting.SettingFragment"
         tools:layout="@layout/fragment_setting" />
+
 
 </navigation>

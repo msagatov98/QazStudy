@@ -17,4 +17,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="lesson_task_view">
+        <item name="civ_border_color">@color/design_default_color_primary_dark</item>
+        <item name="civ_border_width">1dp</item>
+        <item name="borderWidth">1dp</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
 </resources>
