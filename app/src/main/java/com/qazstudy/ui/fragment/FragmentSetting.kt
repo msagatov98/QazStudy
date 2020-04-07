@@ -1,22 +1,18 @@
-package com.qazstudy.ui.setting
+package com.qazstudy.ui.fragment
 
 import android.content.Intent
-import android.content.res.Resources
 import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.Observer
 import android.view.LayoutInflater
-import androidx.core.os.ConfigurationCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import com.qazstudy.Navigation
+import com.qazstudy.ui.activity.Navigation
+import com.qazstudy.ui.activity.Navigation.Companion.isDark
 import kotlinx.android.synthetic.main.fragment_setting.*
 import java.util.*
 
-class SettingFragment : Fragment() {
+class FragmentSetting : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -24,11 +20,14 @@ class SettingFragment : Fragment() {
         locale_en.setOnClickListener { en() }
         locale_tr.setOnClickListener { tr() }
 
+        if (isDark) {
+            fragment_setting__constraint_layout.background = resources.getDrawable(R.color.dark)
+        } else {
+            fragment_setting__constraint_layout.background = resources.getDrawable(R.color.white)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-
         return inflater.inflate(R.layout.fragment_setting, container, false)
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity"
+    tools:context=".ui.activity.ProfileActivity"
     android:id="@+id/activity_profile__constraint_layout">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,10 +21,10 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:padding="13dp"
+                android:padding="9dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_back"
+                android:src="@drawable/ic_back_light"
                 android:id="@+id/activity_profile__ic_back"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

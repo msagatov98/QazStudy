@@ -1,4 +1,4 @@
-package com.qazstudy
+package com.qazstudy.ui.activity
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -18,14 +18,13 @@ class ProfileActivity() : AppCompatActivity() {
 
         activity_profile__ic_back.setOnClickListener { finish() }
         setMode(isDark)
-
     }
 
     private fun setMode(isDark: Boolean) {
         if (isDark) {
-
-            activity_profile__toolbar.background = resources.getDrawable(R.color.color)
             activity_profile__toolbar_txt.setTextColor(resources.getColor(R.color.dark))
+            activity_profile__toolbar.background = resources.getDrawable(R.color.light_blue)
+            activity_profile__ic_back.setImageDrawable(resources.getDrawable(R.drawable.ic_back_dark))
 
             activity_profile__input_name.setTextColor(resources.getColor(R.color.white))
             activity_profile__input_city.setTextColor(resources.getColor(R.color.white))
@@ -45,11 +44,10 @@ class ProfileActivity() : AppCompatActivity() {
             activity_profile__input_country.background.setTint(resources.getColor(R.color.txt_color))
             activity_profile__input_password.background.setTint(resources.getColor(R.color.txt_color))
 
-            activity_profile__btn_exit.setTextColor(resources.getColor(R.color.color))
-            activity_profile__btn_exit.background = resources.getDrawable(R.drawable.bg_btn_delete_account_dark)
+            activity_profile__btn_exit.setTextColor(resources.getColor(R.color.light_blue))
+            activity_profile__btn_exit.background = resources.getDrawable(R.drawable.bg_btn_exit_dark)
             activity_profile__btn_delete.background = resources.getDrawable(R.drawable.bg_btn_delete_account_dark)
             activity_profile__constraint_layout.background = resources.getDrawable(R.drawable.activity_profile__bg_edittext_dark)
         }
     }
-
 }

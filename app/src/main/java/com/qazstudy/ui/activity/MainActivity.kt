@@ -1,7 +1,8 @@
-package com.qazstudy
+package com.qazstudy.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.qazstudy.R
 
 class MainActivity : AppCompatActivity() {
 

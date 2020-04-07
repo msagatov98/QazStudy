@@ -1,7 +1,5 @@
-package com.qazstudy.ui
+package com.qazstudy.ui.adapter
 
-
-import android.content.res.ColorStateList
 import android.graphics.Color
 import com.qazstudy.R
 import android.view.View
@@ -16,7 +14,10 @@ class LessonAdapter(private val header: Array<String>, private val description: 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonAndTaskViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_lesson, parent, false)
-        return LessonAndTaskViewHolder(view, isDark)
+        return LessonAndTaskViewHolder(
+            view,
+            isDark
+        )
     }
 
     override fun getItemCount(): Int {
@@ -36,9 +37,14 @@ class LessonAdapter(private val header: Array<String>, private val description: 
         init {
             if (isDark) {
                 constraintLayout!!.setBackgroundResource(R.drawable.card_bg_dark)
-                textViewHeader.setTextColor(Color.rgb(254, 90, 19))
-            } else {
-                constraintLayout!!.setBackgroundResource(R.drawable.card_bg_light)
+                textViewHeader.setTextColor(Color.rgb(60, 90, 188))
+            }
+        }
+
+        fun setTheme(isDark: Boolean) {
+            if (isDark) {
+                constraintLayout!!.setBackgroundResource(R.drawable.card_bg_dark)
+                textViewHeader.setTextColor(Color.rgb(60, 90, 188))
             }
         }
     }
