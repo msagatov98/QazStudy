@@ -1,14 +1,15 @@
 package com.qazstudy.ui.activity
 
-import android.content.Intent
+import com.qazstudy.R
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import com.qazstudy.ui.adapter.TaskAdapter
-import com.qazstudy.ui.adapter.LessonAdapter
+import android.content.Intent
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
+import com.qazstudy.ui.adapter.TaskAdapter
+import com.qazstudy.ui.adapter.LessonAdapter
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -16,16 +17,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.fragment_task.*
 import kotlinx.android.synthetic.main.fragment_lesson.*
-import kotlinx.android.synthetic.main.app_bar_navigation.*
+import kotlinx.android.synthetic.main.fragment_setting.*
+import kotlinx.android.synthetic.main.fragment_bookmark.*
+import kotlinx.android.synthetic.main.navigation_header.*
+import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.nav_header_navigation.*
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.qazstudy.R
-import kotlinx.android.synthetic.main.fragment_bookmark.*
-import kotlinx.android.synthetic.main.fragment_setting.*
 
-class Navigation : AppCompatActivity() {
+class ActivityNavigation : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -60,7 +60,7 @@ class Navigation : AppCompatActivity() {
     }
 
     fun openProfile(v: View) {
-        val intent = Intent(this, ProfileActivity::class.java)
+        val intent = Intent(this, ActivityProfile::class.java)
         intent.putExtra("isDark",
             isDark
         )
@@ -147,6 +147,5 @@ class Navigation : AppCompatActivity() {
                     isDark
                 )
         }
-
     }
 }

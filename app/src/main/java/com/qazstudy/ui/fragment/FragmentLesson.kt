@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.qazstudy.ui.activity.Navigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.adapter.LessonAdapter
 import kotlinx.android.synthetic.main.fragment_lesson.*
 

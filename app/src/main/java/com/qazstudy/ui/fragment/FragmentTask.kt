@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_task.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.qazstudy.ui.activity.Navigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentTask : Fragment() {
 

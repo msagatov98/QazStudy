@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -18,11 +18,11 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="lesson_task_view">
-        <item name="civ_border_color">@color/design_default_color_primary_dark</item>
-        <item name="civ_border_width">1dp</item>
         <item name="borderWidth">1dp</item>
-        <item name="backgroundColor">@color/white</item>
+        <item name="civ_border_width">1dp</item>
         <item name="android:elevation">4dp</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="civ_border_color">@color/design_default_color_primary_dark</item>
     </style>
 
 </resources>

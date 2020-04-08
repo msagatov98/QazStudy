@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.Navigation">
+    tools:context=".ui.activity.ActivityNavigation">
 
     <com.google.android.material.appbar.AppBarLayout
         android:elevation="0dp"
@@ -24,7 +24,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--<include layout="@layout/content_navigation" /> -->
 
     <fragment
         android:layout_marginTop="56dp"

@@ -11,16 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:fullBackupContent="@xml/backup_descriptor">
         <activity
-            android:name=".ui.activity.ProfileActivity"
+            android:name=".ui.activity.ActivityProfile"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/activity_profile__title" />
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.activity.ActivityLogin"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/activity_profile__title" />
 
         <activity
-            android:name=".ui.activity.Navigation"
+            android:name=".ui.activity.ActivityNavigation"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

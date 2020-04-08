@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.ProfileActivity"
+    tools:context=".ui.activity.ActivityProfile"
     android:id="@+id/activity_profile__constraint_layout">
 
     <androidx.appcompat.widget.Toolbar
@@ -110,7 +110,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginStart="15dp"
         android:layout_width="match_parent"
-        android:background="@drawable/bg_btn"
+        android:background="@drawable/bg_btn_exit_light"
         android:textColor="@color/colorPrimary"
         android:id="@+id/activity_profile__btn_exit"
         android:text="@string/activity_profile__btn_exit"
@@ -125,7 +125,7 @@
         android:layout_width="match_parent"
         android:id="@+id/activity_profile__btn_delete"
         android:text="@string/activity_profile__btn_delete"
-        android:background="@drawable/bg_btn_delete_account"
+        android:background="@drawable/bg_btn_delete_account_light"
         app:layout_constraintTop_toBottomOf="@id/activity_profile__btn_exit"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

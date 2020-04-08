@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
-import com.qazstudy.ui.activity.Navigation
-import com.qazstudy.ui.activity.Navigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import kotlinx.android.synthetic.main.fragment_setting.*
 import java.util.*
 
@@ -36,7 +36,7 @@ class FragmentSetting : Fragment() {
         val conf = resources.configuration
         conf.setLocale(Locale("ru"))
         resources.updateConfiguration(conf, dm)
-        val intent : Intent = Intent(context, Navigation::class.java)
+        val intent : Intent = Intent(context, ActivityNavigation::class.java)
         startActivity(intent)
     }
 
@@ -45,7 +45,7 @@ class FragmentSetting : Fragment() {
         val conf = resources.configuration
         conf.setLocale(Locale("en"))
         resources.updateConfiguration(conf, dm)
-        val intent : Intent = Intent(context, Navigation::class.java)
+        val intent : Intent = Intent(context, ActivityNavigation::class.java)
         startActivity(intent)
     }
 
@@ -54,7 +54,7 @@ class FragmentSetting : Fragment() {
         val conf = resources.configuration
         conf.setLocale(Locale("tr"))
         resources.updateConfiguration(conf, dm)
-        val intent : Intent = Intent(context, Navigation::class.java)
+        val intent : Intent = Intent(context, ActivityNavigation::class.java)
         startActivity(intent)
     }
 }

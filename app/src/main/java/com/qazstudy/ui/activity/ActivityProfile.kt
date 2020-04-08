@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.qazstudy.R
 
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.app_bar_navigation.*
+import kotlinx.android.synthetic.main.navigation_app_bar.*
 
-class ProfileActivity() : AppCompatActivity() {
+class ActivityProfile() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
