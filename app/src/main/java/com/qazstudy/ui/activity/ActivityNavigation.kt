@@ -8,8 +8,8 @@ import android.content.Intent
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
-import com.qazstudy.ui.adapter.TaskAdapter
-import com.qazstudy.ui.adapter.LessonAdapter
+import com.qazstudy.ui.adapter.AdapterTask
+import com.qazstudy.ui.adapter.AdapterLesson
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.qazstudy.util.Lesson
 
 class ActivityNavigation : AppCompatActivity() {
 
@@ -32,7 +33,6 @@ class ActivityNavigation : AppCompatActivity() {
     companion object {
         var isDark = false
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,6 @@ class ActivityNavigation : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_profile,
                 R.id.nav_lesson,
                 R.id.nav_task,
                 R.id.nav_bookmark,
@@ -61,9 +60,7 @@ class ActivityNavigation : AppCompatActivity() {
 
     fun openProfile(v: View) {
         val intent = Intent(this, ActivityProfile::class.java)
-        intent.putExtra("isDark",
-            isDark
-        )
+        intent.putExtra("isDark", isDark)
         startActivity(intent)
     }
 
@@ -81,71 +78,49 @@ class ActivityNavigation : AppCompatActivity() {
     fun themeSwitch(v: View) {
         isDark = !isDark
         if (isDark) {
-            //container.background = resources.getDrawable(R.color.card_bg_dark)
-            toolbar.setTitleTextColor(resources.getColor(R.color.dark))
-            nav_view.setBackgroundColor(resources.getColor(R.color.dark))
-            toolbar.background = resources.getDrawable(R.color.light_blue)
-            nav_header.background = resources.getDrawable(R.color.light_blue)
-            nav_header_txt_name.setTextColor(resources.getColor(R.color.dark))
-            nav_header_txt_surname.setTextColor(resources.getColor(R.color.dark))
-            ic_theme_switcher.setImageDrawable(resources.getDrawable(R.drawable.ic_brightness_dark))
-            ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(resources.getColor(
-                R.color.light_blue
-            ))
+            toolbar.setTitleTextColor(getColor(R.color.dark))
+            nav_view.setBackgroundColor(getColor(R.color.dark))
+            toolbar.background = getDrawable(R.color.light_blue)
+            nav_header.background = getDrawable(R.color.light_blue)
+            nav_header_txt_name.setTextColor(getColor(R.color.dark))
+            nav_header_txt_surname.setTextColor(getColor(R.color.dark))
+            ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_dark))
+            ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light_blue))
 
             if (fragment_setting__constraint_layout != null) {
-                fragment_setting__constraint_layout.background = resources.getDrawable(
-                    R.color.dark
-                )
+                fragment_setting__constraint_layout.background = getDrawable(R.color.dark)
             }
             if (fragment_bookmark__constraint_layout != null) {
-                fragment_bookmark_tab_layout.background = resources.getDrawable(R.color.light_blue)
-                fragment_bookmark__constraint_layout.background = resources.getDrawable(
-                    R.color.dark
-                )
+                fragment_bookmark_tab_layout.background = getDrawable(R.color.light_blue)
+                fragment_bookmark__constraint_layout.background = getDrawable(R.color.dark)
             }
         } else {
-            //container.background = resources.getDrawable(R.color.card_bg_light)
-            toolbar.setTitleTextColor(resources.getColor(R.color.white))
-            nav_view.setBackgroundColor(resources.getColor(R.color.white))
-            toolbar.background = resources.getDrawable(R.color.colorPrimary)
-            nav_header.background = resources.getDrawable(R.color.colorPrimary)
-            nav_header_txt_name.setTextColor(resources.getColor(R.color.white))
-            nav_header_txt_surname.setTextColor(resources.getColor(R.color.white))
-            ic_theme_switcher.setImageDrawable(resources.getDrawable(R.drawable.ic_brightness_light))
-            ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(resources.getColor(
-                R.color.colorPrimary
-            ))
+            toolbar.setTitleTextColor(getColor(R.color.white))
+            nav_view.setBackgroundColor(getColor(R.color.white))
+            toolbar.background = getDrawable(R.color.colorPrimary)
+            nav_header.background = getDrawable(R.color.colorPrimary)
+            nav_header_txt_name.setTextColor(getColor(R.color.white))
+            nav_header_txt_surname.setTextColor(getColor(R.color.white))
+            ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
+            ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.colorPrimary))
 
             if (fragment_setting__constraint_layout != null) {
-                fragment_setting__constraint_layout.background = resources.getDrawable(
-                    R.color.white
-                )
+                fragment_setting__constraint_layout.background = getDrawable(R.color.white)
             }
             if (fragment_bookmark__constraint_layout != null) {
-                fragment_bookmark_tab_layout.background = resources.getDrawable(R.color.colorPrimary)
-                fragment_bookmark__constraint_layout.background = resources.getDrawable(
-                    R.color.white
-                )
+                fragment_bookmark_tab_layout.background = getDrawable(R.color.colorPrimary)
+                fragment_bookmark__constraint_layout.background = getDrawable(R.color.white)
             }
         }
 
         if (fragment_lesson__recycler_view != null) {
             fragment_lesson__recycler_view.adapter =
-                LessonAdapter(
-                    resources.getStringArray(R.array.lessons_header),
-                    resources.getStringArray(R.array.lessons_description),
-                    isDark
-                )
+                AdapterLesson(this, Lesson(resources.getStringArray(R.array.lessons_header), resources.getStringArray(R.array.lessons_description)), isDark)
         }
 
         if (fragment_task__recycler_view != null) {
             fragment_task__recycler_view.adapter =
-                TaskAdapter(
-                    resources.getStringArray(R.array.tasks_header),
-                    resources.getStringArray(R.array.lessons_description),
-                    isDark
-                )
+                AdapterTask(resources.getStringArray(R.array.tasks_header), resources.getStringArray(R.array.lessons_description), isDark)
         }
     }
 }

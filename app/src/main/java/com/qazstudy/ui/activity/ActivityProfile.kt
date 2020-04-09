@@ -1,14 +1,11 @@
 package com.qazstudy.ui.activity
 
-import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import com.qazstudy.R
-
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.navigation_app_bar.*
 
-class ActivityProfile() : AppCompatActivity() {
+class ActivityProfile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,32 +19,32 @@ class ActivityProfile() : AppCompatActivity() {
 
     private fun setMode(isDark: Boolean) {
         if (isDark) {
-            activity_profile__toolbar_txt.setTextColor(resources.getColor(R.color.dark))
-            activity_profile__toolbar.background = resources.getDrawable(R.color.light_blue)
-            activity_profile__ic_back.setImageDrawable(resources.getDrawable(R.drawable.ic_back_dark))
+            activity_profile__toolbar_txt.setTextColor(getColor(R.color.dark))
+            activity_profile__toolbar.background = getDrawable(R.color.light_blue)
+            activity_profile__ic_back.setImageDrawable(getDrawable(R.drawable.ic_back_dark))
 
-            activity_profile__input_name.setTextColor(resources.getColor(R.color.white))
-            activity_profile__input_city.setTextColor(resources.getColor(R.color.white))
-            activity_profile__input_email.setTextColor(resources.getColor(R.color.white))
-            activity_profile__input_country.setTextColor(resources.getColor(R.color.white))
-            activity_profile__input_password.setTextColor(resources.getColor(R.color.white))
+            activity_profile__input_name.setTextColor(getColor(R.color.white))
+            activity_profile__input_city.setTextColor(getColor(R.color.white))
+            activity_profile__input_email.setTextColor(getColor(R.color.white))
+            activity_profile__input_country.setTextColor(getColor(R.color.white))
+            activity_profile__input_password.setTextColor(getColor(R.color.white))
 
-            activity_profile__input_name.setHintTextColor(resources.getColor(R.color.txt_color))
-            activity_profile__input_city.setHintTextColor(resources.getColor(R.color.txt_color))
-            activity_profile__input_email.setHintTextColor(resources.getColor(R.color.txt_color))
-            activity_profile__input_country.setHintTextColor(resources.getColor(R.color.txt_color))
-            activity_profile__input_password.setHintTextColor(resources.getColor(R.color.txt_color))
+            activity_profile__input_name.setHintTextColor(getColor(R.color.txt_color))
+            activity_profile__input_city.setHintTextColor(getColor(R.color.txt_color))
+            activity_profile__input_email.setHintTextColor(getColor(R.color.txt_color))
+            activity_profile__input_country.setHintTextColor(getColor(R.color.txt_color))
+            activity_profile__input_password.setHintTextColor(getColor(R.color.txt_color))
 
-            activity_profile__input_name.background.setTint(resources.getColor(R.color.txt_color))
-            activity_profile__input_city.background.setTint(resources.getColor(R.color.txt_color))
-            activity_profile__input_email.background.setTint(resources.getColor(R.color.txt_color))
-            activity_profile__input_country.background.setTint(resources.getColor(R.color.txt_color))
-            activity_profile__input_password.background.setTint(resources.getColor(R.color.txt_color))
+            activity_profile__input_name.background.setTint(getColor(R.color.txt_color))
+            activity_profile__input_city.background.setTint(getColor(R.color.txt_color))
+            activity_profile__input_email.background.setTint(getColor(R.color.txt_color))
+            activity_profile__input_country.background.setTint(getColor(R.color.txt_color))
+            activity_profile__input_password.background.setTint(getColor(R.color.txt_color))
 
-            activity_profile__btn_exit.setTextColor(resources.getColor(R.color.light_blue))
-            activity_profile__btn_exit.background = resources.getDrawable(R.drawable.bg_btn_exit_dark)
-            activity_profile__btn_delete.background = resources.getDrawable(R.drawable.bg_btn_delete_account_dark)
-            activity_profile__constraint_layout.background = resources.getDrawable(R.drawable.activity_profile__bg_edittext_dark)
+            activity_profile__btn_exit.setTextColor(getColor(R.color.light_blue))
+            activity_profile__btn_exit.background = getDrawable(R.drawable.bg_btn_exit_dark)
+            activity_profile__btn_delete.background = getDrawable(R.drawable.bg_btn_delete_account_dark)
+            activity_profile__constraint_layout.background = getDrawable(R.drawable.activity_profile__bg_edittext_dark)
         }
     }
 }

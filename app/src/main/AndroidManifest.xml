@@ -3,22 +3,24 @@
     package="com.qazstudy">
 
     <application
-        android:label="@string/app_name"
         android:allowBackup="true"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.ActivityLesson"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".ui.activity.ActivityProfile"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/activity_profile__title" />
+            android:label="@string/activity_profile__title"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.ActivityLogin"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/activity_profile__title" />
-
+            android:label="@string/activity_profile__title"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.ActivityNavigation"
             android:theme="@style/AppTheme.NoActionBar">

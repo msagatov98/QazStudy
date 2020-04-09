@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import com.qazstudy.ui.adapter.TaskAdapter
+import com.qazstudy.ui.adapter.AdapterTask
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_task.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +28,7 @@ class FragmentTask : Fragment() {
         fragment_task__recycler_view.addItemDecoration(divider)
         fragment_task__recycler_view.layoutManager = LinearLayoutManager(this.context)
         fragment_task__recycler_view.adapter =
-            TaskAdapter(
+            AdapterTask(
                 taskHeader,
                 lessonDescription,
                 isDark
