@@ -15,21 +15,57 @@
         android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:padding="9dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_back_light"
-            android:id="@+id/activity_lesson__ic_back"
-            android:contentDescription="@string/activity_profile__ic_back_description" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:padding="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_back_light"
+                android:id="@+id/activity_lesson__ic_back"
+                android:contentDescription="@string/activity_profile__ic_back_description"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:padding="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_bookmark_light"
+                android:id="@+id/activity_lesson__ic_bookmark"
+                android:contentDescription="@string/activity_profile__ic_back_description"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </Toolbar>
 
     <fragment
-        android:name="com.qazstudy.ui.fragment.FragmentLecture1"
-        android:id="@+id/fragment_container_lecture"
         android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/fragment_container_lecture"
         app:layout_constraintTop_toBottomOf="@id/activity_lesson__toolbar"/>
+
+
+    <Toolbar
+
+        android:contentInsetStart="0dp"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

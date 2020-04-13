@@ -4,14 +4,14 @@ import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import com.qazstudy.util.Lesson
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.adapter.AdapterLesson
-import com.qazstudy.util.Lesson
 import kotlinx.android.synthetic.main.fragment_lesson.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLesson() : Fragment() {
 

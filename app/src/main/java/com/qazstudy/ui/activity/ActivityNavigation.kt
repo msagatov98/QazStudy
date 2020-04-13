@@ -5,17 +5,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.content.Intent
+import com.qazstudy.util.Lesson
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
 import com.qazstudy.ui.adapter.AdapterTask
+import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
-import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
+import kotlinx.android.synthetic.main.fragment_book.*
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.fragment_task.*
 import kotlinx.android.synthetic.main.fragment_lesson.*
@@ -26,15 +27,14 @@ import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.qazstudy.ui.adapter.AdapterBook
-import com.qazstudy.util.Lesson
-import kotlinx.android.synthetic.main.fragment_book.*
 
 class ActivityNavigation : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    var ar : Array<Int> = arrayOf(R.drawable.book,R.drawable.book1,R.drawable.book2,R.drawable.book3,R.drawable.book,R.drawable.book1,R.drawable.book2,R.drawable.book3)
+    private var ar : Array<Int> = arrayOf(
+        R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3,
+        R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3)
 
     companion object {
         var isDark = false
@@ -50,8 +50,7 @@ class ActivityNavigation : AppCompatActivity() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_lesson,
@@ -66,14 +65,8 @@ class ActivityNavigation : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    fun openProfile(v: View) {
-        val intent = Intent(this, ActivityProfile::class.java)
-        intent.putExtra("isDark", isDark)
-        startActivity(intent)
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.navigation, menu)
         return true
     }
@@ -81,6 +74,13 @@ class ActivityNavigation : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+
+    fun openProfile(v: View) {
+        val intent = Intent(this, ActivityProfile::class.java)
+        intent.putExtra("isDark", isDark)
+        startActivity(intent)
     }
 
     fun themeSwitch(v: View) {

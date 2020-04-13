@@ -1,8 +1,8 @@
 package com.qazstudy.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.qazstudy.R
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
 class ActivityLogin : AppCompatActivity() {
 
