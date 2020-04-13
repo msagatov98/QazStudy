@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     android:id="@+id/activity_lesson__constraint_layout"
     tools:context=".ui.activity.ActivityLesson">
@@ -44,6 +45,7 @@
     </Toolbar>
 
     <fragment
+        android:name="com.qazstudy.ui.fragment.FragmentLecture2"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
@@ -53,7 +55,7 @@
 
 
     <Toolbar
-
+        android:id="@+id/activity_lesson__toolbar_bottom"
         android:contentInsetStart="0dp"
         android:layout_height="50dp"
         android:layout_width="match_parent"
@@ -63,6 +65,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <ImageView
+                android:padding="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_chat_light"
+                android:id="@+id/activity_lesson__ic_chat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

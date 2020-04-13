@@ -2,6 +2,7 @@ package com.qazstudy.ui.activity
 
 import com.qazstudy.R
 import android.os.Bundle
+import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
@@ -25,21 +26,22 @@ class ActivityLesson : AppCompatActivity() {
 
         for (i in arFragmentLecture.indices) {
             if (intent.getIntExtra("numLesson", -1) == i) {
-                Toast.makeText(this, intent.getIntExtra("numLesson", -1).toString(), Toast.LENGTH_LONG).show()
                 fm = supportFragmentManager
                 ft = fm.beginTransaction()
-                ft.add(R.id.fragment_container_lecture, arFragmentLecture[i])
+                ft.replace(R.id.fragment_container_lecture, arFragmentLecture[i])
                 ft.commit()
-                break
             }
         }
     }
 
     private fun setTheme() {
         if (isDark) {
+            this.window.statusBarColor = getColor(R.color.light_blue)
             activity_lesson__toolbar.setBackgroundColor(getColor(R.color.light_blue))
             activity_lesson__constraint_layout.setBackgroundColor(getColor(R.color.dark))
+            activity_lesson__ic_chat.setImageDrawable(getDrawable(R.drawable.ic_chat_dark))
             activity_lesson__ic_back.setImageDrawable(getDrawable(R.drawable.ic_back_dark))
+            activity_lesson__toolbar_bottom.setBackgroundColor(getColor(R.color.light_blue))
             activity_lesson__ic_bookmark.setImageDrawable(getDrawable(R.drawable.ic_bookmark_dark))
         }
     }

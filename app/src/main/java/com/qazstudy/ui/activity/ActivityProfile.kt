@@ -19,6 +19,7 @@ class ActivityProfile : AppCompatActivity() {
 
     private fun setMode(isDark: Boolean) {
         if (isDark) {
+            this.window.statusBarColor = getColor(R.color.light_blue)
             activity_profile__toolbar_txt.setTextColor(getColor(R.color.dark))
             activity_profile__toolbar.background = getDrawable(R.color.light_blue)
             activity_profile__ic_back.setImageDrawable(getDrawable(R.drawable.ic_back_dark))
