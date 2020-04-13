@@ -14,11 +14,11 @@ class ActivityLesson : AppCompatActivity() {
         setTheme()
         activity_lesson__ic_back.setOnClickListener { finish() }
 
-        val ar = resources.getStringArray(R.array.lessons_header)
+        val ar = resources.getStringArray(R.array.lecture_lesson)
 
         for (i in ar.indices) {
             if (intent.getIntExtra("numLesson", -1) == i) {
-                textView.text = ar[i]
+
             }
         }
     }

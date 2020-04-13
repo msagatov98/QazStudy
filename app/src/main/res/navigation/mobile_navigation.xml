@@ -7,10 +7,10 @@
 
 
     <fragment
-        android:id="@+id/nav_lesson"
-        android:name="com.qazstudy.ui.fragment.FragmentLesson"
         android:label="@string/menu_lesson"
-        tools:layout="@layout/fragment_lesson">
+        android:id="@+id/nav_lesson"
+        tools:layout="@layout/fragment_lesson"
+        android:name="com.qazstudy.ui.fragment.FragmentLesson">
 
         <action
             android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
@@ -18,10 +18,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_lesson_second"
-        android:name="com.qazstudy.ui.fragment.FragmentLesson"
         android:label="@string/home_second"
-        tools:layout="@layout/fragment_lesson">
+        android:id="@+id/nav_lesson_second"
+        tools:layout="@layout/fragment_lesson"
+        android:name="com.qazstudy.ui.fragment.FragmentLesson">
         <action
             android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
             app:destination="@id/nav_lesson" />
@@ -32,22 +32,34 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_task"
-        android:name="com.qazstudy.ui.fragment.FragmentTask"
-        android:label="@string/menu_task"
-        tools:layout="@layout/fragment_task" />
+        android:label="@string/menu_book"
+        android:id="@+id/nav_book"
+        tools:layout="@layout/fragment_book"
+        android:name="com.qazstudy.ui.fragment.FragmentBook" />
 
     <fragment
-        android:id="@+id/nav_bookmark"
-        android:name="com.qazstudy.ui.fragment.FragmentBookmark"
+        android:label="@string/menu_dictionary"
+        android:id="@+id/nav_dictionary"
+        tools:layout="@layout/fragment_dictionary"
+        android:name="com.qazstudy.ui.fragment.FragmentDictionary" />
+
+    <fragment
+        android:label="@string/menu_task"
+        android:id="@+id/nav_task"
+        tools:layout="@layout/fragment_task"
+        android:name="com.qazstudy.ui.fragment.FragmentTask" />
+
+    <fragment
         android:label="@string/menu_bookmark"
-        tools:layout="@layout/fragment_bookmark" />
+        android:id="@+id/nav_bookmark"
+        tools:layout="@layout/fragment_bookmark"
+        android:name="com.qazstudy.ui.fragment.FragmentBookmark" />
 
     <fragment
         android:id="@+id/nav_setting"
-        android:label="Settings"
-        android:name="com.qazstudy.ui.fragment.FragmentSetting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting"
+        android:label="@string/title_activity_setting"
+        android:name="com.qazstudy.ui.fragment.FragmentSetting" />
 
 
 </navigation>

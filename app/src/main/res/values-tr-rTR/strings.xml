@@ -26,4 +26,11 @@
     <string name="activity_profile__btn_delete">Kullanıcıyı siılmek</string>
     <string name="activity_profile__ic_back_description">Açıklama</string>
     <string name="activity_profile__title">HZ</string>
+
+    <string-array name="lecture_lesson">
+        <item>Lecture of first lesson</item>
+    </string-array>
+    <string name="lecture_lesson_1">Lecture of first lesson</string>
+    <string name="menu_book">Kıtablar</string>
+    <string name="menu_dictionary">Sözlük</string>
 </resources>

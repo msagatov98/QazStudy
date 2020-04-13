@@ -25,4 +25,13 @@
     <string name="activity_profile__btn_delete">Удалить аккаунт</string>
     <string name="activity_profile__ic_back_description">Описание</string>
     <string name="activity_profile__title">Профиль</string>
+
+    <string-array name="lecture_lesson">
+        <item>В первом уроке мы выучим алфавит. Казахский алфавит состоит из 42 букв</item>
+    </string-array>
+
+
+    <string name="lecture_lesson_1">В первом уроке мы выучим алфавит. Казахский алфавит состоит из 42 букв</string>
+    <string name="menu_book">Книги</string>
+    <string name="menu_dictionary">Словарь</string>
 </resources>

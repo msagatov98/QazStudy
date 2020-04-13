@@ -60,4 +60,14 @@
     <string name="activity_profile__ic_back_description">Description</string>
     <string name="activity_profile__title">Profile</string>
 
+    <string name="lecture_lesson_1">Lecture of first lesson</string>
+
+    <string-array name="lecture_lesson">
+        <item>Lecture of first lesson</item>
+    </string-array>
+    <string name="menu_book">Books</string>
+    <string name="menu_dictionary">Dictionary</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
 </resources>

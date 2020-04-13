@@ -13,11 +13,11 @@ import kotlinx.android.synthetic.main.view_holder_lesson.view.header
 import kotlinx.android.synthetic.main.view_holder_lesson.view.container
 import kotlinx.android.synthetic.main.view_holder_lesson.view.description
 
-class AdapterTask(private val header: Array<String>, private val description: Array<String>, private var isDark : Boolean) : RecyclerView.Adapter<AdapterTask.LessonAndTaskViewHolder>() {
+class AdapterTask(private val header: Array<String>, private val description: Array<String>, private var isDark : Boolean) : RecyclerView.Adapter<AdapterTask.TaskViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonAndTaskViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_task, parent, false)
-        return LessonAndTaskViewHolder(
+        return TaskViewHolder(
             view,
             isDark
         )
@@ -27,7 +27,7 @@ class AdapterTask(private val header: Array<String>, private val description: Ar
         return header.size
     }
 
-    override fun onBindViewHolder(holder: LessonAndTaskViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.textViewHeader.text = header[position]
         holder.textViewDescription.text = description[position]
         holder.constraintLayout!!.setOnClickListener {
@@ -36,7 +36,7 @@ class AdapterTask(private val header: Array<String>, private val description: Ar
 
     }
 
-    class LessonAndTaskViewHolder(itemView: View, isDark : Boolean) : RecyclerView.ViewHolder(itemView) {
+    class TaskViewHolder(itemView: View, isDark : Boolean) : RecyclerView.ViewHolder(itemView) {
         var textViewHeader : TextView = itemView.header
         var textViewDescription : TextView = itemView.description
         var constraintLayout : ConstraintLayout? = itemView.container

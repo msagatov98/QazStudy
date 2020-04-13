@@ -12,6 +12,8 @@ import com.qazstudy.ui.adapter.AdapterTask
 import com.qazstudy.ui.adapter.AdapterLesson
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -24,11 +26,15 @@ import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.util.Lesson
+import kotlinx.android.synthetic.main.fragment_book.*
 
 class ActivityNavigation : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    var ar : Array<Int> = arrayOf(R.drawable.book,R.drawable.book1,R.drawable.book2,R.drawable.book3,R.drawable.book,R.drawable.book1,R.drawable.book2,R.drawable.book3)
 
     companion object {
         var isDark = false
@@ -51,6 +57,8 @@ class ActivityNavigation : AppCompatActivity() {
                 R.id.nav_lesson,
                 R.id.nav_task,
                 R.id.nav_bookmark,
+                R.id.nav_book,
+                R.id.nav_dictionary,
                 R.id.nav_setting
             ), drawerLayout
         )
@@ -76,6 +84,7 @@ class ActivityNavigation : AppCompatActivity() {
     }
 
     fun themeSwitch(v: View) {
+
         isDark = !isDark
         if (isDark) {
             toolbar.setTitleTextColor(getColor(R.color.dark))
@@ -94,6 +103,9 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_bookmark_tab_layout.background = getDrawable(R.color.light_blue)
                 fragment_bookmark__constraint_layout.background = getDrawable(R.color.dark)
             }
+            if (fragment_book__constraint_layout != null ) {
+                fragment_book__constraint_layout.background = getDrawable(R.color.dark)
+            }
         } else {
             toolbar.setTitleTextColor(getColor(R.color.white))
             nav_view.setBackgroundColor(getColor(R.color.white))
@@ -111,6 +123,10 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_bookmark_tab_layout.background = getDrawable(R.color.colorPrimary)
                 fragment_bookmark__constraint_layout.background = getDrawable(R.color.white)
             }
+
+            if (fragment_book__constraint_layout != null) {
+                fragment_book__constraint_layout.background = getDrawable(R.color.white)
+            }
         }
 
         if (fragment_lesson__recycler_view != null) {
@@ -121,6 +137,11 @@ class ActivityNavigation : AppCompatActivity() {
         if (fragment_task__recycler_view != null) {
             fragment_task__recycler_view.adapter =
                 AdapterTask(resources.getStringArray(R.array.tasks_header), resources.getStringArray(R.array.lessons_description), isDark)
+        }
+
+        if (fragment_book__recycler_view != null) {
+            fragment_book__recycler_view.adapter =
+                AdapterBook(ar)
         }
     }
 }

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" android:id="@+id/group_1">
+
         <item
             android:id="@+id/nav_lesson"
             android:title="@string/menu_lesson"
@@ -16,6 +17,21 @@
             android:title="@string/menu_bookmark"
             android:id="@+id/nav_bookmark"
             android:icon="@drawable/ic_menu_bookmark"/>
+    </group>
+
+    <group android:checkableBehavior="single" android:id="@+id/group_2">
+        <item
+            android:id="@+id/nav_book"
+            android:title="@string/menu_book"
+            android:icon="@drawable/ic_menu_book"/>
+        <item
+            android:id="@+id/nav_dictionary"
+            android:title="@string/menu_dictionary"
+            android:icon="@drawable/ic_menu_dictionary"/>
+    </group>
+
+    <group android:checkableBehavior="single"  android:id="@+id/group_3">
+
         <item
             android:title="@string/action_settings"
             android:id="@+id/nav_setting"
