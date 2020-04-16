@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "167549940653",
+    "firebase_url": "https://qazstudy-7f599.firebaseio.com",
+    "project_id": "qazstudy-7f599",
+    "storage_bucket": "qazstudy-7f599.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167549940653:android:6fd4e4731e17fd6365a724",
+        "android_client_info": {
+          "package_name": "com.qazstudy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167549940653-sd47rmpc6bvls2mctgm5bhdet214o2l6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qazstudy",
+            "certificate_hash": "9fca8ea35b9b0bca021dfb96b12dc9f088e7d5c2"
+          }
+        },
+        {
+          "client_id": "167549940653-0c43r830n9ttt1gih0cvpudcfg0td919.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAglhP4_Cl9TE5nRCaQPst7EShSj1dmfgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167549940653-0c43r830n9ttt1gih0cvpudcfg0td919.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

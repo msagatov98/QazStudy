@@ -68,6 +68,48 @@
     <string name="menu_book">Books</string>
     <string name="menu_dictionary">Dictionary</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="abc_cyrillic_1" translatable="false">A a</string>
+    <string name="abc_cyrillic_2" translatable="false">Ә ә</string>
+    <string name="abc_cyrillic_3" translatable="false">Б б</string>
+    <string name="abc_cyrillic_4" translatable="false">В в</string>
+    <string name="abc_cyrillic_5" translatable="false">Г г</string>
+    <string name="abc_cyrillic_6" translatable="false">Ғ ғ</string>
+    <string name="abc_cyrillic_7" translatable="false">Д д</string>
+    <string name="abc_cyrillic_8" translatable="false">Е е</string>
+    <string name="abc_cyrillic_9" translatable="false">Ё ё</string>
+    <string name="abc_cyrillic_10" translatable="false">Ж ж</string>
+    <string name="abc_cyrillic_11" translatable="false">З з</string>
+    <string name="abc_cyrillic_12" translatable="false">И и</string>
+    <string name="abc_cyrillic_13" translatable="false">Й й</string>
+    <string name="abc_cyrillic_14" translatable="false">К к</string>
+    <string name="abc_cyrillic_15" translatable="false">Қ қ</string>
+    <string name="abc_cyrillic_16" translatable="false">Л л</string>
+    <string name="abc_cyrillic_17" translatable="false">М м</string>
+    <string name="abc_cyrillic_18" translatable="false">Н н</string>
+    <string name="abc_cyrillic_19" translatable="false">ң</string>
+    <string name="abc_cyrillic_20" translatable="false">О о</string>
+    <string name="abc_cyrillic_21" translatable="false">Ө ө</string>
+    <string name="abc_cyrillic_22" translatable="false">П п</string>
+    <string name="abc_cyrillic_23" translatable="false">Р р</string>
+    <string name="abc_cyrillic_24" translatable="false">С с</string>
+    <string name="abc_cyrillic_25" translatable="false">Т т</string>
+    <string name="abc_cyrillic_26" translatable="false">У у</string>
+    <string name="abc_cyrillic_27" translatable="false">Ұ ұ</string>
+    <string name="abc_cyrillic_28" translatable="false">Ү ү</string>
+    <string name="abc_cyrillic_29" translatable="false">Ф ф</string>
+    <string name="abc_cyrillic_30" translatable="false">Х х</string>
+    <string name="abc_cyrillic_31" translatable="false">һ</string>
+    <string name="abc_cyrillic_32" translatable="false">Ц ц</string>
+    <string name="abc_cyrillic_33" translatable="false">Ч ч</string>
+    <string name="abc_cyrillic_34" translatable="false">Ш ш</string>
+    <string name="abc_cyrillic_35" translatable="false">Щ щ</string>
+    <string name="abc_cyrillic_36" translatable="false">ъ</string>
+    <string name="abc_cyrillic_37" translatable="false">Ы ы</string>
+    <string name="abc_cyrillic_38" translatable="false">І і</string>
+    <string name="abc_cyrillic_39" translatable="false">ь</string>
+    <string name="abc_cyrillic_40" translatable="false">Э э</string>
+    <string name="abc_cyrillic_41" translatable="false">Ю ю</string>
+    <string name="abc_cyrillic_42" translatable="false">Я я</string>
 
 </resources>

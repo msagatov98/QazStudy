@@ -17,7 +17,7 @@
         <item>Урок 8</item>
     </string-array>
     <string name="activity_profile__hint_name">Имя</string>
-    <string name="activity_profile__hint_email">Электронная почта</string>
+    <string name="activity_profile__hint_email">Эл.почта</string>
     <string name="activity_profile__hint_password">Пароль</string>
     <string name="activity_profile__hint_country">Страна</string>
     <string name="activity_profile__hint_city">Город</string>

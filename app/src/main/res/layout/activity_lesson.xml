@@ -45,12 +45,12 @@
     </Toolbar>
 
     <fragment
-        android:name="com.qazstudy.ui.fragment.FragmentLecture2"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container_lecture"
+        android:name="com.qazstudy.ui.fragment.FragmentLecture2"
         app:layout_constraintTop_toBottomOf="@id/activity_lesson__toolbar"/>
 
 
@@ -67,14 +67,39 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:visibility="invisible"
+                android:layout_marginStart="25dp"
+                android:padding="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_like_light"
+                android:id="@+id/activity_lesson__ic_like"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/activity_lesson__ic_chat" />
+
+
+            <ImageView
                 android:padding="12dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_chat_light"
                 android:id="@+id/activity_lesson__ic_chat"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/activity_lesson__ic_like"
+                app:layout_constraintEnd_toStartOf="@id/activity_lesson__ic_dislike"/>
+
+            <ImageView
+                android:visibility="invisible"
+                android:layout_marginEnd="25dp"
+                android:padding="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_dislike_light"
+                android:id="@+id/activity_lesson__ic_dislike"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/activity_lesson__ic_chat"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

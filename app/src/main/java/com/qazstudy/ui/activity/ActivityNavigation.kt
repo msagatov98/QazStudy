@@ -14,6 +14,7 @@ import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
 import kotlinx.android.synthetic.main.fragment_book.*
@@ -27,6 +28,8 @@ import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.firebase.auth.FirebaseAuth
+import kotlin.system.exitProcess
 
 class ActivityNavigation : AppCompatActivity() {
 
@@ -46,7 +49,6 @@ class ActivityNavigation : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -63,6 +65,8 @@ class ActivityNavigation : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
     }
 
 
@@ -86,13 +90,14 @@ class ActivityNavigation : AppCompatActivity() {
     fun themeSwitch(v: View) {
 
         isDark = !isDark
+
         if (isDark) {
-            this.window.statusBarColor = getColor(R.color.light_blue)
             toolbar.setTitleTextColor(getColor(R.color.dark))
             nav_view.setBackgroundColor(getColor(R.color.dark))
             toolbar.background = getDrawable(R.color.light_blue)
             nav_header.background = getDrawable(R.color.light_blue)
             nav_header_txt_name.setTextColor(getColor(R.color.dark))
+            this.window.statusBarColor = getColor(R.color.light_blue)
             nav_header_txt_surname.setTextColor(getColor(R.color.dark))
             ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_dark))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light_blue))
@@ -108,15 +113,16 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_book__constraint_layout.background = getDrawable(R.color.dark)
             }
         } else {
-            this.window.statusBarColor = getColor(R.color.colorPrimary)
             toolbar.setTitleTextColor(getColor(R.color.white))
             nav_view.setBackgroundColor(getColor(R.color.white))
             toolbar.background = getDrawable(R.color.colorPrimary)
             nav_header.background = getDrawable(R.color.colorPrimary)
             nav_header_txt_name.setTextColor(getColor(R.color.white))
+            this.window.statusBarColor = getColor(R.color.colorPrimary)
             nav_header_txt_surname.setTextColor(getColor(R.color.white))
             ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.colorPrimary))
+
 
             if (fragment_setting__constraint_layout != null) {
                 fragment_setting__constraint_layout.background = getDrawable(R.color.white)

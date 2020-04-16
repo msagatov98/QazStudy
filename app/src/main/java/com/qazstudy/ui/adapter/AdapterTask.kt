@@ -17,10 +17,7 @@ class AdapterTask(private val header: Array<String>, private val description: Ar
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_task, parent, false)
-        return TaskViewHolder(
-            view,
-            isDark
-        )
+        return TaskViewHolder(view, isDark)
     }
 
     override fun getItemCount(): Int {
@@ -28,12 +25,10 @@ class AdapterTask(private val header: Array<String>, private val description: Ar
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.textViewHeader.text = header[position]
-        holder.textViewDescription.text = description[position]
-        holder.constraintLayout!!.setOnClickListener {
-
+            holder.textViewHeader.text = header[position]
+            holder.textViewDescription.text = description[position]
+            holder.constraintLayout!!.setOnClickListener {
         }
-
     }
 
     class TaskViewHolder(itemView: View, isDark : Boolean) : RecyclerView.ViewHolder(itemView) {
