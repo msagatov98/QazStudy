@@ -7,7 +7,7 @@ import android.content.Intent
 import android.view.ViewGroup
 import android.content.Context
 import android.widget.TextView
-import com.qazstudy.util.Lesson
+import com.qazstudy.model.Lesson
 import android.view.LayoutInflater
 import com.qazstudy.ui.activity.ActivityLesson
 import androidx.recyclerview.widget.RecyclerView

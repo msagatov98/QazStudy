@@ -2,22 +2,52 @@ package com.qazstudy.ui.activity
 
 import com.qazstudy.R
 import android.os.Bundle
+import android.content.Intent
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.*
+import com.qazstudy.model.User
 import kotlinx.android.synthetic.main.activity_profile.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.adapter.ValueEventListenerAdapter
+import com.qazstudy.util.showToast
 
 class ActivityProfile : AppCompatActivity() {
+
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var mDatabase: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        setMode()
 
-        val isDark = intent.getBooleanExtra("isDark", false)
+        mAuth = FirebaseAuth.getInstance()
+        mDatabase = FirebaseDatabase.getInstance().reference
+
+        mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter{
+                val user = it.getValue(User::class.java)
+                activity_profile__input_city.setText(user!!.city, TextView.BufferType.EDITABLE)
+                activity_profile__input_name.setText(user.name, TextView.BufferType.EDITABLE)
+                activity_profile__input_email.setText(user.email, TextView.BufferType.EDITABLE)
+                activity_profile__input_country.setText(user.country, TextView.BufferType.EDITABLE)
+            })
 
         activity_profile__ic_back.setOnClickListener { finish() }
-        setMode(isDark)
+        activity_profile__btn_exit.setOnClickListener { mAuth.signOut() }
+
+        mAuth.addAuthStateListener {
+            if (it.currentUser == null) {
+                startActivity(Intent(this, ActivityLogin::class.java))
+                finish()
+            }
+        }
     }
 
-    private fun setMode(isDark: Boolean) {
+
+
+    private fun setMode() {
         if (isDark) {
             this.window.statusBarColor = getColor(R.color.light_blue)
             activity_profile__toolbar_txt.setTextColor(getColor(R.color.dark))
@@ -49,3 +79,4 @@ class ActivityProfile : AppCompatActivity() {
         }
     }
 }
+

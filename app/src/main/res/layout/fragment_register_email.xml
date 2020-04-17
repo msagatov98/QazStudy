@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_user"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/fragment_register__ic_user"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/all_image_description" />
+
+    <EditText
+        android:padding="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/bg_btn_exit_light"
+        android:id="@+id/fragment_register__input_email"
+        android:hint="@string/activity_profile__hint_email"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register__ic_user" />
+
+    <Button
+        android:id="@+id/fragment_register__next"
+        android:text="next"
+        android:stateListAnimator="@animator/btn_login_animator"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_login_bg"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register__input_email"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,9 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.ActivityLesson"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity android:name=".ui.activity.ActivityRegister"></activity>
+        <activity
+            android:name=".ui.activity.ActivityLesson"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.ActivityProfile"
             android:label="@string/activity_profile__title"
@@ -20,7 +21,8 @@
         <activity
             android:name=".ui.activity.ActivityLogin"
             android:label="@string/activity_profile__title"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".ui.activity.ActivityNavigation"
             android:theme="@style/AppTheme.NoActionBar">

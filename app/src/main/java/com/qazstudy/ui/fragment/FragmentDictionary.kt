@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.adapter.AdapterLesson
-import com.qazstudy.util.Lesson
+import com.qazstudy.model.Lesson
 import kotlinx.android.synthetic.main.fragment_lesson.*
 
 class FragmentDictionary() : Fragment() {

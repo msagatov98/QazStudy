@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.content.Intent
-import com.qazstudy.util.Lesson
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
@@ -14,7 +13,6 @@ import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
 import kotlinx.android.synthetic.main.fragment_book.*
@@ -29,11 +27,12 @@ import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.firebase.auth.FirebaseAuth
-import kotlin.system.exitProcess
+import com.qazstudy.model.Lesson
 
 class ActivityNavigation : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var mAuth: FirebaseAuth
 
     private var ar : Array<Int> = arrayOf(
         R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3,
@@ -48,6 +47,8 @@ class ActivityNavigation : AppCompatActivity() {
         setContentView(R.layout.activity_navigation)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        mAuth = FirebaseAuth.getInstance()
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -69,6 +70,14 @@ class ActivityNavigation : AppCompatActivity() {
         ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        if (mAuth.currentUser == null) {
+            startActivity(Intent(this, ActivityLogin::class.java))
+            finish()
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.navigation, menu)

@@ -4,7 +4,7 @@ import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import com.qazstudy.util.Lesson
+import com.qazstudy.model.Lesson
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import com.qazstudy.ui.adapter.AdapterLesson
