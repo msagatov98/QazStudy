@@ -12,9 +12,11 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 import com.qazstudy.util.showToast
+import com.qazstudy.view.DialogInput
 
 class ActivityProfile : AppCompatActivity() {
 
+    private lateinit var mUser: User
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
 
@@ -27,12 +29,28 @@ class ActivityProfile : AppCompatActivity() {
         mDatabase = FirebaseDatabase.getInstance().reference
 
         mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter{
-                val user = it.getValue(User::class.java)
-                activity_profile__input_city.setText(user!!.city, TextView.BufferType.EDITABLE)
-                activity_profile__input_name.setText(user.name, TextView.BufferType.EDITABLE)
-                activity_profile__input_email.setText(user.email, TextView.BufferType.EDITABLE)
-                activity_profile__input_country.setText(user.country, TextView.BufferType.EDITABLE)
-            })
+            mUser = it.getValue(User::class.java)!!
+            activity_profile__input_name.setText(mUser.name, TextView.BufferType.EDITABLE)
+            activity_profile__input_city.setText(mUser.city, TextView.BufferType.EDITABLE)
+            activity_profile__input_email.setText(mUser.email, TextView.BufferType.EDITABLE)
+            activity_profile__input_country.setText(mUser.country, TextView.BufferType.EDITABLE)
+        })
+
+        activity_profile__input_name.setOnClickListener {
+            DialogInput("name").show(supportFragmentManager, "TAG")
+        }
+        activity_profile__input_email.setOnClickListener {
+            DialogInput("email").show(supportFragmentManager, "TAG")
+        }
+        activity_profile__input_country.setOnClickListener {
+            DialogInput("country").show(supportFragmentManager, "TAG")
+        }
+        activity_profile__input_city.setOnClickListener {
+            DialogInput("city").show(supportFragmentManager, "TAG")
+        }
+        activity_profile__input_password.setOnClickListener {
+            DialogInput("password").show(supportFragmentManager, "TAG")
+        }
 
         activity_profile__ic_back.setOnClickListener { finish() }
         activity_profile__btn_exit.setOnClickListener { mAuth.signOut() }

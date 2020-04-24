@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<com.qazstudy.view.KeyboardAwareScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_register__frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.ActivityRegister">
+    android:id="@+id/activity_register__scroll_view">
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/activity_register__frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.activity.ActivityRegister">
+    </FrameLayout>
+
+</com.qazstudy.view.KeyboardAwareScrollView>

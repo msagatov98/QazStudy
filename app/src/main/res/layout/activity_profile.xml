@@ -59,16 +59,19 @@
         app:layout_constraintTop_toBottomOf="@id/activity_profile__toolbar"/>
 
     <TextView
-        android:textColor="@color/txt_color"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
         android:textSize="18sp"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
+        android:textColor="@color/txt_color"
         android:layout_height="wrap_content"
         android:text="@string/activity_profile__hint_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_profile__image_profile"/>
+
     <EditText
+        android:clickable="true"
+        android:focusable="false"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:paddingStart="150dp"
@@ -83,21 +86,23 @@
 
 
     <TextView
-        android:textColor="@color/txt_color"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
         android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/txt_color"
         android:text="@string/activity_profile__hint_email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_profile__input_name"/>
     <EditText
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:paddingStart="150dp"
+        android:clickable="true"
+        android:focusable="false"
         android:paddingEnd="0dp"
         android:layout_height="50dp"
+        android:paddingStart="150dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         android:importantForAutofill="no"
         android:layout_width="match_parent"
         android:inputType="textEmailAddress"
@@ -106,22 +111,24 @@
 
 
     <TextView
-        android:textColor="@color/txt_color"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
         android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
+        android:textColor="@color/txt_color"
         android:layout_height="wrap_content"
         android:text="@string/activity_profile__hint_password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_profile__input_email"/>
     <EditText
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:paddingStart="150dp"
+        android:clickable="true"
+        android:focusable="false"
         android:paddingEnd="0dp"
+        android:paddingStart="150dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="15dp"
         android:inputType="textPassword"
+        android:layout_marginStart="15dp"
         android:importantForAutofill="no"
         android:layout_width="match_parent"
         android:id="@+id/activity_profile__input_password"
@@ -129,22 +136,24 @@
 
 
     <TextView
-        android:textColor="@color/txt_color"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
         android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
+        android:textColor="@color/txt_color"
         android:layout_height="wrap_content"
         android:text="@string/activity_profile__hint_country"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_profile__input_password"/>
     <EditText
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:paddingStart="150dp"
+        android:clickable="true"
+        android:focusable="false"
         android:paddingEnd="0dp"
         android:inputType="text"
         android:layout_height="50dp"
+        android:paddingStart="150dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         android:importantForAutofill="no"
         android:layout_width="match_parent"
         android:id="@+id/activity_profile__input_country"
@@ -152,16 +161,18 @@
 
 
     <TextView
-        android:textColor="@color/txt_color"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
         android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
+        android:textColor="@color/txt_color"
         android:layout_height="wrap_content"
         android:text="@string/activity_profile__hint_city"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_profile__input_country"/>
     <EditText
+        android:clickable="true"
+        android:focusable="false"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:paddingStart="150dp"

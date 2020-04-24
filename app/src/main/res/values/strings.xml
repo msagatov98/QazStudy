@@ -114,4 +114,8 @@
     <string name="abc_cyrillic_41" translatable="false">Ю ю</string>
     <string name="abc_cyrillic_42" translatable="false">Я я</string>
 
+    <string name="activity_profile__hint_password_repeat" translatable="false">Repeat password</string>
+    <string name="register" translatable="false">Register</string>
+    <string name="next">Next</string>
+
 </resources>

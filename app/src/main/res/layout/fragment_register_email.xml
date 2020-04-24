@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="75dp"
         android:src="@drawable/ic_user"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,6 +18,7 @@
 
     <EditText
         android:padding="10dp"
+        android:autofillHints="no"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="25dp"
         android:layout_marginStart="15dp"
@@ -30,16 +31,16 @@
         app:layout_constraintTop_toBottomOf="@id/fragment_register__ic_user" />
 
     <Button
-        android:id="@+id/fragment_register__next"
-        android:text="next"
-        android:stateListAnimator="@animator/btn_login_animator"
+        android:text="@string/next"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="15dp"
         android:layout_marginStart="15dp"
-        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/btn_login_color"
         android:background="@drawable/btn_login_bg"
+        android:id="@+id/fragment_register__btn_next"
+        android:stateListAnimator="@animator/btn_login_animator"
         app:layout_constraintTop_toBottomOf="@id/fragment_register__input_email"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

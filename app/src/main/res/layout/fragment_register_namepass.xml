@@ -6,47 +6,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
         android:layout_marginTop="100dp"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:id="@+id/fragment_register__title"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter name and password"/>
+        android:text="Enter name and password"
+        android:id="@+id/fragment_register__title"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
     <EditText
         android:hint="@string/activity_profile__hint_name"
-        android:id="@+id/fragment_register__input_name"
         android:padding="10dp"
+        android:inputType="text"
+        android:autofillHints="no"
         android:layout_margin="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/fragment_register__input_name"
         android:background="@drawable/bg_btn_exit_light"
         app:layout_constraintTop_toBottomOf="@id/fragment_register__title"/>
 
     <EditText
-        android:hint="@string/activity_profile__hint_password"
-        android:id="@+id/fragment_register__input_password"
         android:padding="10dp"
+        android:hint="@string/activity_profile__hint_password"
+        android:autofillHints="no"
         android:layout_margin="15dp"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn_exit_light"
+        android:id="@+id/fragment_register__input_password"
         app:layout_constraintTop_toBottomOf="@id/fragment_register__input_name"/>
 
+    <EditText
+        android:autofillHints="no"
+        android:hint="@string/activity_profile__hint_password_repeat"
+        android:id="@+id/fragment_register__input_password_repeat"
+        android:padding="10dp"
+        android:layout_margin="15dp"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_exit_light"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register__input_password" />
+
     <Button
-        android:text="Register"
+        android:text="@string/register"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="15dp"
         android:layout_marginStart="15dp"
-        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/btn_login_color"
         android:background="@drawable/btn_login_bg"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register__input_password"/>
+        android:id="@+id/activity_register__btn_register"
+        android:stateListAnimator="@animator/btn_login_animator"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register__input_password_repeat"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.ActivityRegister"></activity>
+
+        <activity android:name=".ui.activity.ActivityRegister"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".ui.activity.ActivityLesson"
             android:theme="@style/AppTheme.NoActionBar" />
