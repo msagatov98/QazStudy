@@ -67,7 +67,8 @@ class ActivityNavigation : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
+        if (isDark) ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_dark))
+        else ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
     }
 
     override fun onStart() {
@@ -132,7 +133,6 @@ class ActivityNavigation : AppCompatActivity() {
             ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.colorPrimary))
 
-
             if (fragment_setting__constraint_layout != null) {
                 fragment_setting__constraint_layout.background = getDrawable(R.color.white)
             }
@@ -140,7 +140,6 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_bookmark_tab_layout.background = getDrawable(R.color.colorPrimary)
                 fragment_bookmark__constraint_layout.background = getDrawable(R.color.white)
             }
-
             if (fragment_book__constraint_layout != null) {
                 fragment_book__constraint_layout.background = getDrawable(R.color.white)
             }
@@ -150,12 +149,10 @@ class ActivityNavigation : AppCompatActivity() {
             fragment_lesson__recycler_view.adapter =
                 AdapterLesson(this, Lesson(resources.getStringArray(R.array.lessons_header), resources.getStringArray(R.array.lessons_description)), isDark)
         }
-
         if (fragment_task__recycler_view != null) {
             fragment_task__recycler_view.adapter =
                 AdapterTask(resources.getStringArray(R.array.tasks_header), resources.getStringArray(R.array.lessons_description), isDark)
         }
-
         if (fragment_book__recycler_view != null) {
             fragment_book__recycler_view.adapter =
                 AdapterBook(ar)

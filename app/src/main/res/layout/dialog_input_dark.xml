@@ -5,16 +5,30 @@
     android:background="@color/dark"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:text="Title"
+        android:id="@+id/dialog_title"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <EditText
         android:padding="10dp"
-        android:layout_margin="25dp"
+        android:inputType="text"
+        android:layout_margin="15dp"
         android:id="@+id/dialog_input"
         android:textColor="@color/white"
+        android:importantForAutofill="no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="@color/txt_color"
         android:background="@drawable/bg_btn_exit_dark"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/dialog_title" />
 
     <Button
         android:layout_width="0dp"
@@ -23,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="@android:string/cancel"
         android:id="@+id/dialog_password__cancel"
-        android:background="@drawable/bg_btn_exit_dark"
+        android:background="@drawable/top_line_cencel_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_input"
         app:layout_constraintEnd_toStartOf="@id/dialog_password__ok"/>
@@ -34,7 +48,7 @@
         android:text="@android:string/ok"
         android:layout_height="wrap_content"
         android:id="@+id/dialog_password__ok"
-        android:background="@drawable/bg_btn_exit_dark"
+        android:background="@drawable/top_line_ok_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_input"
         app:layout_constraintStart_toEndOf="@id/dialog_password__cancel"/>

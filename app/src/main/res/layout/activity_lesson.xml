@@ -44,7 +44,7 @@
 
     </Toolbar>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
@@ -67,39 +67,37 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:visibility="invisible"
                 android:layout_marginStart="25dp"
                 android:padding="12dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_like_light"
-                android:id="@+id/activity_lesson__ic_like"
+                android:src="@drawable/ic_previous_light"
+                android:id="@+id/activity_lesson__ic_previous"
+                android:contentDescription="@string/all_image_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/activity_lesson__ic_chat" />
-
-
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            
             <ImageView
                 android:padding="12dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_chat_light"
                 android:id="@+id/activity_lesson__ic_chat"
+                android:contentDescription="@string/all_image_description"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/activity_lesson__ic_like"
-                app:layout_constraintEnd_toStartOf="@id/activity_lesson__ic_dislike"/>
+                app:layout_constraintStart_toEndOf="@id/activity_lesson__ic_previous"
+                app:layout_constraintEnd_toStartOf="@id/activity_lesson__ic_next"/>
 
             <ImageView
-                android:visibility="invisible"
                 android:layout_marginEnd="25dp"
                 android:padding="12dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_dislike_light"
-                android:id="@+id/activity_lesson__ic_dislike"
+                android:src="@drawable/ic_next_light"
+                android:id="@+id/activity_lesson__ic_next"
+                android:contentDescription="@string/all_image_description"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/activity_lesson__ic_chat"/>
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,9 @@ class ActivityProfile : AppCompatActivity() {
             activity_profile__input_country.setText(mUser.country, TextView.BufferType.EDITABLE)
         })
 
+        activity_profile__input_city.setOnClickListener {
+            DialogInput("city").show(supportFragmentManager, "TAG")
+        }
         activity_profile__input_name.setOnClickListener {
             DialogInput("name").show(supportFragmentManager, "TAG")
         }
@@ -44,9 +47,6 @@ class ActivityProfile : AppCompatActivity() {
         }
         activity_profile__input_country.setOnClickListener {
             DialogInput("country").show(supportFragmentManager, "TAG")
-        }
-        activity_profile__input_city.setOnClickListener {
-            DialogInput("city").show(supportFragmentManager, "TAG")
         }
         activity_profile__input_password.setOnClickListener {
             DialogInput("password").show(supportFragmentManager, "TAG")
@@ -62,9 +62,7 @@ class ActivityProfile : AppCompatActivity() {
             }
         }
     }
-
-
-
+    
     private fun setMode() {
         if (isDark) {
             this.window.statusBarColor = getColor(R.color.light_blue)

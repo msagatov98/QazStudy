@@ -70,6 +70,39 @@
     <string name="menu_book">Books</string>
     <string name="menu_dictionary">Dictionary</string>
 
+    <string name="abc_latin_1" translatable="false">A a</string>
+    <string name="abc_latin_2" translatable="false">Á á</string>
+    <string name="abc_latin_3" translatable="false">B b</string>
+    <string name="abc_latin_4" translatable="false">V v</string>
+    <string name="abc_latin_5" translatable="false">G g</string>
+    <string name="abc_latin_6" translatable="false">Ǵ ǵ</string>
+    <string name="abc_latin_7" translatable="false">D d</string>
+    <string name="abc_latin_8" translatable="false">Ee</string>
+    <string name="abc_latin_9" translatable="false">J j</string>
+    <string name="abc_latin_10" translatable="false">Z z</string>
+    <string name="abc_latin_11" translatable="false">I i</string>
+    <string name="abc_latin_12" translatable="false">I ı</string>
+    <string name="abc_latin_13" translatable="false">Kk</string>
+    <string name="abc_latin_14" translatable="false">Q q</string>
+    <string name="abc_latin_15" translatable="false">L l</string>
+    <string name="abc_latin_16" translatable="false">M m</string>
+    <string name="abc_latin_17" translatable="false">N n</string>
+    <string name="abc_latin_18" translatable="false">Ń ń</string>
+    <string name="abc_latin_19" translatable="false">O o</string>
+    <string name="abc_latin_20" translatable="false">Ó ó</string>
+    <string name="abc_latin_21" translatable="false">P p</string>
+    <string name="abc_latin_22" translatable="false">R r</string>
+    <string name="abc_latin_23" translatable="false">S s</string>
+    <string name="abc_latin_24" translatable="false">T t</string>
+    <string name="abc_latin_25" translatable="false">Ý ý</string>
+    <string name="abc_latin_26" translatable="false">U u</string>
+    <string name="abc_latin_27" translatable="false">Ú ú</string>
+    <string name="abc_latin_28" translatable="false">F f</string>
+    <string name="abc_latin_29" translatable="false">H h</string>
+    <string name="abc_latin_30" translatable="false">Ch ch</string>
+    <string name="abc_latin_31" translatable="false">Sh sh</string>
+    <string name="abc_latin_32" translatable="false">Yy</string>
+
 
     <string name="abc_cyrillic_1" translatable="false">A a</string>
     <string name="abc_cyrillic_2" translatable="false">Ә ә</string>

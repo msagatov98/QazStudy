@@ -4,16 +4,26 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:text="Title"
+        android:id="@+id/dialog_title"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <EditText
         android:padding="10dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="25dp"
+        android:layout_margin="15dp"
         android:id="@+id/dialog_input"
-        android:layout_marginStart="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn_exit_light"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/dialog_title"/>
 
     <Button
         android:layout_width="0dp"
@@ -21,14 +31,14 @@
         android:layout_height="wrap_content"
         android:text="@android:string/cancel"
         android:id="@+id/dialog_password__cancel"
-        android:background="@drawable/bg_btn_exit_light"
+        android:background="@drawable/top_line_cencel_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_input"
         app:layout_constraintEnd_toStartOf="@id/dialog_password__ok"/>
     <Button
         android:id="@+id/dialog_password__ok"
         android:layout_marginTop="25dp"
-        android:background="@drawable/bg_btn_exit_light"
+        android:background="@drawable/top_line_ok_light"
         android:text="@android:string/ok"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
