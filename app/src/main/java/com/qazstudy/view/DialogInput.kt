@@ -39,7 +39,6 @@ class DialogInput(private val hint: String, private val password: String): Dialo
 
                     val view = layoutInflater.inflate(R.layout.dialog_input_password_dark, null)
 
-
                     view.dialog_password__ok.setOnClickListener {
 
                         val oldPassword = view.dialog_input_old_password.text.toString()

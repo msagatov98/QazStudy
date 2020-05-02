@@ -17,7 +17,6 @@ class KeyboardAwareScrollView(context: Context, attrs: AttributeSet) : ScrollVie
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
         KeyboardVisibilityEvent.setEventListener(context as Activity, this)
     }
 
@@ -25,6 +24,4 @@ class KeyboardAwareScrollView(context: Context, attrs: AttributeSet) : ScrollVie
         if (isOpen) scrollTo(0, bottom)
         else scrollTo(0, top)
     }
-
-
 }

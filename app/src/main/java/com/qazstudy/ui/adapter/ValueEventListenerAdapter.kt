@@ -10,5 +10,4 @@ class ValueEventListenerAdapter(val handler: (DataSnapshot) -> Unit): ValueEvent
     override fun onDataChange(data: DataSnapshot) {
         handler(data)
     }
-
 }

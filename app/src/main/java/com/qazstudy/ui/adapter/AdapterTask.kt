@@ -1,6 +1,5 @@
 package com.qazstudy.ui.adapter
 
-import android.content.Intent
 import com.qazstudy.R
 import android.view.View
 import android.view.ViewGroup

@@ -1,22 +1,16 @@
 package com.qazstudy.ui.adapter
 
-import android.content.Intent
-import android.content.res.ColorStateList
 import com.qazstudy.R
 import android.view.View
 import android.view.ViewGroup
 import android.graphics.Color
 import android.widget.TextView
-import android.view.LayoutInflater
 import android.widget.ImageView
-import android.widget.LinearLayout
+import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import kotlinx.android.synthetic.main.view_holder_book.view.*
-import kotlinx.android.synthetic.main.view_holder_lesson.view.header
-import kotlinx.android.synthetic.main.view_holder_lesson.view.container
-import kotlinx.android.synthetic.main.view_holder_lesson.view.description
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class AdapterBook(private val arr: Array<Int>) : RecyclerView.Adapter<AdapterBook.BookViewHolder>() {
 
@@ -31,7 +25,6 @@ class AdapterBook(private val arr: Array<Int>) : RecyclerView.Adapter<AdapterBoo
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         holder.image.setImageResource(arr[position])
-
     }
 
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
