@@ -1,4 +1,4 @@
-package com.qazstudy.ui.fragment
+package com.qazstudy.ui.fragment.lecture
 
 import com.qazstudy.R
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_lecture1.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
-class FragmentLecture3 : Fragment() {
+class FragmentLecture7 : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -17,6 +17,6 @@ class FragmentLecture3 : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_lecture3, container, false)
+        return inflater.inflate(R.layout.fragment_lecture7, container, false)
     }
 }

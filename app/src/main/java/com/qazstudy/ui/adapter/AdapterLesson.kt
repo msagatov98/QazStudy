@@ -9,7 +9,7 @@ import android.content.Context
 import android.widget.TextView
 import com.qazstudy.model.Lesson
 import android.view.LayoutInflater
-import com.qazstudy.ui.activity.ActivityLesson
+import com.qazstudy.ui.activity.ActivityLecture
 import androidx.recyclerview.widget.RecyclerView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_holder_lesson.view.*
@@ -30,7 +30,7 @@ class AdapterLesson(var context: Context, private val lesson: Lesson, var isDark
         holder.textViewDescription.text = lesson.description[position]
 
         holder.constraintLayout!!.setOnClickListener {
-            val intent = Intent(context, ActivityLesson::class .java)
+            val intent = Intent(context, ActivityLecture::class .java)
             intent.putExtra("numLesson", position)
             context.startActivity(intent)
         }

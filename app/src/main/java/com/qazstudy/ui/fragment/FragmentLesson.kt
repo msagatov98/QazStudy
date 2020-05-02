@@ -30,7 +30,7 @@ class FragmentLesson() : Fragment() {
 
         fragment_lesson__recycler_view.addItemDecoration(divider)
         fragment_lesson__recycler_view.layoutManager = LinearLayoutManager(this.context)
-        fragment_lesson__recycler_view.adapter = AdapterLesson(context!!, lesson, isDark)
+        fragment_lesson__recycler_view.adapter = AdapterLesson(requireContext(), lesson, isDark)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

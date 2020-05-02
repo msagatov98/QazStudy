@@ -17,7 +17,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name=".ui.activity.ActivityLesson"
+            android:name=".ui.activity.ActivityLecture"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.ActivityProfile"

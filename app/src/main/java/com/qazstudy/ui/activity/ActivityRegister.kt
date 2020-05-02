@@ -1,34 +1,23 @@
 package com.qazstudy.ui.activity
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.qazstudy.R
+import android.os.Bundle
+import android.content.Intent
 import com.qazstudy.model.User
-import com.qazstudy.ui.fragment.FragmentEmail
-import com.qazstudy.ui.fragment.FragmentNamePass
 import com.qazstudy.util.showToast
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
+import com.qazstudy.ui.fragment.FragmentEmail
+import androidx.appcompat.app.AppCompatActivity
+import com.qazstudy.ui.fragment.FragmentNamePass
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 
 class ActivityRegister : AppCompatActivity(), FragmentEmail.Listener, FragmentNamePass.Listener {
 
     private var mEmail: String? = null
 
-    private lateinit var mAuth: FirebaseAuth
-    private lateinit var mDatabase: DatabaseReference
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
-        mAuth = FirebaseAuth.getInstance()
-        mDatabase = FirebaseDatabase.getInstance().reference
 
         supportFragmentManager.beginTransaction().add(R.id.activity_register__frame_layout, FragmentEmail()).commit()
     }

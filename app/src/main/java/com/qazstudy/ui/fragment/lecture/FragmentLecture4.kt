@@ -1,4 +1,4 @@
-package com.qazstudy.ui.fragment
+package com.qazstudy.ui.fragment.lecture
 
 import com.qazstudy.R
 import android.os.Bundle
@@ -6,22 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_lecture1.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import kotlinx.android.synthetic.main.fragment_dictionary.*
 
-class FragmentDictionary() : Fragment() {
-
+class FragmentLecture4 : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (isDark) {
-            fragment_dictionary__constraint_layout.setBackgroundColor(requireContext().getColor(R.color.dark))
-        }
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dictionary, container, false)
+        return inflater.inflate(R.layout.fragment_lecture4, container, false)
     }
 }

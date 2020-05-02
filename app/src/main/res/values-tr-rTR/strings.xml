@@ -6,8 +6,8 @@
     <string name="menu_lesson">Dersler</string>
     <string name="menu_bookmark">HZ</string>
 
-
     <string-array name="lessons_header">
+        <item>Иaşlangıç</item>
         <item>Ders 1</item>
         <item>Ders 2</item>
         <item>Ders 3</item>
@@ -15,8 +15,8 @@
         <item>Ders 5</item>
         <item>Ders 6</item>
         <item>Ders 7</item>
-        <item>Ders 8</item>
     </string-array>
+
     <string name="activity_profile__hint_name">Adınız</string>
     <string name="activity_profile__hint_email">E-posta</string>
     <string name="activity_profile__hint_password">Parola</string>

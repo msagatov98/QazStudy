@@ -24,7 +24,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <fragment
         android:layout_marginTop="56dp"
         android:id="@+id/nav_host_fragment"
@@ -38,9 +37,9 @@
         app:layout_constraintRight_toRightOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_margin="25dp"
         android:onClick="themeSwitch"
         android:id="@+id/ic_theme_switcher"
-        android:layout_margin="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_theme_switcher"

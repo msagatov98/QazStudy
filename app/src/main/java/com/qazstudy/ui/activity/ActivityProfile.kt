@@ -3,30 +3,24 @@ package com.qazstudy.ui.activity
 import com.qazstudy.R
 import android.os.Bundle
 import android.content.Intent
-import android.widget.TextView
-import com.google.firebase.auth.FirebaseAuth
-import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.*
 import com.qazstudy.model.User
-import kotlinx.android.synthetic.main.activity_profile.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.adapter.ValueEventListenerAdapter
-import com.qazstudy.util.showToast
+import android.widget.TextView
 import com.qazstudy.view.DialogInput
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_profile.*
+import com.qazstudy.ui.adapter.ValueEventListenerAdapter
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 
 class ActivityProfile : AppCompatActivity() {
 
     private lateinit var mUser: User
-    private lateinit var mAuth: FirebaseAuth
-    private lateinit var mDatabase: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         setMode()
-
-        mAuth = FirebaseAuth.getInstance()
-        mDatabase = FirebaseDatabase.getInstance().reference
 
         mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter{
             mUser = it.getValue(User::class.java)!!
@@ -34,22 +28,23 @@ class ActivityProfile : AppCompatActivity() {
             activity_profile__input_city.setText(mUser.city, TextView.BufferType.EDITABLE)
             activity_profile__input_email.setText(mUser.email, TextView.BufferType.EDITABLE)
             activity_profile__input_country.setText(mUser.country, TextView.BufferType.EDITABLE)
+            activity_profile__input_password.setText(mUser.password, TextView.BufferType.EDITABLE)
         })
 
         activity_profile__input_city.setOnClickListener {
-            DialogInput("city").show(supportFragmentManager, "TAG")
+            DialogInput("city", mUser.password).show(supportFragmentManager, "TAG")
         }
         activity_profile__input_name.setOnClickListener {
-            DialogInput("name").show(supportFragmentManager, "TAG")
+            DialogInput("name", mUser.password).show(supportFragmentManager, "TAG")
         }
         activity_profile__input_email.setOnClickListener {
-            DialogInput("email").show(supportFragmentManager, "TAG")
+            DialogInput("email", mUser.password).show(supportFragmentManager, "TAG")
         }
         activity_profile__input_country.setOnClickListener {
-            DialogInput("country").show(supportFragmentManager, "TAG")
+            DialogInput("country", mUser.password).show(supportFragmentManager, "TAG")
         }
         activity_profile__input_password.setOnClickListener {
-            DialogInput("password").show(supportFragmentManager, "TAG")
+            DialogInput("password", mUser.password).show(supportFragmentManager, "TAG")
         }
 
         activity_profile__ic_back.setOnClickListener { finish() }
@@ -60,6 +55,11 @@ class ActivityProfile : AppCompatActivity() {
                 startActivity(Intent(this, ActivityLogin::class.java))
                 finish()
             }
+        }
+
+        activity_profile__btn_delete.setOnClickListener {
+            mDatabase.child("users/${mAuth.currentUser!!.uid}").removeValue()
+            mAuth.currentUser!!.delete()
         }
     }
     

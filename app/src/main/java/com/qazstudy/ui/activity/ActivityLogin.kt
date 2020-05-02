@@ -7,6 +7,7 @@ import android.content.Intent
 import com.qazstudy.util.showToast
 import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.util.coordinateButtonAndInput
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -14,8 +15,6 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener
 
 class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
-
-    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +27,6 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
             activity_login__input_email, activity_login__input_password)
 
         txt_sign_up.setOnClickListener { startActivity(Intent(this, ActivityRegister::class.java)) }
-
-        mAuth = FirebaseAuth.getInstance()
 
         activity_login__btn_login.setOnClickListener {
             val email = activity_login__input_email.text.toString()

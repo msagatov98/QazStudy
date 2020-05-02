@@ -5,18 +5,22 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.content.Intent
+import com.qazstudy.model.Lesson
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
 import com.qazstudy.ui.adapter.AdapterTask
 import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
+import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
-import kotlinx.android.synthetic.main.fragment_book.*
+import com.google.firebase.database.FirebaseDatabase
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.database.DatabaseReference
+import kotlinx.android.synthetic.main.fragment_book.*
 import kotlinx.android.synthetic.main.fragment_task.*
 import kotlinx.android.synthetic.main.fragment_lesson.*
 import kotlinx.android.synthetic.main.fragment_setting.*
@@ -26,13 +30,10 @@ import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.qazstudy.model.Lesson
 
 class ActivityNavigation : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var mAuth: FirebaseAuth
 
     private var ar : Array<Int> = arrayOf(
         R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3,
@@ -40,6 +41,8 @@ class ActivityNavigation : AppCompatActivity() {
 
     companion object {
         var isDark = false
+        var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+        var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,21 +51,13 @@ class ActivityNavigation : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        mAuth = FirebaseAuth.getInstance()
-
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_lesson,
-                R.id.nav_task,
-                R.id.nav_bookmark,
-                R.id.nav_book,
-                R.id.nav_dictionary,
-                R.id.nav_setting
-            ), drawerLayout
+            setOf(R.id.nav_lesson, R.id.nav_task, R.id.nav_book,
+                R.id.nav_dictionary, R.id.nav_setting), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -93,7 +88,6 @@ class ActivityNavigation : AppCompatActivity() {
 
     fun openProfile(v: View) {
         val intent = Intent(this, ActivityProfile::class.java)
-        intent.putExtra("isDark", isDark)
         startActivity(intent)
     }
 
@@ -102,7 +96,6 @@ class ActivityNavigation : AppCompatActivity() {
         isDark = !isDark
 
         if (isDark) {
-            toolbar.setTitleTextColor(getColor(R.color.dark))
             nav_view.setBackgroundColor(getColor(R.color.dark))
             toolbar.background = getDrawable(R.color.light_blue)
             nav_header.background = getDrawable(R.color.light_blue)

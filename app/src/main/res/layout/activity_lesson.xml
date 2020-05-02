@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     android:id="@+id/activity_lesson__constraint_layout"
-    tools:context=".ui.activity.ActivityLesson">
+    tools:context=".ui.activity.ActivityLecture">
 
     <Toolbar
         android:id="@+id/activity_lesson__toolbar"
@@ -50,9 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container_lecture"
-        android:name="com.qazstudy.ui.fragment.FragmentLecture2"
+        android:name="com.qazstudy.ui.fragment.lecture.FragmentLecture2"
         app:layout_constraintTop_toBottomOf="@id/activity_lesson__toolbar"/>
-
 
     <Toolbar
         android:id="@+id/activity_lesson__toolbar_bottom"
@@ -101,6 +100,5 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

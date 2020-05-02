@@ -6,8 +6,8 @@
     <string name="menu_lesson">Lessons</string>
     <string name="menu_bookmark">Bookmarks</string>
 
-
     <string-array name="lessons_header">
+        <item>Introduction</item>
         <item>Lesson 1</item>
         <item>Lesson 2</item>
         <item>Lesson 3</item>
@@ -15,8 +15,8 @@
         <item>Lesson 5</item>
         <item>Lesson 6</item>
         <item>Lesson 7</item>
-        <item>Lesson 8</item>
     </string-array>
+
     <string name="activity_profile__hint_name">Name</string>
     <string name="activity_profile__hint_email">Email</string>
     <string name="activity_profile__hint_password">Password</string>
