@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import kotlinx.android.synthetic.main.fragment_dictionary.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
-class FragmentDictionary() : Fragment() {
+class FragmentDictionary : Fragment() {
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

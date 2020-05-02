@@ -1,14 +1,13 @@
 package com.qazstudy.ui.fragment
 
-import android.content.Context
 import com.qazstudy.R
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.content.Context
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import com.qazstudy.util.coordinateButtonAndInput
-import com.qazstudy.util.showToast
 import kotlinx.android.synthetic.main.fragment_register_email.*
 import kotlinx.android.synthetic.main.fragment_register_namepass.*
 

@@ -15,11 +15,11 @@ class FragmentBookmark : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         if (isDark) {
-            fragment_bookmark_tab_layout.background = resources.getDrawable(R.color.light_blue)
-            fragment_bookmark__constraint_layout.background = resources.getDrawable(R.color.dark)
+            fragment_bookmark_tab_layout.background = requireContext().getDrawable(R.color.light_blue)
+            fragment_bookmark__constraint_layout.background = requireContext().getDrawable(R.color.dark)
         } else {
-            fragment_bookmark_tab_layout.background = resources.getDrawable(R.color.colorPrimary)
-            fragment_bookmark__constraint_layout.background = resources.getDrawable(R.color.white)
+            fragment_bookmark_tab_layout.background = requireContext().getDrawable(R.color.colorPrimary)
+            fragment_bookmark__constraint_layout.background = requireContext().getDrawable(R.color.white)
         }
     }
 

@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.content.Intent
 import com.qazstudy.util.showToast
-import com.google.firebase.auth.FirebaseAuth
 import androidx.appcompat.app.AppCompatActivity
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.util.coordinateButtonAndInput
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_profile.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener
 

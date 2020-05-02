@@ -2,25 +2,22 @@ package com.qazstudy.ui.fragment.chat
 
 import com.qazstudy.R
 import android.os.Bundle
-import android.text.format.DateFormat
 import android.view.View
 import android.view.ViewGroup
+import com.qazstudy.model.Message
 import android.view.LayoutInflater
+import com.qazstudy.util.showToast
+import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import com.firebase.ui.database.FirebaseListAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.qazstudy.model.Message
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.util.showToast
 import kotlinx.android.synthetic.main.fragment_chat1.*
 import kotlinx.android.synthetic.main.view_holder_message.view.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 
 class FragmentChat6 : Fragment() {
 
-    private lateinit var mAuth: FirebaseAuth
-    private lateinit var mDatabase: DatabaseReference
     private lateinit var adapter : FirebaseListAdapter<Message>
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -29,11 +26,8 @@ class FragmentChat6 : Fragment() {
         if (isDark) {
             ic_send.background = requireContext().getDrawable(R.drawable.bg_btn_send_dark)
             //ic_send.setImageDrawable(requireContext().getDrawable(R.drawable.ic_send_dark))
-            input_chat_message.background = resources.getDrawable(R.drawable.bg_input_chat_message_dark)
+            input_chat_message.background = requireContext().getDrawable(R.drawable.bg_input_chat_message_dark)
         }
-
-        mAuth = FirebaseAuth.getInstance()
-        mDatabase = FirebaseDatabase.getInstance().reference
 
         displayChat()
 

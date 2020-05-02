@@ -4,12 +4,12 @@ import com.qazstudy.R
 import android.os.Bundle
 import android.content.Intent
 import androidx.fragment.app.Fragment
+import com.qazstudy.ui.fragment.lecture.*
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_lesson.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.fragment.lecture.*
 
 class ActivityLecture : AppCompatActivity() {
 

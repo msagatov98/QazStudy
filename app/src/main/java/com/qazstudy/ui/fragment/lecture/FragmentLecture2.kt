@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_lecture1.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import kotlinx.android.synthetic.main.fragment_lecture2.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLecture2 : Fragment() {
 
