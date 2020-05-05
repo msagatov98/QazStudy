@@ -36,9 +36,10 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
+                    android:src="@drawable/ic_android"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_android"/>
+                    android:contentDescription="@string/all_image_description" />
 
             </com.github.florent37.shapeofview.shapes.PolygonView>
 
@@ -79,9 +80,9 @@
                     android:id="@+id/progress_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:progressTint="@color/orange"
                     android:progressBackgroundTint="#999da4"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:progressTint="@color/orange"
                     app:layout_constraintBottom_toBottomOf="parent"
                     style="?android:attr/progressBarStyleHorizontal"/>
 

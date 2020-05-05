@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QazStudy</string>
+    <string name="app_name" translatable="false">QazStudy</string>
     <string name="action_settings">Settings</string>
     <string name="nav_header_title" translatable="false">Android Studio</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
@@ -63,7 +63,7 @@
     <string name="activity_profile__ic_back_description">Description</string>
     <string name="activity_profile__title">Profile</string>
 
-    <string name="lecture_lesson_1">Lecture of first lesson</string>
+    <string name="lecture_1">Lecture of first lesson</string>
 
     <string-array name="lecture_lesson">
         <item>Lecture of first lesson</item>
@@ -151,6 +151,8 @@
     <string name="activity_profile__hint_password_repeat" translatable="false">Repeat password</string>
     <string name="register" translatable="false">Register</string>
     <string name="next" translatable="false">Next</string>
+    <string name="lecture_3">asdf</string>
+    <string name="lecture_4">asdf</string>
 
 
 </resources>

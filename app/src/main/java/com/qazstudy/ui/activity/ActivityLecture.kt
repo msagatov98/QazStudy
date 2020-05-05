@@ -19,12 +19,13 @@ class ActivityLecture : AppCompatActivity() {
     private var fm : FragmentManager = supportFragmentManager
     private var ft : FragmentTransaction = fm.beginTransaction()
     private val arFragmentLecture = arrayListOf(
+        FragmentLectureIntro(),
         FragmentLecture1(),
         FragmentLecture2(),
         FragmentLecture3(),
         FragmentLecture4(),
         FragmentLecture5(), FragmentLecture6(),
-        FragmentLecture7(), FragmentLecture8()
+        FragmentLecture7()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +58,12 @@ class ActivityLecture : AppCompatActivity() {
                 position++
 
             when(openedFragment) {
+                is FragmentLectureIntro -> {
+                    ft.replace(R.id.fragment_container_lecture,
+                        FragmentLecture1()
+                    )
+                    openedFragment = FragmentLecture1()
+                }
                 is FragmentLecture1 -> {
                     ft.replace(R.id.fragment_container_lecture,
                         FragmentLecture2()
@@ -99,13 +106,6 @@ class ActivityLecture : AppCompatActivity() {
                     openedFragment =
                         FragmentLecture7()
                 }
-                is FragmentLecture7 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture8()
-                    )
-                    openedFragment =
-                        FragmentLecture8()
-                }
             }
 
             ft.commit()
@@ -118,6 +118,13 @@ class ActivityLecture : AppCompatActivity() {
                 position--
 
             when(openedFragment) {
+                is FragmentLecture1 -> {
+                    ft.replace(R.id.fragment_container_lecture,
+                        FragmentLectureIntro()
+                    )
+                    openedFragment =
+                        FragmentLectureIntro()
+                }
                 is FragmentLecture2 -> {
                     ft.replace(R.id.fragment_container_lecture,
                         FragmentLecture1()
@@ -159,13 +166,6 @@ class ActivityLecture : AppCompatActivity() {
                     )
                     openedFragment =
                         FragmentLecture6()
-                }
-                is FragmentLecture8 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture7()
-                    )
-                    openedFragment =
-                        FragmentLecture7()
                 }
             }
 

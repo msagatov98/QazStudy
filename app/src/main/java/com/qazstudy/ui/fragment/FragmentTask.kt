@@ -4,13 +4,13 @@ import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import com.qazstudy.model.Task
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import com.qazstudy.ui.adapter.AdapterTask
 import kotlinx.android.synthetic.main.fragment_task.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentTask : Fragment() {
 
@@ -28,15 +28,11 @@ class FragmentTask : Fragment() {
         fragment_task__recycler_view.addItemDecoration(divider)
         fragment_task__recycler_view.layoutManager = LinearLayoutManager(this.context)
         fragment_task__recycler_view.adapter =
-            AdapterTask(
-                taskHeader,
-                lessonDescription,
-                isDark
-            )
+            AdapterTask(requireContext(), Task(taskHeader, lessonDescription))
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_task, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
+            View? = inflater.inflate(R.layout.fragment_task, container, false)
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.content.Intent
+import com.qazstudy.model.Task
 import com.qazstudy.model.Lesson
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
@@ -27,9 +28,12 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 import kotlinx.android.synthetic.main.navigation_header.*
 import kotlinx.android.synthetic.main.navigation_app_bar.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class ActivityNavigation : AppCompatActivity() {
 
@@ -39,10 +43,17 @@ class ActivityNavigation : AppCompatActivity() {
         R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3,
         R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3)
 
+
+    private var lessonImage = arrayOf(R.drawable.intro, R.drawable.abc, R.drawable.reading,
+        R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android,
+        R.drawable.ic_android)
+
+
     companion object {
         var isDark = false
         var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
         var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
+        lateinit var mGoogleSignInClient: GoogleSignInClient
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +61,13 @@ class ActivityNavigation : AppCompatActivity() {
         setContentView(R.layout.activity_navigation)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -87,8 +105,7 @@ class ActivityNavigation : AppCompatActivity() {
 
 
     fun openProfile(v: View) {
-        val intent = Intent(this, ActivityProfile::class.java)
-        startActivity(intent)
+        startActivity(Intent(this, ActivityProfile::class.java))
     }
 
     fun themeSwitch(v: View) {
@@ -140,11 +157,15 @@ class ActivityNavigation : AppCompatActivity() {
 
         if (fragment_lesson__recycler_view != null) {
             fragment_lesson__recycler_view.adapter =
-                AdapterLesson(this, Lesson(resources.getStringArray(R.array.lessons_header), resources.getStringArray(R.array.lessons_description)), isDark)
+                AdapterLesson(
+                    this,
+                    Lesson(lessonImage, resources.getStringArray(R.array.lessons_header), resources.getStringArray(R.array.lessons_description)))
         }
         if (fragment_task__recycler_view != null) {
             fragment_task__recycler_view.adapter =
-                AdapterTask(resources.getStringArray(R.array.tasks_header), resources.getStringArray(R.array.lessons_description), isDark)
+                AdapterTask(
+                    this,
+                    Task(resources.getStringArray(R.array.tasks_header), resources.getStringArray(R.array.lessons_description)))
         }
         if (fragment_book__recycler_view != null) {
             fragment_book__recycler_view.adapter =

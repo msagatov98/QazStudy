@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_lecture1.*
+import kotlinx.android.synthetic.main.fragment_lecture3.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLecture3 : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        if (isDark) {
+            lecture_3_text.setTextColor(requireContext().getColor(R.color.white))
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -5,17 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.adapter.AdapterBook
-import com.qazstudy.ui.adapter.AdapterLesson
-import com.qazstudy.model.Lesson
 import kotlinx.android.synthetic.main.fragment_book.*
-import kotlinx.android.synthetic.main.fragment_lesson.*
 
 class FragmentBook() : Fragment() {
 

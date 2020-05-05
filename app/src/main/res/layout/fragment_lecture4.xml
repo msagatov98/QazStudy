@@ -8,12 +8,13 @@
 
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:padding="15dp"
+        android:textSize="16sp"
+        android:textColor="@color/dark"
+        android:id="@+id/lecture_4_text"
+        android:text="@string/lecture_4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lecture 4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.view.View
 import android.content.Intent
 import com.qazstudy.util.showToast
 import androidx.appcompat.app.AppCompatActivity
+import com.firebase.ui.auth.AuthUI
 import com.qazstudy.util.coordinateButtonAndInput
 import kotlinx.android.synthetic.main.activity_login.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
@@ -25,6 +26,11 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
             activity_login__input_email, activity_login__input_password)
 
         txt_sign_up.setOnClickListener { startActivity(Intent(this, ActivityRegister::class.java)) }
+
+        ic_google.setOnClickListener {
+            val intent = AuthUI.getInstance().createSignInIntentBuilder()
+
+        }
 
         activity_login__btn_login.setOnClickListener {
             val email = activity_login__input_email.text.toString()

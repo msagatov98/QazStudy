@@ -14,18 +14,17 @@ import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class AdapterBook(private val arr: Array<Int>) : RecyclerView.Adapter<AdapterBook.BookViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_book, parent, false)
-        return BookViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder =
+         BookViewHolder(
+             LayoutInflater.from(parent.context).inflate(R.layout.view_holder_book, parent, false)
+         )
 
-    override fun getItemCount(): Int {
-        return arr.size
-    }
 
-    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
+    override fun getItemCount(): Int =  arr.size
+
+    override fun onBindViewHolder(holder: BookViewHolder, position: Int) =
         holder.image.setImageResource(arr[position])
-    }
+
 
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

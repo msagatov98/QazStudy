@@ -16,6 +16,11 @@ import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 class FragmentLesson() : Fragment() {
 
     private lateinit var lesson: Lesson
+
+    private var lessonImage = arrayOf(R.drawable.intro, R.drawable.abc, R.drawable.reading,
+        R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android,
+        R.drawable.ic_android)
+
     private lateinit var lessonHeader: Array<String>
     private lateinit var lessonDescription: Array<String>
 
@@ -24,13 +29,14 @@ class FragmentLesson() : Fragment() {
         lessonHeader = resources.getStringArray(R.array.lessons_header)
         lessonDescription = resources.getStringArray(R.array.lessons_description)
 
-        lesson = Lesson(lessonHeader, lessonDescription)
+        lesson = Lesson(lessonImage, lessonHeader, lessonDescription)
 
         val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
 
         fragment_lesson__recycler_view.addItemDecoration(divider)
         fragment_lesson__recycler_view.layoutManager = LinearLayoutManager(this.context)
-        fragment_lesson__recycler_view.adapter = AdapterLesson(requireContext(), lesson, isDark)
+        fragment_lesson__recycler_view.adapter =
+            AdapterLesson(requireContext(), lesson)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">QazStudy</string>
     <string name="action_settings">Ayarlar</string>
     <string name="menu_task">HZ</string>
     <string name="menu_lesson">Dersler</string>
@@ -30,7 +29,9 @@
     <string-array name="lecture_lesson">
         <item>Lecture of first lesson</item>
     </string-array>
-    <string name="lecture_lesson_1">Lecture of first lesson</string>
+    <string name="lecture_1">Lecture of first lesson</string>
     <string name="menu_book">Kıtablar</string>
     <string name="menu_dictionary">Sözlük</string>
+    <string name="lecture_3">sadf</string>
+    <string name="lecture_4">asdf</string>
 </resources>
