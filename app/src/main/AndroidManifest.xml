@@ -3,6 +3,7 @@
     package="com.qazstudy">
 
     <permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -16,6 +17,9 @@
         <activity
             android:name=".ui.activity.ActivityTask"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
 
         <activity
             android:name=".ui.activity.ActivityChat"
@@ -49,6 +53,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.qazstudy.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

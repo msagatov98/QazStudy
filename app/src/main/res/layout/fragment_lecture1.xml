@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:scrollbars="none"
-    android:layout_height="match_parent"
+    tools:context=".ui.fragment.lecture.FragmentLecture1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.lecture.FragmentLecture1">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="15dp"
+    android:scrollbars="none"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:padding="15dp"
             android:textSize="16sp"
             android:id="@+id/text_view"
             android:textColor="@color/dark"
@@ -26,8 +25,6 @@
             android:id="@+id/abc"
             android:padding="1dp"
             android:textStyle="bold"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/txt_color"
@@ -556,7 +553,6 @@
             android:id="@+id/lecture_1_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:textSize="16sp"
             android:textColor="@color/dark"
             android:text="sometext"
@@ -566,11 +562,11 @@
             android:padding="1dp"
             android:textStyle="bold"
             android:id="@+id/abc_latin"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/txt_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lecture_1_2">
 
             <TableRow>

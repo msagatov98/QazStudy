@@ -11,10 +11,10 @@
         android:layout_marginTop="30dp"
         android:id="@+id/nav_profile"
         android:layout_marginStart="16dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:onClick="openProfile"
-        android:src="@drawable/ic_android"
+        android:src="@drawable/ic_avatar_light"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:contentDescription="@string/nav_header_desc"
@@ -23,25 +23,13 @@
     <TextView
         android:id="@+id/nav_header_txt_name"
         android:textSize="18sp"
-        android:text="Android"
+        android:text="User name"
         android:textColor="@color/white"
         android:layout_marginStart="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/nav_profile"
         app:layout_constraintStart_toEndOf="@id/nav_profile"
-        app:layout_constraintBottom_toTopOf="@id/nav_header_txt_surname"/>
-
-    <TextView
-        android:id="@+id/nav_header_txt_surname"
-        android:textSize="18sp"
-        android:text="Studio"
-        android:textColor="@color/white"
-        android:layout_marginStart="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/nav_header_txt_name"
-        app:layout_constraintStart_toEndOf="@id/nav_profile"
         app:layout_constraintBottom_toBottomOf="@id/nav_profile"/>
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>

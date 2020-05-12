@@ -28,6 +28,7 @@ class FragmentLecture1 : Fragment() {
             abc_cyrillic_41, abc_cyrillic_42, abc_cyrillic_43, abc_cyrillic_44, abc_cyrillic_45)
 
 
+
         if (ActivityNavigation.isDark) {
             text_view.setTextColor(requireContext().getColor(R.color.white))
             abc.setBackgroundColor(requireContext().getColor(R.color.txt_color))

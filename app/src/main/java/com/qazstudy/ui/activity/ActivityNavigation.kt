@@ -1,6 +1,7 @@
 package com.qazstudy.ui.activity
 
 import com.qazstudy.R
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -18,6 +19,8 @@ import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.firebase.database.FirebaseDatabase
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.database.DatabaseReference
@@ -32,8 +35,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.qazstudy.model.User
+import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 
 class ActivityNavigation : AppCompatActivity() {
 
@@ -43,17 +49,18 @@ class ActivityNavigation : AppCompatActivity() {
         R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3,
         R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3)
 
-
     private var lessonImage = arrayOf(R.drawable.intro, R.drawable.abc, R.drawable.reading,
         R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android,
         R.drawable.ic_android)
 
-
     companion object {
         var isDark = false
-        var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-        var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
+        lateinit var mUser: User
+        lateinit var mImageURI: Uri
         lateinit var mGoogleSignInClient: GoogleSignInClient
+        var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+        var mStorage: StorageReference = FirebaseStorage.getInstance().reference
+        var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +69,23 @@ class ActivityNavigation : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        if (mAuth.currentUser == null) {
+            startActivity(Intent(this, ActivityLogin::class.java))
+            finish()
+        } else  {
+            mDatabase.child("users/${mAuth.currentUser!!.uid}")
+                .addListenerForSingleValueEvent(ValueEventListenerAdapter {
+                    mUser = it.getValue(User::class.java)!!
+                    nav_header_txt_name.text = mUser.name
+                    if (mUser.photo.isNotEmpty()) {
+                        mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
+                            Glide.with(this).load(it.toString()).into(nav_profile)
+                        }
+                    }
+                })
+        }
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
@@ -91,6 +114,15 @@ class ActivityNavigation : AppCompatActivity() {
             startActivity(Intent(this, ActivityLogin::class.java))
             finish()
         }
+
+        mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter{
+            nav_header_txt_name.text = mUser.name
+            if (mUser.photo.isNotEmpty()) {
+                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
+                    Glide.with(this).load(it.toString()).into(nav_profile)
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -102,7 +134,6 @@ class ActivityNavigation : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 
     fun openProfile(v: View) {
         startActivity(Intent(this, ActivityProfile::class.java))
@@ -118,7 +149,6 @@ class ActivityNavigation : AppCompatActivity() {
             nav_header.background = getDrawable(R.color.light_blue)
             nav_header_txt_name.setTextColor(getColor(R.color.dark))
             this.window.statusBarColor = getColor(R.color.light_blue)
-            nav_header_txt_surname.setTextColor(getColor(R.color.dark))
             ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_dark))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light_blue))
 
@@ -139,7 +169,6 @@ class ActivityNavigation : AppCompatActivity() {
             nav_header.background = getDrawable(R.color.colorPrimary)
             nav_header_txt_name.setTextColor(getColor(R.color.white))
             this.window.statusBarColor = getColor(R.color.colorPrimary)
-            nav_header_txt_surname.setTextColor(getColor(R.color.white))
             ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.colorPrimary))
 
