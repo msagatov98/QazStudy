@@ -183,7 +183,6 @@ class ActivityLecture : AppCompatActivity() {
             activity_lesson__ic_next.setImageDrawable(getDrawable(R.drawable.ic_next_dark))
             activity_lesson__toolbar_bottom.setBackgroundColor(getColor(R.color.light_blue))
             activity_lesson__ic_previous.setImageDrawable(getDrawable(R.drawable.ic_previous_dark))
-            activity_lesson__ic_bookmark.setImageDrawable(getDrawable(R.drawable.ic_bookmark_dark))
         }
     }
 }
