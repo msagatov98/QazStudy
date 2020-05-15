@@ -52,6 +52,10 @@
         <item>Description 8</item>
     </string-array>
 
+    <string name="activity_chat_title">Comments</string>
+    <string name="login">Login</string>
+    <string name="create_account">Don\'t have an account? Sign up.</string>
+
     <!-- Profile activity -->
     <string name="activity_profile__btn_exit">Exit</string>
     <string name="activity_profile__title">Profile</string>
@@ -63,7 +67,6 @@
     <string name="activity_profile__btn_delete">Delete account</string>
     <string name="activity_profile__ic_back_description">Description</string>
 
-    <string name="lecture_1">Lecture of first lesson</string>
 
     <string name="abc_latin_1" translatable="false">A a</string>
     <string name="abc_latin_2" translatable="false">Á á</string>
@@ -72,12 +75,12 @@
     <string name="abc_latin_5" translatable="false">G g</string>
     <string name="abc_latin_6" translatable="false">Ǵ ǵ</string>
     <string name="abc_latin_7" translatable="false">D d</string>
-    <string name="abc_latin_8" translatable="false">Ee</string>
+    <string name="abc_latin_8" translatable="false">E e</string>
     <string name="abc_latin_9" translatable="false">J j</string>
     <string name="abc_latin_10" translatable="false">Z z</string>
     <string name="abc_latin_11" translatable="false">I i</string>
     <string name="abc_latin_12" translatable="false">I ı</string>
-    <string name="abc_latin_13" translatable="false">Kk</string>
+    <string name="abc_latin_13" translatable="false">K k</string>
     <string name="abc_latin_14" translatable="false">Q q</string>
     <string name="abc_latin_15" translatable="false">L l</string>
     <string name="abc_latin_16" translatable="false">M m</string>
@@ -96,7 +99,7 @@
     <string name="abc_latin_29" translatable="false">H h</string>
     <string name="abc_latin_30" translatable="false">Ch ch</string>
     <string name="abc_latin_31" translatable="false">Sh sh</string>
-    <string name="abc_latin_32" translatable="false">Yy</string>
+    <string name="abc_latin_32" translatable="false">Y y</string>
 
     <string name="abc_cyrillic_1" translatable="false">A a</string>
     <string name="abc_cyrillic_2" translatable="false">Ә ә</string>
@@ -116,7 +119,7 @@
     <string name="abc_cyrillic_16" translatable="false">Л л</string>
     <string name="abc_cyrillic_17" translatable="false">М м</string>
     <string name="abc_cyrillic_18" translatable="false">Н н</string>
-    <string name="abc_cyrillic_19" translatable="false">ң</string>
+    <string name="abc_cyrillic_19" translatable="false"> ң </string>
     <string name="abc_cyrillic_20" translatable="false">О о</string>
     <string name="abc_cyrillic_21" translatable="false">Ө ө</string>
     <string name="abc_cyrillic_22" translatable="false">П п</string>
@@ -128,24 +131,28 @@
     <string name="abc_cyrillic_28" translatable="false">Ү ү</string>
     <string name="abc_cyrillic_29" translatable="false">Ф ф</string>
     <string name="abc_cyrillic_30" translatable="false">Х х</string>
-    <string name="abc_cyrillic_31" translatable="false">һ</string>
+    <string name="abc_cyrillic_31" translatable="false"> һ </string>
     <string name="abc_cyrillic_32" translatable="false">Ц ц</string>
     <string name="abc_cyrillic_33" translatable="false">Ч ч</string>
     <string name="abc_cyrillic_34" translatable="false">Ш ш</string>
     <string name="abc_cyrillic_35" translatable="false">Щ щ</string>
-    <string name="abc_cyrillic_36" translatable="false">ъ</string>
+    <string name="abc_cyrillic_36" translatable="false"> ъ </string>
     <string name="abc_cyrillic_37" translatable="false">Ы ы</string>
     <string name="abc_cyrillic_38" translatable="false">І і</string>
-    <string name="abc_cyrillic_39" translatable="false">ь</string>
+    <string name="abc_cyrillic_39" translatable="false"> ь </string>
     <string name="abc_cyrillic_40" translatable="false">Э э</string>
     <string name="abc_cyrillic_41" translatable="false">Ю ю</string>
     <string name="abc_cyrillic_42" translatable="false">Я я</string>
 
     <string name="activity_profile__hint_password_repeat" translatable="false">Repeat password</string>
-    <string name="register" translatable="false">Register</string>
+    <string name="register">Register</string>
     <string name="next" translatable="false">Next</string>
 
+    <string name="lecture_1">Lecture of first lesson</string>
     <string name="lecture_3">asdf</string>
     <string name="lecture_4">asdf</string>
+    <string name="message">Message</string>
+    <string name="enter_name_and_password">Enter name and password</string>
+
 
 </resources>

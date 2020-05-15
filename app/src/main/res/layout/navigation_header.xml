@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_header"
-    android:layout_height="120dp"
+    android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:layout_height="120dp"
+    android:id="@+id/nav_header">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_marginTop="30dp"
-        android:id="@+id/nav_profile"
-        android:layout_marginStart="16dp"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:onClick="openProfile"
+        android:id="@+id/nav_profile"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
         android:src="@drawable/ic_avatar_light"
+        android:contentDescription="@string/nav_header_desc"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/nav_header_desc"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
-        android:id="@+id/nav_header_txt_name"
         android:textSize="18sp"
-        android:text="User name"
         android:onClick="openProfile"
         android:textColor="@color/white"
         android:layout_marginStart="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/nav_header_txt_name"
         app:layout_constraintTop_toTopOf="@id/nav_profile"
         app:layout_constraintStart_toEndOf="@id/nav_profile"
         app:layout_constraintBottom_toBottomOf="@id/nav_profile"/>

@@ -62,8 +62,7 @@ class FragmentEmail: Fragment() {
 
         if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             CropImage.activity(imageURI).setAspectRatio(1, 1).start(requireActivity())
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             imageURI = CropImage.getActivityResult(data).uri
             Glide.with(this).load(imageURI.toString()).into(fragment_register__ic_user)
         }

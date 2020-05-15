@@ -80,5 +80,11 @@
         - аффиксы принадлежности -дікі, -тікі, -нікі/: ата-нікі(дедушки), қыз-дікі(девушки),
             Мұраттікі(Мурата)
     </string>
+    <string name="activity_chat_title">Комментарии</string>
+    <string name="login">Войти</string>
+    <string name="register" translatable="false">Зарегистрироваться</string>
+    <string name="create_account">Нет аккаунта? Зарегистрироваться</string>
+    <string name="message">Введите текст</string>
+    <string name="enter_name_and_password">Введите имя и пороль</string>
 
 </resources>

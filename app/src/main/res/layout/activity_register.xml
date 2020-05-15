@@ -7,9 +7,9 @@
     android:id="@+id/activity_register__scroll_view">
 
     <FrameLayout
-        android:id="@+id/activity_register__frame_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/activity_register__frame_layout"
         tools:context=".ui.activity.ActivityRegister">
     </FrameLayout>
 

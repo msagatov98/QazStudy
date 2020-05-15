@@ -82,7 +82,7 @@
             app:layout_constraintBottom_toTopOf="@id/activity_login__btn_login"/>
 
         <Button
-            android:text="Login"
+            android:text="@string/login"
             android:textStyle="bold"
             android:layout_width="0dp"
             android:layout_marginTop="25dp"
@@ -157,16 +157,16 @@
             app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
 
         <TextView
+            android:gravity="center"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:id="@+id/txt_sign_up"
-            android:layout_width="0dp"
             android:textColor="@color/txt_color"
+            android:text="@string/create_account"
             android:background="@drawable/top_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/divider"
-            android:text="Don't have an account? Sign up."
-            android:gravity="center"/>
+            app:layout_constraintStart_toEndOf="@id/divider"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

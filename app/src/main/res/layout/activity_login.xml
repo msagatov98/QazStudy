@@ -37,59 +37,59 @@
             app:layout_constraintTop_toBottomOf="@id/activity_login__ic_qaz_study"/>
 
         <EditText
+            android:padding="10dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="5dp"
-            android:padding="10dp"
-            android:background="@drawable/bg_btn_exit_light"
-            android:textColorHint="@color/txt_color"
-            android:layout_marginEnd="15dp"
             android:importantForAutofill="no"
             android:layout_marginStart="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:textColorHint="@color/txt_color"
             android:id="@+id/activity_login__input_email"
+            android:background="@drawable/bg_btn_exit_light"
             android:hint="@string/activity_profile__hint_email"
             app:layout_constraintTop_toBottomOf="@id/app_name"/>
 
         <EditText
-            android:layout_marginTop="5dp"
             android:padding="10dp"
-            android:background="@drawable/bg_btn_exit_light"
-            android:textColorHint="@color/txt_color"
-            android:hint="@string/activity_profile__hint_password"
-            android:id="@+id/activity_login__input_password"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:inputType="textPassword"
             android:layout_marginStart="15dp"
             android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:layout_marginEnd="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/txt_color"
+            android:background="@drawable/bg_btn_exit_light"
+            android:id="@+id/activity_login__input_password"
+            android:hint="@string/activity_profile__hint_password"
             app:layout_constraintTop_toBottomOf="@id/activity_login__input_email"/>
 
         <Button
-            android:stateListAnimator="@animator/btn_login_animator"
             android:textStyle="bold"
+            android:text="@string/login"
             android:layout_marginTop="25dp"
-            android:id="@+id/activity_login__btn_login"
-            android:text="Login"
-            android:textColor="@color/btn_login_color"
             android:layout_marginEnd="15dp"
             android:layout_marginStart="15dp"
-            android:background="@drawable/btn_login_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/btn_login_color"
+            android:background="@drawable/btn_login_bg"
+            android:id="@+id/activity_login__btn_login"
+            android:stateListAnimator="@animator/btn_login_animator"
             app:layout_constraintTop_toBottomOf="@id/activity_login__input_password"/>
 
         <ImageView
-            android:layout_marginTop="25dp"
-            android:id="@+id/ic_facebook"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:id="@+id/ic_facebook"
+            android:layout_marginTop="25dp"
             android:src="@drawable/ic_facebook_light"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"
+            android:contentDescription="@string/all_image_description"
             app:layout_constraintEnd_toStartOf="@id/ic_linkedin"
-            android:contentDescription="@string/all_image_description" />
+            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login" />
         <ImageView
             android:contentDescription="@string/all_image_description"
             android:layout_marginTop="25dp"
@@ -97,8 +97,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_linkedin_light"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"
-            app:layout_constraintEnd_toStartOf="@id/ic_google"/>
+            app:layout_constraintEnd_toStartOf="@id/ic_google"
+            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
 
         <ImageView
             android:contentDescription="@string/all_image_description"
@@ -107,9 +107,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_google_light"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
         <ImageView
             android:contentDescription="@string/all_image_description"
             android:layout_marginTop="25dp"
@@ -117,8 +117,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_twitter_light"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"
-            app:layout_constraintStart_toEndOf="@id/ic_google"/>
+            app:layout_constraintStart_toEndOf="@id/ic_google"
+            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
         <ImageView
             android:contentDescription="@string/all_image_description"
             android:layout_marginTop="25dp"
@@ -130,14 +130,14 @@
             app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
 
         <TextView
+            android:gravity="center"
             android:layout_height="50dp"
             android:id="@+id/txt_sign_up"
             android:layout_width="match_parent"
             android:textColor="@color/txt_color"
+            android:text="@string/create_account"
             android:background="@drawable/top_line"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Don't have an account? Sign up."
-            android:gravity="center"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
