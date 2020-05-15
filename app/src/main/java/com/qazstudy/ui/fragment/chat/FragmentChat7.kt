@@ -20,7 +20,7 @@ class FragmentChat7 : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         if (isDark) {
-            ic_send.background = requireContext().getDrawable(R.drawable.bg_btn_send_dark)
+            input_chat_message.setTextColor(requireContext().getColor(R.color.white))
             input_chat_message.background = requireContext().getDrawable(R.drawable.bg_input_chat_message_dark)
         }
 
