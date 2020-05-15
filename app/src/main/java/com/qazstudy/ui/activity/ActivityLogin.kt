@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.content.Intent
 import com.qazstudy.util.showToast
-import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
+import androidx.appcompat.app.AppCompatActivity
 import com.qazstudy.util.coordinateButtonAndInput
 import kotlinx.android.synthetic.main.activity_login.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth

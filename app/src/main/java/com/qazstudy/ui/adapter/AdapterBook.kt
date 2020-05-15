@@ -19,12 +19,10 @@ class AdapterBook(private val arr: Array<Int>) : RecyclerView.Adapter<AdapterBoo
              LayoutInflater.from(parent.context).inflate(R.layout.view_holder_book, parent, false)
          )
 
-
     override fun getItemCount(): Int =  arr.size
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) =
         holder.image.setImageResource(arr[position])
-
 
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

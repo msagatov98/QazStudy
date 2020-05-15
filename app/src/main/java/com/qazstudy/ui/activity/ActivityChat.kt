@@ -28,7 +28,6 @@ class ActivityChat : AppCompatActivity() {
         setMode()
         activity_chat__ic_back.setOnClickListener { finish() }
 
-
         for (i in arFragmentChat.indices) {
             if (intent.getIntExtra("numChat", -1) == i) {
                 openedFragment = arFragmentChat[i]

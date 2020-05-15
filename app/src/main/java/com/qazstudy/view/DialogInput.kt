@@ -11,17 +11,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.qazstudy.ui.activity.ActivityProfile
 import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.dialog_input.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 import kotlinx.android.synthetic.main.dialog_input_password_dark.view.*
 import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__ok
 import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__cancel
 
 class DialogInput(private val hint: String, private val password: String): DialogFragment() {
-
-    private val mDatabase = FirebaseDatabase.getInstance().getReference("users/${mAuth.currentUser!!.uid}/")
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -166,7 +164,7 @@ class DialogInput(private val hint: String, private val password: String): Dialo
                         if (it.isSuccessful) {
                             mAuth.currentUser!!.updateEmail(view.dialog_input.text.toString()).addOnCompleteListener {
                                 if (it.isSuccessful) {
-                                    mDatabase.updateChildren(updatesMap).addOnCompleteListener {
+                                    mDatabase.child("users/${mAuth.currentUser!!.uid}/").updateChildren(updatesMap).addOnCompleteListener {
                                         if (it.isSuccessful) {
                                             startActivity(intent)
                                             requireActivity().finish()
@@ -183,7 +181,7 @@ class DialogInput(private val hint: String, private val password: String): Dialo
                         }
                     }
                 } else {
-                    mDatabase.updateChildren(updatesMap).addOnCompleteListener {
+                    mDatabase.child("users/${mAuth.currentUser!!.uid}/").updateChildren(updatesMap).addOnCompleteListener {
                         if (it.isSuccessful) {
                             startActivity(intent)
                             requireActivity().finish()

@@ -2,9 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_lesson">
-
+    app:startDestination="@+id/nav_lesson"
+    android:id="@+id/mobile_navigation">
 
     <fragment
         android:label="@string/menu_lesson"
@@ -50,16 +49,14 @@
         android:name="com.qazstudy.ui.fragment.FragmentTask" />
 
     <fragment
-        android:label="@string/menu_bookmark"
         android:id="@+id/nav_bookmark"
+        android:label="@string/menu_bookmark"
         tools:layout="@layout/fragment_bookmark"
         android:name="com.qazstudy.ui.fragment.FragmentBookmark" />
 
     <fragment
         android:id="@+id/nav_setting"
         tools:layout="@layout/fragment_setting"
-        android:label="@string/title_activity_setting"
+        android:label="@string/menu_settings"
         android:name="com.qazstudy.ui.fragment.FragmentSetting" />
-
-
 </navigation>

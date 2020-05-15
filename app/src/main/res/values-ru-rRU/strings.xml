@@ -5,7 +5,7 @@
     <string name="menu_lesson">Уроки</string>
     <string name="menu_bookmark">Заметки</string>
     <string name="menu_dictionary">Словарь</string>
-    <string name="action_settings">Настройки</string>
+    <string name="menu_settings">Настройки</string>
 
     <string-array name="lessons_header">
         <item>Введение</item>

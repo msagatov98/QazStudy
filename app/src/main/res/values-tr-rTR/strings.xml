@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_settings">Ayarlar</string>
     <string name="menu_task">HZ</string>
-    <string name="menu_lesson">Dersler</string>
     <string name="menu_bookmark">HZ</string>
+    <string name="menu_book">Kıtablar</string>
+    <string name="menu_lesson">Dersler</string>
+    <string name="menu_settings">Ayarlar</string>
+    <string name="menu_dictionary">Sözlük</string>
 
     <string-array name="lessons_header">
-        <item>Иaşlangıç</item>
-        <item>Ders 1</item>
+        <item>Başlangıç</item>
+        <item>Alfabe</item>
         <item>Ders 2</item>
         <item>Ders 3</item>
         <item>Ders 4</item>
@@ -26,12 +28,7 @@
     <string name="activity_profile__ic_back_description">Açıklama</string>
     <string name="activity_profile__title">HZ</string>
 
-    <string-array name="lecture_lesson">
-        <item>Lecture of first lesson</item>
-    </string-array>
     <string name="lecture_1">Lecture of first lesson</string>
-    <string name="menu_book">Kıtablar</string>
-    <string name="menu_dictionary">Sözlük</string>
     <string name="lecture_3">sadf</string>
     <string name="lecture_4">asdf</string>
 </resources>

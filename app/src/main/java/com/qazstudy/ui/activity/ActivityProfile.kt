@@ -61,13 +61,6 @@ class ActivityProfile : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         setMode()
 
-        mAuth.addAuthStateListener {
-            if (it.currentUser == null) {
-                startActivity(Intent(this, ActivityLogin::class.java))
-                finish()
-            }
-        }
-
         activity_profile__input_city.setOnClickListener {
             DialogInput("city", mUser.password).show(supportFragmentManager, "TAG")
         }
@@ -101,12 +94,16 @@ class ActivityProfile : AppCompatActivity() {
         if (str == "exit") {
             view.dialog_title.text = "Are you sure to exit from account"
 
-            view.dialog_confirm__ok.setOnClickListener { mAuth.signOut() }
-
+            view.dialog_confirm__ok.setOnClickListener {
+                mAuth.signOut()
+                startActivity(Intent(this, ActivityLogin::class.java))
+                finish()
+            }
         } else if (str == "delete") {
             view.dialog_title.text = "Are you sure to delte account"
 
             view.dialog_confirm__ok.setOnClickListener {
+                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").delete()
                 mDatabase.child("users/${mAuth.currentUser!!.uid}").removeValue()
                 mAuth.currentUser!!.delete().addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -117,7 +114,6 @@ class ActivityProfile : AppCompatActivity() {
                     }
                 }
             }
-
         }
 
         view.dialog_confirm__cancel.setOnClickListener {
@@ -129,9 +125,9 @@ class ActivityProfile : AppCompatActivity() {
 
     private fun getDialogView() : View {
         return if (isDark) {
-            layoutInflater.inflate(R.layout.dialog_confirm_dark, null)
+            layoutInflater.inflate(R.layout.dialog_confirm_dark, null, false)
         } else {
-            layoutInflater.inflate(R.layout.dialog_confirm_light, null)
+            layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)
         }
     }
 
