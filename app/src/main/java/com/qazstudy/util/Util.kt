@@ -1,24 +1,23 @@
 package com.qazstudy.util
 
-import android.widget.Toast
-import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
-import android.text.format.DateFormat
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.firebase.ui.database.FirebaseListAdapter
 import com.qazstudy.R
+import android.view.View
+import android.widget.Toast
+import android.text.Editable
+import android.widget.Button
+import android.content.Context
+import android.widget.EditText
+import android.text.TextWatcher
+import com.bumptech.glide.Glide
 import com.qazstudy.model.Message
-import com.qazstudy.ui.activity.ActivityNavigation
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
+import androidx.fragment.app.Fragment
+import android.text.format.DateFormat
+import com.firebase.ui.database.FirebaseListAdapter
 import kotlinx.android.synthetic.main.fragment_chat1.*
 import kotlinx.android.synthetic.main.view_holder_message.view.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 
 fun Context.showToast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, msg, duration).show()

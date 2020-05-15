@@ -3,12 +3,12 @@ package com.qazstudy.ui.activity
 import com.qazstudy.R
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.qazstudy.ui.fragment.chat.*
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_chat.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.fragment.chat.*
 
 class ActivityChat : AppCompatActivity() {
 
