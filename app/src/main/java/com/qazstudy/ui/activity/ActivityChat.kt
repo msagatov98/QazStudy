@@ -22,6 +22,7 @@ class ActivityChat : AppCompatActivity() {
         FragmentChat7(), FragmentChat8()
     )
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)

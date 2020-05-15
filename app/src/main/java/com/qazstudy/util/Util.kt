@@ -39,12 +39,12 @@ fun coordinateButtonAndInput(btn: Button, vararg input: EditText) {
     btn.isEnabled = input.all { it.text.isNotEmpty()}
 }
 
-fun Fragment.displayChat(lecture: String) {
+fun Fragment.displayChat(lectureNum: String) {
 
     val adapter: FirebaseListAdapter<Message>
 
     if (isDark) {
-        adapter = object : FirebaseListAdapter<Message>(activity, Message::class.java, R.layout.view_holder_message_dark, mDatabase.child("messages/$lecture/")) {
+        adapter = object : FirebaseListAdapter<Message>(activity, Message::class.java, R.layout.view_holder_message_dark, mDatabase.child("messages/$lectureNum/")) {
             override fun populateView(v: View?, model: Message?, position: Int) {
                 if (model!!.userID.photo.isNotEmpty()) {
                     mStorage.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
@@ -59,7 +59,7 @@ fun Fragment.displayChat(lecture: String) {
             }
         }
     } else {
-        adapter = object : FirebaseListAdapter<Message>(activity, Message::class.java, R.layout.view_holder_message, mDatabase.child("messages/$lecture/")) {
+        adapter = object : FirebaseListAdapter<Message>(activity, Message::class.java, R.layout.view_holder_message, mDatabase.child("messages/$lectureNum/")) {
             override fun populateView(v: View?, model: Message?, position: Int) {
                 if (model!!.userID.photo.isNotEmpty()) {
                     mStorage.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
