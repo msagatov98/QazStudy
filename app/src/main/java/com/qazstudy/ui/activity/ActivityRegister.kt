@@ -1,17 +1,17 @@
 package com.qazstudy.ui.activity
 
 import com.qazstudy.R
+import android.net.Uri
 import android.os.Bundle
 import android.content.Intent
-import android.net.Uri
 import com.qazstudy.model.User
 import com.qazstudy.util.showToast
 import com.qazstudy.ui.fragment.FragmentEmail
 import androidx.appcompat.app.AppCompatActivity
 import com.qazstudy.ui.fragment.FragmentNamePass
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 
 class ActivityRegister : AppCompatActivity(), FragmentEmail.Listener, FragmentNamePass.Listener {
 

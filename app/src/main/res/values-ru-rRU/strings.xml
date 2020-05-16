@@ -82,9 +82,11 @@
     </string>
     <string name="activity_chat_title">Комментарии</string>
     <string name="login">Войти</string>
-    <string name="register" translatable="false">Зарегистрироваться</string>
+    <string name="register">Зарегистрироваться</string>
     <string name="create_account">Нет аккаунта? Зарегистрироваться</string>
     <string name="message">Введите текст</string>
     <string name="enter_name_and_password">Введите имя и пороль</string>
+    <string name="confirm_delete">Уверены что хотите удалить аккаунт?</string>
+    <string name="confirm_exit">Уверены что хотите выйти</string>
 
 </resources>

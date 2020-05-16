@@ -155,4 +155,8 @@
     <string name="enter_name_and_password">Enter name and password</string>
 
 
+    <string name="confirm_delete">Are you sure to delete account</string>
+    <string name="confirm_exit">Are you sure to exit from account</string>
+
+
 </resources>

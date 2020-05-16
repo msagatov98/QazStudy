@@ -78,8 +78,8 @@ class ActivityNavigation : AppCompatActivity() {
                     mUser = it.getValue(User::class.java)!!
                     nav_header_txt_name.text = mUser.name
                     if (mUser.photo.isNotEmpty()) {
-                        mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
-                            Glide.with(this).load(it.toString()).into(nav_profile)
+                        mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {imageUri ->
+                            Glide.with(this).load(imageUri.toString()).into(nav_profile)
                         }
                     }
                 })
@@ -186,15 +186,11 @@ class ActivityNavigation : AppCompatActivity() {
 
         if (fragment_lesson__recycler_view != null) {
             fragment_lesson__recycler_view.adapter =
-                AdapterLesson(
-                    this,
-                    Lesson(lessonImage, resources.getStringArray(R.array.lessons_header), resources.getStringArray(R.array.lessons_description)))
+                AdapterLesson(this, Lesson(lessonImage, resources.getStringArray(R.array.lessons_header), resources.getStringArray(R.array.lessons_description)))
         }
         if (fragment_task__recycler_view != null) {
             fragment_task__recycler_view.adapter =
-                AdapterTask(
-                    this,
-                    Task(resources.getStringArray(R.array.tasks_header), resources.getStringArray(R.array.lessons_description)))
+                AdapterTask(this, Task(resources.getStringArray(R.array.tasks_header), resources.getStringArray(R.array.lessons_description)))
         }
         if (fragment_book__recycler_view != null) {
             fragment_book__recycler_view.adapter =

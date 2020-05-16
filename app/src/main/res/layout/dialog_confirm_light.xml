@@ -5,10 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:textStyle="bold"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:text="Title"
         android:id="@+id/dialog_title"
         android:layout_marginTop="15dp"
         android:textColor="@color/black"

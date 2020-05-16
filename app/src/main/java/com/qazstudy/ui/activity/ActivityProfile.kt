@@ -1,44 +1,42 @@
 package com.qazstudy.ui.activity
 
-import android.app.Activity
+import java.util.*
+import java.io.File
 import com.qazstudy.R
-import android.os.Bundle
-import android.content.Intent
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.os.Bundle
+import android.app.Activity
+import android.content.Intent
+import android.os.Environment
 import com.qazstudy.model.User
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import com.qazstudy.view.DialogInput
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import com.qazstudy.util.showToast
+import android.provider.MediaStore
+import com.qazstudy.view.DialogInput
+import androidx.core.content.FileProvider
+import androidx.appcompat.app.AlertDialog
+import com.theartofdev.edmodo.cropper.CropImage
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_profile.*
 import com.qazstudy.ui.adapter.ValueEventListenerAdapter
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import com.qazstudy.util.showToast
-import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.dialog_confirm_dark.view.*
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 
 class ActivityProfile : AppCompatActivity() {
 
     private val TAG = "ActivityProfile"
-
     private val TAKE_PICTURE_REQUEST_CODE = 1
     private val timeStamp = SimpleDateFormat("yyyyMMDD_HHmmss", Locale.US).format(Date())
 
     init {
-
         mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter{
             mUser = it.getValue(User::class.java)!!
             activity_profile__input_name.setText(mUser.name, TextView.BufferType.EDITABLE)
@@ -48,12 +46,11 @@ class ActivityProfile : AppCompatActivity() {
             activity_profile__input_password.setText(mUser.password, TextView.BufferType.EDITABLE)
 
             if (mUser.photo.isNotEmpty()) {
-                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
-                    Glide.with(this).load(it.toString()).into(activity_profile__image_profile)
+                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {imageUri ->
+                    Glide.with(this).load(imageUri.toString()).into(activity_profile__image_profile)
                 }
             }
         })
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +82,40 @@ class ActivityProfile : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Log.e(TAG, "onActivityResult")
+
+        if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            CropImage.activity(mImageURI).setAspectRatio(1, 1).start(this)
+        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            mImageURI = CropImage.getActivityResult(data).uri
+
+            mStorage.child("users/${mAuth.currentUser!!.uid}/photo").putFile(mImageURI).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val url = mStorage.child("users/${mAuth.currentUser!!.uid}/photo/$mImageURI")
+                    mDatabase.child("users/${mAuth.currentUser!!.uid}/photo").setValue(url.downloadUrl.toString()).addOnCompleteListener {it1 ->
+                        if (it1.isSuccessful) {
+                            showToast("Photo saved")
+                            if (!this.isDestroyed)
+                                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {imageUri ->
+                                    if (!this.isDestroyed) {
+                                        Glide.with(this).load(imageUri.toString())
+                                            .into(activity_profile__image_profile)
+                                    }
+                                }
+                        } else {
+                            showToast(it1.exception!!.message.toString())
+                        }
+                    }
+                } else {
+                    showToast(it.exception!!.message.toString())
+                }
+            }
+        }
+    }
+
     private fun getAlertDialog(str: String) : AlertDialog {
 
         val view = getDialogView()
@@ -92,7 +123,7 @@ class ActivityProfile : AppCompatActivity() {
         val alertDialog: AlertDialog = AlertDialog.Builder(this).setView(view).create()
 
         if (str == "exit") {
-            view.dialog_title.text = "Are you sure to exit from account"
+            view.dialog_title.text = resources.getString(R.string.confirm_exit)
 
             view.dialog_confirm__ok.setOnClickListener {
                 mAuth.signOut()
@@ -100,7 +131,7 @@ class ActivityProfile : AppCompatActivity() {
                 finish()
             }
         } else if (str == "delete") {
-            view.dialog_title.text = "Are you sure to delte account"
+            view.dialog_title.text = resources.getString(R.string.confirm_delete)
 
             view.dialog_confirm__ok.setOnClickListener {
                 mStorage.child("users/${mAuth.currentUser!!.uid}/photo").delete()
@@ -124,45 +155,8 @@ class ActivityProfile : AppCompatActivity() {
     }
 
     private fun getDialogView() : View {
-        return if (isDark) {
-            layoutInflater.inflate(R.layout.dialog_confirm_dark, null, false)
-        } else {
-            layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        Log.e(TAG, "onActivityResult")
-
-        if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            CropImage.activity(mImageURI).setAspectRatio(1, 1).start(this)
-        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            mImageURI = CropImage.getActivityResult(data).uri
-
-            mStorage.child("users/${mAuth.currentUser!!.uid}/photo").putFile(mImageURI).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val url = mStorage.child("users/${mAuth.currentUser!!.uid}/photo/$mImageURI")
-                    mDatabase.child("users/${mAuth.currentUser!!.uid}/photo").setValue(url.downloadUrl.toString()).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            showToast("Photo saved")
-                            if (!this.isDestroyed)
-                            mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
-                                if (!this.isDestroyed) {
-                                    Glide.with(this).load(it.toString())
-                                        .into(activity_profile__image_profile)
-                                }
-                            }
-                        } else {
-                            showToast(it.exception!!.message.toString())
-                        }
-                    }
-                } else {
-                    showToast(it.exception!!.message.toString())
-                }
-            }
-        }
+        return if (isDark) layoutInflater.inflate(R.layout.dialog_confirm_dark, null, false)
+        else layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)
     }
 
     private fun createImageFile(): File {

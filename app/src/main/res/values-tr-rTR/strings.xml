@@ -37,4 +37,6 @@
     <string name="create_account">ХЗ</string>
     <string name="message">" Mesaj"</string>
     <string name="enter_name_and_password">Adınızı ve parolanı yazın</string>
+    <string name="confirm_delete">Hesapı silmeyi istiyor musunuz</string>
+    <string name="confirm_exit">Hesaptan cıkmayı istiyor musunuz</string>
 </resources>
