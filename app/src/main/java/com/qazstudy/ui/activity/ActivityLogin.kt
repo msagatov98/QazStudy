@@ -3,19 +3,18 @@ package com.qazstudy.ui.activity
 import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
-import android.content.Intent
 import android.util.Log
+import android.content.Intent
+import com.qazstudy.model.User
 import com.qazstudy.util.showToast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
+import com.qazstudy.util.coordinateButtonAndInput
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.gms.common.api.ApiException
+import kotlinx.android.synthetic.main.activity_login.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.GoogleAuthProvider
-import com.qazstudy.model.User
-import com.qazstudy.util.coordinateButtonAndInput
-import kotlinx.android.synthetic.main.activity_login.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
@@ -47,7 +46,6 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
             .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
 
         ic_google.setOnClickListener {
             val intent = mGoogleSignInClient.signInIntent
@@ -95,6 +93,7 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
             txt_sign_up.visibility = View.VISIBLE
         }
     }
+
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mAuth.signInWithCredential(credential)
@@ -108,8 +107,8 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
                     var photo = ""
                     var email = ""
 
-                    if (googleAccount!!.displayName!!.isNotEmpty())
-                        name = googleAccount.displayName!!
+                    if (googleAccount!!.givenName!!.isNotEmpty())
+                        name = googleAccount.givenName!!
 
                     if (googleAccount.email!!.isNotEmpty())
                         email = googleAccount.email!!

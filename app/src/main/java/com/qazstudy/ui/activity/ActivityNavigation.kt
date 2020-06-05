@@ -11,6 +11,8 @@ import com.qazstudy.model.Lesson
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
+import android.view.LayoutInflater
+import android.view.MenuInflater
 import com.qazstudy.ui.adapter.AdapterTask
 import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
@@ -40,6 +42,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.qazstudy.model.User
 import com.qazstudy.ui.adapter.ValueEventListenerAdapter
+import java.util.zip.Inflater
 
 class ActivityNavigation : AppCompatActivity() {
 
@@ -100,6 +103,7 @@ class ActivityNavigation : AppCompatActivity() {
             setOf(R.id.nav_lesson, R.id.nav_task, R.id.nav_book,
                 R.id.nav_dictionary, R.id.nav_setting), drawerLayout
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -126,7 +130,7 @@ class ActivityNavigation : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.navigation, menu)
+        menuInflater.inflate(R.menu.activity_navigation_drawer, menu)
         return true
     }
 

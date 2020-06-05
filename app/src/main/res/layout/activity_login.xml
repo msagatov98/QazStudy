@@ -82,30 +82,21 @@
             app:layout_constraintTop_toBottomOf="@id/activity_login__input_password"/>
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:id="@+id/ic_facebook"
             android:layout_marginTop="25dp"
             android:src="@drawable/ic_facebook_light"
             android:contentDescription="@string/all_image_description"
-            app:layout_constraintEnd_toStartOf="@id/ic_linkedin"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login" />
-        <ImageView
-            android:contentDescription="@string/all_image_description"
-            android:layout_marginTop="25dp"
-            android:id="@+id/ic_linkedin"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_linkedin_light"
             app:layout_constraintEnd_toStartOf="@id/ic_google"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
+            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login" />
 
         <ImageView
             android:contentDescription="@string/all_image_description"
             android:layout_marginTop="25dp"
             android:id="@+id/ic_google"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@drawable/ic_google_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,19 +105,10 @@
             android:contentDescription="@string/all_image_description"
             android:layout_marginTop="25dp"
             android:id="@+id/ic_twitter"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@drawable/ic_twitter_light"
             app:layout_constraintStart_toEndOf="@id/ic_google"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
-        <ImageView
-            android:contentDescription="@string/all_image_description"
-            android:layout_marginTop="25dp"
-            android:id="@+id/ic_vkontakte"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_vk_light"
-            app:layout_constraintStart_toEndOf="@id/ic_twitter"
             app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
 
         <TextView

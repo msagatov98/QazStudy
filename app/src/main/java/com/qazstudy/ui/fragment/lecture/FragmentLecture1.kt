@@ -4,12 +4,12 @@ import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.view.LayoutInflater
 import android.widget.TextView
+import android.media.MediaPlayer
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
-import com.qazstudy.ui.activity.ActivityNavigation
 import kotlinx.android.synthetic.main.fragment_lecture1.*
-import kotlinx.android.synthetic.main.fragment_lecture2.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLecture1 : Fragment() {
     private lateinit var  arrayAbcCyrillic: Array<TextView>
@@ -27,9 +27,13 @@ class FragmentLecture1 : Fragment() {
             abc_cyrillic_36, abc_cyrillic_37, abc_cyrillic_38, abc_cyrillic_39, abc_cyrillic_40,
             abc_cyrillic_41, abc_cyrillic_42, abc_cyrillic_43, abc_cyrillic_44, abc_cyrillic_45)
 
+        val old = MediaPlayer.create(requireContext(), R.raw.old_town_road)
 
+        abc_cyrillic_6.setOnClickListener {
+            old.start()
+        }
 
-        if (ActivityNavigation.isDark) {
+        if (isDark) {
             text_view.setTextColor(requireContext().getColor(R.color.white))
             abc.setBackgroundColor(requireContext().getColor(R.color.txt_color))
             arrayAbcCyrillic.forEach {
