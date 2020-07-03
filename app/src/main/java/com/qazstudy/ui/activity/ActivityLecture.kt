@@ -2,6 +2,7 @@ package com.qazstudy.ui.activity
 
 import com.qazstudy.R
 import android.os.Bundle
+import android.view.View
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.qazstudy.ui.fragment.lecture.*
@@ -24,7 +25,8 @@ class ActivityLecture : AppCompatActivity() {
         FragmentLecture2(),
         FragmentLecture3(),
         FragmentLecture4(),
-        FragmentLecture5(), FragmentLecture6(),
+        FragmentLecture5(),
+        FragmentLecture6(),
         FragmentLecture7()
     )
 
@@ -32,14 +34,8 @@ class ActivityLecture : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson)
         setTheme()
-        activity_lesson__ic_back.setOnClickListener { finish() }
-        position = intent.getIntExtra("numLesson", -1)
 
-        activity_lesson__ic_chat.setOnClickListener {
-            val intentChat = Intent(this, ActivityChat::class.java)
-            intentChat.putExtra("numChat", position)
-            startActivity(intentChat)
-        }
+        position = intent.getIntExtra("numLesson", -1)
 
         for (i in arFragmentLecture.indices) {
             if (intent.getIntExtra("numLesson", -1) == i) {
@@ -51,125 +47,14 @@ class ActivityLecture : AppCompatActivity() {
             }
         }
 
-        activity_lesson__ic_next.setOnClickListener {
-            ft = fm.beginTransaction()
+    }
 
-            if (position < arFragmentLecture.size-1)
-                position++
-
-            when(openedFragment) {
-                is FragmentLectureIntro -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture1()
-                    )
-                    openedFragment = FragmentLecture1()
-                }
-                is FragmentLecture1 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture2()
-                    )
-                    openedFragment =
-                        FragmentLecture2()
-                }
-                is FragmentLecture2 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture3()
-                    )
-                    openedFragment =
-                        FragmentLecture3()
-                }
-                is FragmentLecture3 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture4()
-                    )
-                    openedFragment =
-                        FragmentLecture4()
-                }
-                is FragmentLecture4 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture5()
-                    )
-                    openedFragment =
-                        FragmentLecture5()
-                }
-                is FragmentLecture5 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture6()
-                    )
-                    openedFragment =
-                        FragmentLecture6()
-                }
-                is FragmentLecture6 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture7()
-                    )
-                    openedFragment =
-                        FragmentLecture7()
-                }
-            }
-
-            ft.commit()
-        }
-
-        activity_lesson__ic_previous.setOnClickListener {
-            ft = fm.beginTransaction()
-
-            if (position > 0)
-                position--
-
-            when(openedFragment) {
-                is FragmentLecture1 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLectureIntro()
-                    )
-                    openedFragment =
-                        FragmentLectureIntro()
-                }
-                is FragmentLecture2 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture1()
-                    )
-                    openedFragment =
-                        FragmentLecture1()
-                }
-                is FragmentLecture3 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture2()
-                    )
-                    openedFragment =
-                        FragmentLecture2()
-                }
-                is FragmentLecture4 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture3()
-                    )
-                    openedFragment =
-                        FragmentLecture3()
-                }
-                is FragmentLecture5 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture4()
-                    )
-                    openedFragment =
-                        FragmentLecture4()
-                }
-                is FragmentLecture6 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture5()
-                    )
-                    openedFragment =
-                        FragmentLecture5()
-                }
-                is FragmentLecture7 -> {
-                    ft.replace(R.id.fragment_container_lecture,
-                        FragmentLecture6()
-                    )
-                    openedFragment =
-                        FragmentLecture6()
-                }
-            }
-
-            ft.commit()
+    fun onIconClick(v: View) {
+        when (v) {
+            activity_lesson__ic_back -> finish()
+            activity_lesson__ic_chat -> onIconChatClick()
+            activity_lesson__ic_next -> onIconNextClick()
+            activity_lesson__ic_previous -> onIconPreviousClick()
         }
     }
 
@@ -185,4 +70,128 @@ class ActivityLecture : AppCompatActivity() {
             activity_lesson__ic_previous.setImageDrawable(getDrawable(R.drawable.ic_previous_dark))
         }
     }
+
+    private fun onIconChatClick() {
+        val intentChat = Intent(this, ActivityChat::class.java)
+        intentChat.putExtra("numChat", position)
+        startActivity(intentChat)
+    }
+
+    private fun onIconNextClick() {
+
+        ft = fm.beginTransaction()
+
+        if (position < arFragmentLecture.size-1)
+            position++
+
+        when(openedFragment) {
+            is FragmentLectureIntro -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture1()
+                )
+                openedFragment = FragmentLecture1()
+            }
+            is FragmentLecture1 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture2()
+                )
+                openedFragment = FragmentLecture2()
+            }
+            is FragmentLecture2 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture3()
+                )
+                openedFragment = FragmentLecture3()
+            }
+            is FragmentLecture3 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture4()
+                )
+                openedFragment = FragmentLecture4()
+            }
+            is FragmentLecture4 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture5()
+                )
+                openedFragment = FragmentLecture5()
+            }
+            is FragmentLecture5 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture6()
+                )
+                openedFragment = FragmentLecture6()
+            }
+            is FragmentLecture6 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture7()
+                )
+                openedFragment = FragmentLecture7()
+            }
+        }
+
+        ft.commit()
+    }
+
+    private fun onIconPreviousClick() {
+
+        ft = fm.beginTransaction()
+
+        if (position > 0)
+            position--
+
+        when(openedFragment) {
+            is FragmentLecture1 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLectureIntro()
+                )
+                openedFragment =
+                    FragmentLectureIntro()
+            }
+            is FragmentLecture2 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture1()
+                )
+                openedFragment =
+                    FragmentLecture1()
+            }
+            is FragmentLecture3 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture2()
+                )
+                openedFragment =
+                    FragmentLecture2()
+            }
+            is FragmentLecture4 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture3()
+                )
+                openedFragment =
+                    FragmentLecture3()
+            }
+            is FragmentLecture5 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture4()
+                )
+                openedFragment =
+                    FragmentLecture4()
+            }
+            is FragmentLecture6 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture5()
+                )
+                openedFragment =
+                    FragmentLecture5()
+            }
+            is FragmentLecture7 -> {
+                ft.replace(R.id.fragment_container_lecture,
+                    FragmentLecture6()
+                )
+                openedFragment =
+                    FragmentLecture6()
+            }
+        }
+
+        ft.commit()
+    }
+
 }

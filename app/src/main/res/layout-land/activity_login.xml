@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.qazstudy.view.KeyboardAwareScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login__scroll_view"
+    tools:context=".ui.activity.ActivityLogin"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.activity.ActivityLogin">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/activity_login__ic_qaz_study"
             android:src="@drawable/icon_android"
+            android:layout_marginBottom="25dp"
             android:layout_height="150dp"
             android:layout_width="150dp"
-            android:layout_marginBottom="25dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,8 +27,8 @@
             android:text="@string/app_name"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toStartOf="@id/divider"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/divider"
             app:layout_constraintTop_toBottomOf="@id/activity_login__ic_qaz_study"/>
 
 
@@ -46,130 +41,42 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
-        <EditText
-            android:padding="10dp"
-            android:layout_width="0dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
-            android:importantForAutofill="no"
-            android:layout_marginStart="25dp"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/txt_color"
-            android:id="@+id/activity_login__input_email"
-            android:background="@drawable/bg_btn_exit_light"
-            android:hint="@string/activity_profile__hint_email"
-            app:layout_constraintBottom_toTopOf="@id/activity_login__input_password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/divider"/>
-
-        <EditText
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="25dp"
-            android:padding="10dp"
-            android:background="@drawable/bg_btn_exit_light"
-            android:textColorHint="@color/txt_color"
-            android:hint="@string/activity_profile__hint_password"
-            android:id="@+id/activity_login__input_password"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_marginStart="25dp"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:layout_marginEnd="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/divider"
-            app:layout_constraintBottom_toTopOf="@id/activity_login__btn_login"/>
-
-        <Button
-            android:text="@string/login"
-            android:textStyle="bold"
-            android:layout_width="0dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/btn_login_color"
-            android:id="@+id/activity_login__btn_login"
-            android:background="@drawable/btn_login_bg"
-            android:stateListAnimator="@animator/btn_login_animator"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/divider"/>
-
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:background="@color/colorPrimary"
+            android:layout_margin="25dp"
             android:id="@+id/ic_facebook"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            android:src="@drawable/ic_facebook_light"
-            android:contentDescription="@string/all_image_description"
-            app:layout_constraintBottom_toTopOf="@id/txt_sign_up"
-            app:layout_constraintEnd_toStartOf="@id/ic_linkedin"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/ic_linkedin"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            android:src="@drawable/ic_linkedin_light"
-            android:contentDescription="@string/all_image_description"
-            app:layout_constraintEnd_toStartOf="@id/ic_google"
-            app:layout_constraintBottom_toTopOf="@id/txt_sign_up"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
-
-        <ImageView
-            android:id="@+id/ic_google"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            android:src="@drawable/ic_google_light"
-            android:contentDescription="@string/all_image_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/divider"
-            app:layout_constraintBottom_toTopOf="@id/txt_sign_up"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="25dp"
-            android:id="@+id/ic_twitter"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/ic_twitter_light"
-            android:contentDescription="@string/all_image_description"
-            app:layout_constraintStart_toEndOf="@id/ic_google"
-            app:layout_constraintBottom_toTopOf="@id/txt_sign_up"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
-        <ImageView
-            android:contentDescription="@string/all_image_description"
-            android:layout_marginBottom="25dp"
-            android:layout_marginTop="25dp"
-            android:id="@+id/ic_vkontakte"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_vk_light"
-            app:layout_constraintStart_toEndOf="@id/ic_twitter"
-            app:layout_constraintBottom_toTopOf="@id/txt_sign_up"
-            app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
-
-        <TextView
-            android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:id="@+id/txt_sign_up"
-            android:textColor="@color/txt_color"
-            android:text="@string/create_account"
-            android:background="@drawable/top_line"
+            android:contentDescription="@string/all_image_description"
+            android:src="@drawable/ic_facebook_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/divider"
+            app:layout_constraintBottom_toTopOf="@id/ic_google"/>
+
+        <ImageView
+            android:background="@color/colorPrimary"
+            android:layout_margin="25dp"
+            android:id="@+id/ic_google"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/all_image_description"
+            android:src="@drawable/ic_google_light"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/divider"/>
 
+        <ImageView
+            android:background="@color/colorPrimary"
+            android:layout_margin="25dp"
+            android:id="@+id/ic_twitter"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/all_image_description"
+            android:src="@drawable/ic_twitter_light"
+            app:layout_constraintStart_toEndOf="@id/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_google"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</com.qazstudy.view.KeyboardAwareScrollView>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

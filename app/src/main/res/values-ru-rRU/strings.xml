@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Menu -->
     <string name="menu_book">Книги</string>
     <string name="menu_task">Задачи</string>
     <string name="menu_lesson">Уроки</string>
     <string name="menu_bookmark">Заметки</string>
-    <string name="menu_dictionary">Словарь</string>
     <string name="menu_settings">Настройки</string>
+    <string name="menu_dictionary">Словарь</string>
 
     <string-array name="lessons_header">
         <item>Введение</item>
@@ -28,9 +29,19 @@
     <string name="activity_profile__btn_delete">Удалить аккаунт</string>
     <string name="activity_profile__ic_back_description">Описание</string>
 
-    <string name="lecture_1">В первом уроке мы выучим алфавит. Казахский алфавит состоит из
-        42 букв
+    <string name="login">Войти</string>
+    <string name="message">Введите текст</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="activity_chat_title">Комментарии</string>
+    <string name="confirm_exit">Уверены что хотите выйти</string>
+    <string name="enter_name_and_password">Введите имя и пороль</string>
+    <string name="create_account">Нет аккаунта? Зарегистрироваться</string>
+    <string name="confirm_delete">Уверены что хотите удалить аккаунт?</string>
+
+    <string name="lecture_1">
+        В первом уроке мы выучим алфавит. Казахский алфавит состоит из 42 букв
     </string>
+
     <string name="lecture_3">
         В казахском языке образованием слов и словоизменением управляет
         ЗАКОН СИНГАРМОНИЗМА — закон созвучия (гармонии) звуков основного слова и аффиксов.
@@ -80,13 +91,5 @@
         - аффиксы принадлежности -дікі, -тікі, -нікі/: ата-нікі(дедушки), қыз-дікі(девушки),
             Мұраттікі(Мурата)
     </string>
-    <string name="activity_chat_title">Комментарии</string>
-    <string name="login">Войти</string>
-    <string name="register">Зарегистрироваться</string>
-    <string name="create_account">Нет аккаунта? Зарегистрироваться</string>
-    <string name="message">Введите текст</string>
-    <string name="enter_name_and_password">Введите имя и пороль</string>
-    <string name="confirm_delete">Уверены что хотите удалить аккаунт?</string>
-    <string name="confirm_exit">Уверены что хотите выйти</string>
 
 </resources>

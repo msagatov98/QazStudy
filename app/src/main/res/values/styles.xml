@@ -37,10 +37,11 @@
 
     <style name="style_abc">
         <item name="android:textSize">26sp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="backgroundColor">@color/white</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@drawable/bg_abc_light</item>
     </style>
 
 </resources>

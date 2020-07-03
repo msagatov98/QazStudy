@@ -12,13 +12,6 @@
             android:title="@string/menu_task"
             android:id="@+id/nav_task"
             android:icon="@drawable/ic_menu_task"/>
-
-        <!--
-        <item
-            android:title="@string/menu_bookmark"
-            android:id="@+id/nav_bookmark"
-            android:icon="@drawable/ic_menu_bookmark"/>
-         -->
     </group>
 
     <group android:checkableBehavior="single" android:id="@+id/group_2">
