@@ -148,6 +148,7 @@ class ActivityNavigation : AppCompatActivity() {
         isDark = !isDark
 
         if (isDark) {
+            container.setBackgroundColor(getColor(R.color.dark))
             nav_view.setBackgroundColor(getColor(R.color.dark))
             toolbar.background = getDrawable(R.color.light_blue)
             nav_header.background = getDrawable(R.color.light_blue)
@@ -167,6 +168,7 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_book__constraint_layout.background = getDrawable(R.color.dark)
             }
         } else {
+            container.setBackgroundColor(getColor(R.color.white))
             toolbar.setTitleTextColor(getColor(R.color.white))
             nav_view.setBackgroundColor(getColor(R.color.white))
             toolbar.background = getDrawable(R.color.colorPrimary)

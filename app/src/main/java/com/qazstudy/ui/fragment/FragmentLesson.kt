@@ -11,6 +11,7 @@ import com.qazstudy.ui.adapter.AdapterLesson
 import kotlinx.android.synthetic.main.fragment_lesson.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLesson() : Fragment() {
@@ -31,9 +32,11 @@ class FragmentLesson() : Fragment() {
 
         lesson = Lesson(lessonImage, lessonHeader, lessonDescription)
 
-        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        val dividerVertical = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        val dividerHorizontal = DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL)
 
-        fragment_lesson__recycler_view.addItemDecoration(divider)
+        fragment_lesson__recycler_view.addItemDecoration(dividerVertical)
+        //fragment_lesson__recycler_view.addItemDecoration(dividerHorizontal)
         fragment_lesson__recycler_view.layoutManager = LinearLayoutManager(this.context)
         fragment_lesson__recycler_view.adapter =
             AdapterLesson(requireContext(), lesson)

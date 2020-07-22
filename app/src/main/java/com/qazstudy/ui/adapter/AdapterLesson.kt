@@ -37,6 +37,8 @@ class AdapterLesson(var context: Context, private val lesson: Lesson) : Recycler
             intent.putExtra("numLesson", position)
             context.startActivity(intent)
         }
+
+        holder.bind()
     }
 
     class LessonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -45,11 +47,11 @@ class AdapterLesson(var context: Context, private val lesson: Lesson) : Recycler
         var textViewDescription : TextView = itemView.description
         var constraintLayout : ConstraintLayout? = itemView.container
 
-        init {
+        fun bind() {
             if (isDark) {
-                constraintLayout!!.setBackgroundResource(R.drawable.card_bg_dark)
                 textViewHeader.setTextColor(Color.rgb(60, 90, 188))
             }
         }
+
     }
 }

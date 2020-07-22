@@ -31,7 +31,6 @@
             app:layout_constraintEnd_toStartOf="@id/divider"
             app:layout_constraintTop_toBottomOf="@id/activity_login__ic_qaz_study"/>
 
-
         <View
             android:id="@+id/divider"
             android:layout_width="1dp"
@@ -39,7 +38,6 @@
             android:background="@color/txt_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
         <ImageView
             android:background="@color/colorPrimary"
@@ -77,6 +75,5 @@
             app:layout_constraintStart_toEndOf="@id/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ic_google"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
