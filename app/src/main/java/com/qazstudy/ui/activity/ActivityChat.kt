@@ -16,11 +16,12 @@ class ActivityChat : AppCompatActivity() {
     private var fm : FragmentManager = supportFragmentManager
     private var ft : FragmentTransaction = fm.beginTransaction()
 
-    private val arFragmentChat = arrayListOf(
-        FragmentChat1(), FragmentChat2(), FragmentChat3(),
-        FragmentChat4(), FragmentChat5(), FragmentChat6(),
-        FragmentChat7(), FragmentChat8()
-    )
+    private val arFragmentChat =
+        arrayListOf(
+            FragmentChat1(), FragmentChat2(), FragmentChat3(),
+            FragmentChat4(), FragmentChat5(), FragmentChat6(),
+            FragmentChat7(), FragmentChat8()
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,20 +6,17 @@ import android.view.View
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.qazstudy.ui.fragment.lecture.*
-import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_lesson.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import kotlin.contracts.ReturnsNotNull
 
 class ActivityLecture : AppCompatActivity() {
 
     private  var position = -1
 
     private lateinit var openedFragment: Fragment
-    private var fragmentManager : FragmentManager = supportFragmentManager
-    private var fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
+    private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
 
     private val arFragmentLecture = arrayListOf(
         FragmentLectureIntro(),
@@ -29,26 +26,15 @@ class ActivityLecture : AppCompatActivity() {
         FragmentLecture4(),
         FragmentLecture5(),
         FragmentLecture6(),
-        FragmentLecture7()
+        FragmentLecture7(),
+        FragmentLecture8()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson)
         setTheme()
-
-        position = intent.getIntExtra("numLesson", -1)
-
-        for (i in arFragmentLecture.indices) {
-            if (intent.getIntExtra("numLesson", -1) == i) {
-                openedFragment = arFragmentLecture[i]
-                fragmentManager = supportFragmentManager
-                fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fragment_container_lecture, arFragmentLecture[i])
-                fragmentTransaction.commit()
-            }
-        }
-
+        initFragments()
     }
 
     fun onIconClick(v: View) {
@@ -60,9 +46,24 @@ class ActivityLecture : AppCompatActivity() {
         }
     }
 
+    private fun initFragments() {
+
+        position = intent.getIntExtra("numLesson", -1)
+
+        for (i in arFragmentLecture.indices) {
+            if (intent.getIntExtra("numLesson", -1) == i) {
+                openedFragment = arFragmentLecture[i]
+                fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container_lecture, arFragmentLecture[i])
+                fragmentTransaction.commit()
+            }
+        }
+    }
+
     private fun setTheme() {
         if (isDark) {
             this.window.statusBarColor = getColor(R.color.light_blue)
+            activity_lesson__txt_lecture_header.setTextColor(getColor(R.color.dark))
             activity_lesson__toolbar.setBackgroundColor(getColor(R.color.light_blue))
             activity_lesson__constraint_layout.setBackgroundColor(getColor(R.color.dark))
             activity_lesson__ic_chat.setImageDrawable(getDrawable(R.drawable.ic_chat_dark))
@@ -81,7 +82,7 @@ class ActivityLecture : AppCompatActivity() {
 
     private fun onIconNextClick() {
 
-        fragmentTransaction = fragmentManager
+        fragmentTransaction = supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left)
 
@@ -131,6 +132,12 @@ class ActivityLecture : AppCompatActivity() {
                 )
                 openedFragment = FragmentLecture7()
             }
+            is FragmentLecture7 -> {
+                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                    FragmentLecture7()
+                )
+                openedFragment = FragmentLecture8()
+            }
         }
 
         fragmentTransaction.commit()
@@ -138,7 +145,7 @@ class ActivityLecture : AppCompatActivity() {
 
     private fun onIconPreviousClick() {
 
-        fragmentTransaction = fragmentManager
+        fragmentTransaction = supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.enter_left_to_right, R.anim.exit_left_to_right)
 
@@ -195,9 +202,15 @@ class ActivityLecture : AppCompatActivity() {
                 openedFragment =
                     FragmentLecture6()
             }
+            is FragmentLecture8 -> {
+                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                    FragmentLecture7()
+                )
+                openedFragment =
+                    FragmentLecture7()
+            }
         }
 
         fragmentTransaction.commit()
     }
-
 }

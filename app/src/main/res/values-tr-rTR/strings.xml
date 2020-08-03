@@ -16,6 +16,7 @@
         <item>Ders 5</item>
         <item>Ders 6</item>
         <item>Ders 7</item>
+        <item>Ders 8</item>
     </string-array>
 
     <string name="activity_profile__hint_name">Adınız</string>

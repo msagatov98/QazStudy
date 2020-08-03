@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_lecture1.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import kotlinx.android.synthetic.main.activity_lesson.*
+import kotlinx.android.synthetic.main.activity_lesson.view.*
 
 class FragmentLecture1 : Fragment() {
 
@@ -18,6 +20,11 @@ class FragmentLecture1 : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val txt = activity?.findViewById<TextView>(R.id.activity_lesson__txt_lecture_header)
+
+        val ar = resources.getStringArray(R.array.lessons_header)
+        txt?.text = ar[1]
 
         arrayAbcCyrillic = arrayOf(
             abc_cyrillic_1, abc_cyrillic_2, abc_cyrillic_3, abc_cyrillic_4, abc_cyrillic_5,

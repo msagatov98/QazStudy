@@ -19,6 +19,7 @@ class FragmentChat1 : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
         if (isDark) {
             input_chat_message.setTextColor(requireContext().getColor(R.color.white))
             input_chat_message.background = requireContext().getDrawable(R.drawable.bg_input_chat_message_dark)

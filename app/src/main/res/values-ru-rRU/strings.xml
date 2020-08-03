@@ -10,13 +10,14 @@
 
     <string-array name="lessons_header">
         <item>Введение</item>
-        <item>Алфавит</item>
-        <item>Учимся читать</item>
-        <item>Гармония гласных</item>
-        <item>Гармония согласных</item>
-        <item>Урок 5</item>
-        <item>Урок 6</item>
-        <item>Урок 7</item>
+        <item>1. Алфавит</item>
+        <item>2. Учимся читать</item>
+        <item>3. Гармония гласных</item>
+        <item>4. Гармония согласных</item>
+        <item>5. Урок 5</item>
+        <item>6. Урок 6</item>
+        <item>7. Урок 7</item>
+        <item>8. Урок 8</item>
     </string-array>
 
     <string name="activity_profile__hint_name">Имя</string>
@@ -39,7 +40,9 @@
     <string name="confirm_delete">Уверены что хотите удалить аккаунт?</string>
 
     <string name="lecture_1">
-        В первом уроке мы выучим алфавит. Казахский алфавит состоит из 42 букв
+
+            В первом уроке мы выучим алфавит. Казахский алфавит состоит из 42 букв
+
     </string>
 
     <string name="lecture_3">

@@ -21,13 +21,14 @@
 
     <string-array name="lessons_header">
         <item>Introduction</item>
-        <item>Lesson 1</item>
-        <item>Lesson 2</item>
-        <item>Lesson 3</item>
-        <item>Lesson 4</item>
-        <item>Lesson 5</item>
-        <item>Lesson 6</item>
-        <item>Lesson 7</item>
+        <item>1. Lesson 1</item>
+        <item>2. Lesson 2</item>
+        <item>3. Lesson 3</item>
+        <item>4. Lesson 4</item>
+        <item>5. Lesson 5</item>
+        <item>6. Lesson 6</item>
+        <item>7. Lesson 7</item>
+        <item>8. Lesson 8</item>
     </string-array>
 
     <string-array name="tasks_header">
@@ -50,6 +51,7 @@
         <item>Description 6</item>
         <item>Description 7</item>
         <item>Description 8</item>
+        <item>Description 9</item>
     </string-array>
 
     <string name="activity_chat_title">Comments</string>

@@ -3,16 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:id="@+id/container">
+    android:layout_height="wrap_content"
+    android:id="@+id/container"
+    android:paddingBottom="50dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ic_task"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="25dp"
         android:src="@drawable/ic_android"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -20,23 +21,13 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:id="@+id/header"
-        android:layout_marginStart="25dp"
+        android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ic_task"
-        app:layout_constraintBottom_toTopOf="@id/description" />
-
-    <TextView
-        android:textSize="16sp"
-        android:id="@+id/description"
-        android:layout_marginStart="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/txt_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintStart_toEndOf="@id/ic_task"/>
+        app:layout_constraintTop_toBottomOf="@id/ic_task"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

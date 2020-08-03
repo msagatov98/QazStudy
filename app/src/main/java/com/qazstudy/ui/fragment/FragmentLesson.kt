@@ -1,45 +1,58 @@
 package com.qazstudy.ui.fragment
 
-import com.qazstudy.R
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.qazstudy.model.Lesson
-import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.qazstudy.R
+import com.qazstudy.model.Lesson
 import com.qazstudy.ui.adapter.AdapterLesson
 import kotlinx.android.synthetic.main.fragment_lesson.*
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLesson() : Fragment() {
 
+    val TAG = "FragmentLesson"
     private lateinit var lesson: Lesson
 
-    private var lessonImage = arrayOf(R.drawable.intro, R.drawable.abc, R.drawable.reading,
-        R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android,
-        R.drawable.ic_android)
+    private var lessonImage =
+        arrayOf(
+            R.drawable.intro, R.drawable.abc, R.drawable.reading,
+            R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android,
+            R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android
+        )
 
     private lateinit var lessonHeader: Array<String>
-    private lateinit var lessonDescription: Array<String>
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         lessonHeader = resources.getStringArray(R.array.lessons_header)
-        lessonDescription = resources.getStringArray(R.array.lessons_description)
 
-        lesson = Lesson(lessonImage, lessonHeader, lessonDescription)
+        lesson = Lesson(lessonImage, lessonHeader)
 
-        val dividerVertical = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        val dividerHorizontal = DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL)
+        val adapter = AdapterLesson(requireContext(), lesson)
+        val glm = GridLayoutManager(this.context, 2)
 
-        fragment_lesson__recycler_view.addItemDecoration(dividerVertical)
-        //fragment_lesson__recycler_view.addItemDecoration(dividerHorizontal)
-        fragment_lesson__recycler_view.layoutManager = LinearLayoutManager(this.context)
-        fragment_lesson__recycler_view.adapter =
-            AdapterLesson(requireContext(), lesson)
+        glm.spanSizeLookup = object : SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+
+                Log.e("$TAG getSpSiz", "$position")
+
+                return when(adapter.getItemViewType(position)) {
+                    adapter.TYPE_FIRST_ITEM -> 2
+                    adapter.TYPE_ITEM -> 1
+                    else -> -1
+                }
+            }
+        }
+
+        fragment_lesson__recycler_view.layoutManager = glm
+        fragment_lesson__recycler_view.adapter = adapter
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

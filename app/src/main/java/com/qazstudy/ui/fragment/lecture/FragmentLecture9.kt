@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_lecture1.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
-class FragmentLecture2 : Fragment() {
-
+class FragmentLecture9 : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -18,10 +18,10 @@ class FragmentLecture2 : Fragment() {
         val txt = activity?.findViewById<TextView>(R.id.activity_lesson__txt_lecture_header)
 
         val ar = resources.getStringArray(R.array.lessons_header)
-        txt?.text = ar[2]
+        txt?.text = ar[8]
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_lecture2, container, false)
+        return inflater.inflate(R.layout.fragment_lecture9, container, false)
     }
 }

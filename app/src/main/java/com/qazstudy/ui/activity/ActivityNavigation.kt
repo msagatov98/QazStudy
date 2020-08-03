@@ -11,8 +11,6 @@ import com.qazstudy.model.Lesson
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
-import android.view.LayoutInflater
-import android.view.MenuInflater
 import com.qazstudy.ui.adapter.AdapterTask
 import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
@@ -42,7 +40,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.qazstudy.model.User
 import com.qazstudy.ui.adapter.ValueEventListenerAdapter
-import java.util.zip.Inflater
 
 class ActivityNavigation : AppCompatActivity() {
 
@@ -71,6 +68,7 @@ class ActivityNavigation : AppCompatActivity() {
         setContentView(R.layout.activity_navigation)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
 
         if (mAuth.currentUser == null) {
             startActivity(Intent(this, ActivityLogin::class.java))
@@ -139,11 +137,19 @@ class ActivityNavigation : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun openProfile(v: View) {
+    fun onIconClick(v: View) {
+        when(v) {
+            nav_profile -> openProfile()
+            ic_theme_switcher -> themeSwitch()
+            nav_header_txt_name -> openProfile()
+        }
+    }
+
+    private fun openProfile() {
         startActivity(Intent(this, ActivityProfile::class.java))
     }
 
-    fun themeSwitch(v: View) {
+    private fun themeSwitch() {
 
         isDark = !isDark
 
@@ -151,6 +157,7 @@ class ActivityNavigation : AppCompatActivity() {
             container.setBackgroundColor(getColor(R.color.dark))
             nav_view.setBackgroundColor(getColor(R.color.dark))
             toolbar.background = getDrawable(R.color.light_blue)
+            toolbar.setTitleTextColor(getColor(R.color.dark))
             nav_header.background = getDrawable(R.color.light_blue)
             nav_header_txt_name.setTextColor(getColor(R.color.dark))
             this.window.statusBarColor = getColor(R.color.light_blue)
@@ -164,8 +171,8 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_bookmark_tab_layout.background = getDrawable(R.color.light_blue)
                 fragment_bookmark__constraint_layout.background = getDrawable(R.color.dark)
             }
-            if (fragment_book__constraint_layout != null ) {
-                fragment_book__constraint_layout.background = getDrawable(R.color.dark)
+            if (fragment_book__recycler_view != null ) {
+                fragment_book__recycler_view.background = getDrawable(R.color.dark)
             }
         } else {
             container.setBackgroundColor(getColor(R.color.white))
@@ -185,18 +192,18 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_bookmark_tab_layout.background = getDrawable(R.color.colorPrimary)
                 fragment_bookmark__constraint_layout.background = getDrawable(R.color.white)
             }
-            if (fragment_book__constraint_layout != null) {
-                fragment_book__constraint_layout.background = getDrawable(R.color.white)
+            if (fragment_book__recycler_view != null) {
+                fragment_book__recycler_view.background = getDrawable(R.color.white)
             }
         }
 
         if (fragment_lesson__recycler_view != null) {
             fragment_lesson__recycler_view.adapter =
-                AdapterLesson(this, Lesson(lessonImage, resources.getStringArray(R.array.lessons_header), resources.getStringArray(R.array.lessons_description)))
+                AdapterLesson(this, Lesson(lessonImage, resources.getStringArray(R.array.lessons_header)))
         }
         if (fragment_task__recycler_view != null) {
             fragment_task__recycler_view.adapter =
-                AdapterTask(this, Task(resources.getStringArray(R.array.tasks_header), resources.getStringArray(R.array.lessons_description)))
+                AdapterTask(this, Task(resources.getStringArray(R.array.tasks_header)))
         }
         if (fragment_book__recycler_view != null) {
             fragment_book__recycler_view.adapter =

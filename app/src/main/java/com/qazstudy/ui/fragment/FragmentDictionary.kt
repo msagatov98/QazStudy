@@ -12,15 +12,6 @@ import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 class FragmentDictionary : Fragment() {
 
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        if (isDark) {
-            fragment_dictionary__constraint_layout.setBackgroundColor(requireContext().getColor(R.color.dark))
-        }
-
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dictionary, container, false)
     }
