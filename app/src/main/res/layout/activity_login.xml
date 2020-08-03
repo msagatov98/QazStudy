@@ -67,6 +67,7 @@
             app:layout_constraintTop_toBottomOf="@id/activity_login__input_email"/>
 
         <Button
+            android:onClick="onClick"
             android:textStyle="bold"
             android:text="@string/login"
             android:layout_marginTop="25dp"
@@ -81,6 +82,7 @@
             app:layout_constraintTop_toBottomOf="@id/activity_login__input_password"/>
 
         <ImageView
+            android:onClick="onClick"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:id="@+id/ic_facebook"
@@ -91,6 +93,7 @@
             app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login" />
 
         <ImageView
+            android:onClick="onClick"
             android:contentDescription="@string/all_image_description"
             android:layout_marginTop="25dp"
             android:id="@+id/ic_google"
@@ -101,6 +104,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
         <ImageView
+            android:onClick="onClick"
             android:contentDescription="@string/all_image_description"
             android:layout_marginTop="25dp"
             android:id="@+id/ic_twitter"
@@ -109,8 +113,8 @@
             android:src="@drawable/ic_twitter_light"
             app:layout_constraintStart_toEndOf="@id/ic_google"
             app:layout_constraintTop_toBottomOf="@id/activity_login__btn_login"/>
-
         <TextView
+            android:onClick="onClick"
             android:gravity="center"
             android:layout_height="50dp"
             android:id="@+id/txt_sign_up"

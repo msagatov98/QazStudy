@@ -38,8 +38,6 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
         coordinateButtonAndInput(activity_login__btn_login,
             activity_login__input_email, activity_login__input_password)
 
-        txt_sign_up.setOnClickListener { startActivity(Intent(this, ActivityRegister::class.java)) }
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -47,27 +45,40 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        ic_google.setOnClickListener {
-            val intent = mGoogleSignInClient.signInIntent
-            startActivityForResult(intent, RC_SIGN_IN)
-        }
+    }
 
-        activity_login__btn_login.setOnClickListener {
-            val email = activity_login__input_email.text.toString()
-            val password = activity_login__input_password.text.toString()
-            if (validate(email, password)) {
-                mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            startActivity(Intent(this, ActivityNavigation::class.java))
-                            finish()
-                        } else {
-                            showToast("Incorrect email or password")
-                        }
+    fun onClick(v: View) {
+        when(v) {
+            txt_sign_up -> signUp()
+            activity_login__btn_login -> login()
+            ic_google -> startGoogleSignInIntent()
+        }
+    }
+
+    private fun signUp() {
+        startActivity(Intent(this, ActivityRegister::class.java))
+    }
+
+    private fun startGoogleSignInIntent() {
+        val intent = mGoogleSignInClient.signInIntent
+        startActivityForResult(intent, RC_SIGN_IN)
+    }
+
+    private fun login() {
+        val email = activity_login__input_email.text.toString()
+        val password = activity_login__input_password.text.toString()
+        if (validate(email, password)) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        startActivity(Intent(this, ActivityNavigation::class.java))
+                        finish()
+                    } else {
+                        showToast("Incorrect email or password")
+                    }
                 }
-            } else {
-                showToast("Please enter email or password")
-            }
+        } else {
+            showToast("Please enter email or password")
         }
     }
 
