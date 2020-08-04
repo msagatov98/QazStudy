@@ -16,10 +16,10 @@ class FragmentBook() : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val ar : Array<Int> = arrayOf(R.drawable.book,R.drawable.book1,R.drawable.book2,R.drawable.book3,R.drawable.book,R.drawable.book1,R.drawable.book2,R.drawable.book3)
+        val ar : Array<Int> = arrayOf(R.drawable.book0,R.drawable.book1,R.drawable.book2,R.drawable.book3,R.drawable.book,R.drawable.book1,R.drawable.book2,R.drawable.book3)
 
         fragment_book__recycler_view.layoutManager = GridLayoutManager(context, 2)
-        fragment_book__recycler_view.adapter = AdapterBook(ar)
+        fragment_book__recycler_view.adapter = AdapterBook(requireContext(), ar)
         fragment_book__recycler_view.setHasFixedSize(true)
     }
 

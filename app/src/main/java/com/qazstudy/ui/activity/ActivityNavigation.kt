@@ -207,7 +207,7 @@ class ActivityNavigation : AppCompatActivity() {
         }
         if (fragment_book__recycler_view != null) {
             fragment_book__recycler_view.adapter =
-                AdapterBook(ar)
+                AdapterBook(this, ar)
         }
     }
 }
