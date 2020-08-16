@@ -1,191 +1,28 @@
-<resources>
-    <string name="app_name" translatable="false">QazStudy</string>
-    <string name="nav_header_title" translatable="false">Android Studio</string>
-    <string name="nav_header_desc" translatable="false">Navigation header</string>
-    <string name="title_activity_navigation" translatable="false">Navigation</string>
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
-    <string name="menu_book">Books</string>
-    <string name="menu_task">Tasks</string>
-    <string name="menu_lesson">Lessons</string>
-    <string name="menu_settings">Settings</string>
-    <string name="menu_bookmark">Bookmarks</string>
-    <string name="menu_dictionary">Dictionary</string>
+Қаланың сырт жағы қандай тамаша! Жаздың жайма-шуақ кезі, қара бидай сарбалақтанып, сұлы
+көктеп, пішеннің шөмелеге салынған шағы. Көкорай шалғын көк майсада ұп-ұзын, қып-қызыл
+сирағы анадайдан сидиып, бір құтан египетше сайрап жүрді ол тілді оған өзінің шешесі
+үйреткен.Сонау жайсаң дала, жасыл алқаптың ар жағында қарауытып қара орман тұр, оның
+қойнауы толғантүпсіз терең шалқар көл. Шаһардың шеті қандай ғаламат! Айналасын табағы сулы
+терең сайқоршаған, аумақты келген көне мекен-жай күн нұрына шомылған, терең сай мен тас
+қорғанның екі арасына түбінен тік тұрған бала көрінбейтін түйе жапырақ есіп кеткен. Түйе
+жапырақтардың саясы ит тұмсығы батпайтын ну ормандай, құлаққа ұрған танадай мүлгіген меңіреу
+дүние. Мекиен үйрек осы арада балапан басып отыр. Оның отырғанына да көп болған, өзі де
+әбден жалыққан: келіп-кетіп халін білушілер де шамалы, өйткені басқа үйректердің түйе
+жапырақтардың арасында іш пыстырып, ұя басқан онымен текке барылдасқаннан гөрі, сайға барып
+суда жүзгені мың есе артық!
 
-    <string name="home_second" translatable="false">Home Second</string>
+Күндердің бір күні ақыры, жұмыртқалардың да қабығы жарылды-ау. Ішінен шиқ-шиқ еткен дыбыс
+шығады. Сары уыздан пайда болған балапандар жұмыртқаның тесігінен бастарын қылтитады.
 
-    <string name="all_image_description" translatable="false">Description</string>
-    <!-- Strings used for fragments for navigation -->
+− Бол! Бол! – деп барқ-барқ етті енесі.
 
-    <string-array name="lessons_header">
-        <item>Introduction</item>
-        <item>1. Lesson 1</item>
-        <item>2. Lesson 2</item>
-        <item>3. Lesson 3</item>
-        <item>4. Lesson 4</item>
-        <item>5. Lesson 5</item>
-        <item>6. Lesson 6</item>
-        <item>7. Lesson 7</item>
-        <item>8. Lesson 8</item>
-    </string-array>
+Үйректің балапандары асығып-үсігіп кең дүниеге шықты да, айналасына таңырқай қарап,
+жап-жасыл түйе жапыраққа таңданысып біраз тұрды. Енесі оларды беттен қаққан жоқ: жасыл түс
+көздің нұрын молайтады.
 
-    <string-array name="tasks_header">
-        <item>Task 1</item>
-        <item>Task 2</item>
-        <item>Task 3</item>
-        <item>Task 4</item>
-        <item>Task 5</item>
-        <item>Task 6</item>
-        <item>Task 7</item>
-        <item>Task 8</item>
-    </string-array>
-
-    <string-array name="lessons_description">
-        <item>Description 1</item>
-        <item>Description 2</item>
-        <item>Description 3</item>
-        <item>Description 4</item>
-        <item>Description 5</item>
-        <item>Description 6</item>
-        <item>Description 7</item>
-        <item>Description 8</item>
-        <item>Description 9</item>
-    </string-array>
-
-    <string name="activity_chat_title">Comments</string>
-    <string name="login">Login</string>
-    <string name="create_account">Don\'t have an account? Sign up.</string>
-
-    <!-- Profile activity -->
-    <string name="activity_profile__btn_exit">Exit</string>
-    <string name="activity_profile__title">Profile</string>
-    <string name="activity_profile__hint_name">Name</string>
-    <string name="activity_profile__hint_city">City</string>
-    <string name="activity_profile__hint_email">Email</string>
-    <string name="activity_profile__hint_country">Country</string>
-    <string name="activity_profile__hint_password">Password</string>
-    <string name="activity_profile__btn_delete">Delete account</string>
-    <string name="activity_profile__ic_back_description">Description</string>
-
-
-    <string name="abc_latin_1" translatable="false">A a</string>
-    <string name="abc_latin_2" translatable="false">Á á</string>
-    <string name="abc_latin_3" translatable="false">B b</string>
-    <string name="abc_latin_4" translatable="false">V v</string>
-    <string name="abc_latin_5" translatable="false">G g</string>
-    <string name="abc_latin_6" translatable="false">Ǵ ǵ</string>
-    <string name="abc_latin_7" translatable="false">D d</string>
-    <string name="abc_latin_8" translatable="false">E e</string>
-    <string name="abc_latin_9" translatable="false">J j</string>
-    <string name="abc_latin_10" translatable="false">Z z</string>
-    <string name="abc_latin_11" translatable="false">I i</string>
-    <string name="abc_latin_12" translatable="false">I ı</string>
-    <string name="abc_latin_13" translatable="false">K k</string>
-    <string name="abc_latin_14" translatable="false">Q q</string>
-    <string name="abc_latin_15" translatable="false">L l</string>
-    <string name="abc_latin_16" translatable="false">M m</string>
-    <string name="abc_latin_17" translatable="false">N n</string>
-    <string name="abc_latin_18" translatable="false">Ń ń</string>
-    <string name="abc_latin_19" translatable="false">O o</string>
-    <string name="abc_latin_20" translatable="false">Ó ó</string>
-    <string name="abc_latin_21" translatable="false">P p</string>
-    <string name="abc_latin_22" translatable="false">R r</string>
-    <string name="abc_latin_23" translatable="false">S s</string>
-    <string name="abc_latin_24" translatable="false">T t</string>
-    <string name="abc_latin_25" translatable="false">Ý ý</string>
-    <string name="abc_latin_26" translatable="false">U u</string>
-    <string name="abc_latin_27" translatable="false">Ú ú</string>
-    <string name="abc_latin_28" translatable="false">F f</string>
-    <string name="abc_latin_29" translatable="false">H h</string>
-    <string name="abc_latin_30" translatable="false">Ch ch</string>
-    <string name="abc_latin_31" translatable="false">Sh sh</string>
-    <string name="abc_latin_32" translatable="false">Y y</string>
-
-    <string name="abc_cyrillic_1" translatable="false">A a</string>
-    <string name="abc_cyrillic_2" translatable="false">Ә ә</string>
-    <string name="abc_cyrillic_3" translatable="false">Б б</string>
-    <string name="abc_cyrillic_4" translatable="false">В в</string>
-    <string name="abc_cyrillic_5" translatable="false">Г г</string>
-    <string name="abc_cyrillic_6" translatable="false">Ғ ғ</string>
-    <string name="abc_cyrillic_7" translatable="false">Д д</string>
-    <string name="abc_cyrillic_8" translatable="false">Е е</string>
-    <string name="abc_cyrillic_9" translatable="false">Ё ё</string>
-    <string name="abc_cyrillic_10" translatable="false">Ж ж</string>
-    <string name="abc_cyrillic_11" translatable="false">З з</string>
-    <string name="abc_cyrillic_12" translatable="false">И и</string>
-    <string name="abc_cyrillic_13" translatable="false">Й й</string>
-    <string name="abc_cyrillic_14" translatable="false">К к</string>
-    <string name="abc_cyrillic_15" translatable="false">Қ қ</string>
-    <string name="abc_cyrillic_16" translatable="false">Л л</string>
-    <string name="abc_cyrillic_17" translatable="false">М м</string>
-    <string name="abc_cyrillic_18" translatable="false">Н н</string>
-    <string name="abc_cyrillic_19" translatable="false"> ң </string>
-    <string name="abc_cyrillic_20" translatable="false">О о</string>
-    <string name="abc_cyrillic_21" translatable="false">Ө ө</string>
-    <string name="abc_cyrillic_22" translatable="false">П п</string>
-    <string name="abc_cyrillic_23" translatable="false">Р р</string>
-    <string name="abc_cyrillic_24" translatable="false">С с</string>
-    <string name="abc_cyrillic_25" translatable="false">Т т</string>
-    <string name="abc_cyrillic_26" translatable="false">У у</string>
-    <string name="abc_cyrillic_27" translatable="false">Ұ ұ</string>
-    <string name="abc_cyrillic_28" translatable="false">Ү ү</string>
-    <string name="abc_cyrillic_29" translatable="false">Ф ф</string>
-    <string name="abc_cyrillic_30" translatable="false">Х х</string>
-    <string name="abc_cyrillic_31" translatable="false"> һ </string>
-    <string name="abc_cyrillic_32" translatable="false">Ц ц</string>
-    <string name="abc_cyrillic_33" translatable="false">Ч ч</string>
-    <string name="abc_cyrillic_34" translatable="false">Ш ш</string>
-    <string name="abc_cyrillic_35" translatable="false">Щ щ</string>
-    <string name="abc_cyrillic_36" translatable="false"> ъ </string>
-    <string name="abc_cyrillic_37" translatable="false">Ы ы</string>
-    <string name="abc_cyrillic_38" translatable="false">І і</string>
-    <string name="abc_cyrillic_39" translatable="false"> ь </string>
-    <string name="abc_cyrillic_40" translatable="false">Э э</string>
-    <string name="abc_cyrillic_41" translatable="false">Ю ю</string>
-    <string name="abc_cyrillic_42" translatable="false">Я я</string>
-
-    <string name="register">Register</string>
-    <string name="next" translatable="false">Next</string>
-    <string name="activity_profile__hint_password_repeat" translatable="false">Repeat password</string>
-
-    <string name="lecture_1">Lecture of first lesson</string>
-    <string name="lecture_3">asdf</string>
-    <string name="lecture_4">asdf</string>
-    <string name="message">Message</string>
-    <string name="enter_name_and_password">Enter name and password</string>
-
-
-    <string name="confirm_delete">Are you sure to delete account</string>
-    <string name="confirm_exit">Are you sure to exit from account</string>
-
-    <string name="book_1" translatable="false">
-        \n
-        Қаланың сырт жағы қандай тамаша! Жаздың жайма-шуақ кезі, қара бидай сарбалақтанып, сұлы
-        көктеп, пішеннің шөмелеге салынған шағы. Көкорай шалғын көк майсада ұп-ұзын, қып-қызыл
-        сирағы анадайдан сидиып, бір құтан египетше сайрап жүрді ол тілді оған өзінің шешесі
-        үйреткен.Сонау жайсаң дала, жасыл алқаптың ар жағында қарауытып қара орман тұр, оның
-        қойнауы толғантүпсіз терең шалқар көл. Шаһардың шеті қандай ғаламат! Айналасын табағы сулы
-        терең сайқоршаған, аумақты келген көне мекен-жай күн нұрына шомылған, терең сай мен тас
-        қорғанның екі арасына түбінен тік тұрған бала көрінбейтін түйе жапырақ есіп кеткен. Түйе
-        жапырақтардың саясы ит тұмсығы батпайтын ну ормандай, құлаққа ұрған танадай мүлгіген меңіреу
-        дүние. Мекиен үйрек осы арада балапан басып отыр. Оның отырғанына да көп болған, өзі де
-        әбден жалыққан: келіп-кетіп халін білушілер де шамалы, өйткені басқа үйректердің түйе
-        жапырақтардың арасында іш пыстырып, ұя басқан онымен текке барылдасқаннан гөрі, сайға барып
-        суда жүзгені мың есе артық!
-        \n\n
-        Күндердің бір күні ақыры, жұмыртқалардың да қабығы жарылды-ау. Ішінен шиқ-шиқ еткен дыбыс
-        шығады. Сары уыздан пайда болған балапандар жұмыртқаның тесігінен бастарын қылтитады.
-        \n\n
-        − Бол! Бол! – деп барқ-барқ етті енесі.
-        \n\n
-        Үйректің балапандары асығып-үсігіп кең дүниеге шықты да, айналасына таңырқай қарап,
-        жап-жасыл түйе жапыраққа таңданысып біраз тұрды. Енесі оларды беттен қаққан жоқ: жасыл түс
-        көздің нұрын молайтады.
-        \n\n
-        − Дүние неткен кең еді! – деп балапандар барылдап қоя берді. Қайтсін-ай! Жұмыртқаның
-        ішінде бүрісіпотырғаннан гөрі мұнда еркінірек қой, әйтеуір.
+− Дүние неткен кең еді! – деп балапандар барылдап қоя берді. Қайтсін-ай! Жұмыртқаның
+ішінде бүрісіпотырғаннан гөрі мұнда еркінірек қой, әйтеуір.
         \n\n
         − Дүние деген жалғыз осы ара – деп отырсыңдар ма? – деді енесі. Жоқ, оның ұшы-қиыры жоқ,
         сонау миуа бақтан әрі, имамның үйінің ар жағына қарай созылып жатыр, бірақ мен ол жаққа
@@ -528,6 +365,3 @@
         \n\n
         «Ұсқынсыз балапан үйрек боп жүргенімде мұндай арман, мұндай бақыт ойыма келіп пе!» – деді ол.
         \n
-    </string>
-
-</resources>
