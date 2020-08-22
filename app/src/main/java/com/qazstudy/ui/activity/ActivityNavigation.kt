@@ -17,6 +17,7 @@ import com.qazstudy.ui.adapter.AdapterLesson
 import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.storage.FirebaseStorage
@@ -157,7 +158,6 @@ class ActivityNavigation : AppCompatActivity() {
             container.setBackgroundColor(getColor(R.color.dark))
             nav_view.setBackgroundColor(getColor(R.color.dark))
             toolbar.background = getDrawable(R.color.light_blue)
-            toolbar.setTitleTextColor(getColor(R.color.dark))
             nav_header.background = getDrawable(R.color.light_blue)
             nav_header_txt_name.setTextColor(getColor(R.color.dark))
             this.window.statusBarColor = getColor(R.color.light_blue)
@@ -176,7 +176,6 @@ class ActivityNavigation : AppCompatActivity() {
             }
         } else {
             container.setBackgroundColor(getColor(R.color.white))
-            toolbar.setTitleTextColor(getColor(R.color.white))
             nav_view.setBackgroundColor(getColor(R.color.white))
             toolbar.background = getDrawable(R.color.colorPrimary)
             nav_header.background = getDrawable(R.color.colorPrimary)

@@ -37,13 +37,13 @@ class AdapterBook(private val context: Context, private val arr: Array<Int>) : R
 
         fun bind(position: Int) {
 
-
             if (isDark) text.setTextColor(Color.rgb(255, 255, 255))
 
             image.setImageResource(arr[position])
 
             image.setOnClickListener {
-                context.startActivity(Intent(context, ActivityBook::class.java))
+                val intent = Intent(context, ActivityBook::class.java).putExtra("bookNum", position)
+                context.startActivity(intent)
             }
         }
     }
