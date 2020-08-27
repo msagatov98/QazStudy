@@ -9,10 +9,9 @@
     android:id="@+id/activity_lesson__constraint_layout">
 
     <Toolbar
+        style="@style/style_toolbar"
         android:layout_height="50dp"
-        android:contentInsetStart="0dp"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
         android:id="@+id/activity_lesson__toolbar"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,7 +20,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:padding="12dp"
+                android:padding="14dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:onClick="onIconClick"
@@ -42,7 +41,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/activity_lesson__ic_back"/>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </Toolbar>

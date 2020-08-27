@@ -7,17 +7,19 @@ import android.view.Menu
 import android.view.View
 import android.content.Intent
 import com.qazstudy.model.Task
+import com.qazstudy.model.User
+import com.bumptech.glide.Glide
 import com.qazstudy.model.Lesson
 import androidx.navigation.ui.navigateUp
 import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
+import androidx.core.content.ContextCompat
 import com.qazstudy.ui.adapter.AdapterTask
 import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
 import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.storage.FirebaseStorage
@@ -28,6 +30,7 @@ import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.fragment_book.*
 import kotlinx.android.synthetic.main.fragment_task.*
 import kotlinx.android.synthetic.main.fragment_lesson.*
+import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 import kotlinx.android.synthetic.main.navigation_header.*
@@ -36,11 +39,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.qazstudy.model.User
-import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 
 class ActivityNavigation : AppCompatActivity() {
 
@@ -69,8 +69,7 @@ class ActivityNavigation : AppCompatActivity() {
         setContentView(R.layout.activity_navigation)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
-
+        
         if (mAuth.currentUser == null) {
             startActivity(Intent(this, ActivityLogin::class.java))
             finish()
@@ -106,8 +105,8 @@ class ActivityNavigation : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        if (isDark) ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_dark))
-        else ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
+        if (isDark) ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_dark))
+        else ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_light))
     }
 
     override fun onStart() {
@@ -157,42 +156,42 @@ class ActivityNavigation : AppCompatActivity() {
         if (isDark) {
             container.setBackgroundColor(getColor(R.color.dark))
             nav_view.setBackgroundColor(getColor(R.color.dark))
-            toolbar.background = getDrawable(R.color.light_blue)
-            nav_header.background = getDrawable(R.color.light_blue)
+            toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
+            nav_header.background = ContextCompat.getDrawable(this, R.color.light_blue)
             nav_header_txt_name.setTextColor(getColor(R.color.dark))
             this.window.statusBarColor = getColor(R.color.light_blue)
-            ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_dark))
+            ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_dark))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light_blue))
 
             if (fragment_setting__constraint_layout != null) {
-                fragment_setting__constraint_layout.background = getDrawable(R.color.dark)
+                fragment_setting__constraint_layout.background = ContextCompat.getDrawable(this, R.color.dark)
             }
             if (fragment_bookmark__constraint_layout != null) {
-                fragment_bookmark_tab_layout.background = getDrawable(R.color.light_blue)
-                fragment_bookmark__constraint_layout.background = getDrawable(R.color.dark)
+                fragment_bookmark_tab_layout.background = ContextCompat.getDrawable(this, R.color.light_blue)
+                fragment_bookmark__constraint_layout.background = ContextCompat.getDrawable(this, R.color.dark)
             }
             if (fragment_book__recycler_view != null ) {
-                fragment_book__recycler_view.background = getDrawable(R.color.dark)
+                fragment_book__recycler_view.background = ContextCompat.getDrawable(this, R.color.dark)
             }
         } else {
             container.setBackgroundColor(getColor(R.color.white))
             nav_view.setBackgroundColor(getColor(R.color.white))
-            toolbar.background = getDrawable(R.color.colorPrimary)
-            nav_header.background = getDrawable(R.color.colorPrimary)
+            toolbar.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
+            nav_header.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
             nav_header_txt_name.setTextColor(getColor(R.color.white))
             this.window.statusBarColor = getColor(R.color.colorPrimary)
-            ic_theme_switcher.setImageDrawable(getDrawable(R.drawable.ic_brightness_light))
+            ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_light))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.colorPrimary))
 
             if (fragment_setting__constraint_layout != null) {
-                fragment_setting__constraint_layout.background = getDrawable(R.color.white)
+                fragment_setting__constraint_layout.background = ContextCompat.getDrawable(this, R.color.white)
             }
             if (fragment_bookmark__constraint_layout != null) {
-                fragment_bookmark_tab_layout.background = getDrawable(R.color.colorPrimary)
-                fragment_bookmark__constraint_layout.background = getDrawable(R.color.white)
+                fragment_bookmark_tab_layout.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
+                fragment_bookmark__constraint_layout.background = ContextCompat.getDrawable(this, R.color.white)
             }
             if (fragment_book__recycler_view != null) {
-                fragment_book__recycler_view.background = getDrawable(R.color.white)
+                fragment_book__recycler_view.background = ContextCompat.getDrawable(this, R.color.white)
             }
         }
 

@@ -43,10 +43,8 @@ class ActivityChat : AppCompatActivity() {
     private fun setMode() {
         if (isDark) {
             bg_chat.setBackgroundColor(getColor(R.color.dark))
-            this.window.statusBarColor = getColor(R.color.light_blue)
-            activity_chat__toolbar_txt.setTextColor(getColor(R.color.dark))
+            this.window.statusBarColor = getColor(R.color.black)
             activity_chat__toolbar.setBackgroundColor(getColor(R.color.light_blue))
-            activity_chat__ic_back.setImageDrawable(getDrawable(R.drawable.ic_back_dark))
         }
     }
 }

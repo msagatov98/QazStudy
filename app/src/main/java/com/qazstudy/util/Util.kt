@@ -14,6 +14,7 @@ import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import com.firebase.ui.database.FirebaseListAdapter
 import com.firebase.ui.database.FirebaseListOptions
+import com.google.firebase.database.ChildEventListener
 import kotlinx.android.synthetic.main.fragment_chat1.*
 import kotlinx.android.synthetic.main.view_holder_message.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
@@ -45,50 +46,35 @@ fun Fragment.displayChat(lectureNum: String) {
     val adapter: FirebaseListAdapter<Message>
     val options: FirebaseListOptions<Message>
 
-    val query = mDatabase.child("messages/$lectureNum/")
+    val query = mDatabase.child("messages/$lectureNum")
 
     if (isDark) {
-
         options = FirebaseListOptions.Builder<Message>()
             .setQuery(query, Message::class.java)
             .setLayout(R.layout.view_holder_message_dark)
             .build()
-
-        adapter = object : FirebaseListAdapter<Message>(options) {
-            override fun populateView(v: View, model: Message, position: Int) {
-                if (model.userID.photo.isNotEmpty()) {
-                    mStorage.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
-                        if (this@displayChat.isVisible) {
-                            Glide.with(requireActivity()).load(it.toString()).into(v.ic_chat)
-                        }
-                    }
-                }
-                v.chat_message.text = model.message
-                v.chat_user.text = model.userID.name
-                v.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
-            }
-        }
     } else {
-
         options = FirebaseListOptions.Builder<Message>()
             .setQuery(query, Message::class.java)
             .setLayout(R.layout.view_holder_message)
             .build()
+    }
 
-        adapter = object : FirebaseListAdapter<Message>(options) {
-            override fun populateView(v: View, model: Message, position: Int) {
-                if (model.userID.photo.isNotEmpty()) {
-                    mStorage.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
-                        if (this@displayChat.isVisible) {
-                            Glide.with(requireActivity()).load(it.toString()).into(v.ic_chat)
-                        }
+    adapter = object : FirebaseListAdapter<Message>(options) {
+        override fun populateView(v: View, model: Message, position: Int) {
+            if (model.userID.photo.isNotEmpty()) {
+                mStorage.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
+                    if (this@displayChat.isVisible) {
+                        Glide.with(requireActivity()).load(it.toString()).into(v.ic_chat)
                     }
                 }
-                v.chat_message.text = model.message
-                v.chat_user.text = model.userID.name
-                v.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
             }
+            v.chat_message.text = model.message
+            v.chat_user.text = model.userID.name
+            v.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
         }
     }
     chat_list_view.adapter = adapter
+
+
 }

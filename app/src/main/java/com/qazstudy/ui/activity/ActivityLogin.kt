@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.snackbar.Snackbar
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
@@ -107,8 +108,7 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
                     val auth = mAuth.currentUser
@@ -130,11 +130,11 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
                     val user = User(name= name, email = email, photo = photo)
 
                     mDatabase.child("users/${auth!!.uid}").setValue(user)
-                        .addOnCompleteListener { it ->
-                            if (it.isSuccessful) {
+                        .addOnCompleteListener { addNewUserResult ->
+                            if (addNewUserResult.isSuccessful) {
                                 if (user.photo.isNotEmpty()) {
-                                    mStorage.child("users/${auth.uid}/photo").putFile(googleAccount.photoUrl!!).addOnCompleteListener {
-                                        if (it.isSuccessful) {
+                                    mStorage.child("users/${auth.uid}/photo").putFile(googleAccount.photoUrl!!).addOnCompleteListener { addNewUserPhotoResult ->
+                                        if (addNewUserPhotoResult.isSuccessful) {
                                             val url = mStorage.child("users/${auth.uid}/photo/${photo}")
                                             mDatabase.child("users/${auth.uid}/photo").setValue(url.downloadUrl.toString()).addOnCompleteListener {
                                                 if (it.isSuccessful) {
@@ -145,7 +145,7 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
                                                 }
                                             }
                                         } else {
-                                            showToast(it.exception!!.message.toString())
+                                            showToast(addNewUserPhotoResult.exception!!.message.toString())
                                         }
                                     }
                                 } else {

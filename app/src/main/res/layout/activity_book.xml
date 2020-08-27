@@ -7,11 +7,10 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        app:contentInsetStart="0dp"
+        style="@style/style_toolbar"
         android:id="@+id/toolbar"
         android:layout_height="50dp"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 

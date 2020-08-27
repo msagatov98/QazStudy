@@ -41,8 +41,6 @@ class FragmentLesson() : Fragment() {
         glm.spanSizeLookup = object : SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
 
-                Log.e("$TAG getSpSiz", "$position")
-
                 return when(adapter.getItemViewType(position)) {
                     adapter.TYPE_FIRST_ITEM -> 2
                     adapter.TYPE_ITEM -> 1
