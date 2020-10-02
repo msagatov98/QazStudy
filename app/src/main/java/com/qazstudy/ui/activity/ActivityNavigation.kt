@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.fragment_task.*
 import kotlinx.android.synthetic.main.fragment_lesson.*
 import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 import kotlinx.android.synthetic.main.fragment_setting.*
-import kotlinx.android.synthetic.main.fragment_bookmark.*
 import kotlinx.android.synthetic.main.navigation_header.*
 import kotlinx.android.synthetic.main.navigation_app_bar.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -154,41 +153,31 @@ class ActivityNavigation : AppCompatActivity() {
         isDark = !isDark
 
         if (isDark) {
-            container.setBackgroundColor(getColor(R.color.dark))
             nav_view.setBackgroundColor(getColor(R.color.dark))
+            container.setBackgroundColor(getColor(R.color.dark))
+            this.window.statusBarColor = getColor(R.color.light_blue)
             toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
             nav_header.background = ContextCompat.getDrawable(this, R.color.light_blue)
-            nav_header_txt_name.setTextColor(getColor(R.color.dark))
-            this.window.statusBarColor = getColor(R.color.light_blue)
-            ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_dark))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light_blue))
+            ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_dark))
 
             if (fragment_setting__constraint_layout != null) {
                 fragment_setting__constraint_layout.background = ContextCompat.getDrawable(this, R.color.dark)
-            }
-            if (fragment_bookmark__constraint_layout != null) {
-                fragment_bookmark_tab_layout.background = ContextCompat.getDrawable(this, R.color.light_blue)
-                fragment_bookmark__constraint_layout.background = ContextCompat.getDrawable(this, R.color.dark)
             }
             if (fragment_book__recycler_view != null ) {
                 fragment_book__recycler_view.background = ContextCompat.getDrawable(this, R.color.dark)
             }
         } else {
-            container.setBackgroundColor(getColor(R.color.white))
             nav_view.setBackgroundColor(getColor(R.color.white))
+            container.setBackgroundColor(getColor(R.color.white))
+            this.window.statusBarColor = getColor(R.color.colorPrimary)
             toolbar.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
             nav_header.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
-            nav_header_txt_name.setTextColor(getColor(R.color.white))
-            this.window.statusBarColor = getColor(R.color.colorPrimary)
-            ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_light))
             ic_theme_switcher.backgroundTintList = ColorStateList.valueOf(getColor(R.color.colorPrimary))
+            ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_light))
 
             if (fragment_setting__constraint_layout != null) {
                 fragment_setting__constraint_layout.background = ContextCompat.getDrawable(this, R.color.white)
-            }
-            if (fragment_bookmark__constraint_layout != null) {
-                fragment_bookmark_tab_layout.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
-                fragment_bookmark__constraint_layout.background = ContextCompat.getDrawable(this, R.color.white)
             }
             if (fragment_book__recycler_view != null) {
                 fragment_book__recycler_view.background = ContextCompat.getDrawable(this, R.color.white)

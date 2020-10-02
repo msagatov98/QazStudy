@@ -14,6 +14,10 @@
     <string name="menu_bookmark">Bookmarks</string>
     <string name="menu_dictionary">Dictionary</string>
 
+    <string name="dialog_password">Password</string>
+    <string name="dialog_old_password">Old password</string>
+    <string name="dialog_repeat_password">Repeat password</string>
+
     <string name="home_second" translatable="false">Home Second</string>
 
     <string name="all_image_description" translatable="false">Description</string>
@@ -150,7 +154,7 @@
     <string name="next" translatable="false">Next</string>
     <string name="activity_profile__hint_password_repeat" translatable="false">Repeat password</string>
 
-    <string name="lecture_1">Lecture of first lesson</string>
+    <string name="lecture_1_1">Lecture of first lesson</string>
     <string name="lecture_3">asdf</string>
     <string name="lecture_4">asdf</string>
     <string name="lecture_5">asdf</string>
@@ -160,5 +164,7 @@
 
     <string name="confirm_delete">Are you sure to delete account</string>
     <string name="confirm_exit">Are you sure to exit from account</string>
+    <string name="lecture_1_2">lecture 1.2</string>
+    <string name="lecture_2_1">lecture_2_1</string>
 
 </resources>

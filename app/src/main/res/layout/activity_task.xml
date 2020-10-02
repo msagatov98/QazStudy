@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.ActivityTask">
 
-    <androidx.appcompat.widget.Toolbar
-        app:contentInsetStart="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="50dp"
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
@@ -15,32 +14,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:padding="13dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_back_light"
-                android:id="@+id/activity_task__ic_back"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="@string/activity_profile__ic_back_description" />
-            <TextView
-                android:text="@string/menu_task"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginStart="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/activity_chat__toolbar_txt"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/activity_task__ic_back"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.appcompat.widget.Toolbar>
+        <ImageView
+            android:padding="13dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_back_light"
+            android:id="@+id/activity_task__ic_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/activity_profile__ic_back_description" />
+
+        <TextView
+            android:text="@string/menu_task"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_chat__toolbar_txt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/activity_task__ic_back"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView2"

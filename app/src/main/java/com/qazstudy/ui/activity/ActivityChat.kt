@@ -36,6 +36,7 @@ class ActivityChat : AppCompatActivity() {
                 ft = fm.beginTransaction()
                 ft.replace(R.id.activity_chat__fragment, arFragmentChat[i])
                 ft.commit()
+                break
             }
         }
     }

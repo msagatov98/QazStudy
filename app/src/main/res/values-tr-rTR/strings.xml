@@ -29,7 +29,7 @@
     <string name="activity_profile__ic_back_description">Açıklama</string>
     <string name="activity_profile__title">HZ</string>
 
-    <string name="lecture_1">Lecture of first lesson</string>
+    <string name="lecture_1_1">Lecture of first lesson</string>
     <string name="lecture_3">sadf</string>
     <string name="lecture_4">asdf</string>
     <string name="lecture_5">asdf</string>
@@ -41,4 +41,9 @@
     <string name="enter_name_and_password">Adınızı ve parolanı yazın</string>
     <string name="confirm_delete">Hesapı silmeyi istiyor musunuz</string>
     <string name="confirm_exit">Hesaptan cıkmayı istiyor musunuz</string>
+    <string name="lecture_1_2">lecture 1.2</string>
+    <string name="lecture_2_1">lecture_2_1</string>
+    <string name="dialog_password">Parola</string>
+    <string name="dialog_old_password">Eski parola</string>
+    <string name="dialog_repeat_password">Parola repeat</string>
 </resources>
