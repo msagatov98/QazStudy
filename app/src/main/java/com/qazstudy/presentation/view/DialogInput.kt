@@ -1,4 +1,4 @@
-package com.qazstudy.view
+package com.qazstudy.presentation.view
 
 import com.qazstudy.R
 import android.util.Log
@@ -133,8 +133,9 @@ class DialogInput(private val hint: String, private val password: String): Dialo
                     AlertDialog.Builder(requireContext()).setView(view).create()
                 }
             }
+
+            else -> return  AlertDialog.Builder(requireContext()).setView(R.layout.dialog_input).create()
         }
-        return  AlertDialog.Builder(requireContext()).setView(R.layout.dialog_input).create()
     }
 
     private fun getAlertDialog(str: String) : AlertDialog {

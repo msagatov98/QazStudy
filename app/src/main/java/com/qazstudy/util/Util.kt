@@ -74,7 +74,7 @@ fun Fragment.displayChat(lectureNum: String) {
             v.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
         }
     }
-    chat_list_view.adapter = adapter
+    adapter.startListening()
 
 
 }

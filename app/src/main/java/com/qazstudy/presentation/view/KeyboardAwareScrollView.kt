@@ -1,4 +1,4 @@
-package com.qazstudy.view
+package com.qazstudy.presentation.view
 
 import android.app.Activity
 import android.content.Context

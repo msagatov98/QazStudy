@@ -9,77 +9,76 @@ import android.os.Bundle
 import android.app.Activity
 import android.content.Intent
 import android.os.Environment
-import com.qazstudy.model.User
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import moxy.MvpAppCompatActivity
 import java.text.SimpleDateFormat
 import com.qazstudy.util.showToast
 import android.provider.MediaStore
-import com.qazstudy.view.DialogInput
+import com.qazstudy.presentation.view.MvpProfile
+import moxy.presenter.InjectPresenter
 import androidx.core.content.FileProvider
-import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import com.qazstudy.presenter.ProfilePresenter
 import com.theartofdev.edmodo.cropper.CropImage
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_profile.*
-import com.qazstudy.ui.adapter.ValueEventListenerAdapter
-import kotlinx.android.synthetic.main.dialog_confirm_dark.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 
-class ActivityProfile : AppCompatActivity() {
+class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
+
+    @InjectPresenter
+    lateinit var mProfilePresenter: ProfilePresenter
+
+    private lateinit var mDialog: DialogFragment
 
     private val TAG = "ActivityProfile"
     private val TAKE_PICTURE_REQUEST_CODE = 1
     private val timeStamp = SimpleDateFormat("yyyyMMDD_HHmmss", Locale.US).format(Date())
 
-    init {
-        mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter{
-            mUser = it.getValue(User::class.java)!!
-            activity_profile__input_name.setText(mUser.name, TextView.BufferType.EDITABLE)
-            activity_profile__input_city.setText(mUser.city, TextView.BufferType.EDITABLE)
-            activity_profile__input_email.setText(mUser.email, TextView.BufferType.EDITABLE)
-            activity_profile__input_country.setText(mUser.country, TextView.BufferType.EDITABLE)
-            activity_profile__input_password.setText(mUser.password, TextView.BufferType.EDITABLE)
-
-            if (mUser.photo.isNotEmpty()) {
-                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {imageUri ->
-                    Glide.with(this).load(imageUri.toString()).into(activity_profile__image_profile)
-                }
-            }
-        })
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         setMode()
+        initProfile()
+    }
 
-        activity_profile__input_city.setOnClickListener {
-            DialogInput("city", mUser.password).show(supportFragmentManager, "TAG")
+    fun onClick(v: View) {
+        when (v) {
+            activity_profile__btn_exit -> showDialog("exit")
+            activity_profile__btn_delete -> showDialog("delete")
+
+            activity_profile__input_city -> showDialog("city")
+            activity_profile__input_name -> showDialog("name")
+            activity_profile__input_email -> showDialog("email")
+            activity_profile__input_country -> showDialog("country")
+            activity_profile__input_password -> showDialog("password")
+
+            activity_profile__ic_back -> finish()
+            activity_profile__image_profile -> takeCameraPicture()
         }
-        activity_profile__input_name.setOnClickListener {
-            DialogInput("name", mUser.password).show(supportFragmentManager, "TAG")
-        }
-        activity_profile__input_email.setOnClickListener {
-            DialogInput("email", mUser.password).show(supportFragmentManager, "TAG")
-        }
-        activity_profile__input_country.setOnClickListener {
-            DialogInput("country", mUser.password).show(supportFragmentManager, "TAG")
-        }
-        activity_profile__input_password.setOnClickListener {
-            DialogInput("password", mUser.password).show(supportFragmentManager, "TAG")
+    }
+
+    override fun showDialog(message: String) {
+        when(message) {
+            "city", "name", "email", "country", "password" ->
+                mDialog = mProfilePresenter.getDialogInput(message)
+            "exit", "delete" ->
+                mDialog = mProfilePresenter.getDialogConfirm(message)
         }
 
-        activity_profile__ic_back.setOnClickListener { finish() }
-        activity_profile__image_profile.setOnClickListener { takeCameraPicture() }
+        mDialog.show(supportFragmentManager, TAG)
+    }
 
-        activity_profile__btn_exit.setOnClickListener { getAlertDialog("exit").show() }
-        activity_profile__btn_delete.setOnClickListener { getAlertDialog("delete").show() }
-
+    override fun initProfile() {
+        activity_profile__input_name.setText(mProfilePresenter.getName(), TextView.BufferType.EDITABLE)
+        activity_profile__input_city.setText(mProfilePresenter.getCity(), TextView.BufferType.EDITABLE)
+        activity_profile__input_email.setText(mProfilePresenter.getEmail(), TextView.BufferType.EDITABLE)
+        activity_profile__input_country.setText(mProfilePresenter.getCountry(), TextView.BufferType.EDITABLE)
+        activity_profile__input_password.setText(mProfilePresenter.getPassword(), TextView.BufferType.EDITABLE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -114,49 +113,6 @@ class ActivityProfile : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun getAlertDialog(str: String) : AlertDialog {
-
-        val view = getDialogView()
-
-        val alertDialog: AlertDialog = AlertDialog.Builder(this).setView(view).create()
-
-        if (str == "exit") {
-            view.dialog_title.text = resources.getString(R.string.confirm_exit)
-
-            view.dialog_confirm__ok.setOnClickListener {
-                mAuth.signOut()
-                startActivity(Intent(this, ActivityLogin::class.java))
-                finish()
-            }
-        } else if (str == "delete") {
-            view.dialog_title.text = resources.getString(R.string.confirm_delete)
-
-            view.dialog_confirm__ok.setOnClickListener {
-                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").delete()
-                mDatabase.child("users/${mAuth.currentUser!!.uid}").removeValue()
-                mAuth.currentUser!!.delete().addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        startActivity(Intent(this, ActivityLogin::class.java))
-                        finish()
-                    } else {
-                        showToast(it.exception.toString())
-                    }
-                }
-            }
-        }
-
-        view.dialog_confirm__cancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
-
-        return alertDialog
-    }
-
-    private fun getDialogView() : View {
-        return if (isDark) layoutInflater.inflate(R.layout.dialog_confirm_dark, null, false)
-        else layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)
     }
 
     private fun createImageFile(): File {
@@ -208,3 +164,6 @@ class ActivityProfile : AppCompatActivity() {
         }
     }
 }
+
+
+
