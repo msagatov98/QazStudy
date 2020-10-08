@@ -21,7 +21,6 @@ class DialogConfirm(private val hint: String): DialogFragment() {
 
         when (hint) {
             "exit" -> return  getAlertDialog("exit")
-
             "delete" -> return  getAlertDialog("delete")
         }
 
@@ -62,7 +61,7 @@ class DialogConfirm(private val hint: String): DialogFragment() {
         view.dialog_confirm__cancel.setOnClickListener {
             alertDialog.dismiss()
         }
-
+        
         return alertDialog
     }
 

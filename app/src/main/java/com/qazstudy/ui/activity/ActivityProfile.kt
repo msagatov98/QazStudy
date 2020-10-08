@@ -69,7 +69,6 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
             "exit", "delete" ->
                 mDialog = mProfilePresenter.getDialogConfirm(message)
         }
-
         mDialog.show(supportFragmentManager, TAG)
     }
 
