@@ -21,30 +21,19 @@ import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 import com.qazstudy.util.showToast
 import com.qazstudy.presentation.view.ChatView
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.fragment_chat1.*
 import kotlinx.android.synthetic.main.view_holder_message.view.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
-class FragmentChat1 : MvpAppCompatFragment(), ChatView {
+class FragmentChat1(private val chatPath: String) : MvpAppCompatFragment(), ChatView {
 
-    @InjectPresenter
-    lateinit var mChatPresenter: ChatPresenter
-
-
-    lateinit var mUser : User
-    var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    var mStorage: StorageReference = FirebaseStorage.getInstance().reference
-    var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     lateinit var adapter: FirebaseRecyclerAdapter<Message, MessageViewHolder>
 
-    init {
-        mDatabase.child("users/${mAuth.currentUser!!.uid}")
-            .addListenerForSingleValueEvent(ValueEventListenerAdapter {
-                mUser = it.getValue(User::class.java)!!
-            })
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -63,7 +52,7 @@ class FragmentChat1 : MvpAppCompatFragment(), ChatView {
 
         ic_send.setOnClickListener {
             if (input_chat_message.text.isNotEmpty()) {
-                mDatabase.child("messages/lecture1").push().setValue(
+                mDatabase.child(chatPath).push().setValue(
                     Message(mUser, input_chat_message.text.toString())
                 )
                 input_chat_message.setText("")

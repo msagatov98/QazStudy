@@ -7,38 +7,23 @@ import com.qazstudy.ui.fragment.chat.*
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.qazstudy.presenter.ChatPresenter
+import com.qazstudy.presenter.ProfilePresenter
 import kotlinx.android.synthetic.main.activity_chat.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import moxy.presenter.InjectPresenter
 
 class ActivityChat : AppCompatActivity() {
 
-    private lateinit var openedFragment: Fragment
-    private var fm : FragmentManager = supportFragmentManager
-    private var ft : FragmentTransaction = fm.beginTransaction()
-
-    private val arFragmentChat =
-        arrayListOf(
-            FragmentChat1(), FragmentChat2(), FragmentChat3(),
-            FragmentChat4(), FragmentChat5(), FragmentChat6(),
-            FragmentChat7(), FragmentChat8()
-        )
+    @InjectPresenter
+    lateinit var mChatPresenter: ChatPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         setMode()
         activity_chat__ic_back.setOnClickListener { finish() }
-
-        for (i in arFragmentChat.indices) {
-            if (intent.getIntExtra("numChat", -1) == i) {
-                openedFragment = arFragmentChat[i]
-                fm = supportFragmentManager
-                ft = fm.beginTransaction()
-                ft.replace(R.id.activity_chat__fragment, arFragmentChat[i])
-                ft.commit()
-                break
-            }
-        }
     }
 
     private fun setMode() {
