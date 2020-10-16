@@ -15,7 +15,7 @@ import com.qazstudy.util.showToast
 import com.qazstudy.presentation.view.ChatView
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import kotlinx.android.synthetic.main.fragment_chat1.*
+import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.view_holder_message.view.*
 import moxy.MvpAppCompatFragment
 
@@ -76,7 +76,7 @@ class FragmentChat : MvpAppCompatFragment(), ChatView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_chat1, container, false)
+        return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
     override fun displayChat() {

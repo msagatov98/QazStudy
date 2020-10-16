@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import com.firebase.ui.database.FirebaseListAdapter
 import com.firebase.ui.database.FirebaseListOptions
 import com.google.firebase.database.ChildEventListener
-import kotlinx.android.synthetic.main.fragment_chat1.*
+import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.view_holder_message.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
