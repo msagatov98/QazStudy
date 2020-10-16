@@ -1,4 +1,4 @@
-package com.qazstudy.ui.fragment.chat
+package com.qazstudy.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,32 +8,40 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.qazstudy.R
 import com.qazstudy.model.Message
-import com.qazstudy.model.User
-import com.qazstudy.presenter.ChatPresenter
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 import com.qazstudy.util.showToast
 import com.qazstudy.presentation.view.ChatView
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.fragment_chat1.*
 import kotlinx.android.synthetic.main.view_holder_message.view.*
 import moxy.MvpAppCompatFragment
-import moxy.presenter.InjectPresenter
 
-class FragmentChat1(private val chatPath: String) : MvpAppCompatFragment(), ChatView {
+class FragmentChat : MvpAppCompatFragment(), ChatView {
 
+    val KEY_CHAT_PATH = "chatPath"
 
     lateinit var adapter: FirebaseRecyclerAdapter<Message, MessageViewHolder>
+    private lateinit var mChatPath: String
 
+    companion object {
+        fun newInstance(chatPath: String) : FragmentChat {
+            val args = Bundle()
+            val fragmentChat = FragmentChat()
+            args.putString("chatPath", chatPath)
+            fragmentChat.arguments = args
+            return fragmentChat
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (savedInstanceState != null)
+            mChatPath = savedInstanceState.getString(KEY_CHAT_PATH, "")
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -52,7 +60,7 @@ class FragmentChat1(private val chatPath: String) : MvpAppCompatFragment(), Chat
 
         ic_send.setOnClickListener {
             if (input_chat_message.text.isNotEmpty()) {
-                mDatabase.child(chatPath).push().setValue(
+                mDatabase.child(mChatPath).push().setValue(
                     Message(mUser, input_chat_message.text.toString())
                 )
                 input_chat_message.setText("")
@@ -75,7 +83,7 @@ class FragmentChat1(private val chatPath: String) : MvpAppCompatFragment(), Chat
 
         val options: FirebaseRecyclerOptions<Message>
 
-        val query = mDatabase.child("messages/lecture1/")
+        val query = mDatabase.child(mChatPath)
 
         options = FirebaseRecyclerOptions.Builder<Message>()
                 .setQuery(query, Message::class.java)
@@ -110,13 +118,9 @@ class FragmentChat1(private val chatPath: String) : MvpAppCompatFragment(), Chat
             }
         }
         requireContext().showToast("Chat displayed")
-
     }
 
-
-
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
 
         fun bind(model: Message) {
             itemView.chat_message.text = model.message
@@ -127,5 +131,3 @@ class FragmentChat1(private val chatPath: String) : MvpAppCompatFragment(), Chat
         }
     }
 }
-
-

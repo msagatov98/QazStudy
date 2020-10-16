@@ -1,12 +1,11 @@
 package com.qazstudy.presenter
 
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.qazstudy.R
 import com.qazstudy.presentation.view.ChatView
-import com.qazstudy.ui.fragment.chat.*
+import com.qazstudy.ui.fragment.FragmentChat
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
@@ -16,13 +15,17 @@ class ChatPresenter: MvpPresenter<ChatView>() {
     private lateinit var openedFragment: Fragment
     private var fm : FragmentManager = supportFragmentManager
     private var ft : FragmentTransaction = fm.beginTransaction()
-
-
+    
     private val arFragmentChat =
         arrayListOf(
-            FragmentChat1("messages/lecture1"), FragmentChat2(), FragmentChat3(),
-            FragmentChat4(), FragmentChat5(), FragmentChat6(),
-            FragmentChat7(), FragmentChat8()
+            FragmentChat.newInstance("messages/lecture1"),
+            FragmentChat.newInstance("messages/lecture2"),
+            FragmentChat.newInstance("messages/lecture3"),
+            FragmentChat.newInstance("messages/lecture4"),
+            FragmentChat.newInstance("messages/lecture5"),
+            FragmentChat.newInstance("messages/lecture6"),
+            FragmentChat.newInstance("messages/lecture7"),
+            FragmentChat.newInstance("messages/lecture8")
         )
 
     init {
