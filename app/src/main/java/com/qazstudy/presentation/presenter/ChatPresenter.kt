@@ -30,14 +30,14 @@ class ChatPresenter: MvpPresenter<ChatView>() {
 
     init {
         for (i in arFragmentChat.indices) {
-        if (intent.getIntExtra("numChat", -1) == i) {
-            openedFragment = arFragmentChat[i]
-            fm = supportFragmentManager
-            ft = fm.beginTransaction()
-            ft.replace(R.id.activity_chat__fragment, arFragmentChat[i])
-            ft.commit()
-            break
+            if (intent.getIntExtra("numChat", -1) == i) {
+                openedFragment = arFragmentChat[i]
+                fm = supportFragmentManager
+                ft = fm.beginTransaction()
+                ft.replace(R.id.activity_chat__fragment, arFragmentChat[i])
+                ft.commit()
+                break
+            }
         }
-    }
     }
 }
