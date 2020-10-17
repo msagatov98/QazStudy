@@ -78,6 +78,7 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
         activity_profile__input_email.setText(mProfilePresenter.getEmail(), TextView.BufferType.EDITABLE)
         activity_profile__input_country.setText(mProfilePresenter.getCountry(), TextView.BufferType.EDITABLE)
         activity_profile__input_password.setText(mProfilePresenter.getPassword(), TextView.BufferType.EDITABLE)
+        Glide.with(this).load(mProfilePresenter.getImage()).into(activity_profile__image_profile)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

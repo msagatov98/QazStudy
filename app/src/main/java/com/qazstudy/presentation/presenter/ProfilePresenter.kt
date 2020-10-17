@@ -1,5 +1,6 @@
 package com.qazstudy.presenter
 
+import android.net.Uri
 import androidx.fragment.app.DialogFragment
 import moxy.MvpPresenter
 import moxy.InjectViewState
@@ -41,16 +42,12 @@ class ProfilePresenter : MvpPresenter<MvpProfile>() {
         return mUser.password
     }
 
-    fun getImage() {
-
-        mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter {
-            if (mUser.photo.isNotEmpty()) {
-                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
-
-                }
-            }
-        })
-
+    fun getImage() : String {
+        var uri: String? = null
+        mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
+            uri = it.path
+        }
+        return uri.toString()
     }
 
     fun getDialogInput(str: String): DialogFragment {
