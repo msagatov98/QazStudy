@@ -66,7 +66,9 @@ class DialogConfirm(private val hint: String): DialogFragment() {
     }
 
     private fun getDialogView() : View {
-        return if (isDark) layoutInflater.inflate(R.layout.dialog_confirm_dark, null, false)
-        else layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)
+        return if (isDark)
+            layoutInflater.inflate(R.layout.dialog_confirm_dark, null, false)
+        else
+            layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)
     }
 }
