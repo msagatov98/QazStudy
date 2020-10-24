@@ -6,6 +6,7 @@ import android.view.View
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.qazstudy.ui.fragment.lecture.*
+import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_lesson.*
@@ -13,7 +14,7 @@ import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class ActivityLecture : AppCompatActivity() {
 
-    private  var position = -1
+    private var position = -1
 
     private lateinit var openedFragment: Fragment
     private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
@@ -27,7 +28,8 @@ class ActivityLecture : AppCompatActivity() {
         FragmentLecture5(),
         FragmentLecture6(),
         FragmentLecture7(),
-        FragmentLecture8()
+        FragmentLecture8(),
+        FragmentLecture9()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,11 +68,11 @@ class ActivityLecture : AppCompatActivity() {
             activity_lesson__txt_lecture_header.setTextColor(getColor(R.color.dark))
             activity_lesson__toolbar.setBackgroundColor(getColor(R.color.light_blue))
             activity_lesson__constraint_layout.setBackgroundColor(getColor(R.color.dark))
-            activity_lesson__ic_chat.setImageDrawable(getDrawable(R.drawable.ic_chat_dark))
-            activity_lesson__ic_back.setImageDrawable(getDrawable(R.drawable.ic_back_dark))
-            activity_lesson__ic_next.setImageDrawable(getDrawable(R.drawable.ic_next_dark))
             activity_lesson__toolbar_bottom.setBackgroundColor(getColor(R.color.light_blue))
-            activity_lesson__ic_previous.setImageDrawable(getDrawable(R.drawable.ic_previous_dark))
+            activity_lesson__ic_chat.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_chat_dark))
+            activity_lesson__ic_back.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
+            activity_lesson__ic_next.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_next_dark))
+            activity_lesson__ic_previous.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_previous_dark))
         }
     }
 
@@ -134,9 +136,15 @@ class ActivityLecture : AppCompatActivity() {
             }
             is FragmentLecture7 -> {
                 fragmentTransaction.replace(R.id.fragment_container_lecture,
-                    FragmentLecture7()
+                    FragmentLecture8()
                 )
                 openedFragment = FragmentLecture8()
+            }
+            is FragmentLecture8 -> {
+                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                    FragmentLecture9()
+                )
+                openedFragment = FragmentLecture9()
             }
         }
 
@@ -208,6 +216,13 @@ class ActivityLecture : AppCompatActivity() {
                 )
                 openedFragment =
                     FragmentLecture7()
+            }
+            is FragmentLecture9 -> {
+                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                    FragmentLecture8()
+                )
+                openedFragment =
+                    FragmentLecture8()
             }
         }
 

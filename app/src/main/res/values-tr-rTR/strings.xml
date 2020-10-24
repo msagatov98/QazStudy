@@ -17,6 +17,7 @@
         <item>Ders 6</item>
         <item>Ders 7</item>
         <item>Ders 8</item>
+        <item>Ders 9</item>
     </string-array>
 
     <string name="activity_profile__hint_name">Adınız</string>
@@ -46,4 +47,5 @@
     <string name="dialog_password">Parola</string>
     <string name="dialog_old_password">Eski parola</string>
     <string name="dialog_repeat_password">Parola repeat</string>
+    <string name="empty_message_send">Boş mesaj atamazsınız</string>
 </resources>

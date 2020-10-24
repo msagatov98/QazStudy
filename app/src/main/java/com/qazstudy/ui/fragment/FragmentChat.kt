@@ -1,37 +1,45 @@
 package com.qazstudy.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
+import com.qazstudy.R
 import android.view.View
+import android.os.Bundle
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.qazstudy.model.Message
+import com.qazstudy.util.showToast
+import android.view.LayoutInflater
+import androidx.fragment.app.Fragment
+import android.text.format.DateFormat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.qazstudy.ui.activity.ActivityNavigation
+import kotlinx.android.synthetic.main.fragment_chat.*
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.qazstudy.R
-import com.qazstudy.model.Message
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.util.showToast
-import com.qazstudy.presentation.view.ChatView
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.view_holder_message.view.*
-import moxy.MvpAppCompatFragment
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 
-class FragmentChat : MvpAppCompatFragment(), ChatView {
+class FragmentChat : Fragment() {
 
-    val KEY_CHAT_PATH = "chatPath"
-
-    lateinit var adapter: FirebaseRecyclerAdapter<Message, MessageViewHolder>
     private lateinit var mChatPath: String
 
+    private lateinit var adapter: FirebaseRecyclerAdapter<Message, MessageViewHolder>
+    private lateinit var options: FirebaseRecyclerOptions<Message>
+
     companion object {
+
+        const val KEY_CHAT_PATH = "KEY_CHAT_PATH"
+
         fun newInstance(chatPath: String) : FragmentChat {
             val args = Bundle()
+            args.putString(KEY_CHAT_PATH, chatPath)
+
             val fragmentChat = FragmentChat()
-            args.putString("chatPath", chatPath)
             fragmentChat.arguments = args
+
             return fragmentChat
         }
     }
@@ -39,14 +47,55 @@ class FragmentChat : MvpAppCompatFragment(), ChatView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState != null)
-            mChatPath = savedInstanceState.getString(KEY_CHAT_PATH, "")
+        mChatPath = arguments?.getString(KEY_CHAT_PATH, "").toString()
+
+        if (mChatPath != "") {
+
+            val query = mDatabase.child(mChatPath)
+
+            options = FirebaseRecyclerOptions.Builder<Message>()
+                .setQuery(query, Message::class.java)
+                .build()
+
+            adapter = object : FirebaseRecyclerAdapter<Message, MessageViewHolder>(options) {
+                override fun onCreateViewHolder(
+                    parent: ViewGroup,
+                    viewType: Int
+                ): MessageViewHolder {
+
+                    val view =
+                        if (isDark)
+                            LayoutInflater
+                                .from(parent.context)
+                                .inflate(R.layout.view_holder_message_dark, parent, false)
+                        else
+                            LayoutInflater
+                                .from(parent.context)
+                                .inflate(R.layout.view_holder_message, parent, false)
+
+                    return MessageViewHolder(view)
+                }
+
+                override fun onBindViewHolder(
+                    holder: MessageViewHolder,
+                    position: Int,
+                    model: Message
+                ) {
+                    holder.bind(model)
+                }
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        displayChat()
+        val manager =  LinearLayoutManager(requireContext())
+        manager.orientation = LinearLayoutManager.VERTICAL
+        manager.stackFromEnd = true
+
+        rv_chat.layoutManager = manager
+        rv_chat.adapter = adapter
 
         if (isDark) {
             input_chat_message.setTextColor(requireContext().getColor(R.color.white))
@@ -56,17 +105,15 @@ class FragmentChat : MvpAppCompatFragment(), ChatView {
             )
         }
 
-        adapter.startListening()
-
         ic_send.setOnClickListener {
-            if (input_chat_message.text.isNotEmpty()) {
+            if (input_chat_message.text.isNotEmpty() && mChatPath != "") {
                 mDatabase.child(mChatPath).push().setValue(
                     Message(mUser, input_chat_message.text.toString())
                 )
                 input_chat_message.setText("")
-                displayChat()
+                adapter.notifyDataSetChanged()
             } else {
-                requireContext().showToast("You can't send empty message")
+                requireContext().showToast(R.string.empty_message_send)
             }
         }
     }
@@ -79,55 +126,29 @@ class FragmentChat : MvpAppCompatFragment(), ChatView {
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
-    override fun displayChat() {
+    override fun onStart() {
+        super.onStart()
+        adapter.startListening()
+    }
 
-        val options: FirebaseRecyclerOptions<Message>
-
-        val query = mDatabase.child(mChatPath)
-
-        options = FirebaseRecyclerOptions.Builder<Message>()
-                .setQuery(query, Message::class.java)
-                .build()
-
-        adapter = object : FirebaseRecyclerAdapter<Message, MessageViewHolder>(options) {
-            /*override fun populateView(v: View, model: Message, position: Int) {
-                /*if (model.userID.photo.isNotEmpty()) {
-                    mStorage.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
-                        Glide.with(requireActivity()).load(it.toString()).into(v.ic_chat)
-                    }
-                }*/
-                v.chat_message.text = model.message
-                v.chat_user.text = model.userID.name
-                v.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
-            }*/
-
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-                // Create a new instance of the ViewHolder, in this case we are using a custom
-                // layout called R.layout.message for each item
-                val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.view_holder_message, parent, false)
-                return MessageViewHolder(view)
-            }
-
-            override fun onBindViewHolder(
-                holder: MessageViewHolder,
-                position: Int,
-                model: Message
-            ) {
-                holder.bind(model)
-            }
-        }
-        requireContext().showToast("Chat displayed")
+    override fun onPause() {
+        super.onPause()
+        adapter.stopListening()
     }
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(model: Message) {
+
+            if (model.userID.photo.isNotEmpty()) {
+                ActivityNavigation.mStorage.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
+                    Glide.with(requireActivity()).load(it.toString()).into(itemView.ic_chat)
+                }
+            }
+
             itemView.chat_message.text = model.message
-            itemView.chat_time.text = model.time.toString()
             itemView.chat_user.text = model.userID.name
-            itemView.chat_country.text = model.userID.country
-            itemView.chat_city.text = model.userID.city
+            itemView.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
         }
     }
 }

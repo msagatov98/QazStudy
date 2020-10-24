@@ -18,6 +18,7 @@
         <item>6. Урок</item>
         <item>7. Урок</item>
         <item>8. Урок</item>
+        <item>9. Урок</item>
     </string-array>
 
     <string name="activity_profile__hint_name">Имя</string>
@@ -118,5 +119,6 @@
     <string name="dialog_password">Пароль</string>
     <string name="dialog_old_password">Старый пароль</string>
     <string name="dialog_repeat_password">Повторите пароль</string>
+    <string name="empty_message_send">Вы не можете отправить пустое сообщение</string>
 
 </resources>

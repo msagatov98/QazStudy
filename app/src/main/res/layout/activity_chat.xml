@@ -37,11 +37,11 @@
             app:layout_constraintStart_toEndOf="@id/activity_chat__ic_back"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:layout_height="0dp"
         android:layout_width="match_parent"
         android:id="@+id/activity_chat__fragment"
-        android:name="com.qazstudy.ui.fragment.chat.FragmentChat1"
+        class="com.qazstudy.ui.fragment.FragmentChat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_chat__toolbar"/>
 

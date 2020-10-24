@@ -1,17 +1,16 @@
 package com.qazstudy.ui.adapter
 
 import com.qazstudy.R
-import android.util.Log
 import android.view.View
 import android.graphics.Color
 import android.content.Intent
 import android.view.ViewGroup
 import android.content.Context
+import android.util.Log
 import android.widget.TextView
 import android.widget.ImageView
 import com.qazstudy.model.Lesson
 import android.view.LayoutInflater
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.qazstudy.ui.activity.ActivityLecture
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_holder_lesson.view.*
@@ -19,10 +18,10 @@ import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 open class AdapterLesson(var context: Context, private val lesson: Lesson) : RecyclerView.Adapter<AdapterLesson.LessonViewHolder>() {
 
-    val TAG = "AdapterLesson"
+    val TAG: String = this.javaClass.name
 
-    val TYPE_FIRST_ITEM = 1
-    val TYPE_ITEM = 2
+    val TYPE_SINGLE_ITEM = 1
+    val TYPE_DOUBLE_ITEM = 2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_lesson, parent, false)
@@ -34,8 +33,8 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) : Rec
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0) TYPE_FIRST_ITEM
-               else TYPE_ITEM
+        return if (position == 0 || position == 9) TYPE_SINGLE_ITEM
+               else TYPE_DOUBLE_ITEM
     }
 
     override fun onBindViewHolder(holder: LessonViewHolder, position: Int) {
@@ -49,11 +48,14 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) : Rec
 
         fun bind(position: Int) {
 
+
             if (isDark) {
                 header.setTextColor(Color.rgb(60, 90, 188))
             }
 
-            if (position < lesson.header.size-1)
+            Log.i(TAG, position.toString())
+
+            if (position < lesson.header.size)
                 icTask.setImageResource(lesson.icon[position])
 
             header.text = lesson.header[position]

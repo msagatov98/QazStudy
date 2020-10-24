@@ -1,5 +1,6 @@
 package com.qazstudy.ui.activity
 
+import android.content.Context
 import com.qazstudy.R
 import android.net.Uri
 import android.os.Bundle
@@ -115,7 +116,7 @@ class ActivityNavigation : AppCompatActivity() {
             startActivity(Intent(this, ActivityLogin::class.java))
             finish()
         }
-
+    
         mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter{
             nav_header_txt_name.text = mUser.name
             if (mUser.photo.isNotEmpty()) {

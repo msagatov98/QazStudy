@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.content.Intent
 import android.view.LayoutInflater
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.qazstudy.ui.activity.ActivityNavigation
 import kotlinx.android.synthetic.main.fragment_setting.*
@@ -43,7 +45,7 @@ class FragmentSetting : Fragment() {
     private fun en() {
         val dm = resources.displayMetrics
         val conf = resources.configuration
-        conf.setLocale(Locale("en"))
+        conf.setLocale(Locale.ENGLISH)
         resources.updateConfiguration(conf, dm)
         val intent  = Intent(context, ActivityNavigation::class.java)
         startActivity(intent)

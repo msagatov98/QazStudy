@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single" android:id="@+id/group_1">
         <item
+            app:showAsAction="never"
             android:id="@+id/nav_lesson"
             android:title="@string/menu_lesson"
             android:icon="@drawable/ic_menu_lesson" />
         <item
+            app:showAsAction="never"
             android:title="@string/menu_task"
             android:id="@+id/nav_task"
             android:icon="@drawable/ic_menu_task"/>
@@ -16,10 +19,12 @@
 
     <group android:checkableBehavior="single" android:id="@+id/group_2">
         <item
+            app:showAsAction="never"
             android:id="@+id/nav_book"
             android:title="@string/menu_book"
             android:icon="@drawable/ic_menu_book"/>
         <item
+            app:showAsAction="never"
             android:id="@+id/nav_dictionary"
             android:title="@string/menu_dictionary"
             android:icon="@drawable/ic_menu_dictionary"/>
@@ -27,6 +32,7 @@
 
     <group android:checkableBehavior="single"  android:id="@+id/group_3">
         <item
+            app:showAsAction="never"
             android:title="@string/menu_settings"
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_settings"/>

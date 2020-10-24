@@ -33,6 +33,7 @@
         <item>6. Lesson 6</item>
         <item>7. Lesson 7</item>
         <item>8. Lesson 8</item>
+        <item>9. Lesson 9</item>
     </string-array>
 
     <string-array name="tasks_header">
@@ -166,5 +167,6 @@
     <string name="confirm_exit">Are you sure to exit from account</string>
     <string name="lecture_1_2">lecture 1.2</string>
     <string name="lecture_2_1">lecture_2_1</string>
+    <string name="empty_message_send">You can\'t send empty message</string>
 
 </resources>

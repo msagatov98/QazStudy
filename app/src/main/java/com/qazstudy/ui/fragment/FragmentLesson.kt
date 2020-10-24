@@ -1,14 +1,12 @@
 package com.qazstudy.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.qazstudy.R
 import com.qazstudy.model.Lesson
 import com.qazstudy.ui.adapter.AdapterLesson
@@ -23,7 +21,7 @@ class FragmentLesson() : Fragment() {
         arrayOf(
             R.drawable.intro, R.drawable.abc, R.drawable.reading,
             R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android,
-            R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android
+            R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android
         )
 
     private lateinit var lessonHeader: Array<String>
@@ -42,8 +40,8 @@ class FragmentLesson() : Fragment() {
             override fun getSpanSize(position: Int): Int {
 
                 return when(adapter.getItemViewType(position)) {
-                    adapter.TYPE_FIRST_ITEM -> 2
-                    adapter.TYPE_ITEM -> 1
+                    adapter.TYPE_SINGLE_ITEM -> 2
+                    adapter.TYPE_DOUBLE_ITEM -> 1
                     else -> -1
                 }
             }

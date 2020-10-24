@@ -18,7 +18,7 @@ class FragmentLecture9 : Fragment() {
         val txt = activity?.findViewById<TextView>(R.id.activity_lesson__txt_lecture_header)
 
         val ar = resources.getStringArray(R.array.lessons_header)
-        txt?.text = ar[8]
+        txt?.text = ar[9]
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
