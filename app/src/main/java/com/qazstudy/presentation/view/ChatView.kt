@@ -4,7 +4,7 @@ import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEnd
 
 
-interface ChatView: MvpView {
+interface ChatView: BaseView {
 
     @AddToEnd
     fun displayChat(i : Int)

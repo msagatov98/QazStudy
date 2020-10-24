@@ -55,7 +55,7 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) : Rec
 
             Log.i(TAG, position.toString())
 
-            if (position < lesson.header.size)
+            if (position < lesson.icon.size)
                 icTask.setImageResource(lesson.icon[position])
 
             header.text = lesson.header[position]

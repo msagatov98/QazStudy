@@ -34,7 +34,7 @@ class ActivityChat : MvpAppCompatActivity(), ChatView {
 
     }
 
-    private fun setMode() {
+    override fun setMode() {
         if (isDark) {
             bg_chat.setBackgroundColor(getColor(R.color.dark))
             this.window.statusBarColor = getColor(R.color.black)

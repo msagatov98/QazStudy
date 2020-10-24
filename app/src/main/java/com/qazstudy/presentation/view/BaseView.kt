@@ -3,12 +3,7 @@ package com.qazstudy.presentation.view
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEnd
 
-interface MvpProfile : BaseView {
-
+interface BaseView: MvpView {
     @AddToEnd
-    fun showDialog(message: String)
-
-    @AddToEnd
-    fun initProfile()
-
+    fun setMode()
 }

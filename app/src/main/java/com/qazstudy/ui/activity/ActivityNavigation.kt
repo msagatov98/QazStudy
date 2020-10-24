@@ -46,8 +46,8 @@ class ActivityNavigation : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private var ar : Array<Int> = arrayOf(
-        R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3,
+    private var ar = arrayOf(
+        R.drawable.book0, R.drawable.book1, R.drawable.book2, R.drawable.book3,
         R.drawable.book, R.drawable.book1, R.drawable.book2, R.drawable.book3)
 
     private var lessonImage = arrayOf(R.drawable.intro, R.drawable.abc, R.drawable.reading,
@@ -109,24 +109,6 @@ class ActivityNavigation : AppCompatActivity() {
         else ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_light))
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        if (mAuth.currentUser == null) {
-            startActivity(Intent(this, ActivityLogin::class.java))
-            finish()
-        }
-    
-        mDatabase.child("users/${mAuth.currentUser!!.uid}").addListenerForSingleValueEvent( ValueEventListenerAdapter{
-            nav_header_txt_name.text = mUser.name
-            if (mUser.photo.isNotEmpty()) {
-                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
-                    Glide.with(this).load(it.toString()).into(nav_profile)
-                }
-            }
-        })
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.activity_navigation_drawer, menu)
         return true
@@ -184,6 +166,7 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_book__recycler_view.background = ContextCompat.getDrawable(this, R.color.white)
             }
         }
+
 
         if (fragment_lesson__recycler_view != null) {
             fragment_lesson__recycler_view.adapter =

@@ -1,7 +1,18 @@
 package com.qazstudy.presenter
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
+import android.os.Environment
+import android.provider.MediaStore
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
+import com.bumptech.glide.Glide
+import com.google.android.gms.tasks.Task
 import moxy.MvpPresenter
 import moxy.InjectViewState
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
@@ -12,19 +23,17 @@ import com.qazstudy.presentation.view.MvpProfile
 import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 import com.qazstudy.presentation.view.DialogConfirm
 import com.qazstudy.presentation.view.DialogInput
+import com.qazstudy.ui.activity.ActivityNavigation
+import kotlinx.android.synthetic.main.activity_profile.*
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @InjectViewState
-class ProfilePresenter : MvpPresenter<MvpProfile>() {
+class ProfilePresenter(private val contextCompat: Context) : MvpPresenter<MvpProfile>() {
 
-    init {
-        viewState.initProfile()
-    }
-
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        viewState.initProfile()
-    }
+    private val timeStamp = SimpleDateFormat("yyyyMMDD_HHmmss", Locale.US).format(Date())
 
     fun getName() : String {
         return mUser.name
@@ -42,12 +51,10 @@ class ProfilePresenter : MvpPresenter<MvpProfile>() {
         return mUser.password
     }
 
-    fun getImage() : String {
-        var uri: String? = null
+    fun setImage(view: ImageView) {
         mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
-            uri = it.path
+            Glide.with(contextCompat).load(it).into(view)
         }
-        return uri.toString()
     }
 
     fun getDialogInput(str: String): DialogFragment {
