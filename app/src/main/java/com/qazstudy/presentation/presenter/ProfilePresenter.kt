@@ -1,8 +1,12 @@
 package com.qazstudy.presenter
 
 
+import android.app.Activity
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import com.google.firebase.storage.StorageReference
+import com.bumptech.glide.Glide
+import com.qazstudy.R
 import moxy.MvpPresenter
 import moxy.InjectViewState
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
@@ -14,7 +18,8 @@ import com.qazstudy.presentation.view.DialogInput
 
 
 @InjectViewState
-class ProfilePresenter : MvpPresenter<MvpProfile>() {
+class ProfilePresenter(var activity: Activity) : MvpPresenter<MvpProfile>() {
+
 
     fun getName() : String {
         return mUser.name
@@ -32,8 +37,13 @@ class ProfilePresenter : MvpPresenter<MvpProfile>() {
         return mUser.password
     }
 
-    fun setImage(): StorageReference {
-        return mStorage.child("users/${mAuth.currentUser!!.uid}/photo")
+    fun setImage(view: ImageView) {
+         mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
+             Glide.with(activity)
+                 .load(it)
+                 .error(ContextCompat.getDrawable(activity, R.drawable.ic_avatar_dark))
+                 .into(view)
+         }
     }
 
     fun getDialogInput(str: String): DialogFragment {

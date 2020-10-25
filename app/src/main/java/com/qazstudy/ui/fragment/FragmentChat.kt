@@ -63,11 +63,10 @@ class FragmentChat : Fragment() {
                     viewType: Int
                 ): MessageViewHolder {
 
-                    val view =
-                        if (isDark)
-                            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message_dark, parent, false)
-                        else
-                            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message, parent, false)
+                    val view = if (isDark)
+                                    LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message_dark, parent, false)
+                               else
+                                    LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message, parent, false)
 
                     return MessageViewHolder(view)
                 }
@@ -114,11 +113,7 @@ class FragmentChat : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 

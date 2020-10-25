@@ -43,7 +43,6 @@ import com.qazstudy.util.showToast
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
-
 class ActivityNavigation : AppCompatActivity() {
 
     private val AUTH_REQUEST_CODE = 101
@@ -60,9 +59,10 @@ class ActivityNavigation : AppCompatActivity() {
 
     private var providers: List<AuthUI.IdpConfig> = listOf(
         AuthUI.IdpConfig.EmailBuilder().build(),
+        AuthUI.IdpConfig.PhoneBuilder().build(),
         AuthUI.IdpConfig.GoogleBuilder().build(),
         //AuthUI.IdpConfig.TwitterBuilder().build(),
-        AuthUI.IdpConfig.FacebookBuilder().build()
+        //AuthUI.IdpConfig.FacebookBuilder().build()
     )
 
     companion object {

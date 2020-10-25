@@ -37,6 +37,10 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
     @InjectPresenter
     lateinit var mProfilePresenter: ProfilePresenter
 
+    @ProvidePresenter
+    fun providePresenter(): ProfilePresenter {
+        return ProfilePresenter(this)
+    }
 
     private lateinit var mDialog: DialogFragment
 
@@ -82,7 +86,8 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
     }
 
     override fun initProfile() {
-        Glide.with(this).load(mProfilePresenter.setImage()).into(activity_profile__image_profile)
+        mProfilePresenter.setImage(activity_profile__image_profile)
+
         activity_profile__input_name.setText(
             mProfilePresenter.getName(),
             TextView.BufferType.EDITABLE
@@ -160,76 +165,22 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
         if (isDark) {
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
             activity_profile__toolbar_txt.setTextColor(ContextCompat.getColor(this, R.color.dark))
-            activity_profile__toolbar.background = ContextCompat.getDrawable(
-                this,
-                R.color.light_blue
-            )
-            activity_profile__ic_back.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_back_dark
-                )
-            )
-
+            activity_profile__toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
+            activity_profile__ic_back.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
+            activity_profile__image_profile.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_avatar_light))
             activity_profile__input_name.setTextColor(ContextCompat.getColor(this, R.color.white))
             activity_profile__input_city.setTextColor(ContextCompat.getColor(this, R.color.white))
             activity_profile__input_email.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_country.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
-            )
-            activity_profile__input_password.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
-            )
+            activity_profile__input_country.setTextColor(ContextCompat.getColor(this, R.color.white))
+            activity_profile__input_password.setTextColor(ContextCompat.getColor(this, R.color.white))
+            activity_profile__input_name.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_city.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_email.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_country.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_password.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
 
-            activity_profile__input_name.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-            activity_profile__input_city.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-            activity_profile__input_email.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-            activity_profile__input_country.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-            activity_profile__input_password.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-
-            activity_profile__input_name.background.setTint(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-            activity_profile__input_city.background.setTint(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
+            activity_profile__input_name.background.setTint(ContextCompat.getColor(this,R.color.txt_color))
+            activity_profile__input_city.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
             activity_profile__input_email.background.setTint(
                 ContextCompat.getColor(
                     this,
