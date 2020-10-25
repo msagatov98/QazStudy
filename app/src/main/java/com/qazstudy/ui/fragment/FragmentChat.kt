@@ -65,13 +65,9 @@ class FragmentChat : Fragment() {
 
                     val view =
                         if (isDark)
-                            LayoutInflater
-                                .from(parent.context)
-                                .inflate(R.layout.view_holder_message_dark, parent, false)
+                            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message_dark, parent, false)
                         else
-                            LayoutInflater
-                                .from(parent.context)
-                                .inflate(R.layout.view_holder_message, parent, false)
+                            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message, parent, false)
 
                     return MessageViewHolder(view)
                 }
@@ -147,7 +143,9 @@ class FragmentChat : Fragment() {
             }
 
             itemView.chat_message.text = model.message
+            itemView.chat_city.text = model.userID.city
             itemView.chat_user.text = model.userID.name
+            itemView.chat_country.text = model.userID.country
             itemView.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
         }
     }

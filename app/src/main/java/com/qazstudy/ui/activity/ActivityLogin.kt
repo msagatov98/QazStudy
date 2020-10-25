@@ -8,6 +8,7 @@ import android.content.Intent
 import com.qazstudy.model.User
 import com.qazstudy.util.showToast
 import androidx.appcompat.app.AppCompatActivity
+import com.firebase.ui.auth.AuthUI
 import com.qazstudy.util.coordinateButtonAndInput
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.gms.common.api.ApiException
@@ -16,11 +17,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener
+import java.util.*
 
 class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
 
@@ -28,6 +33,7 @@ class ActivityLogin : AppCompatActivity(), KeyboardVisibilityEventListener {
 
     private val TAG = javaClass.name
     private val RC_SIGN_IN = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

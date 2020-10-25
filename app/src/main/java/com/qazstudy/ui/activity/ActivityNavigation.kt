@@ -34,16 +34,21 @@ import com.qazstudy.ui.adapter.ValueEventListenerAdapter
 import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.navigation_header.*
 import kotlinx.android.synthetic.main.navigation_app_bar.*
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.database.ValueEventListener
+import com.qazstudy.util.showToast
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 
 class ActivityNavigation : AppCompatActivity() {
 
+    private val AUTH_REQUEST_CODE = 101
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private var authListener: FirebaseAuth.AuthStateListener? = null
 
     private var ar = arrayOf(
         R.drawable.book0, R.drawable.book1, R.drawable.book2, R.drawable.book3,
@@ -53,11 +58,17 @@ class ActivityNavigation : AppCompatActivity() {
         R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android, R.drawable.ic_android,
         R.drawable.ic_android)
 
+    private var providers: List<AuthUI.IdpConfig> = listOf(
+        AuthUI.IdpConfig.EmailBuilder().build(),
+        AuthUI.IdpConfig.GoogleBuilder().build(),
+        //AuthUI.IdpConfig.TwitterBuilder().build(),
+        AuthUI.IdpConfig.FacebookBuilder().build()
+    )
+
     companion object {
         var isDark = false
         lateinit var mUser: User
         lateinit var mImageURI: Uri
-        lateinit var mGoogleSignInClient: GoogleSignInClient
         var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
         var mStorage: StorageReference = FirebaseStorage.getInstance().reference
         var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
@@ -66,31 +77,61 @@ class ActivityNavigation : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
+
+        FacebookSdk.sdkInitialize(applicationContext)
+        AppEventsLogger.activateApp(this)
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        
-        if (mAuth.currentUser == null) {
-            startActivity(Intent(this, ActivityLogin::class.java))
-            finish()
-        } else  {
-            mDatabase.child("users/${mAuth.currentUser!!.uid}")
-                .addListenerForSingleValueEvent(ValueEventListenerAdapter {
-                    mUser = it.getValue(User::class.java)!!
-                    nav_header_txt_name.text = mUser.name
-                    if (mUser.photo.isNotEmpty()) {
-                        mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {imageUri ->
-                            Glide.with(this).load(imageUri.toString()).into(nav_profile)
-                        }
+
+        authListener = FirebaseAuth.AuthStateListener {
+            if (mAuth.currentUser == null) {
+                startActivityForResult(
+                    AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setTheme(R.style.LoginTheme)
+                        .setAvailableProviders(providers)
+                        .build(),
+                    AUTH_REQUEST_CODE
+                )
+            } else  {
+
+
+
+
+                mAuth.fetchSignInMethodsForEmail(mAuth.currentUser!!.email!!).addOnCompleteListener{
+                    if (it.isSuccessful) {
+                        mDatabase.child("users/${mAuth.currentUser!!.uid}")
+                            .addListenerForSingleValueEvent(ValueEventListenerAdapter {
+                                mUser = it.getValue(User::class.java)!!
+                                nav_header_txt_name.text = mUser.name
+                                if (mUser.photo.isNotEmpty()) {
+                                    mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {imageUri ->
+                                        Glide.with(this@ActivityNavigation).load(imageUri.toString()).into(nav_profile)
+                                    }
+                                }
+                            })
+                    } else {
+
+                        mUser = User(
+                            name = mAuth.currentUser!!.displayName.toString(),
+                            email = mAuth.currentUser!!.email.toString(),
+                            photo = mAuth.currentUser!!.photoUrl.toString(),
+                        )
+
+                        mDatabase.child("users/${mAuth.currentUser!!.uid}").setValue(mUser)
+                            .addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    nav_header_txt_name.text = mUser.name
+
+                                } else {
+                                    showToast("Error creating user")
+                                }
+                            }
                     }
-                })
+                }
+            }
         }
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -106,6 +147,18 @@ class ActivityNavigation : AppCompatActivity() {
 
         if (isDark) ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_dark))
         else ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_light))
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        mAuth.addAuthStateListener(authListener!!)
+    }
+
+    override fun onStop() {
+        if (authListener != null)
+            mAuth.removeAuthStateListener(authListener!!)
+        super.onStop()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -9,6 +9,7 @@ import com.qazstudy.util.showToast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.qazstudy.ui.activity.ActivityLogin
+import com.qazstudy.ui.activity.ActivityNavigation
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
@@ -38,7 +39,7 @@ class DialogConfirm(private val hint: String): DialogFragment() {
 
             view.dialog_confirm__ok.setOnClickListener {
                 mAuth.signOut()
-                requireActivity().startActivity(Intent(requireActivity(), ActivityLogin::class.java))
+                requireActivity().startActivity(Intent(requireActivity(), ActivityNavigation::class.java))
                 requireActivity().finish()
             }
         } else if (str == "delete") {
@@ -49,7 +50,7 @@ class DialogConfirm(private val hint: String): DialogFragment() {
                 mDatabase.child("users/${mAuth.currentUser!!.uid}").removeValue()
                 mAuth.currentUser!!.delete().addOnCompleteListener {
                     if (it.isSuccessful) {
-                        startActivity(Intent(requireActivity(), ActivityLogin::class.java))
+                        startActivity(Intent(requireActivity(), ActivityNavigation::class.java))
                         requireActivity().finish()
                     } else {
                         requireActivity().showToast(it.exception.toString())
