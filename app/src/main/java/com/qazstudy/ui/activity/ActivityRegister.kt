@@ -34,7 +34,10 @@ class ActivityRegister : AppCompatActivity(), FragmentEmail.Listener, FragmentNa
             mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener {
                 if (it.isSuccessful) {
                     if (it.result?.signInMethods?.isEmpty() != false) {
-                        supportFragmentManager.beginTransaction().replace(R.id.activity_register__frame_layout, FragmentNamePass()).addToBackStack(null).commit()
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.activity_register__frame_layout, FragmentNamePass())
+                            .addToBackStack(null).commit()
                     } else {
                         showToast("This email is registered")
                     }

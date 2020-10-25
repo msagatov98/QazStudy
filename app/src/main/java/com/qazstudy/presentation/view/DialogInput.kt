@@ -139,6 +139,9 @@ class DialogInput(private val hint: String, private val password: String): Dialo
     }
 
     private fun getAlertDialog(str: String) : AlertDialog {
+
+
+
         Log.e("Dialog", "alertDialog")
 
         val view = getDialogView()

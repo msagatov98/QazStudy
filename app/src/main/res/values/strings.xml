@@ -168,5 +168,9 @@
     <string name="lecture_1_2">lecture 1.2</string>
     <string name="lecture_2_1">lecture_2_1</string>
     <string name="empty_message_send">You can\'t send empty message</string>
+    <string name="list_word">List</string>
+    <string name="translater">Translater</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">This page is in development</string>
 
 </resources>

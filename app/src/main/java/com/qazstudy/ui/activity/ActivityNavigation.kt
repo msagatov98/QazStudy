@@ -1,6 +1,5 @@
 package com.qazstudy.ui.activity
 
-import android.content.Context
 import com.qazstudy.R
 import android.net.Uri
 import android.os.Bundle
@@ -166,7 +165,6 @@ class ActivityNavigation : AppCompatActivity() {
                 fragment_book__recycler_view.background = ContextCompat.getDrawable(this, R.color.white)
             }
         }
-
 
         if (fragment_lesson__recycler_view != null) {
             fragment_lesson__recycler_view.adapter =

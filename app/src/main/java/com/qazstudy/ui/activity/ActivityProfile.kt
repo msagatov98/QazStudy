@@ -1,48 +1,46 @@
 package com.qazstudy.ui.activity
 
-import java.util.*
-import java.io.File
-import com.qazstudy.R
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.os.Bundle
-import android.app.Activity
-import android.content.Intent
-import android.os.Environment
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
-import moxy.MvpAppCompatActivity
-import java.text.SimpleDateFormat
+import com.qazstudy.R
+import com.qazstudy.presentation.view.MvpProfile
+import com.qazstudy.presenter.ProfilePresenter
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
 import com.qazstudy.util.showToast
-import android.provider.MediaStore
+import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.android.synthetic.main.activity_profile.*
+import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import androidx.core.content.FileProvider
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
-import com.qazstudy.presenter.ProfilePresenter
-import com.theartofdev.edmodo.cropper.CropImage
-import com.qazstudy.presentation.view.MvpProfile
-import kotlinx.android.synthetic.main.activity_profile.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
 
     @InjectPresenter
     lateinit var mProfilePresenter: ProfilePresenter
 
-    @ProvidePresenter
-    fun providePresenter(): ProfilePresenter {
-        return ProfilePresenter(this)
-    }
 
     private lateinit var mDialog: DialogFragment
 
-    private val TAG = "ActivityProfile"
+    private val TAG = javaClass.simpleName
     private val TAKE_PICTURE_REQUEST_CODE = 1
     private val timeStamp = SimpleDateFormat("yyyyMMDD_HHmmss", Locale.US).format(Date())
 
@@ -50,6 +48,10 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         setMode()
+    }
+
+    override fun onStart() {
+        super.onStart()
         initProfile()
     }
 
@@ -80,12 +82,27 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
     }
 
     override fun initProfile() {
-        mProfilePresenter.setImage(activity_profile__image_profile)
-        activity_profile__input_name.setText(mProfilePresenter.getName(), TextView.BufferType.EDITABLE)
-        activity_profile__input_city.setText(mProfilePresenter.getCity(), TextView.BufferType.EDITABLE)
-        activity_profile__input_email.setText(mProfilePresenter.getEmail(), TextView.BufferType.EDITABLE)
-        activity_profile__input_country.setText(mProfilePresenter.getCountry(), TextView.BufferType.EDITABLE)
-        activity_profile__input_password.setText(mProfilePresenter.getPassword(), TextView.BufferType.EDITABLE)
+        Glide.with(this).load(mProfilePresenter.setImage()).into(activity_profile__image_profile)
+        activity_profile__input_name.setText(
+            mProfilePresenter.getName(),
+            TextView.BufferType.EDITABLE
+        )
+        activity_profile__input_city.setText(
+            mProfilePresenter.getCity(),
+            TextView.BufferType.EDITABLE
+        )
+        activity_profile__input_email.setText(
+            mProfilePresenter.getEmail(),
+            TextView.BufferType.EDITABLE
+        )
+        activity_profile__input_country.setText(
+            mProfilePresenter.getCountry(),
+            TextView.BufferType.EDITABLE
+        )
+        activity_profile__input_password.setText(
+            mProfilePresenter.getPassword(),
+            TextView.BufferType.EDITABLE
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -101,11 +118,11 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
             mStorage.child("users/${mAuth.currentUser!!.uid}/photo").putFile(mImageURI).addOnCompleteListener {
                 if (it.isSuccessful) {
                     val url = mStorage.child("users/${mAuth.currentUser!!.uid}/photo/$mImageURI")
-                    mDatabase.child("users/${mAuth.currentUser!!.uid}/photo").setValue(url.downloadUrl.toString()).addOnCompleteListener {it1 ->
+                    mDatabase.child("users/${mAuth.currentUser!!.uid}/photo").setValue(url.downloadUrl.toString()).addOnCompleteListener { it1 ->
                         if (it1.isSuccessful) {
                             showToast("Photo saved")
                             if (!this.isDestroyed)
-                                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {imageUri ->
+                                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener { imageUri ->
                                     if (!this.isDestroyed) {
                                         Glide.with(this).load(imageUri.toString())
                                             .into(activity_profile__image_profile)
@@ -133,7 +150,7 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
 
         if (intent.resolveActivity(packageManager) != null) {
             val imageFile = createImageFile()
-            mImageURI = FileProvider.getUriForFile(this,"com.qazstudy.fileprovider" , imageFile)
+            mImageURI = FileProvider.getUriForFile(this, "com.qazstudy.fileprovider", imageFile)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageURI)
             startActivityForResult(intent, TAKE_PICTURE_REQUEST_CODE)
         }
@@ -143,34 +160,113 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
         if (isDark) {
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
             activity_profile__toolbar_txt.setTextColor(ContextCompat.getColor(this, R.color.dark))
-            activity_profile__toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
-            activity_profile__ic_back.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
+            activity_profile__toolbar.background = ContextCompat.getDrawable(
+                this,
+                R.color.light_blue
+            )
+            activity_profile__ic_back.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_back_dark
+                )
+            )
 
             activity_profile__input_name.setTextColor(ContextCompat.getColor(this, R.color.white))
             activity_profile__input_city.setTextColor(ContextCompat.getColor(this, R.color.white))
             activity_profile__input_email.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_country.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_password.setTextColor(ContextCompat.getColor(this, R.color.white))
+            activity_profile__input_country.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.white
+                )
+            )
+            activity_profile__input_password.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.white
+                )
+            )
 
-            activity_profile__input_name.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_city.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_email.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_country.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_password.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_name.setHintTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
+            activity_profile__input_city.setHintTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
+            activity_profile__input_email.setHintTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
+            activity_profile__input_country.setHintTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
+            activity_profile__input_password.setHintTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
 
-            activity_profile__input_name.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_city.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_email.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_country.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_password.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_name.background.setTint(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
+            activity_profile__input_city.background.setTint(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
+            activity_profile__input_email.background.setTint(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
+            activity_profile__input_country.background.setTint(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
+            activity_profile__input_password.background.setTint(
+                ContextCompat.getColor(
+                    this,
+                    R.color.txt_color
+                )
+            )
 
-            activity_profile__btn_exit.setTextColor(ContextCompat.getColor(this, R.color.light_blue))
-            activity_profile__btn_exit.background = ContextCompat.getDrawable(this, R.drawable.bg_btn_exit_dark)
-            activity_profile__btn_delete.background = ContextCompat.getDrawable(this, R.drawable.bg_btn_delete_account_dark)
-            activity_profile__constraint_layout.background = ContextCompat.getDrawable(this, R.drawable.activity_profile__bg_edittext_dark)
+            activity_profile__btn_exit.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.light_blue
+                )
+            )
+            activity_profile__btn_exit.background = ContextCompat.getDrawable(
+                this,
+                R.drawable.bg_btn_exit_dark
+            )
+            activity_profile__btn_delete.background = ContextCompat.getDrawable(
+                this,
+                R.drawable.bg_btn_delete_account_dark
+            )
+            activity_profile__constraint_layout.background = ContextCompat.getDrawable(
+                this,
+                R.drawable.activity_profile__bg_edittext_dark
+            )
         }
     }
 }
-
-
-
