@@ -118,7 +118,8 @@ class ActivityNavigation : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.nav_lesson, R.id.nav_task, R.id.nav_book,
-                R.id.nav_dictionary, R.id.nav_setting), drawerLayout
+                    R.id.nav_dictionary, R.id.nav_setting),
+            drawerLayout
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -126,12 +127,6 @@ class ActivityNavigation : AppCompatActivity() {
 
         if (isDark) ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_dark))
         else ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_light))
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-
     }
 
     override fun onStart() {
