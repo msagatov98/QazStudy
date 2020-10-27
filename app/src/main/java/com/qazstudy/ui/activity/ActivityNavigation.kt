@@ -22,11 +22,7 @@ import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.database.FirebaseDatabase
 import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.fragment_book.*
 import kotlinx.android.synthetic.main.fragment_task.*
 import kotlinx.android.synthetic.main.fragment_lesson.*
@@ -38,9 +34,7 @@ import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.firebase.ui.auth.AuthUI
-import com.qazstudy.util.showToast
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
+import com.qazstudy.util.*
 
 class ActivityNavigation : AppCompatActivity() {
 
@@ -68,23 +62,17 @@ class ActivityNavigation : AppCompatActivity() {
         var isDark = false
         lateinit var mUser: User
         lateinit var mImageURI: Uri
-        var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-        var mStorage: StorageReference = FirebaseStorage.getInstance().reference
-        var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
-        FacebookSdk.sdkInitialize(applicationContext)
-        AppEventsLogger.activateApp(this)
-
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         authListener = FirebaseAuth.AuthStateListener {
-            if (mAuth.currentUser == null) {
+            if (AUTH.currentUser == null) {
                 startActivityForResult(
                     AuthUI.getInstance()
                         .createSignInIntentBuilder()
@@ -94,14 +82,14 @@ class ActivityNavigation : AppCompatActivity() {
                     AUTH_REQUEST_CODE
                 )
             } else {
-                mAuth.fetchSignInMethodsForEmail(mAuth.currentUser!!.email!!).addOnCompleteListener{ fetchSignInMethod ->
+                AUTH.fetchSignInMethodsForEmail(AUTH.currentUser!!.email!!).addOnCompleteListener{ fetchSignInMethod ->
                     if (fetchSignInMethod.isSuccessful) {
-                        mDatabase.child("users/${mAuth.currentUser!!.uid}")
+                        DATABASE.child(NODE_USER).child(USER_UID)
                             .addListenerForSingleValueEvent(ValueEventListenerAdapter {
                                 mUser = it.getValue(User::class.java)!!
                                 nav_header_txt_name.text = mUser.name
                                 if (mUser.photo.isNotEmpty()) {
-                                    mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {imageUri ->
+                                    STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).downloadUrl.addOnSuccessListener {imageUri ->
                                         Glide.with(this@ActivityNavigation).load(imageUri.toString()).into(nav_profile)
                                     }
                                 }
@@ -109,19 +97,15 @@ class ActivityNavigation : AppCompatActivity() {
                     } else {
 
                         mUser = User(
-                            name = mAuth.currentUser!!.displayName.toString(),
-                            email = mAuth.currentUser!!.email.toString(),
-                            photo = mAuth.currentUser!!.photoUrl.toString(),
+                            name = AUTH.currentUser!!.displayName.toString(),
+                            email = AUTH.currentUser!!.email.toString(),
+                            photo = AUTH.currentUser!!.photoUrl.toString(),
                         )
 
-                        mDatabase.child("users/${mAuth.currentUser!!.uid}").setValue(mUser)
+                        DATABASE.child(NODE_USER).child(USER_UID).setValue(mUser)
                             .addOnCompleteListener {
-                                if (it.isSuccessful) {
-                                    nav_header_txt_name.text = mUser.name
-
-                                } else {
-                                    showToast("Error creating user")
-                                }
+                                if (it.isSuccessful) nav_header_txt_name.text = mUser.name
+                                else showToast("Error creating user")
                             }
                     }
                 }
@@ -152,12 +136,12 @@ class ActivityNavigation : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        mAuth.addAuthStateListener(authListener!!)
+        AUTH.addAuthStateListener(authListener!!)
     }
 
     override fun onStop() {
         if (authListener != null)
-            mAuth.removeAuthStateListener(authListener!!)
+            AUTH.removeAuthStateListener(authListener!!)
         super.onStop()
     }
 

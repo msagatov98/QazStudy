@@ -4,17 +4,13 @@ import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
 import android.app.Dialog
+import com.qazstudy.util.*
 import android.content.Intent
-import com.qazstudy.util.showToast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.qazstudy.ui.activity.ActivityLogin
 import com.qazstudy.ui.activity.ActivityNavigation
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
 import kotlinx.android.synthetic.main.dialog_confirm_dark.view.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class DialogConfirm(private val hint: String): DialogFragment() {
 
@@ -38,7 +34,7 @@ class DialogConfirm(private val hint: String): DialogFragment() {
             view.dialog_title.text = resources.getString(R.string.confirm_exit)
 
             view.dialog_confirm__ok.setOnClickListener {
-                mAuth.signOut()
+                AUTH.signOut()
                 requireActivity().startActivity(Intent(requireActivity(), ActivityNavigation::class.java))
                 requireActivity().finish()
             }
@@ -46,9 +42,9 @@ class DialogConfirm(private val hint: String): DialogFragment() {
             view.dialog_title.text = resources.getString(R.string.confirm_delete)
 
             view.dialog_confirm__ok.setOnClickListener {
-                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").delete()
-                mDatabase.child("users/${mAuth.currentUser!!.uid}").removeValue()
-                mAuth.currentUser!!.delete().addOnCompleteListener {
+                STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).delete()
+                DATABASE.child(NODE_USER).child(USER_UID).removeValue()
+                AUTH.currentUser!!.delete().addOnCompleteListener {
                     if (it.isSuccessful) {
                         startActivity(Intent(requireActivity(), ActivityNavigation::class.java))
                         requireActivity().finish()

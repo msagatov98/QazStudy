@@ -1,36 +1,31 @@
 package com.qazstudy.ui.activity
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
+import java.util.*
+import java.io.File
+import com.qazstudy.R
 import android.util.Log
 import android.view.View
+import android.os.Bundle
+import com.qazstudy.util.*
+import android.app.Activity
+import android.content.Intent
+import android.os.Environment
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
-import com.qazstudy.R
-import com.qazstudy.presentation.view.MvpProfile
-import com.qazstudy.presenter.ProfilePresenter
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
-import com.qazstudy.util.showToast
-import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.android.synthetic.main.activity_profile.*
 import moxy.MvpAppCompatActivity
+import android.provider.MediaStore
+import java.text.SimpleDateFormat
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
-
+import androidx.core.content.FileProvider
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
+import com.qazstudy.presenter.ProfilePresenter
+import com.theartofdev.edmodo.cropper.CropImage
+import com.qazstudy.presentation.view.MvpProfile
+import kotlinx.android.synthetic.main.activity_profile.*
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
 
 class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
 
@@ -59,30 +54,74 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
         initProfile()
     }
 
-    fun onClick(v: View) {
-        when (v) {
-            activity_profile__btn_exit -> showDialog("exit")
-            activity_profile__btn_delete -> showDialog("delete")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-            activity_profile__input_city -> showDialog("city")
-            activity_profile__input_name -> showDialog("name")
-            activity_profile__input_email -> showDialog("email")
-            activity_profile__input_country -> showDialog("country")
-            activity_profile__input_password -> showDialog("password")
+        Log.e(TAG, "onActivityResult")
 
-            activity_profile__ic_back -> finish()
-            activity_profile__image_profile -> takeCameraPicture()
+        if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            CropImage.activity(mImageURI).setAspectRatio(1, 1).start(this)
+        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            mImageURI = CropImage.getActivityResult(data).uri
+
+            STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO)
+                .putFile(mImageURI)
+                .addOnCompleteListener { uploadTask ->
+                    if (uploadTask.isSuccessful) {
+
+                        val url = STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).child("$mImageURI")
+
+                        DATABASE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).setValue(url.downloadUrl.toString()).addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                showToast("Photo saved")
+                                if (!this.isDestroyed)
+                                    STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
+                                        if (!this.isDestroyed) {
+                                            Glide.with(this)
+                                                .load(imageUri)
+                                                .into(activity_profile__image_profile)
+                                        }
+                                    }
+                            } else {
+                                showToast(task.exception!!.message.toString())
+                            }
+                        }
+                    } else {
+                        showToast(uploadTask.exception!!.message.toString())
+                    }
+                }
         }
     }
 
-    override fun showDialog(message: String) {
-        when(message) {
-            "city", "name", "email", "country", "password" ->
-                mDialog = mProfilePresenter.getDialogInput(message)
-            "exit", "delete" ->
-                mDialog = mProfilePresenter.getDialogConfirm(message)
+    override fun setMode() {
+        if (isDark) {
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
+            activity_profile__toolbar_txt.setTextColor(ContextCompat.getColor(this, R.color.dark))
+            activity_profile__toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
+            activity_profile__ic_back.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
+            activity_profile__image_profile.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_avatar_light))
+            activity_profile__input_name.setTextColor(ContextCompat.getColor(this, R.color.white))
+            activity_profile__input_city.setTextColor(ContextCompat.getColor(this, R.color.white))
+            activity_profile__input_email.setTextColor(ContextCompat.getColor(this, R.color.white))
+            activity_profile__input_country.setTextColor(ContextCompat.getColor(this, R.color.white))
+            activity_profile__input_password.setTextColor(ContextCompat.getColor(this, R.color.white))
+            activity_profile__input_name.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_city.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_email.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_country.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_password.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+
+            activity_profile__input_name.background.setTint(ContextCompat.getColor(this,R.color.txt_color))
+            activity_profile__input_city.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_email.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_country.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+            activity_profile__input_password.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+
+            activity_profile__btn_exit.setTextColor(ContextCompat.getColor(this, R.color.light_blue))
+            activity_profile__btn_exit.background = ContextCompat.getDrawable(this, R.drawable.bg_btn_exit_dark)
+            activity_profile__btn_delete.background = ContextCompat.getDrawable(this, R.drawable.bg_btn_delete_account_dark)
+            activity_profile__constraint_layout.background = ContextCompat.getDrawable(this, R.drawable.activity_profile__bg_edittext_dark)
         }
-        mDialog.show(supportFragmentManager, TAG)
     }
 
     override fun initProfile() {
@@ -110,44 +149,30 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
         )
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        Log.e(TAG, "onActivityResult")
-
-        if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            CropImage.activity(mImageURI).setAspectRatio(1, 1).start(this)
-        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            mImageURI = CropImage.getActivityResult(data).uri
-
-            mStorage.child("users/${mAuth.currentUser!!.uid}/photo").putFile(mImageURI).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val url = mStorage.child("users/${mAuth.currentUser!!.uid}/photo/$mImageURI")
-                    mDatabase.child("users/${mAuth.currentUser!!.uid}/photo").setValue(url.downloadUrl.toString()).addOnCompleteListener { it1 ->
-                        if (it1.isSuccessful) {
-                            showToast("Photo saved")
-                            if (!this.isDestroyed)
-                                mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener { imageUri ->
-                                    if (!this.isDestroyed) {
-                                        Glide.with(this).load(imageUri.toString())
-                                            .into(activity_profile__image_profile)
-                                    }
-                                }
-                        } else {
-                            showToast(it1.exception!!.message.toString())
-                        }
-                    }
-                } else {
-                    showToast(it.exception!!.message.toString())
-                }
-            }
+    override fun showDialog(message: String) {
+        when(message) {
+            "city", "name", "email", "country", "password" ->
+                mDialog = mProfilePresenter.getDialogInput(message)
+            "exit", "delete" ->
+                mDialog = mProfilePresenter.getDialogConfirm(message)
         }
+        mDialog.show(supportFragmentManager, TAG)
     }
 
-    private fun createImageFile(): File {
-        val imageFileName = "JPEG_" + timeStamp + "_"
-        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(imageFileName, ".jpg", storageDir)
+    fun onClick(v: View) {
+        when (v) {
+            activity_profile__btn_exit -> showDialog("exit")
+            activity_profile__btn_delete -> showDialog("delete")
+
+            activity_profile__input_city -> showDialog("city")
+            activity_profile__input_name -> showDialog("name")
+            activity_profile__input_email -> showDialog("email")
+            activity_profile__input_country -> showDialog("country")
+            activity_profile__input_password -> showDialog("password")
+
+            activity_profile__ic_back -> finish()
+            activity_profile__image_profile -> takeCameraPicture()
+        }
     }
 
     private fun takeCameraPicture() {
@@ -160,64 +185,11 @@ class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
             startActivityForResult(intent, TAKE_PICTURE_REQUEST_CODE)
         }
     }
-    
-    override fun setMode() {
-        if (isDark) {
-            this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
-            activity_profile__toolbar_txt.setTextColor(ContextCompat.getColor(this, R.color.dark))
-            activity_profile__toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
-            activity_profile__ic_back.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
-            activity_profile__image_profile.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_avatar_light))
-            activity_profile__input_name.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_city.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_email.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_country.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_password.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_name.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_city.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_email.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_country.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_password.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
 
-            activity_profile__input_name.background.setTint(ContextCompat.getColor(this,R.color.txt_color))
-            activity_profile__input_city.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_email.background.setTint(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-            activity_profile__input_country.background.setTint(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-            activity_profile__input_password.background.setTint(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
-            )
-
-            activity_profile__btn_exit.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.light_blue
-                )
-            )
-            activity_profile__btn_exit.background = ContextCompat.getDrawable(
-                this,
-                R.drawable.bg_btn_exit_dark
-            )
-            activity_profile__btn_delete.background = ContextCompat.getDrawable(
-                this,
-                R.drawable.bg_btn_delete_account_dark
-            )
-            activity_profile__constraint_layout.background = ContextCompat.getDrawable(
-                this,
-                R.drawable.activity_profile__bg_edittext_dark
-            )
-        }
+    private fun createImageFile(): File {
+        val imageFileName = "JPEG_" + timeStamp + "_"
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(imageFileName, ".jpg", storageDir)
     }
+
 }

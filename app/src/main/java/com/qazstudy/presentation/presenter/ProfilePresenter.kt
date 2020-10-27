@@ -9,12 +9,11 @@ import com.bumptech.glide.Glide
 import com.qazstudy.R
 import moxy.MvpPresenter
 import moxy.InjectViewState
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mStorage
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import com.qazstudy.presentation.view.MvpProfile
 import com.qazstudy.presentation.view.DialogConfirm
 import com.qazstudy.presentation.view.DialogInput
+import com.qazstudy.util.*
 
 
 @InjectViewState
@@ -38,7 +37,7 @@ class ProfilePresenter(var activity: Activity) : MvpPresenter<MvpProfile>() {
     }
 
     fun setImage(view: ImageView) {
-         mStorage.child("users/${mAuth.currentUser!!.uid}/photo").downloadUrl.addOnSuccessListener {
+        STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).downloadUrl.addOnSuccessListener {
              Glide.with(activity)
                  .load(it)
                  .error(ContextCompat.getDrawable(activity, R.drawable.ic_avatar_dark))

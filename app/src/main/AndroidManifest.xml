@@ -42,10 +42,6 @@
             android:label="@string/activity_profile__title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.activity.ActivityLogin"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity
             android:name=".ui.activity.ActivityNavigation"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

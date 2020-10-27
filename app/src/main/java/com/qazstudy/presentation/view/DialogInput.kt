@@ -6,15 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.app.Dialog
 import android.content.Intent
-import com.qazstudy.util.showToast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.qazstudy.ui.activity.ActivityProfile
 import com.google.firebase.auth.EmailAuthProvider
 import kotlinx.android.synthetic.main.dialog_input.view.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mAuth
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
+import com.qazstudy.util.*
 import kotlinx.android.synthetic.main.dialog_input_password_dark.view.*
 import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__ok
 import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__cancel
@@ -47,15 +45,15 @@ class DialogInput(private val hint: String, private val password: String): Dialo
 
                             if (newPassword == newPasswordRepeat && oldPassword == password) {
 
-                                val credential = EmailAuthProvider.getCredential(mAuth.currentUser!!.email.toString(), oldPassword)
+                                val credential = EmailAuthProvider.getCredential(AUTH.currentUser!!.email.toString(), oldPassword)
 
-                                mAuth.currentUser!!.reauthenticate(credential).addOnCompleteListener {
+                                AUTH.currentUser!!.reauthenticate(credential).addOnCompleteListener {
                                         if (it.isSuccessful) {
-                                            mAuth.currentUser!!.updatePassword(view.dialog_input_new_password.text.toString()).addOnCompleteListener {
+                                            AUTH.currentUser!!.updatePassword(view.dialog_input_new_password.text.toString()).addOnCompleteListener {
                                                     if (it.isSuccessful) {
                                                         val updatesMap = mutableMapOf<String, Any>()
                                                         updatesMap[hint] = view.dialog_input_new_password.text.toString()
-                                                        mDatabase.updateChildren(updatesMap).addOnCompleteListener {
+                                                        DATABASE.updateChildren(updatesMap).addOnCompleteListener {
                                                                 if (it.isSuccessful) {
                                                                     startActivity(Intent(requireContext(), ActivityProfile::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                                                                     requireActivity().finish()
@@ -96,15 +94,15 @@ class DialogInput(private val hint: String, private val password: String): Dialo
 
                             if (newPassword == newPasswordRepeat && password == oldPassword) {
 
-                                val credential = EmailAuthProvider.getCredential(mAuth.currentUser!!.email.toString(), oldPassword)
+                                val credential = EmailAuthProvider.getCredential(AUTH.currentUser!!.email.toString(), oldPassword)
 
-                                mAuth.currentUser!!.reauthenticate(credential).addOnCompleteListener {
+                                AUTH.currentUser!!.reauthenticate(credential).addOnCompleteListener {
                                     if (it.isSuccessful) {
-                                        mAuth.currentUser!!.updatePassword(view.dialog_input_new_password.text.toString()).addOnCompleteListener {
+                                        AUTH.currentUser!!.updatePassword(view.dialog_input_new_password.text.toString()).addOnCompleteListener {
                                             if (it.isSuccessful) {
                                                 val updatesMap = mutableMapOf<String, Any>()
                                                 updatesMap[hint] = view.dialog_input_new_password.text.toString()
-                                                mDatabase.updateChildren(updatesMap).addOnCompleteListener {
+                                                DATABASE.updateChildren(updatesMap).addOnCompleteListener {
                                                     if (it.isSuccessful) {
                                                         startActivity(Intent(requireContext(), ActivityProfile::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                                                         requireActivity().finish()
@@ -162,13 +160,13 @@ class DialogInput(private val hint: String, private val password: String): Dialo
                 val intent = Intent(requireContext(), ActivityProfile::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 
                 if (hint == "email") {
-                    val credential = EmailAuthProvider.getCredential(mAuth.currentUser!!.email.toString(), password)
+                    val credential = EmailAuthProvider.getCredential(AUTH.currentUser!!.email.toString(), password)
 
-                    mAuth.currentUser!!.reauthenticate(credential).addOnCompleteListener {
+                    AUTH.currentUser!!.reauthenticate(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            mAuth.currentUser!!.updateEmail(view.dialog_input.text.toString()).addOnCompleteListener {
+                            AUTH.currentUser!!.updateEmail(view.dialog_input.text.toString()).addOnCompleteListener {
                                 if (it.isSuccessful) {
-                                    mDatabase.child("users/${mAuth.currentUser!!.uid}/").updateChildren(updatesMap).addOnCompleteListener {
+                                    DATABASE.child(NODE_USER).child(USER_UID).updateChildren(updatesMap).addOnCompleteListener {
                                         if (it.isSuccessful) {
                                             startActivity(intent)
                                             requireActivity().finish()
@@ -185,7 +183,7 @@ class DialogInput(private val hint: String, private val password: String): Dialo
                         }
                     }
                 } else {
-                    mDatabase.child("users/${mAuth.currentUser!!.uid}/").updateChildren(updatesMap).addOnCompleteListener {
+                    DATABASE.child("users/${AUTH.currentUser!!.uid}/").updateChildren(updatesMap).addOnCompleteListener {
                         if (it.isSuccessful) {
                             startActivity(intent)
                             requireActivity().finish()

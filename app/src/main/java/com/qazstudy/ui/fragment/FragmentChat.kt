@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import android.text.format.DateFormat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.qazstudy.ui.activity.ActivityNavigation
 import kotlinx.android.synthetic.main.fragment_chat.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -20,7 +19,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import kotlinx.android.synthetic.main.view_holder_message.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mDatabase
+import com.qazstudy.util.DATABASE
+import com.qazstudy.util.STORAGE
 
 class FragmentChat : Fragment() {
 
@@ -51,7 +51,7 @@ class FragmentChat : Fragment() {
 
         if (mChatPath != "") {
 
-            val query = mDatabase.child(mChatPath)
+            val query = DATABASE.child(mChatPath)
 
             options = FirebaseRecyclerOptions.Builder<Message>()
                 .setQuery(query, Message::class.java)
@@ -102,7 +102,7 @@ class FragmentChat : Fragment() {
 
         ic_send.setOnClickListener {
             if (input_chat_message.text.isNotEmpty() && mChatPath != "") {
-                mDatabase.child(mChatPath).push().setValue(
+                DATABASE.child(mChatPath).push().setValue(
                     Message(mUser, input_chat_message.text.toString())
                 )
                 input_chat_message.setText("")
@@ -132,7 +132,7 @@ class FragmentChat : Fragment() {
         fun bind(model: Message) {
 
             if (model.userID.photo.isNotEmpty()) {
-                ActivityNavigation.mStorage.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
+                STORAGE.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
                     Glide.with(requireActivity()).load(it.toString()).into(itemView.ic_chat)
                 }
             }
