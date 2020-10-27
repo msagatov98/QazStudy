@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "167549940653-sd47rmpc6bvls2mctgm5bhdet214o2l6.apps.googleusercontent.com",
+          "client_id": "167549940653-fp77fdtbhsa8fkmsmfot3u2kgf4l2env.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.qazstudy",
-            "certificate_hash": "9fca8ea35b9b0bca021dfb96b12dc9f088e7d5c2"
+            "certificate_hash": "5de6d7b06b5f8dd60b7e1463b1846df103810f5d"
           }
         },
         {

@@ -38,7 +38,6 @@ import kotlinx.android.synthetic.main.activity_navigation.*
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.firebase.ui.auth.AuthUI
-import com.google.firebase.database.ValueEventListener
 import com.qazstudy.util.showToast
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -62,7 +61,7 @@ class ActivityNavigation : AppCompatActivity() {
         AuthUI.IdpConfig.PhoneBuilder().build(),
         AuthUI.IdpConfig.GoogleBuilder().build(),
         //AuthUI.IdpConfig.TwitterBuilder().build(),
-        //AuthUI.IdpConfig.FacebookBuilder().build()
+        AuthUI.IdpConfig.FacebookBuilder().build()
     )
 
     companion object {
@@ -94,13 +93,9 @@ class ActivityNavigation : AppCompatActivity() {
                         .build(),
                     AUTH_REQUEST_CODE
                 )
-            } else  {
-
-
-
-
-                mAuth.fetchSignInMethodsForEmail(mAuth.currentUser!!.email!!).addOnCompleteListener{
-                    if (it.isSuccessful) {
+            } else {
+                mAuth.fetchSignInMethodsForEmail(mAuth.currentUser!!.email!!).addOnCompleteListener{ fetchSignInMethod ->
+                    if (fetchSignInMethod.isSuccessful) {
                         mDatabase.child("users/${mAuth.currentUser!!.uid}")
                             .addListenerForSingleValueEvent(ValueEventListenerAdapter {
                                 mUser = it.getValue(User::class.java)!!
