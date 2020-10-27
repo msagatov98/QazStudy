@@ -144,6 +144,11 @@ class ActivityNavigation : AppCompatActivity() {
         else ic_theme_switcher.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_brightness_light))
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+    }
 
     override fun onStart() {
         super.onStart()

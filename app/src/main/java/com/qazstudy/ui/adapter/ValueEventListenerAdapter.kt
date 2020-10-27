@@ -8,6 +8,8 @@ class ValueEventListenerAdapter(val handler: (DataSnapshot) -> Unit): ValueEvent
     override fun onCancelled(error: DatabaseError) {}
 
     override fun onDataChange(data: DataSnapshot) {
-        handler(data)
+        if (data.exists())
+            handler(data)
+
     }
 }
