@@ -1,35 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_setting__constraint_layout"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_setting__constraint_layout">
+    android:layout_width="match_parent">
 
-    <ImageView
-        android:id="@+id/locale_ru"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:src="@drawable/russia"
-        android:contentDescription="@string/all_image_description"
+    <TextView
+        android:padding="10dp"
+        android:textSize="24sp"
+        android:text="@string/select_language"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:textColor="@color/black"
+        android:id="@+id/tv_setting_language"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/spinner_setting_language"/>
 
-    <ImageView
-        android:id="@+id/locale_tr"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:src="@drawable/turkey"
-        android:contentDescription="@string/all_image_description"
-        app:layout_constraintTop_toBottomOf="@id/locale_ru"
-        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:id="@+id/spinner_setting_language"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_setting_language"/>
 
-    <ImageView
-        android:id="@+id/locale_en"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:src="@drawable/united_kingdom"
-        android:contentDescription="@string/all_image_description"
-        app:layout_constraintTop_toBottomOf="@id/locale_tr"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

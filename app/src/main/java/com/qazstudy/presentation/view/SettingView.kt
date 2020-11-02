@@ -1,3 +1,4 @@
 package com.qazstudy.presentation.view
 
-interface LoginView
+interface SettingView : BaseView {
+}

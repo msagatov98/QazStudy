@@ -20,14 +20,14 @@ import moxy.presenter.ProvidePresenter
 import androidx.core.content.FileProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import com.qazstudy.presenter.ProfilePresenter
+import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.theartofdev.edmodo.cropper.CropImage
-import com.qazstudy.presentation.view.MvpProfile
+import com.qazstudy.presentation.view.ProfileView
 import kotlinx.android.synthetic.main.activity_profile.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
 
-class ActivityProfile : MvpAppCompatActivity(), MvpProfile {
+class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
     @InjectPresenter
     lateinit var mProfilePresenter: ProfilePresenter

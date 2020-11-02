@@ -13,9 +13,13 @@ import com.google.firebase.auth.EmailAuthProvider
 import kotlinx.android.synthetic.main.dialog_input.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.util.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.dialog_input_password_dark.view.*
 import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__ok
 import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__cancel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 class DialogInput(private val hint: String, private val password: String): DialogFragment() {
 
@@ -183,14 +187,12 @@ class DialogInput(private val hint: String, private val password: String): Dialo
                         }
                     }
                 } else {
-                    DATABASE.child("users/${AUTH.currentUser!!.uid}/").updateChildren(updatesMap).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            startActivity(intent)
-                            requireActivity().finish()
-                        } else {
-                            requireContext().showToast(it.exception.toString())
-                        }
+
+                    this.dismiss()
+                    CoroutineScope(IO).launch {
+                        DATABASE.child(NODE_USER).child(USER_UID).updateChildren(updatesMap)
                     }
+                    activity?.activity_profile__input_name?.setText(str)
                 }
             } else {
                 requireContext().showToast("Enter $hint")

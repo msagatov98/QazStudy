@@ -1,5 +1,4 @@
-package com.qazstudy.presenter
-
+package com.qazstudy.presentation.presenter
 
 import android.app.Activity
 import android.widget.ImageView
@@ -10,14 +9,13 @@ import com.qazstudy.R
 import moxy.MvpPresenter
 import moxy.InjectViewState
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import com.qazstudy.presentation.view.MvpProfile
+import com.qazstudy.presentation.view.ProfileView
 import com.qazstudy.presentation.view.DialogConfirm
 import com.qazstudy.presentation.view.DialogInput
 import com.qazstudy.util.*
 
-
 @InjectViewState
-class ProfilePresenter(var activity: Activity) : MvpPresenter<MvpProfile>() {
+class ProfilePresenter(var activity: Activity) : MvpPresenter<ProfileView>() {
 
 
     fun getName() : String {

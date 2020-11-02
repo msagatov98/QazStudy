@@ -1,7 +1,8 @@
 package com.qazstudy.presentation.view
 
 import moxy.viewstate.strategy.alias.AddToEnd
-interface MvpProfile : BaseView {
+
+interface ProfileView : BaseView {
 
     @AddToEnd
     fun showDialog(message: String)

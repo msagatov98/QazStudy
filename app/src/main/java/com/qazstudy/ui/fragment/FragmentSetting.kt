@@ -6,27 +6,45 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.content.Intent
+import moxy.MvpAppCompatFragment
 import android.view.LayoutInflater
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.widget.AdapterView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import com.qazstudy.presentation.presenter.SettingPresenter
+import com.qazstudy.presentation.view.SettingView
 import com.qazstudy.ui.activity.ActivityNavigation
 import kotlinx.android.synthetic.main.fragment_setting.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
-class FragmentSetting : Fragment() {
+class FragmentSetting : MvpAppCompatFragment(), SettingView {
+
+    @InjectPresenter
+    lateinit var mSettingPresenter: SettingPresenter
+
+    @ProvidePresenter
+    fun providePresenter(): SettingPresenter {
+        return SettingPresenter(requireContext())
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        locale_ru.setOnClickListener{ ru() }
-        locale_en.setOnClickListener { en() }
-        locale_tr.setOnClickListener { tr() }
 
-        if (isDark) {
-            fragment_setting__constraint_layout.background = requireContext().getDrawable(R.color.dark)
-        } else {
-            fragment_setting__constraint_layout.background = requireContext().getDrawable(R.color.white)
+        spinner_setting_language.adapter = mSettingPresenter.getAdapter()
+
+        spinner_setting_language.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when (position) {
+                    1 -> ru()
+                    2 -> tr()
+                    3 -> en()
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) { }
+
         }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,5 +76,10 @@ class FragmentSetting : Fragment() {
         resources.updateConfiguration(conf, dm)
         val intent  = Intent(context, ActivityNavigation::class.java)
         startActivity(intent)
+    }
+
+    override fun setMode() {
+        fragment_setting__constraint_layout.background =
+            ContextCompat.getDrawable(requireContext(), R.color.dark)
     }
 }
