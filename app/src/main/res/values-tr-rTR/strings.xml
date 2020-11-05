@@ -52,6 +52,7 @@
     <string name="dialog_repeat_password">Parola repeat</string>
     <string name="empty_message_send">Boş mesaj atamazsınız</string>
     <string name="list_word">" Kelimeler"</string>
-    <string name="translater">" Çevirmek"</string>
+    <string name="translator">" Çevirmek"</string>
     <string name="hello_blank_fragment">Bu yapiliyor</string>
+    <string name="alphabet">Kazak alfabesi</string>
 </resources>

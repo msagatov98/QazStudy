@@ -29,8 +29,7 @@ class FragmentSetting : MvpAppCompatFragment(), SettingView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        spinner_setting_language.adapter = mSettingPresenter.getAdapter()
+        spinner_setting_language.adapter = mSettingPresenter.getCountryAdapter()
 
         spinner_setting_language.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -81,5 +80,8 @@ class FragmentSetting : MvpAppCompatFragment(), SettingView {
     override fun setMode() {
         fragment_setting__constraint_layout.background =
             ContextCompat.getDrawable(requireContext(), R.color.dark)
+
+        tv_setting_abc.setTextColor(context?.getColor(R.color.white)!!)
+        tv_setting_language.setTextColor(context?.getColor(R.color.white)!!)
     }
 }

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_setting__constraint_layout"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <TextView
-        android:padding="10dp"
-        android:textSize="24sp"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="start|center"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
         android:text="@string/select_language"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -18,12 +20,46 @@
         app:layout_constraintEnd_toStartOf="@id/spinner_setting_language"/>
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:id="@+id/spinner_setting_language"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_setting_language"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/txt_color"
+        app:layout_constraintTop_toBottomOf="@id/tv_setting_language"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="start|center"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="@string/alphabet"
+        android:textColor="@color/black"
+        android:id="@+id/tv_setting_abc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/spinner_setting_abc"
+        app:layout_constraintTop_toBottomOf="@id/tv_setting_language"/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:entries="@array/kazakh_alphabet"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:id="@+id/spinner_setting_abc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/spinner_setting_language"
+        app:layout_constraintTop_toBottomOf="@id/spinner_setting_language"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/txt_color"
+        app:layout_constraintTop_toBottomOf="@id/tv_setting_abc"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

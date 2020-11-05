@@ -22,7 +22,7 @@
 
             <com.google.android.material.tabs.TabItem
                 android:layout_height="50dp"
-                android:text="@string/translater"
+                android:text="@string/translator"
                 android:id="@+id/tab_translater"
                 android:layout_width="match_parent"/>
 

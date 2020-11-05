@@ -13,8 +13,22 @@ import java.util.*
 @InjectViewState
 class SettingPresenter(val context: Context) : MvpPresenter<SettingView>() {
 
-    private fun getCurrentCountry(): Country {
 
+    private val countryList = arrayOf (
+        getCurrentCountry(),
+        Country(context.getString(R.string.russian), R.drawable.russia),
+        Country(context.getString(R.string.turkish), R.drawable.turkey),
+        Country(context.getString(R.string.english), R.drawable.united_kingdom)
+    )
+
+
+    private var countryAdapter: AdapterCountry = AdapterCountry(context, countryList)
+
+    fun getCountryAdapter(): AdapterCountry {
+        return countryAdapter
+    }
+
+    private fun getCurrentCountry(): Country {
         return when(Locale.getDefault().displayLanguage) {
             "English" -> Country(context.getString(R.string.english), R.drawable.united_kingdom)
             "Russian" -> Country(context.getString(R.string.russian), R.drawable.russia)
@@ -22,20 +36,4 @@ class SettingPresenter(val context: Context) : MvpPresenter<SettingView>() {
             else -> Country(context.getString(R.string.russian), R.drawable.russia)
         }
     }
-
-    private  var countryList = arrayOf (
-        getCurrentCountry(),
-        Country(context.getString(R.string.russian), R.drawable.russia),
-        Country(context.getString(R.string.turkish), R.drawable.turkey),
-        Country(context.getString(R.string.english), R.drawable.united_kingdom)
-    )
-
-    private var countryAdapter: AdapterCountry = AdapterCountry(context, countryList)
-
-    fun getAdapter(): AdapterCountry {
-        return countryAdapter
-    }
-
-
-
 }

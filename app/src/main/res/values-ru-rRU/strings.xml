@@ -124,7 +124,8 @@
     <string name="dialog_repeat_password">Повторите пароль</string>
     <string name="empty_message_send">Вы не можете отправить пустое сообщение</string>
     <string name="list_word">Список слов</string>
-    <string name="translater">Переводчик</string>
+    <string name="translator">Переводчик</string>
     <string name="hello_blank_fragment">Эта страница в разработке</string>
+    <string name="alphabet">Казахский алфавит</string>
 
 </resources>

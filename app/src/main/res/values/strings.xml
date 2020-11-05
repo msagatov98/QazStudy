@@ -10,6 +10,9 @@
     <string name="facebook_application_id" translatable="false">702516130309403</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb702516130309403</string>
 
+    <string name="kazakh_alphabet_cyrillic" translatable="false">Кирил</string>
+    <string name="kazakh_alphabet_latin" translatable="false">Latyn</string>
+
     <string name="turkish" translatable="false">Turkce</string>
     <string name="russian" translatable="false">Русский</string>
     <string name="english" translatable="false">English</string>
@@ -28,6 +31,20 @@
     <string name="home_second" translatable="false">Home Second</string>
 
     <string name="all_image_description" translatable="false">Description</string>
+
+
+    <string name="empty_message_send">You can\'t send empty message</string>
+    <string name="list_word">List</string>
+    <string name="translator">Translator</string>
+
+    <string name="select_language">Language</string>
+    <string name="alphabet">Kazakh alphabet</string>
+    
+    <string-array name="kazakh_alphabet">
+        <item>Кирил</item>
+        <item>Latyn</item>
+    </string-array>
+
     <!-- Strings used for fragments for navigation -->
 
     <string-array name="lessons_header">
@@ -69,6 +86,7 @@
     <string name="activity_chat_title">Comments</string>
     <string name="login">Login</string>
     <string name="create_account">Don\'t have an account? Sign up.</string>
+    <string name="enter_name_and_password">Enter name and password</string>
 
     <!-- Profile activity -->
     <string name="activity_profile__btn_exit">Exit</string>
@@ -167,19 +185,11 @@
     <string name="lecture_4">asdf</string>
     <string name="lecture_5">asdf</string>
     <string name="message">Message</string>
-    <string name="enter_name_and_password">Enter name and password</string>
 
 
     <string name="confirm_delete">Are you sure to delete account</string>
     <string name="confirm_exit">Are you sure to exit from account</string>
     <string name="lecture_1_2">lecture 1.2</string>
     <string name="lecture_2_1">lecture_2_1</string>
-    <string name="empty_message_send">You can\'t send empty message</string>
-    <string name="list_word">List</string>
-    <string name="translater">Translater</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">This page is in development</string>
-
-    <string name="select_language">Language</string>
 
 </resources>
