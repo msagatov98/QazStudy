@@ -16,13 +16,17 @@ import kotlinx.android.synthetic.main.fragment_chat.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.view_holder_message.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import com.qazstudy.util.DATABASE
-import com.qazstudy.util.STORAGE
 
 class FragmentChat : Fragment() {
+
+    private val AUTH = FirebaseAuth.getInstance()
+    private var STORAGE = FirebaseStorage.getInstance().reference
+    private var DATABASE = FirebaseDatabase.getInstance().reference
 
     private lateinit var mChatPath: String
 
@@ -63,7 +67,7 @@ class FragmentChat : Fragment() {
                     viewType: Int
                 ): MessageViewHolder {
 
-                    val view = if (isDark)
+                    val view = if (mUser.isDark)
                                     LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message_dark, parent, false)
                                else
                                     LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message, parent, false)
@@ -92,7 +96,7 @@ class FragmentChat : Fragment() {
         rv_chat.layoutManager = manager
         rv_chat.adapter = adapter
 
-        if (isDark) {
+        if (mUser.isDark) {
             input_chat_message.setTextColor(requireContext().getColor(R.color.white))
             input_chat_message.background = ContextCompat.getDrawable(
                 requireContext(),

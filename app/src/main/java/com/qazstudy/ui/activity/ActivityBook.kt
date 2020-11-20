@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.qazstudy.R
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.activity_book.*
 import java.io.BufferedReader
 import java.io.IOException
@@ -25,7 +25,7 @@ class ActivityBook : AppCompatActivity() {
     }
 
     private fun setTheme() {
-        if (isDark) {
+        if (mUser.isDark) {
             book_text.setTextColor(getColor(R.color.white))
             book_text.setBackgroundColor(getColor(R.color.dark))
             toolbar.setBackgroundColor(getColor(R.color.light_blue))

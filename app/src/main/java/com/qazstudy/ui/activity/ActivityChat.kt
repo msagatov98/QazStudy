@@ -10,7 +10,7 @@ import com.qazstudy.presentation.view.ChatView
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_chat.*
 import com.qazstudy.presentation.presenter.ChatPresenter
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 
 class ActivityChat : MvpAppCompatActivity(), ChatView {
 
@@ -35,7 +35,7 @@ class ActivityChat : MvpAppCompatActivity(), ChatView {
     }
 
     override fun setMode() {
-        if (isDark) {
+        if (mUser.isDark) {
             bg_chat.setBackgroundColor(getColor(R.color.dark))
             this.window.statusBarColor = getColor(R.color.black)
             activity_chat__toolbar.setBackgroundColor(getColor(R.color.light_blue))

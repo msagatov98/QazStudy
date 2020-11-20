@@ -20,14 +20,22 @@ import moxy.presenter.ProvidePresenter
 import androidx.core.content.FileProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.theartofdev.edmodo.cropper.CropImage
 import com.qazstudy.presentation.view.ProfileView
 import kotlinx.android.synthetic.main.activity_profile.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 
 class ActivityProfile : MvpAppCompatActivity(), ProfileView {
+
+
+    private val AUTH = FirebaseAuth.getInstance()
+    private var STORAGE = FirebaseStorage.getInstance().reference
+    private var DATABASE = FirebaseDatabase.getInstance().reference
 
     @InjectPresenter
     lateinit var mProfilePresenter: ProfilePresenter
@@ -47,11 +55,13 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         setMode()
+        mProfilePresenter.init()
     }
 
     override fun onStart() {
         super.onStart()
-        initProfile()
+
+        mProfilePresenter.init()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -64,18 +74,18 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
         } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             mImageURI = CropImage.getActivityResult(data).uri
 
-            STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO)
+            STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO)
                 .putFile(mImageURI)
                 .addOnCompleteListener { uploadTask ->
                     if (uploadTask.isSuccessful) {
 
-                        val url = STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).child("$mImageURI")
+                        val url = STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO).child("$mImageURI")
 
-                        DATABASE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).setValue(url.downloadUrl.toString()).addOnCompleteListener { task ->
+                        DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO).setValue(url.downloadUrl.toString()).addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 showToast("Photo saved")
                                 if (!this.isDestroyed)
-                                    STORAGE.child(NODE_USER).child(USER_UID).child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
+                                    STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
                                         if (!this.isDestroyed) {
                                             Glide.with(this)
                                                 .load(imageUri)
@@ -94,7 +104,7 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
     }
 
     override fun setMode() {
-        if (isDark) {
+        if (mUser.isDark) {
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
             activity_profile__toolbar_txt.setTextColor(ContextCompat.getColor(this, R.color.dark))
             activity_profile__toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)

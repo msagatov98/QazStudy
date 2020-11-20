@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.fragment_lecture4.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLecture4 : Fragment() {
 
@@ -22,7 +22,7 @@ class FragmentLecture4 : Fragment() {
 
         setHeaderText()
 
-        if (isDark) {
+        if (mUser.isDark) {
             lecture_4_text.setTextColor(requireContext().getColor(R.color.white))
         }
 

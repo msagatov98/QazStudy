@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLecture2 : Fragment() {
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

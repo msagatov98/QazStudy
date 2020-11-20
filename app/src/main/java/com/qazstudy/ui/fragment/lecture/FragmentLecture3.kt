@@ -9,12 +9,16 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.fragment_lecture3.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLecture3 : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_lecture3, container, false)
     }
 
@@ -22,7 +26,7 @@ class FragmentLecture3 : Fragment() {
         super.onActivityCreated(savedInstanceState)
         setTitle()
 
-        if (isDark) {
+        if (mUser.isDark) {
             lecture_3_text.setTextColor(requireContext().getColor(R.color.white))
         }
     }

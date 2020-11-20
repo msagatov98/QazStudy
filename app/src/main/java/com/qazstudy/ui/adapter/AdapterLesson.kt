@@ -13,8 +13,8 @@ import com.qazstudy.model.Lesson
 import android.view.LayoutInflater
 import com.qazstudy.ui.activity.ActivityLecture
 import androidx.recyclerview.widget.RecyclerView
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.view_holder_lesson.view.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 open class AdapterLesson(var context: Context, private val lesson: Lesson) : RecyclerView.Adapter<AdapterLesson.LessonViewHolder>() {
 
@@ -49,7 +49,7 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) : Rec
         fun bind(position: Int) {
 
 
-            if (isDark) {
+            if (mUser.isDark) {
                 header.setTextColor(Color.rgb(60, 90, 188))
             }
 

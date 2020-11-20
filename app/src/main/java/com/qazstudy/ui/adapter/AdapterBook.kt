@@ -12,8 +12,8 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.qazstudy.ui.activity.ActivityBook
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.view_holder_book.view.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -37,7 +37,7 @@ class AdapterBook(private val context: Context, private val arr: Array<Int>) : R
 
         fun bind(position: Int) {
 
-            if (isDark) text.setTextColor(Color.rgb(255, 255, 255))
+            if (mUser.isDark) text.setTextColor(Color.rgb(255, 255, 255))
 
             image.setImageResource(arr[position])
 

@@ -9,8 +9,8 @@ import com.qazstudy.ui.fragment.lecture.*
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.activity_lesson.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class ActivityLecture : AppCompatActivity() {
 
@@ -63,7 +63,7 @@ class ActivityLecture : AppCompatActivity() {
     }
 
     private fun setTheme() {
-        if (isDark) {
+        if (mUser.isDark) {
             this.window.statusBarColor = getColor(R.color.light_blue)
             activity_lesson__txt_lecture_header.setTextColor(getColor(R.color.dark))
             activity_lesson__toolbar.setBackgroundColor(getColor(R.color.light_blue))

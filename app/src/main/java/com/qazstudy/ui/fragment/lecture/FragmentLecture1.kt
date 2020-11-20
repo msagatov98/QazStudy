@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.fragment_lecture1.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class FragmentLecture1 : Fragment() {
 
@@ -43,7 +43,7 @@ class FragmentLecture1 : Fragment() {
             abc_latin_26, abc_latin_27, abc_latin_28, abc_latin_29, abc_latin_30,
             abc_latin_31, abc_latin_32)
 
-        if (isDark) {
+        if (mUser.isDark) {
             text_view.setTextColor(requireContext().getColor(R.color.white))
             arrayAbcCyrillic.forEach {
                 it.setTextColor(requireContext().getColor(R.color.light_blue))
