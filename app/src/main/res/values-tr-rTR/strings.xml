@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="menu_task">HZ</string>
-    <string name="menu_bookmark">HZ</string>
     <string name="menu_book">Kıtablar</string>
     <string name="menu_lesson">Dersler</string>
     <string name="menu_settings">Ayarlar</string>
@@ -38,11 +37,7 @@
     <string name="lecture_4">asdf</string>
     <string name="lecture_5">asdf</string>
     <string name="activity_chat_title">Yorumlar</string>
-    <string name="login">Oturum aç</string>
-    <string name="register">Kayıt ol</string>
-    <string name="create_account">ХЗ</string>
     <string name="message">" Mesaj"</string>
-    <string name="enter_name_and_password">Adınızı ve parolanı yazın</string>
     <string name="confirm_delete">Hesapı silmeyi istiyor musunuz</string>
     <string name="confirm_exit">Hesaptan cıkmayı istiyor musunuz</string>
     <string name="lecture_1_2">lecture 1.2</string>
@@ -53,6 +48,5 @@
     <string name="empty_message_send">Boş mesaj atamazsınız</string>
     <string name="list_word">" Kelimeler"</string>
     <string name="translator">" Çevirmek"</string>
-    <string name="hello_blank_fragment">Bu yapiliyor</string>
     <string name="alphabet">Kazak alfabesi</string>
 </resources>

@@ -7,7 +7,6 @@
     tools:context=".ui.fragment.lecture.FragmentLecture8">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

@@ -4,7 +4,6 @@
     <string name="menu_book">Книги</string>
     <string name="menu_task">Задачи</string>
     <string name="menu_lesson">Уроки</string>
-    <string name="menu_bookmark">Заметки</string>
     <string name="menu_settings">Настройки</string>
     <string name="menu_dictionary">Словарь</string>
 
@@ -34,13 +33,9 @@
     <string name="activity_profile__btn_delete">Удалить аккаунт</string>
     <string name="activity_profile__ic_back_description">Описание</string>
 
-    <string name="login">Войти</string>
     <string name="message">Введите текст</string>
-    <string name="register">Зарегистрироваться</string>
     <string name="activity_chat_title">Комментарии</string>
     <string name="confirm_exit">Уверены что хотите выйти</string>
-    <string name="enter_name_and_password">Введите имя и пороль</string>
-    <string name="create_account">Нет аккаунта? Зарегистрироваться</string>
     <string name="confirm_delete">Уверены что хотите удалить аккаунт?</string>
 
     <string name="lecture_1_1">
@@ -125,7 +120,6 @@
     <string name="empty_message_send">Вы не можете отправить пустое сообщение</string>
     <string name="list_word">Список слов</string>
     <string name="translator">Переводчик</string>
-    <string name="hello_blank_fragment">Эта страница в разработке</string>
     <string name="alphabet">Казахский алфавит</string>
 
 </resources>

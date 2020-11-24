@@ -15,7 +15,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_list"
                 android:layout_height="50dp"
                 android:text="@string/list_word"
                 android:layout_width="match_parent"/>
@@ -23,7 +22,6 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_height="50dp"
                 android:text="@string/translator"
-                android:id="@+id/tab_translater"
                 android:layout_width="match_parent"/>
 
         </com.google.android.material.tabs.TabLayout>

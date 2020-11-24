@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single" android:id="@+id/group_1">
+    <group android:checkableBehavior="single">
         <item
             app:showAsAction="never"
             android:id="@+id/nav_lesson"
@@ -17,7 +17,7 @@
             android:icon="@drawable/ic_menu_task"/>
     </group>
 
-    <group android:checkableBehavior="single" android:id="@+id/group_2">
+    <group android:checkableBehavior="single">
         <item
             app:showAsAction="never"
             android:id="@+id/nav_book"
@@ -30,7 +30,7 @@
             android:icon="@drawable/ic_menu_dictionary"/>
     </group>
 
-    <group android:checkableBehavior="single"  android:id="@+id/group_3">
+    <group android:checkableBehavior="single">
         <item
             app:showAsAction="never"
             android:title="@string/menu_settings"

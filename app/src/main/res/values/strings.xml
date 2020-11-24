@@ -1,17 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">QazStudy</string>
-    <string name="nav_header_title" translatable="false">Android Studio</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
-    <string name="title_activity_navigation" translatable="false">Navigation</string>
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
-    <string name="facebook_application_id" translatable="false">702516130309403</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb702516130309403</string>
-
-    <string name="kazakh_alphabet_cyrillic" translatable="false">Кирил</string>
-    <string name="kazakh_alphabet_latin" translatable="false">Latyn</string>
 
     <string name="turkish" translatable="false">Turkce</string>
     <string name="russian" translatable="false">Русский</string>
@@ -21,14 +12,11 @@
     <string name="menu_task">Tasks</string>
     <string name="menu_lesson">Lessons</string>
     <string name="menu_settings">Settings</string>
-    <string name="menu_bookmark">Bookmarks</string>
     <string name="menu_dictionary">Dictionary</string>
 
     <string name="dialog_password">Password</string>
     <string name="dialog_old_password">Old password</string>
     <string name="dialog_repeat_password">Repeat password</string>
-
-    <string name="home_second" translatable="false">Home Second</string>
 
     <string name="all_image_description" translatable="false">Description</string>
 
@@ -71,22 +59,7 @@
         <item>Task 8</item>
     </string-array>
 
-    <string-array name="lessons_description">
-        <item>Description 1</item>
-        <item>Description 2</item>
-        <item>Description 3</item>
-        <item>Description 4</item>
-        <item>Description 5</item>
-        <item>Description 6</item>
-        <item>Description 7</item>
-        <item>Description 8</item>
-        <item>Description 9</item>
-    </string-array>
-
     <string name="activity_chat_title">Comments</string>
-    <string name="login">Login</string>
-    <string name="create_account">Don\'t have an account? Sign up.</string>
-    <string name="enter_name_and_password">Enter name and password</string>
 
     <!-- Profile activity -->
     <string name="activity_profile__btn_exit">Exit</string>
@@ -175,10 +148,6 @@
     <string name="abc_cyrillic_40" translatable="false">Э э</string>
     <string name="abc_cyrillic_41" translatable="false">Ю ю</string>
     <string name="abc_cyrillic_42" translatable="false">Я я</string>
-
-    <string name="register">Register</string>
-    <string name="next" translatable="false">Next</string>
-    <string name="activity_profile__hint_password_repeat" translatable="false">Repeat password</string>
 
     <string name="lecture_1_1">Lecture of first lesson</string>
     <string name="lecture_3">asdf</string>
