@@ -11,7 +11,6 @@ import com.qazstudy.model.User
 import com.bumptech.glide.Glide
 import com.qazstudy.model.Lesson
 import androidx.navigation.ui.navigateUp
-import androidx.appcompat.widget.Toolbar
 import android.content.res.ColorStateList
 import android.util.Log
 import androidx.core.content.ContextCompat
@@ -22,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.fragment_book.*
@@ -33,7 +31,6 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.navigation_header.*
 import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.activity_navigation.*
-import com.google.android.material.navigation.NavigationView
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.database.FirebaseDatabase
@@ -41,7 +38,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.qazstudy.util.*
 
 class ActivityNavigation : AppCompatActivity() {
-
 
     private val AUTH = FirebaseAuth.getInstance()
     private var STORAGE = FirebaseStorage.getInstance().reference
@@ -159,7 +155,8 @@ class ActivityNavigation : AppCompatActivity() {
 
                                     mImageURI = mUser.photo.toUri()
 
-                                    STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO)
+                                    STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid)
+                                        .child(NODE_PHOTO)
                                         .putFile(mImageURI)
                                         .addOnCompleteListener { uploadTask ->
                                             if (uploadTask.isSuccessful) {
