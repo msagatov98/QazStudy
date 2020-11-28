@@ -41,17 +41,16 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) : Rec
         holder.bind(position)
     }
 
-
     inner class LessonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var header : TextView = itemView.header
         var icTask: ImageView = itemView.ic_task
 
         fun bind(position: Int) {
 
+                //if (mUser.isDark) {
+                    header.setTextColor(Color.rgb(60, 90, 188))
+                //}
 
-            if (mUser.isDark) {
-                header.setTextColor(Color.rgb(60, 90, 188))
-            }
 
             Log.i(TAG, position.toString())
 

@@ -65,9 +65,9 @@ class ActivityNavigation : AppCompatActivity() {
 
     private var providers: List<AuthUI.IdpConfig> = listOf(
         AuthUI.IdpConfig.EmailBuilder().build(),
-        AuthUI.IdpConfig.GoogleBuilder().build(),
-        //AuthUI.IdpConfig.TwitterBuilder().build(), waiting for twitter gives access to their server
-        AuthUI.IdpConfig.FacebookBuilder().build()
+        AuthUI.IdpConfig.GoogleBuilder().build()
+        // AuthUI.IdpConfig.TwitterBuilder().build(), waiting for twitter gives access to their server
+        // AuthUI.IdpConfig.FacebookBuilder().build()
     )
 
     companion object {
@@ -78,71 +78,13 @@ class ActivityNavigation : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
-
-        authListener = FirebaseAuth.AuthStateListener {
-            if (AUTH.currentUser == null) {
-                startActivityForResult(
-                    AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setTheme(R.style.LoginTheme)
-                        .setAvailableProviders(providers)
-                        .build(),
-                    AUTH_REQUEST_CODE
-                )
-            } else {
-                DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                    .addListenerForSingleValueEvent(ValueEventListenerAdapter {
-
-                        mUser = it.getValue(User::class.java)!!
-
-                        if (mUser.isDark) {
-                            setDark()
-                        } else {
-                            setLight()
-                        }
-
-                        nav_header_txt_name.text = mUser.name
-
-                        Log.i(TAG, "onCreate: get from database $mUser")
-
-                        if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
-                            STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                                .child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
-                                    Glide.with(this@ActivityNavigation).load(imageUri.toString())
-                                        .into(nav_profile)
-                                }
-                        }
-                    })
-            }
-        }
-
-        AUTH.addAuthStateListener(authListener!!)
-
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val navController = findNavController(R.id.nav_host_fragment)
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_lesson, R.id.nav_task, R.id.nav_book,
-                R.id.nav_dictionary, R.id.nav_setting
-            ),
-            drawerLayout
-        )
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        initAuth()
+        initNavigation()
 
     }
 
-
     override fun onStart() {
         super.onStart()
-
-        AUTH.addAuthStateListener(authListener!!)
 
         if (AUTH.currentUser != null) {
             DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
@@ -150,11 +92,6 @@ class ActivityNavigation : AppCompatActivity() {
 
                     mUser = it.getValue(User::class.java)!!
 
-                    if (mUser.isDark) {
-                        setDark()
-                    } else {
-                        setLight()
-                    }
 
                     nav_header_txt_name.text = mUser.name
 
@@ -167,8 +104,11 @@ class ActivityNavigation : AppCompatActivity() {
                                     .into(nav_profile)
                             }
                     }
+
                 })
         }
+
+        AUTH.addAuthStateListener(authListener!!)
 
     }
 
@@ -180,43 +120,63 @@ class ActivityNavigation : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
+        super.onActivityResult(requestCode, resultCode, data)
+
         if (resultCode == RESULT_OK && requestCode == AUTH_REQUEST_CODE) {
 
             mUser = User(
                 name = AUTH.currentUser!!.displayName.toString(),
                 email = AUTH.currentUser!!.email.toString(),
                 photo = AUTH.currentUser!!.photoUrl.toString(),
+                isDark = false
             )
 
-            DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).setValue(mUser)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        nav_header_txt_name.text = mUser.name
+            AUTH.fetchSignInMethodsForEmail(mUser.email).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    nav_header_txt_name.text = mUser.name
 
-                        if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
+                    if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
 
-                            mImageURI = mUser.photo.toUri()
+                        mImageURI = mUser.photo.toUri()
 
-                            STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO)
-                                .putFile(mImageURI)
-                                .addOnCompleteListener { uploadTask ->
-                                    if (uploadTask.isSuccessful) {
-                                        Glide.with(this).load(mImageURI).into(nav_profile)
-                                    } else {
-                                        showToast(uploadTask.exception!!.message.toString())
-                                    }
+                        STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO)
+                            .putFile(mImageURI)
+                            .addOnCompleteListener { uploadTask ->
+                                if (uploadTask.isSuccessful) {
+                                    Glide.with(this).load(mImageURI).into(nav_profile)
+                                } else {
+                                    showToast(uploadTask.exception!!.message.toString())
                                 }
-                        }
-                    } else {
-                        showToast("Error creating user")
+                            }
                     }
-                }
+                } else {
+                    DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).setValue(mUser)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                nav_header_txt_name.text = mUser.name
 
-            startActivity(Intent(this, ActivityNavigation::class.java))
-            finish()
+                                if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
+
+                                    mImageURI = mUser.photo.toUri()
+
+                                    STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO)
+                                        .putFile(mImageURI)
+                                        .addOnCompleteListener { uploadTask ->
+                                            if (uploadTask.isSuccessful) {
+                                                Glide.with(this).load(mImageURI).into(nav_profile)
+                                            } else {
+                                                showToast(uploadTask.exception!!.message.toString())
+                                            }
+                                        }
+                                }
+                            } else {
+                                showToast("Error creating user")
+                            }
+                        }
+                }
+            }
         }
 
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -237,20 +197,71 @@ class ActivityNavigation : AppCompatActivity() {
         }
     }
 
+    private fun initNavigation() {
+
+        setSupportActionBar(toolbar)
+        val navController = findNavController(R.id.nav_host_fragment)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_lesson, R.id.nav_task, R.id.nav_book,
+                R.id.nav_dictionary, R.id.nav_setting
+            ),
+            drawer_layout
+        )
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        nav_view.setupWithNavController(navController)
+    }
+
+    private fun initAuth() {
+
+        authListener = FirebaseAuth.AuthStateListener {
+            if (AUTH.currentUser == null) {
+                startActivityForResult(
+                    AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setTheme(R.style.LoginTheme)
+                        .setAvailableProviders(providers)
+                        .build(),
+                    AUTH_REQUEST_CODE
+                )
+            } else {
+                DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
+                    .addListenerForSingleValueEvent(ValueEventListenerAdapter {
+
+
+                        mUser = it.getValue(User::class.java)!!
+
+                        nav_header_txt_name.text = mUser.name
+
+                        Log.i(TAG, "onCreate: get from database $mUser")
+
+                        if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
+                            STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid)
+                                .child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
+                                    Glide.with(this@ActivityNavigation).load(imageUri.toString())
+                                        .into(nav_profile)
+                                }
+                        }
+
+                    })
+            }
+        }
+    }
+
     private fun openProfile() {
         startActivity(Intent(this, ActivityProfile::class.java))
     }
 
     private fun themeSwitch() {
 
-
         val updatesMap = mutableMapOf<String, Any>()
 
-        updatesMap["isDark"] = !mUser.isDark
+        mUser.isDark = !mUser.isDark
+        updatesMap["isDark"] = mUser.isDark
 
         DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).updateChildren(updatesMap)
 
-        mUser.isDark = !mUser.isDark
 
         if (mUser.isDark) {
             setDark()
