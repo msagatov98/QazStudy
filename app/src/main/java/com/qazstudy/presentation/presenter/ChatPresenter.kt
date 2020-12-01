@@ -9,7 +9,7 @@ import com.qazstudy.presentation.view.ChatView
 import com.qazstudy.util.NODE_MESSAGE
 
 @InjectViewState
-class ChatPresenter(var fm: FragmentManager) : MvpPresenter<ChatView>() {
+class ChatPresenter() : MvpPresenter<ChatView>() {
 
     private val arFragmentChat =
         arrayListOf(
@@ -26,8 +26,8 @@ class ChatPresenter(var fm: FragmentManager) : MvpPresenter<ChatView>() {
         )
 
     fun displayChat(i : Int) {
-        val ft = fm.beginTransaction()
-        ft.replace(R.id.activity_chat__fragment, arFragmentChat[i])
-        ft.commit()
+//        val ft = fm.beginTransaction()
+//        ft.replace(R.id.activity_chat__fragment, arFragmentChat[i])
+//        ft.commit()
     }
 }

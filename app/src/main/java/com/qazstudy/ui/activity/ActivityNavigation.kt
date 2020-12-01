@@ -33,15 +33,27 @@ import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.activity_navigation.*
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.firebase.ui.auth.AuthUI
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.qazstudy.model.FirebaseHelper
+import com.qazstudy.presentation.presenter.NavigationPresenter
 import com.qazstudy.util.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.ProvidePresenter
 
 class ActivityNavigation : AppCompatActivity() {
 
-    private val AUTH = FirebaseAuth.getInstance()
-    private var STORAGE = FirebaseStorage.getInstance().reference
-    private var DATABASE = FirebaseDatabase.getInstance().reference
+    private lateinit var AUTH: FirebaseAuth
+    private lateinit var STORAGE: StorageReference
+    private lateinit var DATABASE: DatabaseReference
+
+//    lateinit var presenter: NavigationPresenter
+//
+//    @ProvidePresenter
+//    fun providePresenter(): NavigationPresenter {
+//        return NavigationPresenter(FirebaseHelper())
+//    }
 
     private val TAG = javaClass.simpleName
     private val AUTH_REQUEST_CODE = 101
@@ -74,44 +86,14 @@ class ActivityNavigation : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
-        initAuth()
+
+        AUTH = FirebaseAuth.getInstance()
+        STORAGE = FirebaseStorage.getInstance().reference
+        DATABASE = FirebaseDatabase.getInstance().reference
+
         initNavigation()
+        initAuth()
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        if (AUTH.currentUser != null) {
-            DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                .addListenerForSingleValueEvent(ValueEventListenerAdapter {
-
-                    mUser = it.getValue(User::class.java)!!
-
-
-                    nav_header_txt_name.text = mUser.name
-
-                    Log.i(TAG, "onCreate: get from database $mUser")
-
-                    if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
-                        STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                            .child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
-                                Glide.with(this@ActivityNavigation).load(imageUri.toString())
-                                    .into(nav_profile)
-                            }
-                    }
-
-                })
-        }
-
-        AUTH.addAuthStateListener(authListener!!)
-
-    }
-
-    override fun onStop() {
-        if (authListener != null)
-            AUTH.removeAuthStateListener(authListener!!)
-        super.onStop()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -127,25 +109,25 @@ class ActivityNavigation : AppCompatActivity() {
                 isDark = false
             )
 
-            AUTH.fetchSignInMethodsForEmail(mUser.email).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    nav_header_txt_name.text = mUser.name
+            AUTH.fetchSignInMethodsForEmail(mUser.email).addOnSuccessListener {
+                nav_header_txt_name.text = mUser.name
 
-                    if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
+                if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
 
-                        mImageURI = mUser.photo.toUri()
+                    mImageURI = mUser.photo.toUri()
 
-                        STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO)
-                            .putFile(mImageURI)
-                            .addOnCompleteListener { uploadTask ->
-                                if (uploadTask.isSuccessful) {
-                                    Glide.with(this).load(mImageURI).into(nav_profile)
-                                } else {
-                                    showToast(uploadTask.exception!!.message.toString())
-                                }
+                    STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO)
+                        .putFile(mImageURI)
+                        .addOnCompleteListener { uploadTask ->
+                            if (uploadTask.isSuccessful) {
+                                Glide.with(this).load(mImageURI).into(nav_profile)
+                            } else {
+                                showToast(uploadTask.exception!!.message.toString())
                             }
-                    }
-                } else {
+                        }
+                }
+
+                AUTH.fetchSignInMethodsForEmail(mUser.email).addOnFailureListener {
                     DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).setValue(mUser)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
@@ -173,7 +155,6 @@ class ActivityNavigation : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -212,22 +193,13 @@ class ActivityNavigation : AppCompatActivity() {
 
     private fun initAuth() {
 
-        authListener = FirebaseAuth.AuthStateListener {
-            if (AUTH.currentUser == null) {
-                startActivityForResult(
-                    AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setTheme(R.style.LoginTheme)
-                        .setAvailableProviders(providers)
-                        .build(),
-                    AUTH_REQUEST_CODE
-                )
-            } else {
-                DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                    .addListenerForSingleValueEvent(ValueEventListenerAdapter {
+        if (AUTH.currentUser != null) {
 
+            DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
+                .addListenerForSingleValueEvent(object: ValueEventListener {
 
-                        mUser = it.getValue(User::class.java)!!
+                    override fun onDataChange(data: DataSnapshot) {
+                        mUser = data.getValue(User::class.java)!!
 
                         nav_header_txt_name.text = mUser.name
 
@@ -240,9 +212,23 @@ class ActivityNavigation : AppCompatActivity() {
                                         .into(nav_profile)
                                 }
                         }
+                    }
 
-                    })
-            }
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                })
+
+        } else {
+            startActivityForResult(
+                AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setTheme(R.style.LoginTheme)
+                    .setAvailableProviders(providers)
+                    .build(),
+                AUTH_REQUEST_CODE
+            )
         }
     }
 
@@ -258,7 +244,6 @@ class ActivityNavigation : AppCompatActivity() {
         updatesMap["isDark"] = mUser.isDark
 
         DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).updateChildren(updatesMap)
-
 
         if (mUser.isDark) {
             setDark()
@@ -290,7 +275,6 @@ class ActivityNavigation : AppCompatActivity() {
             fragment_book__recycler_view.background =
                 ContextCompat.getDrawable(this, R.color.dark)
         }
-
 
         if (fragment_lesson__recycler_view != null) {
             fragment_lesson__recycler_view.adapter =

@@ -47,9 +47,9 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) : Rec
 
         fun bind(position: Int) {
 
-                //if (mUser.isDark) {
-                    header.setTextColor(Color.rgb(60, 90, 188))
-                //}
+//                if (mUser.isDark) {
+//                    header.setTextColor(Color.rgb(60, 90, 188))
+//                }
 
 
             Log.i(TAG, position.toString())

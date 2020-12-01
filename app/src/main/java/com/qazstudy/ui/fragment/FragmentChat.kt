@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.view_holder_message.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import kotlinx.android.synthetic.main.activity_chat.*
 
 class FragmentChat : Fragment() {
 
@@ -96,13 +97,13 @@ class FragmentChat : Fragment() {
         rv_chat.layoutManager = manager
         rv_chat.adapter = adapter
 
-        if (mUser.isDark) {
-            input_chat_message.setTextColor(requireContext().getColor(R.color.white))
-            input_chat_message.background = ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.bg_input_chat_message_dark
-            )
-        }
+//        if (mUser.isDark) {
+//            input_chat_message.setTextColor(requireContext().getColor(R.color.white))
+//            input_chat_message.background = ContextCompat.getDrawable(
+//                requireContext(),
+//                R.drawable.bg_input_chat_message_dark
+//            )
+//        }
 
         ic_send.setOnClickListener {
             if (input_chat_message.text.isNotEmpty() && mChatPath != "") {
