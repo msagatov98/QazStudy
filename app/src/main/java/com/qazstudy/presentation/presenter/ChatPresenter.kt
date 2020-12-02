@@ -1,33 +1,115 @@
 package com.qazstudy.presentation.presenter
 
+import android.content.Context
+import android.text.format.DateFormat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.qazstudy.R
-import moxy.MvpPresenter
-import moxy.InjectViewState
-import com.qazstudy.ui.fragment.FragmentChat
-import androidx.fragment.app.FragmentManager
+import com.qazstudy.model.Message
 import com.qazstudy.presentation.view.ChatView
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import com.qazstudy.util.NODE_MESSAGE
+import kotlinx.android.synthetic.main.view_holder_message.view.*
+import moxy.InjectViewState
+import moxy.MvpPresenter
 
 @InjectViewState
-class ChatPresenter() : MvpPresenter<ChatView>() {
+class ChatPresenter(val context: Context) : MvpPresenter<ChatView>() {
 
-    private val arFragmentChat =
-        arrayListOf(
-            FragmentChat.newInstance("$NODE_MESSAGE/lectureIntro"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture1"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture2"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture3"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture4"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture5"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture6"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture7"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture8"),
-            FragmentChat.newInstance("$NODE_MESSAGE/lecture9")
-        )
+    private lateinit var mChatPath: String
 
-    fun displayChat(i : Int) {
-//        val ft = fm.beginTransaction()
-//        ft.replace(R.id.activity_chat__fragment, arFragmentChat[i])
-//        ft.commit()
+    private var STORAGE: StorageReference = FirebaseStorage.getInstance().reference
+    private var DATABASE: DatabaseReference = FirebaseDatabase.getInstance().reference
+
+    private lateinit var adapter: FirebaseRecyclerAdapter<Message, MessageViewHolder>
+    private lateinit var options: FirebaseRecyclerOptions<Message>
+
+    fun getAdapter(): FirebaseRecyclerAdapter<Message, MessageViewHolder> {
+        return adapter
     }
+
+    fun displayChat(position: Int) {
+
+        mChatPath = when (position) {
+            0 -> "$NODE_MESSAGE/lectureIntro"
+            1 -> "$NODE_MESSAGE/lecture1"
+            2 -> "$NODE_MESSAGE/lecture2"
+            3 -> "$NODE_MESSAGE/lecture3"
+            4 -> "$NODE_MESSAGE/lecture4"
+            5 -> "$NODE_MESSAGE/lecture5"
+            6 -> "$NODE_MESSAGE/lecture6"
+            7 -> "$NODE_MESSAGE/lecture7"
+            8 -> "$NODE_MESSAGE/lecture8"
+            9 -> "$NODE_MESSAGE/lecture9"
+            else -> ""
+        }
+
+        val query = DATABASE.child(mChatPath)
+
+        options = FirebaseRecyclerOptions.Builder<Message>()
+            .setQuery(query, Message::class.java)
+            .build()
+
+        adapter =
+            object : FirebaseRecyclerAdapter<Message, MessageViewHolder>(options) {
+
+                override fun onCreateViewHolder(
+                    parent: ViewGroup,
+                    viewType: Int
+                ): MessageViewHolder {
+
+                    val view = if (mUser.isDark)
+                        LayoutInflater.from(parent.context)
+                            .inflate(R.layout.view_holder_message_dark, parent, false)
+                    else
+                        LayoutInflater.from(parent.context)
+                            .inflate(R.layout.view_holder_message, parent, false)
+
+                    return MessageViewHolder(view)
+                }
+
+                override fun onBindViewHolder(
+                    holder: MessageViewHolder,
+                    position: Int,
+                    model: Message
+                ) {
+                    holder.bind(model)
+                }
+
+            }
+    }
+
+    fun sendMessage(message: String) {
+        DATABASE.child(mChatPath).push().setValue(
+            Message(mUser, message)
+        )
+    }
+
+    inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(model: Message) {
+
+            if (model.userID.photo.isNotEmpty()) {
+                STORAGE.child("users/${model.id}/photo").downloadUrl.addOnSuccessListener {
+                    Glide.with(context).load(it.toString()).into(itemView.ic_chat)
+                }
+            }
+
+            itemView.chat_message.text = model.message
+            itemView.chat_city.text = model.userID.city
+            itemView.chat_user.text = model.userID.name
+            itemView.chat_country.text = model.userID.country
+            itemView.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
+        }
+    }
+
 }
