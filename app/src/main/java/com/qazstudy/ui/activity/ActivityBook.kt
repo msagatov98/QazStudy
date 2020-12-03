@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.qazstudy.R
+import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.activity_book.*
 import java.io.BufferedReader
@@ -11,9 +12,14 @@ import java.io.IOException
 import java.io.InputStreamReader
 
 class ActivityBook : AppCompatActivity() {
+
+    private lateinit var binding: ActivityBookBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_book)
+        binding = ActivityBookBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
         setTheme()
         setBook()
     }
@@ -26,7 +32,7 @@ class ActivityBook : AppCompatActivity() {
 
     private fun setTheme() {
         if (mUser.isDark) {
-            book_text.setTextColor(getColor(R.color.white))
+            binding.bookText.setTextColor(getColor(R.color.white))
             book_text.setBackgroundColor(getColor(R.color.dark))
             toolbar.setBackgroundColor(getColor(R.color.light_blue))
             this.window.statusBarColor = getColor(R.color.light_blue)

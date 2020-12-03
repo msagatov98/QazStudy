@@ -111,5 +111,4 @@ class ChatPresenter(val context: Context) : MvpPresenter<ChatView>() {
             itemView.chat_time.text = DateFormat.format("dd-MM-yyyy HH:mm", model.time)
         }
     }
-
 }
