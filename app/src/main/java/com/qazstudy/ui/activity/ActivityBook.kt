@@ -33,8 +33,8 @@ class ActivityBook : AppCompatActivity() {
     private fun setTheme() {
         if (mUser.isDark) {
             binding.bookText.setTextColor(getColor(R.color.white))
-            book_text.setBackgroundColor(getColor(R.color.dark))
-            toolbar.setBackgroundColor(getColor(R.color.light_blue))
+            binding.bookText.setBackgroundColor(getColor(R.color.dark))
+            binding.toolbar.setBackgroundColor(getColor(R.color.light_blue))
             this.window.statusBarColor = getColor(R.color.light_blue)
         }
     }
@@ -43,12 +43,12 @@ class ActivityBook : AppCompatActivity() {
 
         when(intent.getIntExtra("bookNum", -1)) {
             0 -> {
-                book_title.text = "Ұсқынсыз үйрек"
-                book_text.text = getBookText("book1")
+                binding.bookTitle.text = "Ұсқынсыз үйрек"
+                binding.bookText.text = getBookText("book1")
             }
             1 -> {
-                book_title.text = ""
-                book_text.text = getBookText("book2")
+                binding.bookTitle.text = ""
+                binding.bookText.text = getBookText("book2")
             }
         }
     }

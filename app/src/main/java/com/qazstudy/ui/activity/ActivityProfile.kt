@@ -23,6 +23,7 @@ import androidx.fragment.app.DialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.qazstudy.databinding.ActivityProfileBinding
 import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.theartofdev.edmodo.cropper.CropImage
 import com.qazstudy.presentation.view.ProfileView
@@ -32,6 +33,7 @@ import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 
 class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
+    private lateinit var binding: ActivityProfileBinding
 
     private val AUTH = FirebaseAuth.getInstance()
     private var STORAGE = FirebaseStorage.getInstance().reference
@@ -53,14 +55,9 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setMode()
-        mProfilePresenter.init()
-    }
-
-    override fun onStart() {
-        super.onStart()
-
         mProfilePresenter.init()
     }
 
@@ -106,31 +103,31 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
     override fun setMode() {
         if (mUser.isDark) {
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
-            activity_profile__toolbar_txt.setTextColor(ContextCompat.getColor(this, R.color.dark))
-            activity_profile__toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
-            activity_profile__ic_back.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
-            activity_profile__image_profile.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_avatar_light))
-            activity_profile__input_name.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_city.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_email.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_country.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_password.setTextColor(ContextCompat.getColor(this, R.color.white))
-            activity_profile__input_name.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_city.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_email.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_country.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_password.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileToolbarTxt.setTextColor(ContextCompat.getColor(this, R.color.dark))
+            binding.activityProfileToolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
+            binding.activityProfileIcBack.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
+            binding.activityProfileImageProfile.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_avatar_light))
+            binding.activityProfileInputName.setTextColor(ContextCompat.getColor(this, R.color.white))
+            binding.activityProfileInputCity.setTextColor(ContextCompat.getColor(this, R.color.white))
+            binding.activityProfileInputEmail.setTextColor(ContextCompat.getColor(this, R.color.white))
+            binding.activityProfileInputCountry.setTextColor(ContextCompat.getColor(this, R.color.white))
+            binding.activityProfileInputPassword.setTextColor(ContextCompat.getColor(this, R.color.white))
+            binding.activityProfileInputName.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileInputCity.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileInputEmail.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileInputCountry.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileInputPassword.setHintTextColor(ContextCompat.getColor(this, R.color.txt_color))
 
-            activity_profile__input_name.background.setTint(ContextCompat.getColor(this,R.color.txt_color))
-            activity_profile__input_city.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_email.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_country.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
-            activity_profile__input_password.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileInputName.background.setTint(ContextCompat.getColor(this,R.color.txt_color))
+            binding.activityProfileInputCity.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileInputEmail.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileInputCountry.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
+            binding.activityProfileInputPassword.background.setTint(ContextCompat.getColor(this, R.color.txt_color))
 
-            activity_profile__btn_exit.setTextColor(ContextCompat.getColor(this, R.color.light_blue))
-            activity_profile__btn_exit.background = ContextCompat.getDrawable(this, R.drawable.bg_btn_exit_dark)
-            activity_profile__btn_delete.background = ContextCompat.getDrawable(this, R.drawable.bg_btn_delete_account_dark)
-            activity_profile__constraint_layout.background = ContextCompat.getDrawable(this, R.drawable.activity_profile__bg_edittext_dark)
+            binding.activityProfileBtnExit.setTextColor(ContextCompat.getColor(this, R.color.light_blue))
+            binding.activityProfileBtnExit.background = ContextCompat.getDrawable(this, R.drawable.bg_btn_exit_dark)
+            binding.activityProfileBtnDelete.background = ContextCompat.getDrawable(this, R.drawable.bg_btn_delete_account_dark)
+            binding.activityProfileConstraintLayout.background = ContextCompat.getDrawable(this, R.drawable.activity_profile__bg_edittext_dark)
         }
     }
 
@@ -139,8 +136,7 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
         activity_profile__input_name.setText(
             mProfilePresenter.getName(),
-            TextView.BufferType.EDITABLE
-        )
+            TextView.BufferType.EDITABLE)
         activity_profile__input_city.setText(
             mProfilePresenter.getCity(),
             TextView.BufferType.EDITABLE
@@ -201,5 +197,4 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(imageFileName, ".jpg", storageDir)
     }
-
 }
