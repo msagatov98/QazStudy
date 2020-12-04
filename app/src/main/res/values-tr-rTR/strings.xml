@@ -49,4 +49,5 @@
     <string name="list_word">" Kelimeler"</string>
     <string name="translator">" Çevirmek"</string>
     <string name="alphabet">Kazak alfabesi</string>
+    <string name="sign_in">Gir</string>
 </resources>

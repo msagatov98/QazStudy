@@ -26,7 +26,7 @@ class ActivityBook : AppCompatActivity() {
 
     fun onClick(v: View) {
         when(v) {
-            ic_back -> finish()
+            binding.icBack -> finish()
         }
     }
 

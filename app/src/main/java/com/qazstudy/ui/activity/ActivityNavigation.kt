@@ -1,48 +1,47 @@
 package com.qazstudy.ui.activity
 
-import com.qazstudy.R
+import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
-import android.content.Intent
-import com.qazstudy.model.Task
-import com.qazstudy.model.User
-import com.bumptech.glide.Glide
-import com.qazstudy.model.Lesson
-import androidx.navigation.ui.navigateUp
-import android.content.res.ColorStateList
-import android.util.Log
-import androidx.core.content.ContextCompat
-import com.qazstudy.ui.adapter.AdapterTask
-import com.qazstudy.ui.adapter.AdapterBook
-import com.qazstudy.ui.adapter.AdapterLesson
-import com.google.firebase.auth.FirebaseAuth
-import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
+import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.fragment_book.*
-import kotlinx.android.synthetic.main.fragment_task.*
-import kotlinx.android.synthetic.main.fragment_lesson.*
-import com.qazstudy.ui.adapter.ValueEventListenerAdapter
-import kotlinx.android.synthetic.main.fragment_setting.*
-import kotlinx.android.synthetic.main.navigation_header.*
-import kotlinx.android.synthetic.main.navigation_app_bar.*
-import kotlinx.android.synthetic.main.activity_navigation.*
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.firebase.ui.auth.AuthUI
+import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.qazstudy.model.FirebaseHelper
-import com.qazstudy.presentation.presenter.NavigationPresenter
+import com.qazstudy.R
+import com.qazstudy.databinding.ActivityNavigationBinding
+import com.qazstudy.model.Lesson
+import com.qazstudy.model.Task
+import com.qazstudy.model.User
+import com.qazstudy.ui.adapter.AdapterBook
+import com.qazstudy.ui.adapter.AdapterLesson
+import com.qazstudy.ui.adapter.AdapterTask
 import com.qazstudy.util.*
-import moxy.MvpAppCompatActivity
-import moxy.presenter.ProvidePresenter
+import kotlinx.android.synthetic.main.activity_navigation.*
+import kotlinx.android.synthetic.main.fragment_book.*
+import kotlinx.android.synthetic.main.fragment_lesson.*
+import kotlinx.android.synthetic.main.fragment_setting.*
+import kotlinx.android.synthetic.main.fragment_task.*
+import kotlinx.android.synthetic.main.navigation_app_bar.*
+import kotlinx.android.synthetic.main.navigation_header.*
 
 class ActivityNavigation : AppCompatActivity() {
+
+    companion object {
+        lateinit var mUser: User
+        lateinit var mImageURI: Uri
+    }
 
     private lateinit var AUTH: FirebaseAuth
     private lateinit var STORAGE: StorageReference
@@ -55,10 +54,10 @@ class ActivityNavigation : AppCompatActivity() {
 //        return NavigationPresenter(FirebaseHelper())
 //    }
 
+    private lateinit var binding: ActivityNavigationBinding
+
     private val TAG = javaClass.simpleName
-    private val AUTH_REQUEST_CODE = 101
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private var authListener: FirebaseAuth.AuthStateListener? = null
 
     private var ar = arrayOf(
         R.drawable.book0, R.drawable.book1, R.drawable.book2, R.drawable.book3,
@@ -71,21 +70,12 @@ class ActivityNavigation : AppCompatActivity() {
         R.drawable.ic_android
     )
 
-    private var providers: List<AuthUI.IdpConfig> = listOf(
-        AuthUI.IdpConfig.EmailBuilder().build(),
-        AuthUI.IdpConfig.GoogleBuilder().build()
-        // AuthUI.IdpConfig.TwitterBuilder().build(), waiting for twitter gives access to their server
-        // AuthUI.IdpConfig.FacebookBuilder().build()
-    )
-
-    companion object {
-        lateinit var mUser: User
-        lateinit var mImageURI: Uri
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_navigation)
+
+        binding = ActivityNavigationBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         AUTH = FirebaseAuth.getInstance()
         STORAGE = FirebaseStorage.getInstance().reference
@@ -94,67 +84,6 @@ class ActivityNavigation : AppCompatActivity() {
         initNavigation()
         initAuth()
 
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == RESULT_OK && requestCode == AUTH_REQUEST_CODE) {
-
-            mUser = User(
-                name = AUTH.currentUser!!.displayName.toString(),
-                email = AUTH.currentUser!!.email.toString(),
-                photo = AUTH.currentUser!!.photoUrl.toString(),
-                isDark = false
-            )
-
-            AUTH.fetchSignInMethodsForEmail(mUser.email).addOnSuccessListener {
-                nav_header_txt_name.text = mUser.name
-
-                if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
-
-                    mImageURI = mUser.photo.toUri()
-
-                    STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO)
-                        .putFile(mImageURI)
-                        .addOnCompleteListener { uploadTask ->
-                            if (uploadTask.isSuccessful) {
-                                Glide.with(this).load(mImageURI).into(nav_profile)
-                            } else {
-                                showToast(uploadTask.exception!!.message.toString())
-                            }
-                        }
-                }
-
-                AUTH.fetchSignInMethodsForEmail(mUser.email).addOnFailureListener {
-                    DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).setValue(mUser)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                nav_header_txt_name.text = mUser.name
-
-                                if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
-
-                                    mImageURI = mUser.photo.toUri()
-
-                                    STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                                        .child(NODE_PHOTO)
-                                        .putFile(mImageURI)
-                                        .addOnCompleteListener { uploadTask ->
-                                            if (uploadTask.isSuccessful) {
-                                                Glide.with(this).load(mImageURI).into(nav_profile)
-                                            } else {
-                                                showToast(uploadTask.exception!!.message.toString())
-                                            }
-                                        }
-                                }
-                            } else {
-                                showToast("Error creating user")
-                            }
-                        }
-                }
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -188,48 +117,35 @@ class ActivityNavigation : AppCompatActivity() {
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        nav_view.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
     }
 
     private fun initAuth() {
 
-        if (AUTH.currentUser != null) {
+        DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
 
-            DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                .addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onDataChange(data: DataSnapshot) {
+                    mUser = data.getValue(User::class.java)!!
 
-                    override fun onDataChange(data: DataSnapshot) {
-                        mUser = data.getValue(User::class.java)!!
+                    nav_header_txt_name.text = mUser.name
 
-                        nav_header_txt_name.text = mUser.name
+                    Log.i(TAG, "onCreate: get from database $mUser")
 
-                        Log.i(TAG, "onCreate: get from database $mUser")
-
-                        if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
-                            STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                                .child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
-                                    Glide.with(this@ActivityNavigation).load(imageUri.toString())
-                                        .into(nav_profile)
-                                }
-                        }
+                    if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
+                        STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid)
+                            .child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
+                                Glide.with(this@ActivityNavigation).load(imageUri.toString())
+                                    .into(nav_profile)
+                            }
                     }
+                }
 
-                    override fun onCancelled(error: DatabaseError) {
+                override fun onCancelled(error: DatabaseError) {
 
-                    }
+                }
 
-                })
-
-        } else {
-            startActivityForResult(
-                AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setTheme(R.style.LoginTheme)
-                    .setAvailableProviders(providers)
-                    .build(),
-                AUTH_REQUEST_CODE
-            )
-        }
+            })
     }
 
     private fun openProfile() {

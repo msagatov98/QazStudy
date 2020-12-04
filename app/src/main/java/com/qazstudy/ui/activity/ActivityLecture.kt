@@ -9,6 +9,7 @@ import com.qazstudy.ui.fragment.lecture.*
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.qazstudy.databinding.ActivityLessonBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import kotlinx.android.synthetic.main.activity_lesson.*
 
@@ -18,6 +19,8 @@ class ActivityLecture : AppCompatActivity() {
 
     private lateinit var openedFragment: Fragment
     private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
+
+    private lateinit var binding: ActivityLessonBinding
 
     private val arFragmentLecture = arrayListOf(
         FragmentLectureIntro(),

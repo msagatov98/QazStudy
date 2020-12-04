@@ -14,6 +14,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.qazstudy.ui.activity.ActivityNavigation
 import kotlinx.android.synthetic.main.dialog_confirm_dark.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.ui.activity.LoginActivity
 
 class DialogConfirm(private val hint: String): DialogFragment() {
 
@@ -42,8 +43,8 @@ class DialogConfirm(private val hint: String): DialogFragment() {
 
             view.dialog_confirm__ok.setOnClickListener {
                 AUTH.signOut()
-                requireActivity().startActivity(Intent(requireActivity(), ActivityNavigation::class.java))
-                requireActivity().finish()
+                activity?.startActivity(Intent(activity, LoginActivity::class.java))
+                activity?.finish()
             }
         } else if (str == "delete") {
             view.dialog_title.text = resources.getString(R.string.confirm_delete)
@@ -53,7 +54,7 @@ class DialogConfirm(private val hint: String): DialogFragment() {
                 DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).removeValue()
                 AUTH.currentUser!!.delete().addOnCompleteListener {
                     if (it.isSuccessful) {
-                        startActivity(Intent(requireActivity(), ActivityNavigation::class.java))
+                        requireContext().startActivity(Intent(requireContext(), LoginActivity::class.java))
                         requireActivity().finish()
                     } else {
                         requireActivity().showToast(it.exception.toString())

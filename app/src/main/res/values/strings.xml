@@ -8,6 +8,8 @@
     <string name="russian" translatable="false">Русский</string>
     <string name="english" translatable="false">English</string>
 
+    <string name="sign_in">Sign in</string>
+
     <string name="menu_book">Books</string>
     <string name="menu_task">Tasks</string>
     <string name="menu_lesson">Lessons</string>
@@ -27,7 +29,7 @@
 
     <string name="select_language">Language</string>
     <string name="alphabet">Kazakh alphabet</string>
-    
+
     <string-array name="kazakh_alphabet">
         <item>Кирил</item>
         <item>Latyn</item>

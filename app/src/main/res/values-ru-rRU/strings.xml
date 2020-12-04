@@ -121,5 +121,6 @@
     <string name="list_word">Список слов</string>
     <string name="translator">Переводчик</string>
     <string name="alphabet">Казахский алфавит</string>
+    <string name="sign_in">Войти</string>
 
 </resources>
