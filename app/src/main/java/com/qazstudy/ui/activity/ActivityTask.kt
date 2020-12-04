@@ -2,21 +2,25 @@ package com.qazstudy.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.qazstudy.R
-import kotlinx.android.synthetic.main.activity_task.*
+import com.qazstudy.databinding.ActivityTaskBinding
 
 class ActivityTask : AppCompatActivity() {
 
     private var position = -1
 
+    private lateinit var binding: ActivityTaskBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_task)
+
+        binding = ActivityTaskBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         position = intent.getIntExtra("numTask", -1)
 
-        textView2.text = "Task $position"
+        binding.textView2.text = "Task $position"
 
-        activity_task__ic_back.setOnClickListener { finish() }
+        binding.activityTaskIcBack.setOnClickListener { finish() }
     }
 }

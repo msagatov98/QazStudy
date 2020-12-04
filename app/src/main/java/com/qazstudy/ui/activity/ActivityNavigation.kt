@@ -28,7 +28,6 @@ import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
 import com.qazstudy.ui.adapter.AdapterTask
 import com.qazstudy.util.*
-import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.fragment_book.*
 import kotlinx.android.synthetic.main.fragment_lesson.*
 import kotlinx.android.synthetic.main.fragment_setting.*
@@ -113,7 +112,7 @@ class ActivityNavigation : AppCompatActivity() {
                 R.id.nav_lesson, R.id.nav_task, R.id.nav_book,
                 R.id.nav_dictionary, R.id.nav_setting
             ),
-            drawer_layout
+            binding.drawerLayout
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -169,7 +168,7 @@ class ActivityNavigation : AppCompatActivity() {
     }
 
     private fun setDark() {
-        nav_view.setBackgroundColor(getColor(R.color.dark))
+        binding.navView.setBackgroundColor(getColor(R.color.dark))
         container.setBackgroundColor(getColor(R.color.dark))
         this.window.statusBarColor = getColor(R.color.light_blue)
         toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
@@ -210,7 +209,7 @@ class ActivityNavigation : AppCompatActivity() {
     }
 
     private fun setLight() {
-        nav_view.setBackgroundColor(getColor(R.color.white))
+        binding.navView.setBackgroundColor(getColor(R.color.white))
         container.setBackgroundColor(getColor(R.color.white))
         this.window.statusBarColor = getColor(R.color.colorPrimary)
         toolbar.background = ContextCompat.getDrawable(this, R.color.colorPrimary)

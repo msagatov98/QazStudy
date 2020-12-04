@@ -27,7 +27,6 @@ import com.qazstudy.databinding.ActivityProfileBinding
 import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.theartofdev.edmodo.cropper.CropImage
 import com.qazstudy.presentation.view.ProfileView
-import kotlinx.android.synthetic.main.activity_profile.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 
@@ -86,7 +85,7 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
                                         if (!this.isDestroyed) {
                                             Glide.with(this)
                                                 .load(imageUri)
-                                                .into(activity_profile__image_profile)
+                                                .into(binding.activityProfileImageProfile)
                                         }
                                     }
                             } else {
@@ -132,24 +131,24 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
     }
 
     override fun initProfile() {
-        mProfilePresenter.setImage(activity_profile__image_profile)
+        mProfilePresenter.setImage(binding.activityProfileImageProfile)
 
-        activity_profile__input_name.setText(
+        binding.activityProfileInputName.setText(
             mProfilePresenter.getName(),
             TextView.BufferType.EDITABLE)
-        activity_profile__input_city.setText(
+        binding.activityProfileInputCity.setText(
             mProfilePresenter.getCity(),
             TextView.BufferType.EDITABLE
         )
-        activity_profile__input_email.setText(
+        binding.activityProfileInputEmail.setText(
             mProfilePresenter.getEmail(),
             TextView.BufferType.EDITABLE
         )
-        activity_profile__input_country.setText(
+        binding.activityProfileInputCountry.setText(
             mProfilePresenter.getCountry(),
             TextView.BufferType.EDITABLE
         )
-        activity_profile__input_password.setText(
+        binding.activityProfileInputPassword.setText(
             mProfilePresenter.getPassword(),
             TextView.BufferType.EDITABLE
         )
@@ -167,17 +166,17 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
     fun onClick(v: View) {
         when (v) {
-            activity_profile__btn_exit -> showDialog("exit")
-            activity_profile__btn_delete -> showDialog("delete")
+            binding.activityProfileBtnExit -> showDialog("exit")
+            binding.activityProfileBtnDelete -> showDialog("delete")
 
-            activity_profile__input_city -> showDialog("city")
-            activity_profile__input_name -> showDialog("name")
-            activity_profile__input_email -> showDialog("email")
-            activity_profile__input_country -> showDialog("country")
-            activity_profile__input_password -> showDialog("password")
+            binding.activityProfileInputCity -> showDialog("city")
+            binding.activityProfileInputName -> showDialog("name")
+            binding.activityProfileInputEmail -> showDialog("email")
+            binding.activityProfileInputCountry -> showDialog("country")
+            binding.activityProfileInputPassword -> showDialog("password")
 
-            activity_profile__ic_back -> finish()
-            activity_profile__image_profile -> takeCameraPicture()
+            binding.activityProfileIcBack -> finish()
+            binding.activityProfileImageProfile -> takeCameraPicture()
         }
     }
 

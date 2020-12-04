@@ -6,7 +6,6 @@ import android.view.View
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import kotlinx.android.synthetic.main.activity_book.*
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
