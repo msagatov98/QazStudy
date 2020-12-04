@@ -9,9 +9,8 @@ import com.qazstudy.ui.fragment.lecture.*
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import com.qazstudy.databinding.ActivityLessonBinding
+import com.qazstudy.databinding.ActivityLectureBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import kotlinx.android.synthetic.main.activity_lesson.*
 
 class ActivityLecture : AppCompatActivity() {
 
@@ -20,7 +19,7 @@ class ActivityLecture : AppCompatActivity() {
     private lateinit var openedFragment: Fragment
     private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
 
-    private lateinit var binding: ActivityLessonBinding
+    private lateinit var binding: ActivityLectureBinding
 
     private val arFragmentLecture = arrayListOf(
         FragmentLectureIntro(),
@@ -37,17 +36,20 @@ class ActivityLecture : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lesson)
+
+        binding = ActivityLectureBinding.inflate(layoutInflater)
+
+        setContentView(R.layout.activity_lecture)
         setTheme()
         initFragments()
     }
 
     fun onIconClick(v: View) {
         when (v) {
-            activity_lesson__ic_back -> finish()
-            activity_lesson__ic_chat -> onIconChatClick()
-            activity_lesson__ic_next -> onIconNextClick()
-            activity_lesson__ic_previous -> onIconPreviousClick()
+            binding.activityLessonIcBack -> finish()
+            binding.activityLessonIcChat -> onIconChatClick()
+            binding.activityLessonIcNext -> onIconNextClick()
+            binding.activityLessonIcPrevious -> onIconPreviousClick()
         }
     }
 
@@ -68,14 +70,14 @@ class ActivityLecture : AppCompatActivity() {
     private fun setTheme() {
         if (mUser.isDark) {
             this.window.statusBarColor = getColor(R.color.light_blue)
-            activity_lesson__txt_lecture_header.setTextColor(getColor(R.color.dark))
-            activity_lesson__toolbar.setBackgroundColor(getColor(R.color.light_blue))
-            activity_lesson__constraint_layout.setBackgroundColor(getColor(R.color.dark))
-            activity_lesson__toolbar_bottom.setBackgroundColor(getColor(R.color.light_blue))
-            activity_lesson__ic_chat.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_chat_dark))
-            activity_lesson__ic_back.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
-            activity_lesson__ic_next.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_next_dark))
-            activity_lesson__ic_previous.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_previous_dark))
+            binding.activityLessonTxtLectureHeader.setTextColor(getColor(R.color.dark))
+            binding.activityLessonToolbar.setBackgroundColor(getColor(R.color.light_blue))
+            binding.activityLessonConstraintLayout.setBackgroundColor(getColor(R.color.dark))
+            binding.activityLessonToolbarBottom.setBackgroundColor(getColor(R.color.light_blue))
+            binding.activityLessonIcChat.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_chat_dark))
+            binding.activityLessonIcBack.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
+            binding.activityLessonIcNext.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_next_dark))
+            binding.activityLessonIcPrevious.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_previous_dark))
         }
     }
 

@@ -92,6 +92,12 @@ dependencies {
     implementation 'androidx.viewpager:viewpager:1.0.0'
     kapt "com.github.moxy-community:moxy-compiler:2.2.0"
 
+    // LifeCycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
