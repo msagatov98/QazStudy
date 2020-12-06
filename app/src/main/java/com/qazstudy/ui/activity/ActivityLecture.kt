@@ -39,7 +39,8 @@ class ActivityLecture : AppCompatActivity() {
 
         binding = ActivityLectureBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_lecture)
+        setContentView(binding.root)
+
         setTheme()
         initFragments()
     }

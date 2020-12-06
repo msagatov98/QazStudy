@@ -5,19 +5,13 @@ import android.util.Log
 import android.os.Bundle
 import android.view.View
 import android.app.Dialog
-import android.content.Intent
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.qazstudy.ui.activity.ActivityProfile
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
+import com.qazstudy.model.Firebase
 import kotlinx.android.synthetic.main.dialog_input.view.*
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import com.qazstudy.util.*
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.dialog_input_password_dark.view.*
 import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__ok
 import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__cancel
 import kotlinx.coroutines.CoroutineScope
@@ -26,13 +20,9 @@ import kotlinx.coroutines.launch
 
 class DialogInput(private val hint: String, private val password: String) : DialogFragment() {
 
-
-    private val AUTH = FirebaseAuth.getInstance()
-    private var DATABASE = FirebaseDatabase.getInstance().reference
-
+    val firebase = Firebase()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
 
         when (hint) {
             "name" -> return getAlertDialog("Name")
@@ -43,133 +33,133 @@ class DialogInput(private val hint: String, private val password: String) : Dial
 
             "country" -> return getAlertDialog("Country")
 
-            "password" -> {
-                return if (mUser.isDark) {
-
-                    val view = layoutInflater.inflate(R.layout.dialog_input_password_dark, null)
-
-                    view.dialog_password__ok.setOnClickListener {
-
-                        val oldPassword = view.dialog_input_old_password.text.toString()
-                        val newPassword = view.dialog_input_new_password.text.toString()
-                        val newPasswordRepeat =
-                            view.dialog_input_new_password_repeat.text.toString()
-
-                        if (oldPassword.isNotEmpty() && newPassword.isNotEmpty() && newPasswordRepeat.isNotEmpty()) {
-
-                            if (newPassword == newPasswordRepeat && oldPassword == password) {
-
-                                val credential = EmailAuthProvider.getCredential(
-                                    AUTH.currentUser!!.email.toString(),
-                                    oldPassword
-                                )
-
-                                AUTH.currentUser!!.reauthenticate(credential)
-                                    .addOnCompleteListener {
-                                        if (it.isSuccessful) {
-                                            AUTH.currentUser!!.updatePassword(view.dialog_input_new_password.text.toString())
-                                                .addOnCompleteListener {
-                                                    if (it.isSuccessful) {
-                                                        val updatesMap = mutableMapOf<String, Any>()
-                                                        updatesMap[hint] =
-                                                            view.dialog_input_new_password.text.toString()
-                                                        DATABASE.updateChildren(updatesMap)
-                                                            .addOnCompleteListener {
-                                                                if (it.isSuccessful) {
-                                                                    startActivity(
-                                                                        Intent(
-                                                                            requireContext(),
-                                                                            ActivityProfile::class.java
-                                                                        ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                                                    )
-                                                                    requireActivity().finish()
-                                                                } else {
-                                                                    requireContext().showToast(it.exception.toString())
-                                                                }
-                                                            }
-                                                    } else {
-                                                        requireContext().showToast(it.exception.toString())
-                                                    }
-                                                }
-                                        } else {
-                                            requireContext().showToast(it.exception.toString())
-                                        }
-                                    }
-                            } else {
-                                requireContext().showToast("Passwords are not same")
-                            }
-                        } else {
-                            requireContext().showToast("Enter passwords")
-                        }
-                    }
-
-                    view.dialog_password__cancel.setOnClickListener { this.dismiss() }
-
-                    AlertDialog.Builder(requireContext()).setView(view).create()
-                } else {
-
-                    val view = layoutInflater.inflate(R.layout.dialog_input_password_light, null)
-
-                    view.dialog_password__ok.setOnClickListener {
-
-                        val oldPassword = view.dialog_input_old_password.text.toString()
-                        val newPassword = view.dialog_input_new_password.text.toString()
-                        val newPasswordRepeat =
-                            view.dialog_input_new_password_repeat.text.toString()
-
-                        if (oldPassword.isNotEmpty() && newPassword.isNotEmpty() && newPasswordRepeat.isNotEmpty()) {
-
-                            if (newPassword == newPasswordRepeat && password == oldPassword) {
-
-                                val credential = EmailAuthProvider.getCredential(
-                                    AUTH.currentUser!!.email.toString(),
-                                    oldPassword
-                                )
-
-                                AUTH.currentUser!!.reauthenticate(credential)
-                                    .addOnCompleteListener {
-                                        if (it.isSuccessful) {
-                                            AUTH.currentUser!!.updatePassword(view.dialog_input_new_password.text.toString())
-                                                .addOnCompleteListener {
-                                                    if (it.isSuccessful) {
-                                                        val updatesMap = mutableMapOf<String, Any>()
-                                                        updatesMap[hint] =
-                                                            view.dialog_input_new_password.text.toString()
-                                                        DATABASE.updateChildren(updatesMap)
-                                                            .addOnCompleteListener {
-                                                                if (it.isSuccessful) {
-                                                                    startActivity(
-                                                                        Intent(
-                                                                            requireContext(),
-                                                                            ActivityProfile::class.java
-                                                                        ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                                                    )
-                                                                    requireActivity().finish()
-                                                                } else {
-                                                                    requireContext().showToast(it.exception.toString())
-                                                                }
-                                                            }
-                                                    } else {
-                                                        requireContext().showToast(it.exception.toString())
-                                                    }
-                                                }
-                                        } else {
-                                            requireContext().showToast(it.exception.toString())
-                                        }
-                                    }
-                            } else {
-                                requireContext().showToast("Passwords are not same")
-                            }
-                        } else {
-                            requireContext().showToast("Enter passwords")
-                        }
-                    }
-
-                    view.dialog_password__cancel.setOnClickListener { this.dismiss() }
-
-                    AlertDialog.Builder(requireContext()).setView(view).create()
-                }
-            }
+//            "password" -> {
+//                return if (mUser.isDark) {
+//
+//                    val view = layoutInflater.inflate(R.layout.dialog_input_password_dark, null)
+//
+//                    view.dialog_password__ok.setOnClickListener {
+//
+//                        val oldPassword = view.dialog_input_old_password.text.toString()
+//                        val newPassword = view.dialog_input_new_password.text.toString()
+//                        val newPasswordRepeat =
+//                            view.dialog_input_new_password_repeat.text.toString()
+//
+//                        if (oldPassword.isNotEmpty() && newPassword.isNotEmpty() && newPasswordRepeat.isNotEmpty()) {
+//
+//                            if (newPassword == newPasswordRepeat && oldPassword == password) {
+//
+//                                val credential = EmailAuthProvider.getCredential(
+//                                    AUTH.currentUser!!.email.toString(),
+//                                    oldPassword
+//                                )
+//
+//                                AUTH.currentUser!!.reauthenticate(credential)
+//                                    .addOnCompleteListener {
+//                                        if (it.isSuccessful) {
+//                                            AUTH.currentUser!!.updatePassword(view.dialog_input_new_password.text.toString())
+//                                                .addOnCompleteListener {
+//                                                    if (it.isSuccessful) {
+//                                                        val updatesMap = mutableMapOf<String, Any>()
+//                                                        updatesMap[hint] =
+//                                                            view.dialog_input_new_password.text.toString()
+//                                                        DATABASE.updateChildren(updatesMap)
+//                                                            .addOnCompleteListener {
+//                                                                if (it.isSuccessful) {
+//                                                                    startActivity(
+//                                                                        Intent(
+//                                                                            requireContext(),
+//                                                                            ActivityProfile::class.java
+//                                                                        ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+//                                                                    )
+//                                                                    requireActivity().finish()
+//                                                                } else {
+//                                                                    requireContext().showToast(it.exception.toString())
+//                                                                }
+//                                                            }
+//                                                    } else {
+//                                                        requireContext().showToast(it.exception.toString())
+//                                                    }
+//                                                }
+//                                        } else {
+//                                            requireContext().showToast(it.exception.toString())
+//                                        }
+//                                    }
+//                            } else {
+//                                requireContext().showToast("Passwords are not same")
+//                            }
+//                        } else {
+//                            requireContext().showToast("Enter passwords")
+//                        }
+//                    }
+//
+//                    view.dialog_password__cancel.setOnClickListener { this.dismiss() }
+//
+//                    AlertDialog.Builder(requireContext()).setView(view).create()
+//                } else {
+//
+//                    val view = layoutInflater.inflate(R.layout.dialog_input_password_light, null)
+//
+//                    view.dialog_password__ok.setOnClickListener {
+//
+//                        val oldPassword = view.dialog_input_old_password.text.toString()
+//                        val newPassword = view.dialog_input_new_password.text.toString()
+//                        val newPasswordRepeat =
+//                            view.dialog_input_new_password_repeat.text.toString()
+//
+//                        if (oldPassword.isNotEmpty() && newPassword.isNotEmpty() && newPasswordRepeat.isNotEmpty()) {
+//
+//                            if (newPassword == newPasswordRepeat && password == oldPassword) {
+//
+//                                val credential = EmailAuthProvider.getCredential(
+//                                    AUTH.currentUser!!.email.toString(),
+//                                    oldPassword
+//                                )
+//
+//                                AUTH.currentUser!!.reauthenticate(credential)
+//                                    .addOnCompleteListener {
+//                                        if (it.isSuccessful) {
+//                                            AUTH.currentUser!!.updatePassword(view.dialog_input_new_password.text.toString())
+//                                                .addOnCompleteListener {
+//                                                    if (it.isSuccessful) {
+//                                                        val updatesMap = mutableMapOf<String, Any>()
+//                                                        updatesMap[hint] =
+//                                                            view.dialog_input_new_password.text.toString()
+//                                                        DATABASE.updateChildren(updatesMap)
+//                                                            .addOnCompleteListener {
+//                                                                if (it.isSuccessful) {
+//                                                                    startActivity(
+//                                                                        Intent(
+//                                                                            requireContext(),
+//                                                                            ActivityProfile::class.java
+//                                                                        ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+//                                                                    )
+//                                                                    requireActivity().finish()
+//                                                                } else {
+//                                                                    requireContext().showToast(it.exception.toString())
+//                                                                }
+//                                                            }
+//                                                    } else {
+//                                                        requireContext().showToast(it.exception.toString())
+//                                                    }
+//                                                }
+//                                        } else {
+//                                            requireContext().showToast(it.exception.toString())
+//                                        }
+//                                    }
+//                            } else {
+//                                requireContext().showToast("Passwords are not same")
+//                            }
+//                        } else {
+//                            requireContext().showToast("Enter passwords")
+//                        }
+//                    }
+//
+//                    view.dialog_password__cancel.setOnClickListener { this.dismiss() }
+//
+//                    AlertDialog.Builder(requireContext()).setView(view).create()
+//                }
+//            }
 
             else -> return AlertDialog.Builder(requireContext()).setView(R.layout.dialog_input)
                 .create()
@@ -208,31 +198,15 @@ class DialogInput(private val hint: String, private val password: String) : Dial
                 if (hint == "email") {
 
                     CoroutineScope(IO).launch {
-                        val credential = EmailAuthProvider.getCredential(
-                            AUTH.currentUser!!.email.toString(),
-                            password
-                        )
 
-                        AUTH.currentUser!!.reauthenticate(credential)
-                            .addOnCompleteListener { task1 ->
-                                if (task1.isSuccessful) {
-                                    AUTH.currentUser!!.updateEmail(view.dialog_input.text.toString())
-                                        .addOnCompleteListener { task2 ->
-                                            if (task2.isSuccessful) {
-                                                DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).updateChildren(updatesMap)
-                                            } else {
-                                                requireContext().showToast(task2.exception.toString())
-                                            }
-                                        }
-                                } else {
-                                    requireContext().showToast(task1.exception.toString())
-                                }
-                            }
+                        val email = view.dialog_input.text.toString()
+                        val password = mUser.password
+
+                        firebase.updateUser(email, password)
                     }
                 } else {
                     CoroutineScope(IO).launch {
-                        DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
-                            .updateChildren(updatesMap)
+                        firebase.updateUser(updatesMap)
                     }
                 }
 

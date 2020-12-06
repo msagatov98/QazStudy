@@ -85,6 +85,12 @@ class ActivityNavigation : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        initAuth()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.activity_navigation_drawer, menu)
         return true

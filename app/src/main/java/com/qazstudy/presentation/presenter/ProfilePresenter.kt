@@ -1,6 +1,7 @@
 package com.qazstudy.presentation.presenter
 
 import android.app.Activity
+import android.net.Uri
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
@@ -8,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.qazstudy.R
+import com.qazstudy.model.Firebase
 import moxy.MvpPresenter
 import moxy.InjectViewState
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
@@ -19,8 +21,7 @@ import com.qazstudy.util.*
 @InjectViewState
 class ProfilePresenter(var activity: Activity) : MvpPresenter<ProfileView>() {
 
-    private val AUTH = FirebaseAuth.getInstance()
-    private var STORAGE = FirebaseStorage.getInstance().reference
+    private val firebase = Firebase()
 
     fun init() {
         viewState.initProfile()
@@ -42,8 +43,12 @@ class ProfilePresenter(var activity: Activity) : MvpPresenter<ProfileView>() {
         return mUser.password
     }
 
+    fun updateUser(imageUri: Uri ) {
+        firebase.updateUser(imageUri)
+    }
+
     fun setImage(view: ImageView) {
-        STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid).child(NODE_PHOTO).downloadUrl.addOnSuccessListener {
+        firebase.mStorage.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).child(NODE_PHOTO).downloadUrl.addOnSuccessListener {
              Glide.with(activity)
                  .load(it)
                  .error(ContextCompat.getDrawable(activity, R.drawable.ic_avatar_dark))
