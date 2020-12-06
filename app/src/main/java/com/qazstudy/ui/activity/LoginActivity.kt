@@ -2,12 +2,18 @@ package com.qazstudy.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.qazstudy.databinding.ActivityLoginBinding
+import com.qazstudy.presentation.presenter.LoginPresenter
+import com.qazstudy.presentation.view.LoginView
 import com.qazstudy.util.showToast
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : MvpAppCompatActivity(), LoginView {
+
+    @InjectPresenter
+    lateinit var presenter: LoginPresenter
 
     private lateinit var AUTH: FirebaseAuth
 
@@ -38,9 +44,5 @@ class LoginActivity : AppCompatActivity() {
                 showToast("Введите адрес электронной почты и пароль")
             }
         }
-    }
-
-    override fun onBackPressed() {
-        this.finish()
     }
 }

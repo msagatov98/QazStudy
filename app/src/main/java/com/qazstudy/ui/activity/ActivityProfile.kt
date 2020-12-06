@@ -1,13 +1,16 @@
 package com.qazstudy.ui.activity
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
@@ -18,13 +21,14 @@ import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.qazstudy.presentation.view.ProfileView
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.util.showToast
 import com.theartofdev.edmodo.cropper.CropImage
-import moxy.MvpAppCompatActivity
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
@@ -42,6 +46,7 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
     private val TAG = javaClass.simpleName
     private val TAKE_PICTURE_REQUEST_CODE = 1
+    private val TAKE_PERMISSION_REQUEST_CODE = 2
     private val timeStamp = SimpleDateFormat("yyyyMMDD_HHmmss", Locale.US).format(Date())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,13 +63,26 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
         Log.e(TAG, "onActivityResult")
 
         if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            CropImage.activity(mImageURI).setAspectRatio(1, 1).start(this)
+            mProfilePresenter.cropImage(mImageURI)
         } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             mImageURI = CropImage.getActivityResult(data).uri
 
             Glide.with(this).load(mImageURI).into(binding.activityProfileImageProfile)
             mProfilePresenter.updateUser(mImageURI)
         }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == TAKE_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                takeCameraPicture()
+            } else {
+                showToast("Give permission to take picture")
+            }
+        }
+
     }
 
     override fun setMode() {
@@ -250,13 +268,18 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
     private fun takeCameraPicture() {
 
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_GRANTED) {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        if (intent.resolveActivity(packageManager) != null) {
-            val imageFile = createImageFile()
-            mImageURI = FileProvider.getUriForFile(this, "com.qazstudy.fileprovider", imageFile)
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageURI)
-            startActivityForResult(intent, TAKE_PICTURE_REQUEST_CODE)
+            if (intent.resolveActivity(packageManager) != null) {
+                val imageFile = createImageFile()
+                mImageURI = FileProvider.getUriForFile(this, "com.qazstudy.fileprovider", imageFile)
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageURI)
+                startActivityForResult(intent, TAKE_PICTURE_REQUEST_CODE)
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), TAKE_PERMISSION_REQUEST_CODE)
+            }
         }
     }
 

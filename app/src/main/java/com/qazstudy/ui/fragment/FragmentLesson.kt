@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
+import androidx.recyclerview.widget.RecyclerView
 import com.qazstudy.R
 import com.qazstudy.model.Lesson
 import com.qazstudy.ui.adapter.AdapterLesson
@@ -14,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_lesson.*
 
 class FragmentLesson() : Fragment() {
 
-    val TAG = "FragmentLesson"
     private lateinit var lesson: Lesson
 
     private var lessonImage =

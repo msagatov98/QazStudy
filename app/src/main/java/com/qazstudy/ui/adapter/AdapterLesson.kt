@@ -33,7 +33,7 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) : Rec
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0 || position == 9) TYPE_SINGLE_ITEM
+        return if (position == 0 || position == 5) TYPE_SINGLE_ITEM
                else TYPE_DOUBLE_ITEM
     }
 

@@ -18,7 +18,12 @@ import com.qazstudy.model.Message
 import com.qazstudy.presentation.view.ChatView
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import com.qazstudy.util.NODE_MESSAGE
-import kotlinx.android.synthetic.main.view_holder_message.view.*
+import kotlinx.android.synthetic.main.view_holder_message.view.chat_city
+import kotlinx.android.synthetic.main.view_holder_message.view.chat_country
+import kotlinx.android.synthetic.main.view_holder_message.view.chat_message
+import kotlinx.android.synthetic.main.view_holder_message.view.chat_time
+import kotlinx.android.synthetic.main.view_holder_message.view.chat_user
+import kotlinx.android.synthetic.main.view_holder_message.view.ic_chat
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
