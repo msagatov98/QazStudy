@@ -1,19 +1,17 @@
 package com.qazstudy.ui.dialog
 
-import com.qazstudy.R
-import android.util.Log
-import android.os.Bundle
-import android.view.View
 import android.app.Dialog
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.qazstudy.R
 import com.qazstudy.model.Firebase
-import kotlinx.android.synthetic.main.dialog_input.view.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.util.*
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__ok
-import kotlinx.android.synthetic.main.dialog_input.view.dialog_password__cancel
+import kotlinx.android.synthetic.main.dialog_input.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch

@@ -1,15 +1,13 @@
 package com.qazstudy.ui.fragment.lecture
 
-import com.qazstudy.R
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.SpannedString
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.R
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import kotlinx.android.synthetic.main.fragment_lecture3.*
 
 class FragmentLecture3 : Fragment() {

@@ -1,31 +1,29 @@
 package com.qazstudy.ui.fragment
 
-import com.qazstudy.R
-import android.view.View
 import android.os.Bundle
-import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.qazstudy.model.Message
-import com.qazstudy.util.showToast
-import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.text.format.DateFormat
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_chat.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.view_holder_message.view.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.R
+import com.qazstudy.model.Message
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
+import com.qazstudy.util.showToast
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.fragment_chat.*
+import kotlinx.android.synthetic.main.view_holder_message.view.*
 
 class FragmentChat : Fragment() {
 
-    private val AUTH = FirebaseAuth.getInstance()
     private var STORAGE = FirebaseStorage.getInstance().reference
     private var DATABASE = FirebaseDatabase.getInstance().reference
 
@@ -38,7 +36,7 @@ class FragmentChat : Fragment() {
 
         const val KEY_CHAT_PATH = "KEY_CHAT_PATH"
 
-        fun newInstance(chatPath: String) : FragmentChat {
+        fun newInstance(chatPath: String): FragmentChat {
             val args = Bundle()
             args.putString(KEY_CHAT_PATH, chatPath)
 
@@ -69,9 +67,11 @@ class FragmentChat : Fragment() {
                 ): MessageViewHolder {
 
                     val view = if (mUser.isDark)
-                                    LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message_dark, parent, false)
-                               else
-                                    LayoutInflater.from(parent.context).inflate(R.layout.view_holder_message, parent, false)
+                        LayoutInflater.from(parent.context)
+                            .inflate(R.layout.view_holder_message_dark, parent, false)
+                    else
+                        LayoutInflater.from(parent.context)
+                            .inflate(R.layout.view_holder_message, parent, false)
 
                     return MessageViewHolder(view)
                 }
@@ -90,7 +90,7 @@ class FragmentChat : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val manager =  LinearLayoutManager(requireContext())
+        val manager = LinearLayoutManager(requireContext())
         manager.orientation = LinearLayoutManager.VERTICAL
         manager.stackFromEnd = true
 
@@ -118,7 +118,11 @@ class FragmentChat : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 

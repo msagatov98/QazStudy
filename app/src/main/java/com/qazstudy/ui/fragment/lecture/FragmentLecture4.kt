@@ -1,18 +1,22 @@
 package com.qazstudy.ui.fragment.lecture
 
-import com.qazstudy.R
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import kotlinx.android.synthetic.main.fragment_lecture4.*
+import com.qazstudy.R
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
+import kotlinx.android.synthetic.main.fragment_lecture4.lecture_4_text
 
 class FragmentLecture4 : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_lecture4, container, false)
     }
 

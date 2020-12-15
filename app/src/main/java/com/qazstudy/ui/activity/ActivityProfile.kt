@@ -16,12 +16,11 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.qazstudy.R
-import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.databinding.ActivityProfileBinding
 import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.qazstudy.presentation.view.ProfileView
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.util.showToast
 import com.qazstudy.util.viewBinding
 import com.theartofdev.edmodo.cropper.CropImage
@@ -34,7 +33,7 @@ import moxy.presenter.ProvidePresenter
 
 class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
-    private  val binding by viewBinding(ActivityProfileBinding::inflate)
+    private val binding by viewBinding(ActivityProfileBinding::inflate)
 
     @InjectPresenter
     lateinit var mProfilePresenter: ProfilePresenter
@@ -74,7 +73,11 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == TAKE_PERMISSION_REQUEST_CODE) {
@@ -271,7 +274,8 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
     private fun takeCameraPicture() {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
-                PackageManager.PERMISSION_GRANTED) {
+            PackageManager.PERMISSION_GRANTED
+        ) {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
             if (intent.resolveActivity(packageManager) != null) {
@@ -280,7 +284,11 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageURI)
                 startActivityForResult(intent, TAKE_PICTURE_REQUEST_CODE)
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), TAKE_PERMISSION_REQUEST_CODE)
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.CAMERA),
+                    TAKE_PERMISSION_REQUEST_CODE
+                )
             }
         }
     }

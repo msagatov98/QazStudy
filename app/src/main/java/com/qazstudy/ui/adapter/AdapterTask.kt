@@ -1,24 +1,23 @@
 package com.qazstudy.ui.adapter
 
-import com.qazstudy.R
-import android.view.View
-import android.content.Intent
-import android.view.ViewGroup
-import android.graphics.Color
 import android.content.Context
-import android.widget.TextView
-import com.qazstudy.model.Task
+import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
-import com.qazstudy.ui.activity.ActivityTask
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.github.florent37.shapeofview.shapes.PolygonView
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
-import kotlinx.android.synthetic.main.view_holder_task.view.*
+import com.qazstudy.R
+import com.qazstudy.model.Task
+import com.qazstudy.ui.activity.ActivityTask
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import kotlinx.android.synthetic.main.view_holder_lesson.view.header
-import kotlinx.android.synthetic.main.view_holder_lesson.view.container
+import kotlinx.android.synthetic.main.view_holder_task.view.*
 
-class AdapterTask(var context: Context, var task: Task) : RecyclerView.Adapter<AdapterTask.TaskViewHolder>() {
+class AdapterTask(var context: Context, var task: Task) :
+    RecyclerView.Adapter<AdapterTask.TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder =
         TaskViewHolder(
@@ -32,7 +31,7 @@ class AdapterTask(var context: Context, var task: Task) : RecyclerView.Adapter<A
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textViewHeader : TextView = itemView.header
+        var textViewHeader: TextView = itemView.header
         val icon: PolygonView = itemView.ic_task
 
         fun bind(position: Int) {

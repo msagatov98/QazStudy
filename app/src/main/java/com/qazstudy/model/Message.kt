@@ -1,8 +1,8 @@
 package com.qazstudy.model
 
 import com.google.firebase.auth.FirebaseAuth
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import java.util.*
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 
 
 private val AUTH = FirebaseAuth.getInstance()

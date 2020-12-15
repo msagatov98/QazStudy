@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityBookBinding
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.util.viewBinding
 import java.io.BufferedReader
 import java.io.IOException

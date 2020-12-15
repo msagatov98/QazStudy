@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,16 +14,16 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityNavigationBinding
 import com.qazstudy.model.Firebase
 import com.qazstudy.model.Lesson
 import com.qazstudy.model.Task
 import com.qazstudy.model.User
+import com.qazstudy.presentation.presenter.NavigationPresenter
+import com.qazstudy.presentation.view.NavigationView
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.ui.adapter.AdapterBook
 import com.qazstudy.ui.adapter.AdapterLesson
 import com.qazstudy.ui.adapter.AdapterTask
@@ -35,22 +34,19 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.fragment_task.*
 import kotlinx.android.synthetic.main.navigation_app_bar.*
 import kotlinx.android.synthetic.main.navigation_header.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 
-class ActivityNavigation : AppCompatActivity() {
+class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
 
     companion object {
-        lateinit var mUser: User
         lateinit var mImageURI: Uri
     }
 
     private lateinit var firebase: Firebase
 
-//    lateinit var presenter: NavigationPresenter
-//
-//    @ProvidePresenter
-//    fun providePresenter(): NavigationPresenter {
-//        return NavigationPresenter(FirebaseHelper())
-//    }
+    @InjectPresenter
+    lateinit var presenter: NavigationPresenter
 
     private val binding by viewBinding(ActivityNavigationBinding::inflate)
 
@@ -76,7 +72,6 @@ class ActivityNavigation : AppCompatActivity() {
         firebase = Firebase()
 
         initNavigation()
-        initAuth()
 
     }
 
@@ -159,7 +154,8 @@ class ActivityNavigation : AppCompatActivity() {
         mUser.isDark = !mUser.isDark
         updatesMap["isDark"] = mUser.isDark
 
-        firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).updateChildren(updatesMap)
+        firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
+            .updateChildren(updatesMap)
 
         if (mUser.isDark) {
             setDark()

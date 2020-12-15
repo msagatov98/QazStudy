@@ -1,17 +1,16 @@
 package com.qazstudy.ui.activity
 
-import com.qazstudy.R
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.content.Intent
-import androidx.fragment.app.Fragment
-import com.qazstudy.ui.fragment.lecture.*
-import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.qazstudy.databinding.ActivityBookBinding
+import com.qazstudy.R
 import com.qazstudy.databinding.ActivityLectureBinding
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
+import com.qazstudy.ui.fragment.lecture.*
 import com.qazstudy.util.viewBinding
 
 class ActivityLecture : AppCompatActivity() {
@@ -19,9 +18,9 @@ class ActivityLecture : AppCompatActivity() {
     private var position = -1
 
     private lateinit var openedFragment: Fragment
-    private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
+    private var fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
 
-    private  val binding by viewBinding(ActivityLectureBinding::inflate)
+    private val binding by viewBinding(ActivityLectureBinding::inflate)
 
     private val arFragmentLecture = arrayListOf(
         FragmentLectureIntro(),
@@ -75,10 +74,30 @@ class ActivityLecture : AppCompatActivity() {
             binding.activityLessonToolbar.setBackgroundColor(getColor(R.color.light_blue))
             binding.activityLessonConstraintLayout.setBackgroundColor(getColor(R.color.dark))
             binding.activityLessonToolbarBottom.setBackgroundColor(getColor(R.color.light_blue))
-            binding.activityLessonIcChat.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_chat_dark))
-            binding.activityLessonIcBack.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_back_dark))
-            binding.activityLessonIcNext.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_next_dark))
-            binding.activityLessonIcPrevious.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_previous_dark))
+            binding.activityLessonIcChat.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_chat_dark
+                )
+            )
+            binding.activityLessonIcBack.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_back_dark
+                )
+            )
+            binding.activityLessonIcNext.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_next_dark
+                )
+            )
+            binding.activityLessonIcPrevious.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_previous_dark
+                )
+            )
         }
     }
 
@@ -94,60 +113,69 @@ class ActivityLecture : AppCompatActivity() {
             .beginTransaction()
             .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left)
 
-        if (position < arFragmentLecture.size-1)
+        if (position < arFragmentLecture.size - 1)
             position++
 
-        when(openedFragment) {
+        when (openedFragment) {
             is FragmentLectureIntro -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture1()
                 )
                 openedFragment = FragmentLecture1()
             }
             is FragmentLecture1 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture2()
                 )
                 openedFragment = FragmentLecture2()
             }
             is FragmentLecture2 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture3()
                 )
                 openedFragment = FragmentLecture3()
             }
             is FragmentLecture3 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture4()
                 )
                 openedFragment = FragmentLecture4()
             }
             is FragmentLecture4 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture5()
                 )
                 openedFragment = FragmentLecture5()
             }
             is FragmentLecture5 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture6()
                 )
                 openedFragment = FragmentLecture6()
             }
             is FragmentLecture6 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture7()
                 )
                 openedFragment = FragmentLecture7()
             }
             is FragmentLecture7 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture8()
                 )
                 openedFragment = FragmentLecture8()
             }
             is FragmentLecture8 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture9()
                 )
                 openedFragment = FragmentLecture9()
@@ -166,65 +194,74 @@ class ActivityLecture : AppCompatActivity() {
         if (position > 0)
             position--
 
-        when(openedFragment) {
+        when (openedFragment) {
             is FragmentLecture1 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLectureIntro()
                 )
                 openedFragment =
                     FragmentLectureIntro()
             }
             is FragmentLecture2 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture1()
                 )
                 openedFragment =
                     FragmentLecture1()
             }
             is FragmentLecture3 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture2()
                 )
                 openedFragment =
                     FragmentLecture2()
             }
             is FragmentLecture4 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture3()
                 )
                 openedFragment =
                     FragmentLecture3()
             }
             is FragmentLecture5 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture4()
                 )
                 openedFragment =
                     FragmentLecture4()
             }
             is FragmentLecture6 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture5()
                 )
                 openedFragment =
                     FragmentLecture5()
             }
             is FragmentLecture7 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture6()
                 )
                 openedFragment =
                     FragmentLecture6()
             }
             is FragmentLecture8 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture7()
                 )
                 openedFragment =
                     FragmentLecture7()
             }
             is FragmentLecture9 -> {
-                fragmentTransaction.replace(R.id.fragment_container_lecture,
+                fragmentTransaction.replace(
+                    R.id.fragment_container_lecture,
                     FragmentLecture8()
                 )
                 openedFragment =
