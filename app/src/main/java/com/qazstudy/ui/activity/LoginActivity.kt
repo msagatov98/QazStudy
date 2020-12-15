@@ -3,10 +3,12 @@ package com.qazstudy.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
+import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.databinding.ActivityLoginBinding
 import com.qazstudy.presentation.presenter.LoginPresenter
 import com.qazstudy.presentation.view.LoginView
 import com.qazstudy.util.showToast
+import com.qazstudy.util.viewBinding
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 
@@ -17,11 +19,10 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     private lateinit var AUTH: FirebaseAuth
 
-    private lateinit var binding: ActivityLoginBinding
+    private  val binding by viewBinding(ActivityLoginBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         AUTH = FirebaseAuth.getInstance()

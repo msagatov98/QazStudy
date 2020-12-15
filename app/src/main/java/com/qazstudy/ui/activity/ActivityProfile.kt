@@ -16,12 +16,14 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.qazstudy.R
+import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.databinding.ActivityProfileBinding
 import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.qazstudy.presentation.view.ProfileView
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import com.qazstudy.util.showToast
+import com.qazstudy.util.viewBinding
 import com.theartofdev.edmodo.cropper.CropImage
 import java.io.File
 import java.text.SimpleDateFormat
@@ -32,7 +34,7 @@ import moxy.presenter.ProvidePresenter
 
 class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
-    private lateinit var binding: ActivityProfileBinding
+    private  val binding by viewBinding(ActivityProfileBinding::inflate)
 
     @InjectPresenter
     lateinit var mProfilePresenter: ProfilePresenter
@@ -51,8 +53,8 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setMode()
         mProfilePresenter.init()
     }

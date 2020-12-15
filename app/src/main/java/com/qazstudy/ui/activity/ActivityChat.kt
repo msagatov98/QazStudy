@@ -4,11 +4,13 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.qazstudy.R
+import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.databinding.ActivityChatBinding
 import com.qazstudy.presentation.presenter.ChatPresenter
 import com.qazstudy.presentation.view.ChatView
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
 import com.qazstudy.util.showToast
+import com.qazstudy.util.viewBinding
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -23,12 +25,12 @@ class ActivityChat : MvpAppCompatActivity(), ChatView {
         return ChatPresenter(this)
     }
 
-    private lateinit var binding: ActivityChatBinding
+    private  val binding by viewBinding(ActivityChatBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setMode()
         initListeners()
 

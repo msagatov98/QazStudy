@@ -9,8 +9,10 @@ import com.qazstudy.ui.fragment.lecture.*
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.databinding.ActivityLectureBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.util.viewBinding
 
 class ActivityLecture : AppCompatActivity() {
 
@@ -19,7 +21,7 @@ class ActivityLecture : AppCompatActivity() {
     private lateinit var openedFragment: Fragment
     private var fragmentTransaction : FragmentTransaction = supportFragmentManager.beginTransaction()
 
-    private lateinit var binding: ActivityLectureBinding
+    private  val binding by viewBinding(ActivityLectureBinding::inflate)
 
     private val arFragmentLecture = arrayListOf(
         FragmentLectureIntro(),
@@ -36,8 +38,6 @@ class ActivityLecture : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityLectureBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 

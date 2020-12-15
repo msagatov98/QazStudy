@@ -21,6 +21,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityNavigationBinding
+import com.qazstudy.model.Firebase
 import com.qazstudy.model.Lesson
 import com.qazstudy.model.Task
 import com.qazstudy.model.User
@@ -42,9 +43,7 @@ class ActivityNavigation : AppCompatActivity() {
         lateinit var mImageURI: Uri
     }
 
-    private lateinit var AUTH: FirebaseAuth
-    private lateinit var STORAGE: StorageReference
-    private lateinit var DATABASE: DatabaseReference
+    private lateinit var firebase: Firebase
 
 //    lateinit var presenter: NavigationPresenter
 //
@@ -53,7 +52,7 @@ class ActivityNavigation : AppCompatActivity() {
 //        return NavigationPresenter(FirebaseHelper())
 //    }
 
-    private lateinit var binding: ActivityNavigationBinding
+    private val binding by viewBinding(ActivityNavigationBinding::inflate)
 
     private val TAG = javaClass.simpleName
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -72,13 +71,9 @@ class ActivityNavigation : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityNavigationBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        AUTH = FirebaseAuth.getInstance()
-        STORAGE = FirebaseStorage.getInstance().reference
-        DATABASE = FirebaseDatabase.getInstance().reference
+        firebase = Firebase()
 
         initNavigation()
         initAuth()
@@ -127,7 +122,7 @@ class ActivityNavigation : AppCompatActivity() {
 
     private fun initAuth() {
 
-        DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid)
+        firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(data: DataSnapshot) {
@@ -138,7 +133,7 @@ class ActivityNavigation : AppCompatActivity() {
                     Log.i(TAG, "onCreate: get from database $mUser")
 
                     if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
-                        STORAGE.child(NODE_USER).child(AUTH.currentUser!!.uid)
+                        firebase.mStorage.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
                             .child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
                                 Glide.with(this@ActivityNavigation).load(imageUri.toString())
                                     .into(nav_profile)
@@ -164,7 +159,7 @@ class ActivityNavigation : AppCompatActivity() {
         mUser.isDark = !mUser.isDark
         updatesMap["isDark"] = mUser.isDark
 
-        DATABASE.child(NODE_USER).child(AUTH.currentUser!!.uid).updateChildren(updatesMap)
+        firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).updateChildren(updatesMap)
 
         if (mUser.isDark) {
             setDark()

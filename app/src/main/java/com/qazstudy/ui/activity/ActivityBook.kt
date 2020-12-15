@@ -6,19 +6,19 @@ import android.view.View
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mUser
+import com.qazstudy.util.viewBinding
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
 class ActivityBook : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBookBinding
+    private  val binding by viewBinding(ActivityBookBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBookBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
         setTheme()
         setBook()
     }
