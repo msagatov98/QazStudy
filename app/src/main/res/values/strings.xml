@@ -162,5 +162,6 @@
     <string name="confirm_exit">Are you sure to exit from account</string>
     <string name="lecture_1_2">lecture 1.2</string>
     <string name="lecture_2_1">lecture_2_1</string>
+    <string name="register">Don\'t have account? <string>Register</string></string>
 
 </resources>

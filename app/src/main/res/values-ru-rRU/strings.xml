@@ -122,5 +122,6 @@
     <string name="translator">Переводчик</string>
     <string name="alphabet">Казахский алфавит</string>
     <string name="sign_in">Войти</string>
+    <string name="register">Нету аккаунта? <strong>Регистрация</strong></string>
 
 </resources>

@@ -117,30 +117,36 @@ class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
 
     private fun initAuth() {
 
-        firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
+        if (!firebase.isUserExits()) {
+            firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
 
-                override fun onDataChange(data: DataSnapshot) {
-                    mUser = data.getValue(User::class.java)!!
+                    override fun onDataChange(data: DataSnapshot) {
+                        mUser = data.getValue(User::class.java)!!
 
-                    nav_header_txt_name.text = mUser.name
+                        nav_header_txt_name.text = mUser.name
 
-                    Log.i(TAG, "onCreate: get from database $mUser")
+                        Log.i(TAG, "onCreate: get from database $mUser")
 
-                    if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
-                        firebase.mStorage.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
-                            .child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
-                                Glide.with(this@ActivityNavigation).load(imageUri.toString())
-                                    .into(nav_profile)
-                            }
+                        if (mUser.photo.isNotEmpty() || mUser.photo != "null") {
+                            firebase.mStorage.child(NODE_USER)
+                                .child(firebase.mAuth.currentUser!!.uid)
+                                .child(NODE_PHOTO).downloadUrl.addOnSuccessListener { imageUri ->
+                                    Glide.with(this@ActivityNavigation).load(imageUri.toString())
+                                        .into(nav_profile)
+                                }
+                        }
                     }
-                }
 
-                override fun onCancelled(error: DatabaseError) {
+                    override fun onCancelled(error: DatabaseError) {
 
-                }
+                    }
 
-            })
+                })
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 
     private fun openProfile() {

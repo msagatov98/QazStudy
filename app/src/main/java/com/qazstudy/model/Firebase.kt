@@ -77,13 +77,11 @@ class Firebase {
     }
 
     fun deleteUser(): Boolean {
+        var res = false
         mStorage.child(NODE_USER).child(mAuth.currentUser!!.uid).child(NODE_PHOTO).delete()
         mDatabase.child(NODE_USER).child(mAuth.currentUser!!.uid).removeValue()
-        mAuth.currentUser!!.delete().addOnSuccessListener {
-            return@addOnSuccessListener
-        }
-
-        return false
+        mAuth.currentUser!!.delete().addOnSuccessListener { res = true }
+        return res
     }
 
     fun signOut() {
