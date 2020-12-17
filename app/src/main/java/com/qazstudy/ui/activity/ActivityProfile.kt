@@ -19,8 +19,8 @@ import com.qazstudy.R
 import com.qazstudy.databinding.ActivityProfileBinding
 import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.qazstudy.presentation.view.ProfileView
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
-import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.util.showToast
 import com.qazstudy.util.viewBinding
 import com.theartofdev.edmodo.cropper.CropImage
@@ -91,7 +91,7 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
     }
 
     override fun setMode() {
-        if (mUser.isDark) {
+        if (isDark) {
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
             binding.activityProfileToolbarTxt.setTextColor(
                 ContextCompat.getColor(

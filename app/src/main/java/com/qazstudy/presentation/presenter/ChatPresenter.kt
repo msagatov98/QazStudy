@@ -16,6 +16,7 @@ import com.google.firebase.storage.StorageReference
 import com.qazstudy.R
 import com.qazstudy.model.Message
 import com.qazstudy.presentation.view.ChatView
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.util.NODE_MESSAGE
 import kotlinx.android.synthetic.main.view_holder_message.view.chat_city
@@ -72,7 +73,7 @@ class ChatPresenter(val context: Context) : MvpPresenter<ChatView>() {
                     viewType: Int
                 ): MessageViewHolder {
 
-                    val view = if (mUser.isDark)
+                    val view = if (isDark)
                         LayoutInflater.from(parent.context)
                             .inflate(R.layout.view_holder_message_dark, parent, false)
                     else

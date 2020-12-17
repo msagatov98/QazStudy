@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.qazstudy.R
-import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import kotlinx.android.synthetic.main.fragment_lecture1.*
 
 class FragmentLecture1 : Fragment() {
@@ -45,7 +45,7 @@ class FragmentLecture1 : Fragment() {
             abc_latin_31, abc_latin_32
         )
 
-        if (mUser.isDark) {
+        if (isDark) {
             text_view.setTextColor(requireContext().getColor(R.color.white))
             arrayAbcCyrillic.forEach {
                 it.setTextColor(requireContext().getColor(R.color.light_blue))

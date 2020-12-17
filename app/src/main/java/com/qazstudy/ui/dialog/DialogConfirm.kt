@@ -8,8 +8,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.qazstudy.R
 import com.qazstudy.model.Firebase
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.LoginActivity
-import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.util.showToast
 import kotlinx.android.synthetic.main.dialog_confirm_dark.view.*
 
@@ -70,7 +70,7 @@ class DialogConfirm(private val hint: String) : DialogFragment() {
     }
 
     private fun getDialogView(): View {
-        return if (mUser.isDark)
+        return if (isDark)
             layoutInflater.inflate(R.layout.dialog_confirm_dark, null, false)
         else
             layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)

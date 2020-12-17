@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityLectureBinding
-import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.fragment.lecture.*
 import com.qazstudy.util.viewBinding
 
@@ -68,7 +68,7 @@ class ActivityLecture : AppCompatActivity() {
     }
 
     private fun setTheme() {
-        if (mUser.isDark) {
+        if (isDark) {
             this.window.statusBarColor = getColor(R.color.light_blue)
             binding.activityLessonTxtLectureHeader.setTextColor(getColor(R.color.dark))
             binding.activityLessonToolbar.setBackgroundColor(getColor(R.color.light_blue))

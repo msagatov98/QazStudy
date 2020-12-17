@@ -40,6 +40,7 @@ import moxy.presenter.InjectPresenter
 class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
 
     companion object {
+        var isDark = false
         lateinit var mImageURI: Uri
     }
 
@@ -66,7 +67,6 @@ class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(binding.root)
 
         firebase = Firebase()
@@ -149,15 +149,9 @@ class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
 
     private fun themeSwitch() {
 
-        val updatesMap = mutableMapOf<String, Any>()
+        isDark = !isDark
 
-        mUser.isDark = !mUser.isDark
-        updatesMap["isDark"] = mUser.isDark
-
-        firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
-            .updateChildren(updatesMap)
-
-        if (mUser.isDark) {
+        if (isDark) {
             setDark()
         } else {
             setLight()

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityBookBinding
-import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.util.viewBinding
 import java.io.BufferedReader
 import java.io.IOException
@@ -30,7 +30,7 @@ class ActivityBook : AppCompatActivity() {
     }
 
     private fun setTheme() {
-        if (mUser.isDark) {
+        if (isDark) {
             binding.bookText.setTextColor(getColor(R.color.white))
             binding.bookText.setBackgroundColor(getColor(R.color.dark))
             binding.toolbar.setBackgroundColor(getColor(R.color.light_blue))

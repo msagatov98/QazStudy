@@ -45,20 +45,6 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
                 firebase.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
 
-                        firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
-                            .addValueEventListener(object : ValueEventListener {
-
-                                override fun onDataChange(data: DataSnapshot) {
-                                    mUser = data.getValue(User::class.java)!!
-                                }
-
-                                override fun onCancelled(error: DatabaseError) {
-
-                                }
-
-                            })
-
-
                         startActivity(Intent(this, ActivityNavigation::class.java))
                         finish()
                     } else {

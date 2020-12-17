@@ -7,7 +7,7 @@ import com.qazstudy.R
 import com.qazstudy.databinding.ActivityChatBinding
 import com.qazstudy.presentation.presenter.ChatPresenter
 import com.qazstudy.presentation.view.ChatView
-import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.util.showToast
 import com.qazstudy.util.viewBinding
 import moxy.MvpAppCompatActivity
@@ -57,7 +57,7 @@ class ActivityChat : MvpAppCompatActivity(), ChatView {
     }
 
     override fun setMode() {
-        if (mUser.isDark) {
+        if (isDark) {
             binding.bgChat.setBackgroundColor(getColor(R.color.dark))
             this.window.statusBarColor = getColor(R.color.black)
             binding.activityChatToolbar.setBackgroundColor(getColor(R.color.light_blue))
@@ -79,9 +79,9 @@ class ActivityChat : MvpAppCompatActivity(), ChatView {
 
         binding.icSend.setOnClickListener {
             if (binding.inputChatMessage.text.isNotEmpty()) {
-                binding.inputChatMessage.setText("")
                 mChatPresenter.sendMessage(binding.inputChatMessage.text.toString())
                 mChatPresenter.getAdapter().notifyDataSetChanged()
+                binding.inputChatMessage.setText("")
             } else {
                 showToast(R.string.empty_message_send)
             }

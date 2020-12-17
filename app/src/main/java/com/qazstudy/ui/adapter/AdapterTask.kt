@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.florent37.shapeofview.shapes.PolygonView
 import com.qazstudy.R
 import com.qazstudy.model.Task
+import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.ActivityTask
-import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import kotlinx.android.synthetic.main.view_holder_lesson.view.header
 import kotlinx.android.synthetic.main.view_holder_task.view.*
 
@@ -35,7 +35,7 @@ class AdapterTask(var context: Context, var task: Task) :
         val icon: PolygonView = itemView.ic_task
 
         fun bind(position: Int) {
-            if (mUser.isDark)
+            if (isDark)
                 textViewHeader.setTextColor(Color.rgb(60, 90, 188))
 
             textViewHeader.text = task.header[position]

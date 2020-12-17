@@ -36,15 +36,6 @@
             app:layout_constraintStart_toEndOf="@id/activity_chat__ic_back"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <fragment-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:id="@+id/activity_chat__fragment"-->
-<!--        class="com.qazstudy.ui.fragment.FragmentChat"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/activity_chat__toolbar"/>-->
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat"
         android:layout_height="0dp"
