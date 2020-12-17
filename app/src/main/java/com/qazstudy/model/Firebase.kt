@@ -23,13 +23,6 @@ class Firebase {
         mDatabase = FirebaseDatabase.getInstance().reference
     }
 
-    fun isUserExits(): Boolean {
-        return mAuth.currentUser != null
-    }
-
-    fun createUser() {
-    }
-
     fun updateUser(email: String, password: String) {
         val credential = EmailAuthProvider.getCredential(
             mAuth.currentUser!!.email.toString(),
@@ -76,17 +69,14 @@ class Firebase {
             }
     }
 
-    fun deleteUser(): Boolean {
-        var res = false
+    fun deleteUser() {
         mStorage.child(NODE_USER).child(mAuth.currentUser!!.uid).child(NODE_PHOTO).delete()
         mDatabase.child(NODE_USER).child(mAuth.currentUser!!.uid).removeValue()
-        mAuth.currentUser!!.delete().addOnSuccessListener { res = true }
-        return res
+        mAuth.currentUser!!.delete()
     }
 
     fun signOut() {
         mAuth.signOut()
     }
-
 
 }

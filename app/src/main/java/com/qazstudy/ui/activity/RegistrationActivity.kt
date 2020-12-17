@@ -2,12 +2,15 @@ package com.qazstudy.ui.activity
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -15,7 +18,6 @@ import com.bumptech.glide.Glide
 import com.qazstudy.databinding.ActivityRegistrationBinding
 import com.qazstudy.model.Firebase
 import com.qazstudy.model.User
-import com.qazstudy.presentation.presenter.ProfilePresenter
 import com.qazstudy.presentation.presenter.RegistrationPresenter
 import com.qazstudy.presentation.view.RegistrationView
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
@@ -28,7 +30,6 @@ import com.theartofdev.edmodo.cropper.CropImage
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlinx.android.synthetic.main.activity_login.inputPassword
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -83,20 +84,57 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
     }
 
     private fun registration(email: String, password: String) {
-        if (email.isNotEmpty() && password.isNotEmpty()) {
+
+        closeKeyboard()
+
+        val name = binding.inputName.text.toString()
+
+        if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()) {
+
+            binding.progress.visibility = View.VISIBLE
+
             firebase.mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    mUser = User(email = email, name = binding.inputName.text.toString(), password = password, photo = mImageURI.toString())
+                    mUser = User(
+                        email = email,
+                        name = binding.inputName.text.toString(),
+                        password = password,
+                        photo = mImageURI.toString()
+                    )
 
-                    firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).setValue(mUser).addOnCompleteListener {
+                    firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).setValue(
+                        mUser
+                    ).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            firebase.mStorage.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).child(NODE_PHOTO).
+                            firebase.mStorage.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).child(
+                                NODE_PHOTO
+                            ).putFile(mImageURI).addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    startActivity(Intent(this, ActivityNavigation::class.java))
+                                    finish()
+                                }
+                            }
                         }
                     }
                 }
             }
         } else {
             showToast("Введите адрес электронной почты и пароль")
+        }
+    }
+
+    private fun closeKeyboard() {
+        val view = this.currentFocus
+
+        if (view != null) {
+
+            val manager: InputMethodManager = getSystemService(
+                Context.INPUT_METHOD_SERVICE
+            ) as InputMethodManager
+            manager
+                .hideSoftInputFromWindow(
+                    view.windowToken, 0
+                )
         }
     }
 

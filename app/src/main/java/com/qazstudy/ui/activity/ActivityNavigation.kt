@@ -117,7 +117,6 @@ class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
 
     private fun initAuth() {
 
-        if (!firebase.isUserExits()) {
             firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -143,10 +142,7 @@ class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
                     }
 
                 })
-        } else {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+
     }
 
     private fun openProfile() {

@@ -50,14 +50,11 @@ class DialogConfirm(private val hint: String) : DialogFragment() {
             view.dialog_title.text = resources.getString(R.string.confirm_delete)
 
             view.dialog_confirm__ok.setOnClickListener {
-                if (firebase.deleteUser()) {
-                    val intent = Intent(activity, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    activity?.startActivity(intent)
-                    activity?.finish()
-                } else {
-                    activity?.showToast("Can't delete account")
-                }
+                firebase.deleteUser()
+                val intent = Intent(activity, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                activity?.startActivity(intent)
+                activity?.finish()
             }
 
         }
