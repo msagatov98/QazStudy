@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -18,8 +19,6 @@ import com.bumptech.glide.Glide
 import com.qazstudy.databinding.ActivityRegistrationBinding
 import com.qazstudy.model.Firebase
 import com.qazstudy.model.User
-import com.qazstudy.presentation.presenter.RegistrationPresenter
-import com.qazstudy.presentation.view.RegistrationView
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
 import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.util.NODE_PHOTO
@@ -30,21 +29,10 @@ import com.theartofdev.edmodo.cropper.CropImage
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import moxy.MvpAppCompatActivity
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
 
-class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
+class RegistrationActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityRegistrationBinding::inflate)
-
-    @InjectPresenter
-    lateinit var mRegistrationPresenter: RegistrationPresenter
-
-    @ProvidePresenter
-    fun providePresenter(): RegistrationPresenter {
-        return RegistrationPresenter(this)
-    }
 
     private val firebase = Firebase()
     private val TAG = javaClass.simpleName
@@ -75,7 +63,7 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
         Log.e(TAG, "onActivityResult")
 
         if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            mRegistrationPresenter.cropImage(mImageURI)
+            CropImage.activity(mImageURI).setAspectRatio(1, 1).start(this)
         } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             mImageURI = CropImage.getActivityResult(data).uri
 
