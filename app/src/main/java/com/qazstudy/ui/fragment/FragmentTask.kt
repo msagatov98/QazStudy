@@ -1,31 +1,27 @@
 package com.qazstudy.ui.fragment
 
-import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import com.qazstudy.model.Task
-import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
-import com.qazstudy.ui.adapter.AdapterTask
-import kotlinx.android.synthetic.main.fragment_task.*
 import androidx.recyclerview.widget.GridLayoutManager
+import com.qazstudy.R
+import com.qazstudy.databinding.FragmentTaskBinding
+import com.qazstudy.model.Task
+import com.qazstudy.ui.adapter.AdapterTask
+import com.qazstudy.util.viewBinding
 
-class FragmentTask : Fragment() {
+class FragmentTask : Fragment(R.layout.fragment_task) {
+
+    private val binding by viewBinding(FragmentTaskBinding::bind)
 
     private lateinit var taskHeader: Array<String>
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         taskHeader = resources.getStringArray(R.array.tasks_header)
 
-        fragment_task__recycler_view.layoutManager = GridLayoutManager(context, 2)
-        fragment_task__recycler_view.adapter = AdapterTask(requireContext(), Task(taskHeader))
-
+        binding.fragmentTaskRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        binding.fragmentTaskRecyclerView.adapter = AdapterTask(requireContext(), Task(taskHeader))
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
-            View? = inflater.inflate(R.layout.fragment_task, container, false)
-
 }

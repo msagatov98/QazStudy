@@ -1,46 +1,50 @@
 package com.qazstudy.ui.fragment
 
-import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
+import com.qazstudy.R
+import com.qazstudy.databinding.FragmentDictionaryBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.adapter.AdapterDictionaryPage
-import kotlinx.android.synthetic.main.fragment_dictionary.*
+import com.qazstudy.util.viewBinding
 
-class FragmentDictionary : Fragment() {
+class FragmentDictionary : Fragment(R.layout.fragment_dictionary) {
+
+    private val binding by viewBinding(FragmentDictionaryBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if (isDark) {
+            binding.tabLayout.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.light_blue
+                )
+            )
+        }
+        
         val pageAdapter = AdapterDictionaryPage(
             requireActivity().supportFragmentManager,
-            tab_layout.tabCount)
+            binding.tabLayout.tabCount
+        )
 
-        view_pager.adapter = pageAdapter
+        binding.viewPager.adapter = pageAdapter
 
-        tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                view_pager.currentItem = tab!!.position
+                binding.viewPager.currentItem = tab!!.position
                 pageAdapter.notifyDataSetChanged()
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) { }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
-            override fun onTabReselected(tab: TabLayout.Tab?) { }
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         })
 
-        view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
+        binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))
 
-        if (isDark) {
-            tab_layout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
-        }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dictionary, container, false)
     }
 }

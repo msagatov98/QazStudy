@@ -1,15 +1,11 @@
 package com.qazstudy.ui.fragment
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.qazstudy.R
+import com.qazstudy.databinding.FragmentTranslaterBinding
+import com.qazstudy.util.viewBinding
 
-class TranslateFragment : Fragment() {
+class TranslateFragment : Fragment(R.layout.fragment_translater) {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_translater, container, false)
-    }
+    private val binding by viewBinding(FragmentTranslaterBinding::bind)
 }

@@ -13,13 +13,18 @@ import com.qazstudy.util.viewBinding
 
 class LoginActivity : AppCompatActivity() {
 
+    private val binding by viewBinding(ActivityLoginBinding::inflate)
+    private val firebase = Firebase()
+
     companion object {
         lateinit var mUser: User
     }
 
-    private val firebase = Firebase()
 
-    private val binding by viewBinding(ActivityLoginBinding::inflate)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+    }
 
     fun onClick(view: View) {
         when (view) {
@@ -34,11 +39,13 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.inputPassword.text.toString()
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
+            binding.progressBarLayout.visibility = View.VISIBLE
             firebase.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                 if (it.isSuccessful) {
                     startActivity(Intent(this, ActivityNavigation::class.java))
                     finish()
                 } else {
+                    binding.progressBarLayout.visibility = View.GONE
                     showToast("Неверный адрес электронной почты или пароль")
                 }
             }

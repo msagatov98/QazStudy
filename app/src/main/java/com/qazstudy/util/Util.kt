@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -24,7 +25,7 @@ fun Context.showToast(msg: Int, duration: Int = Toast.LENGTH_SHORT) {
 }
 
 @MainThread
-inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
+inline fun <T : ViewBinding> ComponentActivity.viewBinding(
     crossinline bindingInflater: (LayoutInflater) -> T
 ) =
     lazy(LazyThreadSafetyMode.NONE) {
@@ -32,6 +33,10 @@ inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
         lifecycle.doOnCreated { setContentView(binding.root) }
         binding
     }
+
+@MainThread
+fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
+    FragmentViewBindingDelegate(this, viewBindingFactory)
 
 inline fun Lifecycle.doOnCreated(crossinline block: () -> Unit) {
     if (currentState.isAtLeast(Lifecycle.State.CREATED)) {
