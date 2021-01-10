@@ -44,8 +44,6 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
         binding.icUser.setOnClickListener {
             takeCameraPicture()
         }

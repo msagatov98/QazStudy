@@ -10,10 +10,6 @@ import com.qazstudy.model.User
 import com.qazstudy.util.hideKeyboard
 import com.qazstudy.util.showToast
 import com.qazstudy.util.viewBinding
-import com.qazstudy.util.viewModel
-import com.qazstudy.viewmodel.LoginViewModel
-
-// TODO MVVM
 
 class LoginActivity : AppCompatActivity() {
 
@@ -24,13 +20,6 @@ class LoginActivity : AppCompatActivity() {
     private val firebase = Firebase()
 
     private val binding by viewBinding(ActivityLoginBinding::inflate)
-
-    private val vm by viewModel<LoginViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-    }
 
     fun onClick(view: View) {
         when (view) {

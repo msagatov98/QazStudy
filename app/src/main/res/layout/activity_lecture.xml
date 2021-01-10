@@ -20,7 +20,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:onClick="onIconClick"
-            android:src="@drawable/ic_back_light"
+            android:src="@drawable/ic_back"
             android:id="@+id/activity_lesson__ic_back"
             android:contentDescription="@string/activity_profile__ic_back_description"
             app:layout_constraintTop_toTopOf="parent"

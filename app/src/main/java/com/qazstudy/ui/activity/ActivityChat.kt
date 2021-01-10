@@ -28,8 +28,6 @@ class ActivityChat : MvpAppCompatActivity(), ChatView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
         setMode()
         initListeners()
 
@@ -58,11 +56,10 @@ class ActivityChat : MvpAppCompatActivity(), ChatView {
 
     override fun setMode() {
         if (isDark) {
-            binding.bgChat.setBackgroundColor(getColor(R.color.dark))
-            this.window.statusBarColor = getColor(R.color.black)
-            binding.activityChatToolbar.setBackgroundColor(getColor(R.color.light_blue))
-
-            binding.inputChatMessage.setTextColor(getColor(R.color.white))
+            binding.bgChat.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+            binding.activityChatToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.light_blue))
+            binding.inputChatMessage.setTextColor(ContextCompat.getColor(this, R.color.white))
             binding.inputChatMessage.background = ContextCompat.getDrawable(
                 this,
                 R.drawable.bg_input_chat_message_dark

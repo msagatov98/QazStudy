@@ -161,17 +161,17 @@ class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
     }
 
     private fun setDark() {
-        binding.navView.setBackgroundColor(getColor(R.color.dark))
-        container.setBackgroundColor(getColor(R.color.dark))
-        this.window.statusBarColor = getColor(R.color.light_blue)
+        binding.navView.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
+        container.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
+        this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
         toolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
         nav_header.background = ContextCompat.getDrawable(this, R.color.light_blue)
         ic_theme_switcher.backgroundTintList =
-            ColorStateList.valueOf(getColor(R.color.light_blue))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_blue))
         ic_theme_switcher.setImageDrawable(
             ContextCompat.getDrawable(
                 this,
-                R.drawable.ic_brightness_dark
+                R.drawable.ic_brightness_light
             )
         )
 
@@ -202,17 +202,17 @@ class ActivityNavigation : MvpAppCompatActivity(), NavigationView {
     }
 
     private fun setLight() {
-        binding.navView.setBackgroundColor(getColor(R.color.white))
-        container.setBackgroundColor(getColor(R.color.white))
-        this.window.statusBarColor = getColor(R.color.colorPrimary)
+        binding.navView.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
+        container.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
+        this.window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
         toolbar.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
         nav_header.background = ContextCompat.getDrawable(this, R.color.colorPrimary)
         ic_theme_switcher.backgroundTintList =
-            ColorStateList.valueOf(getColor(R.color.colorPrimary))
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorPrimary))
         ic_theme_switcher.setImageDrawable(
             ContextCompat.getDrawable(
                 this,
-                R.drawable.ic_brightness_light
+                R.drawable.ic_brightness_dark
             )
         )
 

@@ -39,14 +39,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_margin="25dp"
-        android:onClick="onIconClick"
-        android:id="@+id/ic_theme_switcher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_brightness_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

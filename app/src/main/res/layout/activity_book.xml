@@ -14,12 +14,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:padding="13dp"
+                android:padding="14dp"
                 android:onClick="onClick"
                 android:id="@+id/ic_back"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_back_light"
+                android:src="@drawable/ic_back"
                 android:contentDescription="@string/activity_profile__ic_back_description"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -39,6 +39,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:scrollbars="none"
         android:layout_height="0dp"
         android:layout_width="match_parent"

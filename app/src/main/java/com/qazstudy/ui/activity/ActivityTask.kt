@@ -14,7 +14,6 @@ class ActivityTask : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
 
         position = intent.getIntExtra("numTask", -1)
 

@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:id="@+id/nav_header">
+    android:layout_height="wrap_content"
+    android:id="@+id/nav_header"
+    android:padding="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:onClick="onIconClick"
         android:id="@+id/nav_profile"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="16dp"
         android:src="@drawable/ic_avatar_light"
         android:contentDescription="@string/nav_header_desc"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,12 +22,20 @@
         android:textSize="18sp"
         android:onClick="onIconClick"
         android:textColor="@color/white"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nav_header_txt_name"
+        app:layout_constraintTop_toBottomOf="@id/nav_profile"
+        app:layout_constraintStart_toStartOf="@id/nav_profile"/>
+
+    <ImageView
+        android:id="@+id/ic_theme_switcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_brightness_dark"
+        android:onClick="onIconClick"
         app:layout_constraintTop_toTopOf="@id/nav_profile"
-        app:layout_constraintStart_toEndOf="@id/nav_profile"
-        app:layout_constraintBottom_toBottomOf="@id/nav_profile"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -81,7 +81,7 @@ class FragmentSetting : MvpAppCompatFragment(), SettingView {
         fragment_setting__constraint_layout.background =
             ContextCompat.getDrawable(requireContext(), R.color.dark)
 
-        tv_setting_abc.setTextColor(context?.getColor(R.color.white)!!)
-        tv_setting_language.setTextColor(context?.getColor(R.color.white)!!)
+        tv_setting_abc.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        tv_setting_language.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     }
 }

@@ -11,16 +11,17 @@ import com.qazstudy.R
 import com.qazstudy.databinding.ActivityLectureBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.fragment.lecture.*
+import com.qazstudy.util.showToast
 import com.qazstudy.util.viewBinding
 
 class ActivityLecture : AppCompatActivity() {
+
+    private val binding by viewBinding(ActivityLectureBinding::inflate)
 
     private var position = -1
 
     private lateinit var openedFragment: Fragment
     private var fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-
-    private val binding by viewBinding(ActivityLectureBinding::inflate)
 
     private val arFragmentLecture = arrayListOf(
         FragmentLectureIntro(),
@@ -37,9 +38,7 @@ class ActivityLecture : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(binding.root)
-
         setTheme()
         initFragments()
     }
@@ -69,35 +68,10 @@ class ActivityLecture : AppCompatActivity() {
 
     private fun setTheme() {
         if (isDark) {
-            this.window.statusBarColor = getColor(R.color.light_blue)
-            binding.activityLessonTxtLectureHeader.setTextColor(getColor(R.color.dark))
-            binding.activityLessonToolbar.setBackgroundColor(getColor(R.color.light_blue))
-            binding.activityLessonConstraintLayout.setBackgroundColor(getColor(R.color.dark))
-            binding.activityLessonToolbarBottom.setBackgroundColor(getColor(R.color.light_blue))
-            binding.activityLessonIcChat.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_chat_dark
-                )
-            )
-            binding.activityLessonIcBack.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_back_dark
-                )
-            )
-            binding.activityLessonIcNext.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_next_dark
-                )
-            )
-            binding.activityLessonIcPrevious.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_previous_dark
-                )
-            )
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
+            binding.activityLessonToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.light_blue))
+            binding.activityLessonConstraintLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
+            binding.activityLessonToolbarBottom.setBackgroundColor(ContextCompat.getColor(this, R.color.light_blue))
         }
     }
 
@@ -180,6 +154,9 @@ class ActivityLecture : AppCompatActivity() {
                 )
                 openedFragment = FragmentLecture9()
             }
+            is FragmentLecture9 -> {
+                showToast("This is last")
+            }
         }
 
         fragmentTransaction.commit()
@@ -195,6 +172,9 @@ class ActivityLecture : AppCompatActivity() {
             position--
 
         when (openedFragment) {
+            is FragmentLectureIntro -> {
+                showToast("This is first")
+            }
             is FragmentLecture1 -> {
                 fragmentTransaction.replace(
                     R.id.fragment_container_lecture,

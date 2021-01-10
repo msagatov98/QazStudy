@@ -3,6 +3,7 @@ package com.qazstudy.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityBookBinding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
@@ -17,8 +18,6 @@ class ActivityBook : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
         setTheme()
         setBook()
     }
@@ -31,10 +30,11 @@ class ActivityBook : AppCompatActivity() {
 
     private fun setTheme() {
         if (isDark) {
-            binding.bookText.setTextColor(getColor(R.color.white))
-            binding.bookText.setBackgroundColor(getColor(R.color.dark))
-            binding.toolbar.setBackgroundColor(getColor(R.color.light_blue))
-            this.window.statusBarColor = getColor(R.color.light_blue)
+            binding.bookText.setTextColor(ContextCompat.getColor(this, R.color.white))
+            binding.bookText.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
+            binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.light_blue))
+            binding.scrollView.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
+            this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
         }
     }
 

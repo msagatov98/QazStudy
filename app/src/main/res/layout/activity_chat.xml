@@ -19,7 +19,7 @@
             android:padding="14dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_back_light"
+            android:src="@drawable/ic_back"
             android:id="@+id/activity_chat__ic_back"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

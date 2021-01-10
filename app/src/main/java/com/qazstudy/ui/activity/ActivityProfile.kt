@@ -52,7 +52,6 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
 
         setMode()
         mProfilePresenter.init()
@@ -93,98 +92,46 @@ class ActivityProfile : MvpAppCompatActivity(), ProfileView {
     override fun setMode() {
         if (isDark) {
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
-            binding.activityProfileToolbarTxt.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.dark
-                )
-            )
-            binding.activityProfileToolbar.background =
-                ContextCompat.getDrawable(this, R.color.light_blue)
-            binding.activityProfileIcBack.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_back_dark
-                )
-            )
+            binding.activityProfileToolbar.background = ContextCompat.getDrawable(this, R.color.light_blue)
             binding.activityProfileImageProfile.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_avatar_light
-                )
+                ContextCompat.getDrawable(this, R.drawable.ic_avatar_light)
             )
             binding.activityProfileInputName.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
+                ContextCompat.getColor(this, R.color.white)
             )
             binding.activityProfileInputCity.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
+                ContextCompat.getColor(this, R.color.white)
             )
             binding.activityProfileInputEmail.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
+                ContextCompat.getColor(this, R.color.white)
             )
             binding.activityProfileInputCountry.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
+                ContextCompat.getColor(this, R.color.white)
             )
             binding.activityProfileInputPassword.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.white
-                )
+                ContextCompat.getColor(this, R.color.white)
             )
             binding.activityProfileInputName.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
+                ContextCompat.getColor(this, R.color.txt_color)
             )
             binding.activityProfileInputCity.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
+                ContextCompat.getColor(this, R.color.txt_color)
             )
             binding.activityProfileInputEmail.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
+                ContextCompat.getColor(this, R.color.txt_color)
             )
             binding.activityProfileInputCountry.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
+                ContextCompat.getColor(this, R.color.txt_color)
             )
             binding.activityProfileInputPassword.setHintTextColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
+                ContextCompat.getColor(this, R.color.txt_color)
             )
 
             binding.activityProfileInputName.background.setTint(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
+                ContextCompat.getColor(this, R.color.txt_color)
             )
             binding.activityProfileInputCity.background.setTint(
-                ContextCompat.getColor(
-                    this,
-                    R.color.txt_color
-                )
+                ContextCompat.getColor(this, R.color.txt_color)
             )
             binding.activityProfileInputEmail.background.setTint(
                 ContextCompat.getColor(

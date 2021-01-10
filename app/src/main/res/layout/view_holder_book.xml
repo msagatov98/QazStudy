@@ -10,7 +10,6 @@
             android:src="@drawable/book"
             android:layout_width="100dp"
             android:layout_height="150dp"
-            android:background="@color/colorPrimary"
             android:id="@+id/view_holder_book__image"
             android:contentDescription="@string/all_image_description"
             app:layout_constraintTop_toTopOf="parent"
@@ -18,7 +17,6 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:text="Header"
             android:textSize="20sp"
             android:textColor="@color/dark"
             android:layout_marginTop="5dp"

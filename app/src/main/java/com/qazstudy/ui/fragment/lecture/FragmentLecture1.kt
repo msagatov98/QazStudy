@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.qazstudy.R
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
@@ -46,13 +47,13 @@ class FragmentLecture1 : Fragment() {
         )
 
         if (isDark) {
-            text_view.setTextColor(requireContext().getColor(R.color.white))
+            text_view.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             arrayAbcCyrillic.forEach {
-                it.setTextColor(requireContext().getColor(R.color.light_blue))
+                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
             }
 
             arrayAbcLatin.forEach {
-                it.setTextColor(requireContext().getColor(R.color.light_blue))
+                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
             }
         }
     }
