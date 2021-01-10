@@ -24,6 +24,7 @@ import com.qazstudy.ui.activity.ActivityNavigation.Companion.mImageURI
 import com.qazstudy.ui.activity.LoginActivity.Companion.mUser
 import com.qazstudy.util.NODE_PHOTO
 import com.qazstudy.util.NODE_USER
+import com.qazstudy.util.closeKeyboard
 import com.qazstudy.util.showToast
 import com.qazstudy.util.viewBinding
 import com.theartofdev.edmodo.cropper.CropImage
@@ -46,7 +47,6 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
         return RegistrationPresenter(this)
     }
 
-    private val firebase = Firebase()
     private val TAG = javaClass.simpleName
     private val TAKE_PICTURE_REQUEST_CODE = 1
     private val TAKE_PERMISSION_REQUEST_CODE = 2
@@ -62,10 +62,11 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
 
         binding.btnRegister.setOnClickListener {
 
+            val name = binding.inputName.text.toString()
             val email = binding.inputEmail.text.toString()
             val password = binding.inputPassword.text.toString()
 
-            registration(email, password)
+            mRegistrationPresenter.register(email, name, password)
         }
     }
 
@@ -80,61 +81,6 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
             mImageURI = CropImage.getActivityResult(data).uri
 
             Glide.with(this).load(mImageURI).into(binding.icUser)
-        }
-    }
-
-    private fun registration(email: String, password: String) {
-
-        closeKeyboard()
-
-        val name = binding.inputName.text.toString()
-
-        if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()) {
-
-            binding.progress.visibility = View.VISIBLE
-
-            firebase.mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    mUser = User(
-                        email = email,
-                        name = binding.inputName.text.toString(),
-                        password = password,
-                        photo = mImageURI.toString()
-                    )
-
-                    firebase.mDatabase.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).setValue(
-                        mUser
-                    ).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            firebase.mStorage.child(NODE_USER).child(firebase.mAuth.currentUser!!.uid).child(
-                                NODE_PHOTO
-                            ).putFile(mImageURI).addOnCompleteListener {
-                                if (it.isSuccessful) {
-                                    startActivity(Intent(this, ActivityNavigation::class.java))
-                                    finish()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            showToast("Введите адрес электронной почты и пароль")
-        }
-    }
-
-    private fun closeKeyboard() {
-        val view = this.currentFocus
-
-        if (view != null) {
-
-            val manager: InputMethodManager = getSystemService(
-                Context.INPUT_METHOD_SERVICE
-            ) as InputMethodManager
-            manager
-                .hideSoftInputFromWindow(
-                    view.windowToken, 0
-                )
         }
     }
 

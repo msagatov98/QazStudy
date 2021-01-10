@@ -13,15 +13,9 @@ import kotlinx.android.synthetic.main.dialog_input.view.*
 
 class Firebase {
 
-    lateinit var mAuth: FirebaseAuth
-    lateinit var mStorage: StorageReference
-    lateinit var mDatabase: DatabaseReference
-
-    init {
-        mAuth = FirebaseAuth.getInstance()
-        mStorage = FirebaseStorage.getInstance().reference
-        mDatabase = FirebaseDatabase.getInstance().reference
-    }
+    var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    var mStorage: StorageReference = FirebaseStorage.getInstance().reference
+    var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     fun updateUser(email: String, password: String) {
         val credential = EmailAuthProvider.getCredential(
