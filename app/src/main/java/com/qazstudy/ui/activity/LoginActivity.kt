@@ -3,26 +3,19 @@ package com.qazstudy.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.qazstudy.databinding.ActivityBookBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.qazstudy.databinding.ActivityLoginBinding
 import com.qazstudy.model.Firebase
 import com.qazstudy.model.User
-import com.qazstudy.presentation.presenter.LoginPresenter
-import com.qazstudy.presentation.view.LoginView
-import com.qazstudy.util.NODE_USER
+import com.qazstudy.util.hideKeyboard
 import com.qazstudy.util.showToast
 import com.qazstudy.util.viewBinding
-import moxy.MvpAppCompatActivity
-import moxy.presenter.InjectPresenter
+import com.qazstudy.util.viewModel
+import com.qazstudy.viewmodel.LoginViewModel
 
-class LoginActivity : MvpAppCompatActivity(), LoginView {
+// TODO MVVM
 
-    @InjectPresenter
-    lateinit var presenter: LoginPresenter
+class LoginActivity : AppCompatActivity() {
 
     companion object {
         lateinit var mUser: User
@@ -30,7 +23,9 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     private val firebase = Firebase()
 
-    private  val binding by viewBinding(ActivityLoginBinding::inflate)
+    private val binding by viewBinding(ActivityLoginBinding::inflate)
+
+    private val vm by viewModel<LoginViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,20 +33,20 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     }
 
     fun onClick(view: View) {
-        when(view) {
+        when (view) {
             binding.btnLogin -> login()
             binding.textRegister -> register()
         }
     }
 
     private fun login() {
-        val email = binding.inputEmail.text.toString()
+        hideKeyboard()
+        val email = binding.emailInput.text.toString()
         val password = binding.inputPassword.text.toString()
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
             firebase.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                 if (it.isSuccessful) {
-
                     startActivity(Intent(this, ActivityNavigation::class.java))
                     finish()
                 } else {
