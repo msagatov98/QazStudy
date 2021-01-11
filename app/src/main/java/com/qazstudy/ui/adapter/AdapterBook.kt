@@ -4,16 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.qazstudy.R
 import com.qazstudy.databinding.ViewHolderBookBinding
 import com.qazstudy.ui.activity.ActivityBook
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import kotlinx.android.synthetic.main.view_holder_book.view.*
 
 class AdapterBook(private val context: Context, private val arr: Array<Int>) :
     RecyclerView.Adapter<AdapterBook.BookViewHolder>() {

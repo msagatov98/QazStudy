@@ -10,6 +10,5 @@ open class ValueEventListenerAdapter(val handler: (DataSnapshot) -> Unit): Value
     override fun onDataChange(data: DataSnapshot) {
         if (data.exists())
             handler(data)
-
     }
 }

@@ -5,17 +5,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.qazstudy.R
+import com.qazstudy.databinding.ViewHolderLessonBinding
 import com.qazstudy.model.Lesson
 import com.qazstudy.ui.activity.ActivityLecture
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import kotlinx.android.synthetic.main.view_holder_lesson.view.header
-import kotlinx.android.synthetic.main.view_holder_lesson.view.ic_task
 
 open class AdapterLesson(var context: Context, private val lesson: Lesson) :
     RecyclerView.Adapter<AdapterLesson.LessonViewHolder>() {
@@ -26,9 +21,9 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) :
     val TYPE_DOUBLE_ITEM = 2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_lesson, parent, false)
-        return LessonViewHolder(view)
+        val binding =
+            ViewHolderLessonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return LessonViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -44,25 +39,23 @@ open class AdapterLesson(var context: Context, private val lesson: Lesson) :
         holder.bind(position)
     }
 
-    inner class LessonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var header: TextView = itemView.header
-        var icTask: ImageView = itemView.ic_task
+    inner class LessonViewHolder(val binding: ViewHolderLessonBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
 
             if (isDark) {
-                header.setTextColor(Color.rgb(60, 90, 188))
+                binding.header.setTextColor(Color.rgb(60, 90, 188))
             }
-
 
             Log.i(TAG, position.toString())
 
             if (position < lesson.icon.size)
-                icTask.setImageResource(lesson.icon[position])
+                binding.icTask.setImageResource(lesson.icon[position])
 
-            header.text = lesson.header[position]
+            binding.header.text = lesson.header[position]
 
-            icTask.setOnClickListener {
+            binding.icTask.setOnClickListener {
                 val intent = Intent(context, ActivityLecture::class.java)
                 intent.putExtra("numLesson", position)
                 context.startActivity(intent)

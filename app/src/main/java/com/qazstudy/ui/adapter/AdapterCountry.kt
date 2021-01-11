@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.qazstudy.R
+import com.qazstudy.databinding.ViewHolderCountyFlagBinding
 import com.qazstudy.model.Country
 
 class AdapterCountry(context: Context, countries: Array<Country>):
@@ -23,19 +24,18 @@ class AdapterCountry(context: Context, countries: Array<Country>):
 
     private fun initView(position: Int, _convertView: View?, parent: ViewGroup): View {
 
+        val binding = ViewHolderCountyFlagBinding.inflate(LayoutInflater.from(context), parent, false)
+
         val convertView = LayoutInflater
             .from(context)
             .inflate(R.layout.view_holder_county_flag, parent, false)
 
 
-        val ivFlag = convertView?.findViewById<ImageView>(R.id.iv_flag)
-        val tvCountry = convertView?.findViewById<TextView>(R.id.tv_country)
-
         val country = getItem(position)
 
         if (country != null) {
-            tvCountry?.text = country.name
-            ivFlag?.setImageResource(country.imageFlag)
+            binding.tvCountry.text = country.name
+            binding.ivFlag.setImageResource(country.imageFlag)
         }
 
         return convertView
