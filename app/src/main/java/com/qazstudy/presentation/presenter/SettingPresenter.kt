@@ -18,9 +18,9 @@ class SettingPresenter(val context: Context) : MvpPresenter<SettingView>() {
 
     fun getCurrentCountry(): Country {
         return when(Locale.getDefault().displayLanguage) {
-            "English" -> Country(context.getString(R.string.english), R.drawable.united_kingdom)
-            "Russian" -> Country(context.getString(R.string.russian), R.drawable.russia)
-            "Turkish" -> Country(context.getString(R.string.turkish), R.drawable.turkey)
+            context.getString(R.string.english) -> Country(context.getString(R.string.english), R.drawable.united_kingdom)
+            "Русский" -> Country(context.getString(R.string.russian), R.drawable.russia)
+            "Turkce" -> Country(context.getString(R.string.turkish), R.drawable.turkey)
             else -> Country(context.getString(R.string.russian), R.drawable.russia)
         }
     }

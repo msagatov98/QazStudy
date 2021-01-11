@@ -27,17 +27,21 @@ class FragmentSetting : MvpAppCompatFragment(R.layout.fragment_setting), Setting
         return SettingPresenter(requireContext())
     }
 
-    private val countryList = arrayOf (
-        mSettingPresenter.getCurrentCountry(),
-        Country(getString(R.string.russian), R.drawable.russia),
-        Country(getString(R.string.turkish), R.drawable.turkey),
-        Country(getString(R.string.english), R.drawable.united_kingdom)
-    )
+    private lateinit var countryList : Array<Country>
 
-    private var countryAdapter: AdapterCountry = AdapterCountry(requireContext(), countryList)
+    private lateinit var countryAdapter: AdapterCountry
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        countryList = arrayOf(
+            mSettingPresenter.getCurrentCountry(),
+            Country(getString(R.string.russian), R.drawable.russia),
+            Country(getString(R.string.turkish), R.drawable.turkey),
+            Country(getString(R.string.english), R.drawable.united_kingdom)
+        )
+
+        countryAdapter = AdapterCountry(requireContext(), countryList)
 
         binding.spinnerSettingLanguage.adapter = countryAdapter
 

@@ -23,6 +23,5 @@ class FragmentBook : Fragment(R.layout.fragment_book) {
         binding.fragmentBookRecyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.fragmentBookRecyclerView.adapter = AdapterBook(requireContext(), ar)
         binding.fragmentBookRecyclerView.setHasFixedSize(true)
-
     }
 }
