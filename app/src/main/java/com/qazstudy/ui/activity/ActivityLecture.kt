@@ -44,12 +44,15 @@ class ActivityLecture : AppCompatActivity() {
     }
 
     fun onIconClick(v: View) {
-        when (v) {
-            binding.activityLessonIcBack -> finish()
-            binding.activityLessonIcChat -> onIconChatClick()
-            binding.activityLessonIcNext -> onIconNextClick()
-            binding.activityLessonIcPrevious -> onIconPreviousClick()
+        binding.run {
+            when (v) {
+                activityLessonIcBack -> finish()
+                activityLessonIcChat -> onIconChatClick()
+                activityLessonIcNext -> onIconNextClick()
+                activityLessonIcPrevious -> onIconPreviousClick()
+            }
         }
+
     }
 
     private fun initFragments() {

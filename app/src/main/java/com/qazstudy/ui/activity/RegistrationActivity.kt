@@ -20,7 +20,8 @@ import com.qazstudy.util.viewBinding
 import com.theartofdev.edmodo.cropper.CropImage
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.Date
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -73,7 +74,6 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
     }
 
     private fun takeCameraPicture() {
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
             PackageManager.PERMISSION_GRANTED
         ) {

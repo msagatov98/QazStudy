@@ -31,14 +31,19 @@ class FragmentSetting : MvpAppCompatFragment(R.layout.fragment_setting), Setting
 
     private lateinit var countryAdapter: AdapterCountry
 
+    private var currentLanguage: Country = mSettingPresenter.getCurrentCountry()
+    private val russia = Country(getString(R.string.russian), R.drawable.russia)
+    private val turkey = Country(getString(R.string.turkish), R.drawable.turkey)
+    private val gb = Country(getString(R.string.english), R.drawable.united_kingdom)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         countryList = arrayOf(
-            mSettingPresenter.getCurrentCountry(),
-            Country(getString(R.string.russian), R.drawable.russia),
-            Country(getString(R.string.turkish), R.drawable.turkey),
-            Country(getString(R.string.english), R.drawable.united_kingdom)
+            currentLanguage,
+            russia,
+            turkey,
+            gb
         )
 
         countryAdapter = AdapterCountry(requireContext(), countryList)
@@ -49,9 +54,18 @@ class FragmentSetting : MvpAppCompatFragment(R.layout.fragment_setting), Setting
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     when (position) {
-                        1 -> mSettingPresenter.ru()
-                        2 -> mSettingPresenter.tr()
-                        3 -> mSettingPresenter.en()
+                        1 -> {
+                            mSettingPresenter.ru()
+                            currentLanguage = russia
+                        }
+                        2 -> {
+                            mSettingPresenter.tr()
+                            currentLanguage = turkey
+                        }
+                        3 -> {
+                            mSettingPresenter.en()
+                            currentLanguage = gb
+                        }
                     }
                 }
 

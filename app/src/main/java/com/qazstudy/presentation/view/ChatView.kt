@@ -7,4 +7,12 @@ interface ChatView : BaseView {
     @AddToEnd
     fun displayChat(i: Int)
 
+    @AddToEnd
+    fun initPath()
+
+    @AddToEnd
+    fun sendMessage()
+
+    @AddToEnd()
+    fun goToBottom()
 }

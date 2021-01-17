@@ -30,10 +30,12 @@ class ActivityBook : AppCompatActivity() {
 
     private fun setTheme() {
         if (isDark) {
-            binding.bookText.setTextColor(ContextCompat.getColor(this, R.color.white))
-            binding.bookText.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
-            binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.light_blue))
-            binding.scrollView.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
+            binding.run {
+                bookText.setTextColor(ContextCompat.getColor(this@ActivityBook, R.color.white))
+                bookText.setBackgroundColor(ContextCompat.getColor(this@ActivityBook, R.color.dark))
+                toolbar.setBackgroundColor(ContextCompat.getColor(this@ActivityBook, R.color.light_blue))
+                scrollView.setBackgroundColor(ContextCompat.getColor(this@ActivityBook, R.color.dark))
+            }
             this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
         }
     }
@@ -42,12 +44,16 @@ class ActivityBook : AppCompatActivity() {
 
         when(intent.getIntExtra("bookNum", -1)) {
             0 -> {
-                binding.bookTitle.text = "Ұсқынсыз үйрек"
-                binding.bookText.text = getBookText("book1")
+                binding.run {
+                    bookTitle.text = "Ұсқынсыз үйрек"
+                    bookText.text = getBookText("book1")
+                }
             }
             1 -> {
-                binding.bookTitle.text = ""
-                binding.bookText.text = getBookText("book2")
+                binding.run {
+                    bookTitle.text = ""
+                    bookText.text = getBookText("book2")
+                }
             }
         }
     }
