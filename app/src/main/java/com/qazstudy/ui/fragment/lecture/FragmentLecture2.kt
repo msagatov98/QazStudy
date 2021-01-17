@@ -1,25 +1,19 @@
 package com.qazstudy.ui.fragment.lecture
 
-import com.qazstudy.R
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.view.LayoutInflater
 import android.widget.TextView
-import androidx.fragment.app.Fragment
+import com.qazstudy.R
+import com.qazstudy.databinding.FragmentLecture2Binding
+import com.qazstudy.util.viewBinding
 
-class FragmentLecture2 : Fragment() {
+class FragmentLecture2 : BaseFragmentLecture(R.layout.fragment_lecture2) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private val binding by viewBinding(FragmentLecture2Binding::bind)
 
-        val txt = activity?.findViewById<TextView>(R.id.activity_lesson__txt_lecture_header)
-
-        val ar = resources.getStringArray(R.array.lessons_header)
-        txt?.text = ar[2]
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_lecture2, container, false)
-    }
+    override fun setTheme() {}
 }

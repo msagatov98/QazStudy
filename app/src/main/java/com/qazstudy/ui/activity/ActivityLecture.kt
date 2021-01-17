@@ -3,6 +3,7 @@ package com.qazstudy.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -59,6 +60,8 @@ class ActivityLecture : AppCompatActivity() {
 
         position = intent.getIntExtra("numLesson", -1)
 
+        initHeader(position)
+
         for (i in arFragmentLecture.indices) {
             if (intent.getIntExtra("numLesson", -1) == i) {
                 openedFragment = arFragmentLecture[i]
@@ -67,6 +70,11 @@ class ActivityLecture : AppCompatActivity() {
                 fragmentTransaction.commit()
             }
         }
+    }
+
+    private fun initHeader(position: Int) {
+        val ar = resources.getStringArray(R.array.lessons_header)
+        binding.activityLessonTxtLectureHeader.text = ar[position]
     }
 
     private fun setTheme() {
@@ -92,6 +100,7 @@ class ActivityLecture : AppCompatActivity() {
 
         if (position < arFragmentLecture.size - 1)
             position++
+
 
         when (openedFragment) {
             is FragmentLectureIntro -> {
@@ -163,6 +172,7 @@ class ActivityLecture : AppCompatActivity() {
         }
 
         fragmentTransaction.commit()
+        initHeader(position)
     }
 
     private fun onIconPreviousClick() {
@@ -253,5 +263,6 @@ class ActivityLecture : AppCompatActivity() {
         }
 
         fragmentTransaction.commit()
+        initHeader(position)
     }
 }

@@ -1,68 +1,59 @@
 package com.qazstudy.ui.fragment.lecture
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.qazstudy.R
+import com.qazstudy.databinding.FragmentLecture1Binding
 import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
-import kotlinx.android.synthetic.main.fragment_lecture1.*
+import com.qazstudy.util.viewBinding
 
-class FragmentLecture1 : Fragment() {
+class FragmentLecture1 : BaseFragmentLecture(R.layout.fragment_lecture1) {
+
+    private val binding by viewBinding(FragmentLecture1Binding::bind)
 
     private lateinit var arrayAbcLatin: Array<TextView>
     private lateinit var arrayAbcCyrillic: Array<TextView>
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val txt = activity?.findViewById<TextView>(R.id.activity_lesson__txt_lecture_header)
+        binding.run {
+            arrayAbcLatin = arrayOf(
+                abcLatin1, abcLatin2, abcLatin3, abcLatin4, abcLatin5,
+                abcLatin6, abcLatin7, abcLatin8, abcLatin9, abcLatin10,
+                abcLatin11, abcLatin12, abcLatin13, abcLatin14, abcLatin15,
+                abcLatin16, abcLatin17, abcLatin18, abcLatin19, abcLatin20,
+                abcLatin21, abcLatin22, abcLatin23, abcLatin24, abcLatin25,
+                abcLatin26, abcLatin27, abcLatin28, abcLatin29, abcLatin30,
+                abcLatin31, abcLatin32
+            )
 
-        val ar = resources.getStringArray(R.array.lessons_header)
-        txt?.text = ar[1]
-
-        arrayAbcCyrillic = arrayOf(
-            abc_cyrillic_1, abc_cyrillic_2, abc_cyrillic_3, abc_cyrillic_4, abc_cyrillic_5,
-            abc_cyrillic_6, abc_cyrillic_7, abc_cyrillic_8, abc_cyrillic_9, abc_cyrillic_10,
-            abc_cyrillic_11, abc_cyrillic_12, abc_cyrillic_13, abc_cyrillic_14, abc_cyrillic_15,
-            abc_cyrillic_16, abc_cyrillic_17, abc_cyrillic_18, abc_cyrillic_19, abc_cyrillic_20,
-            abc_cyrillic_21, abc_cyrillic_22, abc_cyrillic_23, abc_cyrillic_24, abc_cyrillic_25,
-            abc_cyrillic_26, abc_cyrillic_27, abc_cyrillic_28, abc_cyrillic_29, abc_cyrillic_30,
-            abc_cyrillic_31, abc_cyrillic_32, abc_cyrillic_33, abc_cyrillic_34, abc_cyrillic_35,
-            abc_cyrillic_36, abc_cyrillic_37, abc_cyrillic_38, abc_cyrillic_39, abc_cyrillic_40,
-            abc_cyrillic_41, abc_cyrillic_42
-        )
-
-        arrayAbcLatin = arrayOf(
-            abc_latin_1, abc_latin_2, abc_latin_3, abc_latin_4, abc_latin_5,
-            abc_latin_6, abc_latin_7, abc_latin_8, abc_latin_9, abc_latin_10,
-            abc_latin_11, abc_latin_12, abc_latin_13, abc_latin_14, abc_latin_15,
-            abc_latin_16, abc_latin_17, abc_latin_18, abc_latin_19, abc_latin_20,
-            abc_latin_21, abc_latin_22, abc_latin_23, abc_latin_24, abc_latin_25,
-            abc_latin_26, abc_latin_27, abc_latin_28, abc_latin_29, abc_latin_30,
-            abc_latin_31, abc_latin_32
-        )
-
-        if (isDark) {
-            text_view.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            arrayAbcCyrillic.forEach {
-                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
-            }
-
-            arrayAbcLatin.forEach {
-                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
-            }
+            arrayAbcCyrillic = arrayOf(
+                abcCyrillic1, abcCyrillic2, abcCyrillic3, abcCyrillic4, abcCyrillic5,
+                abcCyrillic6, abcCyrillic7, abcCyrillic8, abcCyrillic9, abcCyrillic10,
+                abcCyrillic11, abcCyrillic12, abcCyrillic13, abcCyrillic14, abcCyrillic15,
+                abcCyrillic16, abcCyrillic17, abcCyrillic18, abcCyrillic19, abcCyrillic20,
+                abcCyrillic21, abcCyrillic22, abcCyrillic23, abcCyrillic24, abcCyrillic25,
+                abcCyrillic26, abcCyrillic27, abcCyrillic28, abcCyrillic29, abcCyrillic30,
+                abcCyrillic31, abcCyrillic32, abcCyrillic33, abcCyrillic34, abcCyrillic35,
+                abcCyrillic36, abcCyrillic37, abcCyrillic38, abcCyrillic39, abcCyrillic40,
+                abcCyrillic41, abcCyrillic42
+            )
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_lecture1, container, false)
+    override fun setTheme() {
+        if (isDark) {
+            binding.textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+//            arrayAbcCyrillic.forEach {
+//                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
+//            }
+//
+//            arrayAbcLatin.forEach {
+//                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
+//            }
+        }
     }
 }
