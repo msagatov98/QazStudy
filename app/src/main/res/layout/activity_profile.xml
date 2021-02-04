@@ -40,10 +40,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <com.meg7.widget.CircleImageView
+    <ImageView
         android:onClick="onClick"
-        app:civ_border_width="0dp"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_marginTop="25dp"

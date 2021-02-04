@@ -7,7 +7,7 @@
     android:id="@+id/container"
     android:paddingBottom="50dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/ic_task"
         android:layout_width="100dp"
         android:layout_height="100dp"

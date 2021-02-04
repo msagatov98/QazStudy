@@ -9,7 +9,7 @@
     android:paddingTop="15dp"
     android:paddingEnd="15dp">
 
-    <com.meg7.widget.CircleImageView
+    <ImageView
         android:id="@+id/ic_chat"
         android:layout_width="40dp"
         android:layout_height="40dp"

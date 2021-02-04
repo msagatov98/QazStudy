@@ -7,22 +7,16 @@
     android:id="@+id/container"
     android:paddingBottom="50dp">
 
-
-    <com.github.florent37.shapeofview.shapes.PolygonView
-        android:layout_height="110dp"
-        android:layout_width="110dp"
+    <ImageView
+        android:src="@drawable/icon_android"
         android:id="@+id/ic_task"
-        app:shape_polygon_noOfSides="6"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:contentDescription="@string/all_image_description"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <ImageView
-            android:src="@drawable/icon_android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/all_image_description" />
-    </com.github.florent37.shapeofview.shapes.PolygonView>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:textSize="20sp"
