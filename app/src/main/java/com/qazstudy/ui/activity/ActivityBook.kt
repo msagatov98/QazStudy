@@ -1,12 +1,9 @@
 package com.qazstudy.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
-import com.qazstudy.R
+import androidx.appcompat.app.AppCompatActivity
 import com.qazstudy.databinding.ActivityBookBinding
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.util.viewBinding
 import java.io.BufferedReader
 import java.io.IOException
@@ -18,25 +15,12 @@ class ActivityBook : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme()
         setBook()
     }
 
     fun onClick(v: View) {
         when(v) {
             binding.icBack -> finish()
-        }
-    }
-
-    private fun setTheme() {
-        if (isDark) {
-            binding.run {
-                bookText.setTextColor(ContextCompat.getColor(this@ActivityBook, R.color.white))
-                bookText.setBackgroundColor(ContextCompat.getColor(this@ActivityBook, R.color.dark))
-                toolbar.setBackgroundColor(ContextCompat.getColor(this@ActivityBook, R.color.light_blue))
-                scrollView.setBackgroundColor(ContextCompat.getColor(this@ActivityBook, R.color.dark))
-            }
-            this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
         }
     }
 

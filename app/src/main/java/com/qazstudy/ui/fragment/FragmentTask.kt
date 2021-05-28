@@ -18,10 +18,10 @@ class FragmentTask : Fragment(R.layout.fragment_task) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         taskHeader = resources.getStringArray(R.array.tasks_header)
-
-        binding.fragmentTaskRecyclerView.layoutManager = GridLayoutManager(context, 2)
-        binding.fragmentTaskRecyclerView.adapter = AdapterTask(requireContext(), Task(taskHeader))
+        binding.run {
+            fragmentTaskRecyclerView.layoutManager = GridLayoutManager(context, 2)
+            fragmentTaskRecyclerView.adapter = AdapterTask(requireContext(), Task(taskHeader))
+        }
     }
 }

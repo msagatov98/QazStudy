@@ -3,14 +3,11 @@ package com.qazstudy.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.qazstudy.R
 import com.qazstudy.databinding.ActivityLectureBinding
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.fragment.lecture.*
 import com.qazstudy.util.showToast
 import com.qazstudy.util.viewBinding
@@ -40,7 +37,6 @@ class ActivityLecture : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setTheme()
         initFragments()
     }
 
@@ -77,15 +73,6 @@ class ActivityLecture : AppCompatActivity() {
         binding.activityLessonTxtLectureHeader.text = ar[position]
     }
 
-    private fun setTheme() {
-        if (isDark) {
-            this.window.statusBarColor = ContextCompat.getColor(this, R.color.light_blue)
-            binding.activityLessonToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.light_blue))
-            binding.activityLessonConstraintLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.dark))
-            binding.activityLessonToolbarBottom.setBackgroundColor(ContextCompat.getColor(this, R.color.light_blue))
-        }
-    }
-
     private fun onIconChatClick() {
         val intentChat = Intent(this, ActivityChat::class.java)
         intentChat.putExtra("numChat", position)
@@ -93,14 +80,11 @@ class ActivityLecture : AppCompatActivity() {
     }
 
     private fun onIconNextClick() {
-
         fragmentTransaction = supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left)
-
         if (position < arFragmentLecture.size - 1)
             position++
-
 
         when (openedFragment) {
             is FragmentLectureIntro -> {

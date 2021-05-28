@@ -57,7 +57,7 @@
         android:importantForAutofill="no"
         android:id="@+id/input_chat_message"
         android:textColorHint="@color/txt_color"
-        android:background="@drawable/bg_input_chat_message"
+        android:background="@drawable/bg_input_edit_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/ic_send" />

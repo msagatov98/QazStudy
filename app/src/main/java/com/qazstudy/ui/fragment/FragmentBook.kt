@@ -15,13 +15,15 @@ class FragmentBook : Fragment(R.layout.fragment_book) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val ar : Array<Int> = arrayOf(
+        val ar = arrayOf(
             R.drawable.book0,R.drawable.book1,R.drawable.book2,R.drawable.book3,
             R.drawable.book,R.drawable.book1,R.drawable.book2,R.drawable.book3
         )
 
-        binding.fragmentBookRecyclerView.layoutManager = GridLayoutManager(context, 2)
-        binding.fragmentBookRecyclerView.adapter = AdapterBook(requireContext(), ar)
-        binding.fragmentBookRecyclerView.setHasFixedSize(true)
+        binding.run {
+            fragmentBookRecyclerView.layoutManager = GridLayoutManager(context, 2)
+            fragmentBookRecyclerView.adapter = AdapterBook(requireContext(), ar)
+            fragmentBookRecyclerView.setHasFixedSize(true)
+        }
     }
 }

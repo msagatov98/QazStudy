@@ -2,13 +2,11 @@ package com.qazstudy.ui.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.qazstudy.databinding.ViewHolderBookBinding
 import com.qazstudy.ui.activity.ActivityBook
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 
 class AdapterBook(private val context: Context, private val arr: Array<Int>) :
     RecyclerView.Adapter<AdapterBook.BookViewHolder>() {
@@ -27,18 +25,15 @@ class AdapterBook(private val context: Context, private val arr: Array<Int>) :
     }
 
     inner class BookViewHolder(val binding: ViewHolderBookBinding) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(position: Int) {
-
-            binding.viewHolderBookText.text = headers[position]
-
-            if (isDark) binding.viewHolderBookText.setTextColor(Color.rgb(255, 255, 255))
-
-            binding.viewHolderBookImage.setImageResource(arr[position])
-
-            binding.viewHolderBookImage.setOnClickListener {
-                val intent = Intent(context, ActivityBook::class.java).putExtra("bookNum", position)
-                context.startActivity(intent)
+            binding.run {
+                viewHolderBookText.text = headers[position]
+                viewHolderBookImage.setImageResource(arr[position])
+                viewHolderBookImage.setOnClickListener {
+                    val intent =
+                        Intent(context, ActivityBook::class.java).putExtra("bookNum", position)
+                    context.startActivity(intent)
+                }
             }
         }
     }

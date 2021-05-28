@@ -3,17 +3,15 @@ package com.qazstudy.ui.dialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.qazstudy.R
-import com.qazstudy.databinding.DialogConfirmDarkBinding
-import com.qazstudy.databinding.DialogConfirmLightBinding
 import com.qazstudy.model.Firebase
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.ui.activity.LoginActivity
-import kotlinx.android.synthetic.main.dialog_confirm_dark.view.*
+import kotlinx.android.synthetic.main.dialog_confirm_dark.view.dialog_confirm__cancel
+import kotlinx.android.synthetic.main.dialog_confirm_dark.view.dialog_confirm__ok
+import kotlinx.android.synthetic.main.dialog_confirm_dark.view.dialog_title
 
 class DialogConfirm(private val hint: String) : DialogFragment() {
 
@@ -69,9 +67,6 @@ class DialogConfirm(private val hint: String) : DialogFragment() {
     }
 
     private fun getDialogView(): View {
-        return if (isDark)
-            layoutInflater.inflate(R.layout.dialog_confirm_dark, null, false)
-        else
-            layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)
+        return layoutInflater.inflate(R.layout.dialog_confirm_light, null, false)
     }
 }

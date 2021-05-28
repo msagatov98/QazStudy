@@ -3,13 +3,12 @@ package com.qazstudy.ui.fragment.lecture
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.qazstudy.R
 import com.qazstudy.databinding.FragmentLecture1Binding
-import com.qazstudy.ui.activity.ActivityNavigation.Companion.isDark
 import com.qazstudy.util.viewBinding
 
-class FragmentLecture1 : BaseFragmentLecture(R.layout.fragment_lecture1) {
+class FragmentLecture1 : Fragment(R.layout.fragment_lecture1) {
 
     private val binding by viewBinding(FragmentLecture1Binding::bind)
 
@@ -41,19 +40,6 @@ class FragmentLecture1 : BaseFragmentLecture(R.layout.fragment_lecture1) {
                 abcCyrillic36, abcCyrillic37, abcCyrillic38, abcCyrillic39, abcCyrillic40,
                 abcCyrillic41, abcCyrillic42
             )
-        }
-    }
-
-    override fun setTheme() {
-        if (isDark) {
-            binding.textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-//            arrayAbcCyrillic.forEach {
-//                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
-//            }
-//
-//            arrayAbcLatin.forEach {
-//                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
-//            }
         }
     }
 }

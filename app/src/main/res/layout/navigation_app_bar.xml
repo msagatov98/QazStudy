@@ -22,7 +22,6 @@
             android:id="@+id/toolbar"
             android:layout_height="50dp"
             android:layout_width="match_parent"
-            android:background="?attr/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
